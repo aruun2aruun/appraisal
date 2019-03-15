@@ -1,0 +1,111 @@
+<div *ngFor="let sectionResponse of sectionResponses; let i = index; trackBy:trackByIndex;">
+  <h3 style="display: inline-block">{{sectionResponse.group}}</h3>
+  <div class="response" *ngFor=" let response of sectionResponse.response; let x = index; trackBy:trackByIndex;">
+    <div *ngIf="appraisalVisibility === 'EDITABLE'">
+      <div>
+        <h4 style="display: inline-block">{{response.criteria}}</h4>
+        <button class="score" *ngIf="(reviewerVisibility === 'EDITABLE' || reviewerVisibility === 'READ-ONLY') && score[i][x]"
+                type="button" mat-stroked-button mat-button [disabled]="true">
+          <mat-icon color="accent">check_circle</mat-icon>
+          {{score[i][x]}}
+        </button>
+        <div style="float: right">
+          <mat-label>Weightage:</mat-label>
+          {{response.weightage}}</div>
+        </div>
+      <div style="display: inline-block"><mat-label>Self Appraisal Comment:</mat-label></div>
+
+      <mat-form-field style="width: 20%; float: right">
+        <mat-select (focusout)="save(sectionResponses, 'Saved')" #MatSelect placeholder="Self Appraisal rating"
+                    [(ngModel)]="response.selfRating">
+          <mat-option (focusout)="save(sectionResponses, 'Saved')" #MatOption
+                      *ngFor="let rating of ratings" [value]="rating">
+            {{rating}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <mat-form-field class="response-full-width">
+        <textarea (focusout)="save(sectionResponses, 'Saved')"
+                  style="width: 100%" [(ngModel)]="response.selfComment" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
+                  placeholder="Provide a comment to support your rating"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngIf="appraisalVisibility === 'READ-ONLY'">
+      <div>
+        <h4 style="display: inline-block">{{response.criteria}}</h4>
+        <button class="score" *ngIf="(reviewerVisibility === 'EDITABLE' || reviewerVisibility === 'READ-ONLY') && score[i][x]"
+                type="button" mat-stroked-button mat-button [disabled]="true">
+          <mat-icon color="accent">check_circle</mat-icon>
+          {{score[i][x]}}
+        </button>
+        <div style="float: right">
+          <mat-label>Weightage:</mat-label>
+          {{response.weightage}}</div>
+      </div>
+      <div style="display: inline-block"><mat-label>Self Appraisal Comment:</mat-label></div>
+
+      <mat-form-field style="width: 20%; float: right">
+        <mat-select [disabled]=true (focusout)="save(sectionResponses, 'Saved')" #MatSelect placeholder="Self Appraisal rating"
+                    [(ngModel)]="response.selfRating">
+          <mat-option (focusout)="save(sectionResponses, 'Saved')" #MatOption
+                      *ngFor="let rating of ratings" [value]="rating">
+            {{rating}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <mat-form-field class="response-full-width">
+        <textarea [disabled]=true (focusout)="save(sectionResponses, 'Saved')"
+                  style="width: 100%" [(ngModel)]="response.selfComment" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
+                  placeholder="Provide a comment to support your rating"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <div *ngIf="reviewerVisibility === 'EDITABLE'">
+      <mat-form-field style="width: 20%; float: right">
+        <mat-select (focusout)="save(sectionResponses, 'Saved')" #MatSelect placeholder="Reviewer rating"
+                    [(ngModel)]="response.reviewerRating">
+          <mat-option #MatOption (focusout)="save(sectionResponses, 'Saved')"
+                      *ngFor="let rating of ratings; let i = index;" [value]="rating">
+            {{rating}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <mat-label>Reviewer Comment:</mat-label>
+        <mat-form-field class="response-full-width">
+        <textarea (focusout)="save(sectionResponses, 'Saved')" style="width: 100%"
+                  [(ngModel)]="response.reviewerComment" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
+                  placeholder="Provide a comment to support your rating"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngIf="reviewerVisibility === 'READ-ONLY'">
+      <mat-form-field style="width: 20%; float: right">
+        <mat-select [disabled]="true" (focusout)="save(sectionResponses, 'Saved')" #MatSelect
+                    placeholder="Reviewer rating" [(ngModel)]="response.reviewerRating">
+          <mat-option #MatOption (focusout)="save(sectionResponses, 'Saved')"
+                      *ngFor="let rating of ratings; let i = index;" [value]="rating">
+            {{rating}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div>
+        <mat-label>Reviewer Comment:</mat-label>
+        <mat-form-field class="response-full-width">
+        <textarea [disabled]="true" (focusout)="save(sectionResponses, 'Saved')" style="width: 100%"
+                  [(ngModel)]="response.reviewerComment" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
+                  placeholder="Provide a comment to support your rating"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+

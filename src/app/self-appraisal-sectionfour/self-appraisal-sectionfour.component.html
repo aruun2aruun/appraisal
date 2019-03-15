@@ -1,0 +1,7 @@
+<div>
+  <mat-form-field class="response-full-width">
+        <textarea (focusout)="save(sectionResponse, 'Saved')" [(ngModel)]="sectionResponse" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=10 data-ng-minLength="10"
+                  placeholder="Additional Feedback"></textarea>
+  </mat-form-field>
+</div>

@@ -1,0 +1,7 @@
+<div *ngIf="email === null">
+  You are not logged in. <a href="http://localhost:4200">Login</a> to proceed further
+</div>
+
+<div *ngIf="email !== null">
+  {{displayName}} ({{email}}) is not authorized to access the app
+</div>

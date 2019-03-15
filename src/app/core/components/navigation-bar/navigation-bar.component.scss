@@ -1,0 +1,30 @@
+.sidenav-container {
+  height: 100%;
+  margin: 10px;
+}
+
+.mat-icon-button {
+  color: white;
+}
+
+mat-toolbar-row span img {
+  width: 110px;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+mat-toolbar-row .mat-stroked-button {
+  border: none;
+}
+
+.button-large {
+  font-size: large;
+}
+
+.header-mobile {
+  font-size: small;
+}
+
+[hidden] { display: none !important;}

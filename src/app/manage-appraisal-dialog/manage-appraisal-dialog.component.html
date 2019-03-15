@@ -1,0 +1,83 @@
+<h2>{{data.user.name}}</h2>
+<div class="userDetails">
+  <table>
+    <thead>
+      <tr>
+        <th>Designation</th>
+        <th>Joining Date</th>
+        <th>Last Appraisal date</th>
+        <th>Appraisal Period</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{data.user.designation}}</td>
+        <td>{{data.user.joiningDate | date}}</td>
+        <td>{{data.user.lastAppraisalDate | date}}</td>
+        <td>{{data.user.duration}}&nbsp;months</td>
+        <td>{{data.userStatus}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<mat-dialog-content>
+  <div *ngIf="data.userStatus === 'SELF_REVIEW'">
+    <p>Self Review Pending</p>
+  </div>
+
+  <div *ngIf="data.userStatus !== 'SELF_REVIEW'">
+    <mat-accordion>
+      <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
+        <mat-expansion-panel-header>
+          <mat-panel-title style="width: 70%">Goals/Targets achieved</mat-panel-title>
+          <mat-panel-description fxHide="false" fxHide.lt-md style="justify-content: space-evenly"></mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-self-appraisal-sectionone [appraisalVisibility]="appraisalVisibility" [reviewerVisibility]="reviewerVisibility"></app-self-appraisal-sectionone>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
+        <mat-expansion-panel-header>
+          <mat-panel-title style="width: 70%">Additional activities/tasks performed</mat-panel-title>
+          <mat-panel-description fxHide="false" fxHide.lt-md style="justify-content: space-evenly"></mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-self-appraisal-sectiontwo [section]="'sectiontwo'" [appraisalVisibility]="appraisalVisibility" [reviewerVisibility]="reviewerVisibility"></app-self-appraisal-sectiontwo>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
+        <mat-expansion-panel-header>
+          <mat-panel-title style="width: 70%">Future Aspirations</mat-panel-title>
+          <mat-panel-description fxHide="false" fxHide.lt-md style="justify-content: space-evenly"></mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-self-appraisal-sectiontwo [section]="'sectionthree'" [appraisalVisibility]="appraisalVisibility" [reviewerVisibility]="reviewerVisibility"></app-self-appraisal-sectiontwo>
+        <mat-action-row></mat-action-row>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
+        <mat-expansion-panel-header>
+          <mat-panel-title style="width: 70%">Additional Feedback from you</mat-panel-title>
+          <mat-panel-description fxHide="false" fxHide.lt-md style="justify-content: space-evenly"></mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-self-appraisal-sectionfour [appraisalVisibility]="appraisalVisibility" [reviewerVisibility]="reviewerVisibility"></app-self-appraisal-sectionfour>
+        <mat-action-row></mat-action-row>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <div layout="row" layout-align="center center" class="error">
+    error
+    <mat-icon color="warn">error</mat-icon>
+    <mat-label> <a title="Click to see Errors" (click)="openDialog()">{{error.error.sectionOneError.length}} errors</a> </mat-label>
+  </div>
+  <button type="button" mat-stroked-button mat-button (click)="save('Save')">
+    <mat-icon>create</mat-icon>
+    Save
+  </button>
+  <button type="button" mat-stroked-button mat-button (click)="submitResponse('Submit')">
+    <mat-icon>done</mat-icon>
+    Submit
+  </button>
+</mat-dialog-actions>
