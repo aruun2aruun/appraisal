@@ -8,7 +8,7 @@ import {UserService} from '../core/services/user.service';
 
 @Component({
   selector: 'app-manage-appraisal-dialog',
-  templateUrl: './manage-appraisal-dialog.component.html',  
+  templateUrl: './manage-appraisal-dialog.component.html',
   styleUrls: ['./manage-appraisal-dialog.component.scss']
 })
 export class ManageAppraisalDialogComponent implements OnInit {
@@ -18,7 +18,7 @@ export class ManageAppraisalDialogComponent implements OnInit {
   appraisalVisibility = 'READ-ONLY';
   reviewerVisibility = 'EDITABLE';
   appraisalId: string;
-  error: string;
+  error: any;
   status: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,

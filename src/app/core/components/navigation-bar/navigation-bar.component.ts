@@ -10,9 +10,9 @@ import {AuthService} from '../../services/auth.service';
 })
 export class NavigationBarComponent {
 
-  constructor( private pageHeaderService: PageHeaderService,
-               private cycleSelectionService: CycleSelectionService,
-               private authService: AuthService) { }
+  constructor( public pageHeaderService: PageHeaderService,
+               public cycleSelectionService: CycleSelectionService,
+               public authService: AuthService) { }
 
   changeCycle(cycle) {
     this.cycleSelectionService.changeCycle(cycle);

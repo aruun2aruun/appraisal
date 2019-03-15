@@ -24,7 +24,7 @@ import {
   MatNativeDateModule
 } from '@angular/material';
 import {MatSidenavModule, MatAutocompleteModule, MatSnackBarModule} from '@angular/material';
-import {MatToolbarRow, MatToolbar, MatNavList, MatTooltipModule} from '@angular/material';
+import {MatToolbarModule, MatListModule, MatTooltipModule} from '@angular/material';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
@@ -60,9 +60,6 @@ import { SubmitConfirmationDialogComponent } from './submit-confirmation-dialog/
   declarations: [
     AppComponent,
     NavigationBarComponent,
-    MatToolbarRow,
-    MatToolbar,
-    MatNavList,
     HomeComponent,
     ProvideFeedbackComponent,
     LoginComponent,
@@ -85,6 +82,8 @@ import { SubmitConfirmationDialogComponent } from './submit-confirmation-dialog/
     SubmitConfirmationDialogComponent
   ],
   imports: [
+    MatToolbarModule,
+    MatListModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 private homeService: HomeService,
                 private userService: UserService,
                 private cycleSelectionService: CycleSelectionService,
-                private authService: AuthService,
+                public authService: AuthService,
                 private cycleService: CycleService,
                 private router: Router) {
     pageHeaderService.setTitle('Home');
