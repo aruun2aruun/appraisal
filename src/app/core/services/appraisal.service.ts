@@ -20,6 +20,11 @@ export class AppraisalService {
     return this.http.get(environment.baseUrl + '/appraisal/cycle/'+ cycleId).pipe(map(response => response));
   }
   
+  getAppraisalbyAppraisalId(appraisalId): Observable<any> {
+    const url = environment.baseUrl + '/appraisal/' + appraisalId;
+    return this.http.get(url).pipe(map(response => response));
+  }
+  
   getAppraisalbyUserId(cycleId, userId): Observable<any> {
     const url = environment.baseUrl + '/appraisal/cycle/' + cycleId + '/user/' + userId;
     return this.http.get(url).pipe(map(response => response));
@@ -44,6 +49,12 @@ export class AppraisalService {
     const url = environment.baseUrl + '/appraisal/' + appraisalId + '/submitSelfAppraisal';
     return this.http.post<any>(url, httpOptions);
   }
+
+  submitReviewerFeedback(appraisalId: string): Observable<any> {
+    const url = environment.baseUrl + '/appraisal/' + appraisalId + '/submitReviewerAppraisal';
+    return this.http.post<any>(url, httpOptions);
+  }
+  
   errorCheck(appraisalId: string): Observable<any> {
     const url = environment.baseUrl + '/appraisal/' + appraisalId + '/errorCheck';
     return this.http.post<any>(url, httpOptions);

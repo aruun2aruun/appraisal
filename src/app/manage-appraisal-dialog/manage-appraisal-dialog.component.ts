@@ -8,7 +8,7 @@ import {UserService} from '../core/services/user.service';
 
 @Component({
   selector: 'app-manage-appraisal-dialog',
-  templateUrl: './manage-appraisal-dialog.component.html',
+  templateUrl: './manage-appraisal-dialog.component.html',  
   styleUrls: ['./manage-appraisal-dialog.component.scss']
 })
 export class ManageAppraisalDialogComponent implements OnInit {
@@ -67,7 +67,7 @@ export class ManageAppraisalDialogComponent implements OnInit {
   }
 
   submitResponse() {
-    this.appraisalService.submitFeedback(this.appraisalId).subscribe(
+    this.appraisalService.submitReviewerFeedback(this.appraisalId).subscribe(
       response => {
         this.initialize();
       }, error => {

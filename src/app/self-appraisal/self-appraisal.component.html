@@ -44,8 +44,8 @@
 </div>
 <footer>
   <div *ngIf="error" layout="row" layout-align="center center" class="error">
-  <mat-icon color="warn">error</mat-icon>
-    <mat-label> <a title="Click to see Errors" (click)="openDialog()">{{error.error.sectionOneError.length}} errors</a> </mat-label>
+    <mat-icon color="warn">error</mat-icon>
+    <mat-label> <a title="Click to see Errors" (click)="openErrorDialog()">{{error.error.sectionOneError.length}} errors</a> </mat-label>
   </div>
   <div *ngIf="status === 'SELF_REVIEW'" layout="row" layout-align="center center" class="footer-button">
     <button type="button" mat-stroked-button (click)="save()"
@@ -62,7 +62,7 @@
   </div>
 
   <div *ngIf="status !== 'SELF_REVIEW'" layout="row" layout-align="center center" class="footer-button">
-      <p class="submit-msg">Your self appraisal is submitted</p>
+    <p class="submit-msg">Your self appraisal is submitted</p>
   </div>
 </footer>
 

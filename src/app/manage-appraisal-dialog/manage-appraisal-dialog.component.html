@@ -66,17 +66,19 @@
   </div>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
-  <div layout="row" layout-align="center center" class="error">
+<mat-dialog-actions style="display: flex;">
+  <div *ngIf="error" class="error">
     <mat-icon color="warn">error</mat-icon>
-    <mat-label> <a title="Click to see Errors" (click)="openDialog()">{{error.sectionOneError.length}} errors</a> </mat-label>
+    <mat-label class="label"><a title="Click to see Errors" (click)="openDialog()">{{error.sectionOneError.length}} errors</a></mat-label>
   </div>
-  <button type="button" mat-stroked-button mat-button (click)="save()">
-    <mat-icon>create</mat-icon>
-    Save
-  </button>
-  <button type="button" mat-stroked-button mat-button (click)="submitResponse()">
-    <mat-icon>done</mat-icon>
-    Submit
-  </button>
+  <div class="button-holder">
+    <button type="button" mat-stroked-button mat-button (click)="save()">
+      <mat-icon>create</mat-icon>
+      Save
+    </button>
+    <button type="button" mat-stroked-button mat-button (click)="submitResponse()">
+      <mat-icon>done</mat-icon>
+      Submit
+    </button>
+  </div>
 </mat-dialog-actions>
