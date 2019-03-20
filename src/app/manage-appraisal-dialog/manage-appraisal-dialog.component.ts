@@ -1,4 +1,5 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject, ViewChild, AfterViewChecked } from '@angular/core';
+import {SelfAppraisalSectiononeComponent } from '../self-appraisal-sectionone/self-appraisal-sectionone.component';
 import {MAT_DIALOG_DATA, MatSnackBar, MatDialog, MatDialogConfig} from '@angular/material';
 import {SubmitErrorDialogComponent} from '../submit-error-dialog/submit-error-dialog.component';
 import {AppraisalService} from '../core/services/appraisal.service';
@@ -11,7 +12,7 @@ import {UserService} from '../core/services/user.service';
   templateUrl: './manage-appraisal-dialog.component.html',  
   styleUrls: ['./manage-appraisal-dialog.component.scss']
 })
-export class ManageAppraisalDialogComponent implements OnInit {
+export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked {
 
   currentCycle: CycleType;
   loggedInUser: UserType;
@@ -20,6 +21,9 @@ export class ManageAppraisalDialogComponent implements OnInit {
   appraisalId: string;
   error: any;
   status: string;
+  totalScore: string;
+
+  @ViewChild(SelfAppraisalSectiononeComponent) child;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                private snackBar: MatSnackBar,
@@ -43,7 +47,10 @@ export class ManageAppraisalDialogComponent implements OnInit {
     this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
     this.loadAppraisal();
     this.error = null;
+  }
 
+  ngAfterViewChecked() {
+    this.totalScore = this.child.totalScore;
   }
 
   loadAppraisal() {

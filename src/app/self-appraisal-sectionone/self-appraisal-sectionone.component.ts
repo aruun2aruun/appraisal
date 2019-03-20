@@ -18,14 +18,15 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   currentCycle: CycleType;
   loggedInUser: UserType;
   sectionResponses: any = [];
-  ratings: string[] = ['Outstanding', 'Exceeds Expectation', 'Meets+ Expectation',
-    'Meets Expectation', 'Meets Partial Expectation', 'Needs Improvement'];
+  ratings: string[] = ['1. Outstanding', '2. Exceeds Expectation', '3. Meets+ Expectation',
+                       '4. Meets Expectation', '5. Meets Partial Expectation', '6. Needs Improvement'];
   @Input() appraisalVisibility: string;
   @Input() reviewerVisibility: string;
-  score: any = [[8.3, 8.9], [9.4, 9.9]];
+  score: any = [[0.0, 0.0], [0.0, 0.0]];
+  totalScore: string;
 
   constructor(private cycleSelectionService: CycleSelectionService, private pageHeaderService: PageHeaderService,
-              private appraisalService: AppraisalService, private userService: UserService, private snackBar: MatSnackBar) {
+               private appraisalService: AppraisalService, private userService: UserService, private snackBar: MatSnackBar) {
     pageHeaderService.setTitle('Self Appraisal');
     cycleSelectionService.cycleChangedEvent.subscribe(data => this.initialize());
   }
@@ -85,23 +86,23 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
       });
       this.score.push(element);
     });
-
-    console.log(this.score);
+    var flatscore = this.score.flat();
+    this.totalScore = flatscore.reduce((partial_sum, a) => partial_sum + a); 
   }
 
   private getScore(weightage: number, reviewerRating: any) {
     let rating = 1;
-    if (reviewerRating === 'Outstanding') {
+    if (reviewerRating === '1. Outstanding') {
       rating = 1;
-    } else if (reviewerRating === 'Exceeds Expectation') {
+    } else if (reviewerRating === '2. Exceeds Expectation') {
       rating = 2;
-    } else if (reviewerRating === 'Meets+ Expectation') {
+    } else if (reviewerRating === '3. Meets+ Expectation') {
       rating = 3;
-    } else if (reviewerRating === 'Meets Expectation') {
+    } else if (reviewerRating === '4. Meets Expectation') {
       rating = 4;
-    } else if (reviewerRating === 'Meets Partial Expectation') {
+    } else if (reviewerRating === '5. Meets Partial Expectation') {
       rating = 5;
-    } else if (reviewerRating === 'Needs Improvement') {
+    } else if (reviewerRating === '6. Needs Improvement') {
       rating = 6;
     }
 

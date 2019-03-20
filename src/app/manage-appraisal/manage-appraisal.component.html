@@ -21,10 +21,19 @@
 
     <!-- Email Column -->
     <ng-container matColumnDef="useremail">
-      <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="30"> Email </mat-header-cell>
-      <mat-cell *matCellDef="let row" fxFlex="30">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20"> User Email </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="20">
         <span class="mobile-label">Email:</span>
         {{userNameMap[row.userId].email}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- Id Column -->
+    <ng-container matColumnDef="userid">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="20"> User Id </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="20">
+        <span class="mobile-label">Id:</span>
+        {{userNameMap[row.userId].id}}
       </mat-cell>
     </ng-container>
 
@@ -48,18 +57,18 @@
 
     <!-- Status Column -->
     <ng-container matColumnDef="status">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Status </mat-header-cell>
-      <mat-cell *matCellDef="let row">
+      <mat-header-cell *matHeaderCellDef mat-sort-header fxFlex="10"> Status </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="10">
         <span class="mobile-label">Status:</span>
         <b [ngClass]=[row.status]>{{row.status}}</b>
       </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
-      <mat-cell *matCellDef="let row">
+      <mat-header-cell *matHeaderCellDef fxFlex="10"> Action </mat-header-cell>
+      <mat-cell *matCellDef="let row" fxFlex="10">
         <button mat-icon-button matTooltip="View Appraisal Cycle" matTooltipPosition="before" class="mat-primary" (click)="openViewDialog(row)">
-          <mat-icon>search</mat-icon>
+          <mat-icon>speaker_notes_outline</mat-icon>
         </button>
         <button mat-icon-button matTooltip="View Appraisal Cycle" matTooltipPosition="before" class="mat-primary" (click)="openNotifyUserDialog(row)">
           <mat-icon>mail_outline</mat-icon>
