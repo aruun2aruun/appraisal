@@ -11,9 +11,14 @@
     <button *ngIf="authService.isAdministrator" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/manage-appraisal">Manage Appraisal</button>
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/goal-definition">Goal Definition</button>
 
-    <a class="logo" mat-stroked-button fxShow="false" fxShow.lt-md [matMenuTriggerFor]="mobileMenu">
+    <a class="logo" fxShow="false" fxShow.lt-md>
       <img src="https://westernacher-consulting.com/wp-content/uploads/2018/12/logo-retina.png" alt="Westernacher logo" class="tt-retina-logo" height="40">
     </a>
+    
+    <button mat-stroked-button fxShow="false" fxShow.lt-md [matMenuTriggerFor]="mobileMenu">
+      <mat-icon>menu</mat-icon>
+      Appraisal
+    </button>
 
     <span class="fill-remaining-space"></span>
 
