@@ -1,4 +1,4 @@
-<form *ngIf="appraisalVisibility" class="form">
+<form *ngIf="appraisalVisibility === 'EDITABLE'" class="form">
   <div *ngFor="let topic of sectionTopics; let i = index;">
     <h3>Topic {{i+1}}
       <button type="button" mat-icon-button color="warn" (click)="removeTopic(i)" matTooltip="Remove Topic" matTooltipPosition="after"  class="btn btn-outline-primary sharp" (focusout)="save(sectionTopics, 'Saved')"><mat-icon>remove_circle_outline</mat-icon></button>
@@ -18,11 +18,11 @@
     </div>
   </div>
 </form>
-<button *ngIf="appraisalVisibility" type="button" mat-stroked-button (click)="addTopic()" class="btn btn-outline-primary sharp">
+<button *ngIf="appraisalVisibility === 'EDITABLE'" type="button" mat-stroked-button (click)="addTopic()" class="btn btn-outline-primary sharp">
   <mat-icon color="primary">add</mat-icon>Add
 </button>
 
-<form *ngIf="!appraisalVisibility" class="form">
+<form *ngIf="appraisalVisibility === 'READ-ONLY'" class="form">
   <div *ngFor="let topic of sectionTopics; let i = index;">
     <h3>Topic {{i+1}}
       <button [disabled]="true" type="button" mat-icon-button color="warn" (click)="removeTopic(i)" matTooltip="Remove Topic" matTooltipPosition="after"  class="btn btn-outline-primary sharp" (focusout)="save(sectionTopics, 'Saved')"><mat-icon>remove_circle_outline</mat-icon></button>
@@ -42,6 +42,6 @@
     </div>
   </div>
 </form>
-<button *ngIf="!appraisalVisibility" [disabled]="true" type="button" mat-stroked-button (click)="addTopic()" class="btn btn-outline-primary sharp">
+<button *ngIf="appraisalVisibility === 'READ-ONLY'" [disabled]="true" type="button" mat-stroked-button (click)="addTopic()" class="btn btn-outline-primary sharp">
   <mat-icon color="primary">add</mat-icon>Add
 </button>
