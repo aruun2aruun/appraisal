@@ -55,6 +55,7 @@ import { NotifyDialogComponent } from './notify-dialog/notify-dialog.component';
 import { SelfAppraisalSectionfourComponent } from './self-appraisal-sectionfour/self-appraisal-sectionfour.component';
 import { SubmitErrorDialogComponent } from './submit-error-dialog/submit-error-dialog.component';
 import { SubmitConfirmationDialogComponent } from './submit-confirmation-dialog/submit-confirmation-dialog.component';
+import {SelfAppraisalSectionfiveComponent} from './self-appraisal-sectionfive/self-appraisal-sectionfive.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { SubmitConfirmationDialogComponent } from './submit-confirmation-dialog/
     GoalDefinitionComponent,
     NotifyDialogComponent,
     SelfAppraisalSectionfourComponent,
+    SelfAppraisalSectionfiveComponent,
     SubmitErrorDialogComponent,
     SubmitConfirmationDialogComponent
   ],
