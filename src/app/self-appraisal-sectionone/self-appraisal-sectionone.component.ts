@@ -16,12 +16,12 @@ import {MatSnackBar} from '@angular/material';
 export class SelfAppraisalSectiononeComponent implements OnInit {
 
   currentCycle: CycleType;
-  currentUser: UserType;
   sectionResponses: any = [];
   ratings: string[] = ['1. Outstanding', '2. Exceeds Expectation', '3. Meets+ Expectation',
                        '4. Meets Expectation', '5. Meets Partial Expectation', '6. Needs Improvement'];
   @Input() appraisalVisibility: string;
   @Input() reviewerVisibility: string;
+  @Input() currentUser: UserType;
   score: any = [[0.0, 0.0], [0.0, 0.0]];
   totalScore: number;
 

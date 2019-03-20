@@ -14,11 +14,11 @@ import {MatSnackBar} from '@angular/material';
 export class SelfAppraisalSectiontwoComponent implements OnInit {
 
   currentCycle: CycleType;
-  currentUser: UserType;
   sectionTopics: any[] = [];
   @Input() appraisalVisibility: string;
   @Input() reviewerVisibility: string;
   @Input() section: string;
+  @Input() currentUser: UserType;
 
   constructor(private cycleSelectionService: CycleSelectionService,
                private appraisalService: AppraisalService,

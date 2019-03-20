@@ -15,8 +15,8 @@ import {MatSnackBar} from '@angular/material';
 export class SelfAppraisalSectionfiveComponent implements OnInit {
 
   currentCycle: CycleType;
-  currentUser: UserType;
   sectionResponse: string;
+  @Input() currentUser: UserType;
   @Input() appraisalVisibility: string;
   @Input() reviewerVisibility: string;
 
