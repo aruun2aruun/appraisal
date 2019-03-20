@@ -23,7 +23,7 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   @Input() appraisalVisibility: string;
   @Input() reviewerVisibility: string;
   score: any = [[0.0, 0.0], [0.0, 0.0]];
-  totalScore: string;
+  totalScore: number;
 
   constructor(private cycleSelectionService: CycleSelectionService, private pageHeaderService: PageHeaderService,
                private appraisalService: AppraisalService, private userService: UserService, private snackBar: MatSnackBar) {
@@ -74,20 +74,14 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   }
 
   calculateScore() {
-    this.score = [];
+    this.totalScore = 0.0;
     this.sectionResponses.forEach(obj => {
-      const element = [];
       obj.response.forEach(item => {
         if (item.reviewerRating !== null) {
-          element.push(this.getScore(item.weightage, item.reviewerRating));
-        } else {
-          element.push('');
+          this.totalScore = this.totalScore + this.getScore(item.weightage, item.reviewerRating);
         }
       });
-      this.score.push(element);
     });
-    var flatscore = this.score.flat();
-    this.totalScore = flatscore.reduce((partial_sum, a) => partial_sum + a); 
   }
 
   private getScore(weightage: number, reviewerRating: any) {
