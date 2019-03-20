@@ -9,13 +9,12 @@ import {UserService} from '../core/services/user.service';
 
 @Component({
   selector: 'app-manage-appraisal-dialog',
-  templateUrl: './manage-appraisal-dialog.component.html',  
+  templateUrl: './manage-appraisal-dialog.component.html',
   styleUrls: ['./manage-appraisal-dialog.component.scss']
 })
 export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked {
 
   currentCycle: CycleType;
-  loggedInUser: UserType;
   currentUser: UserType;
   appraisalVisibility = 'READ-ONLY';
   reviewerVisibility = 'EDITABLE';
@@ -37,7 +36,6 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
     setTimeout(() => {
       this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
         data => {
-          this.loggedInUser = data;
           this.initialize();
         }
       );
@@ -55,7 +53,7 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
   }
 
   loadAppraisal() {
-    this.appraisalService.getAppraisalbyUserId(this.currentCycle.id, this.loggedInUser.id).subscribe(
+    this.appraisalService.getAppraisalbyUserId(this.currentCycle.id, this.currentUser.id).subscribe(
       response => {
         this.status = response.status;
         if (response.status === 'SELF_REVIEW') {

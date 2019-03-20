@@ -1,4 +1,4 @@
-<h2>{{data.user.name}}
+<h2>{{data.currentUser.name}}
   <span *ngIf="data.userStatus !== 'SELF_REVIEW'">TotalScore - <b>{{this.totalScore}}</b></span>
 </h2>
 <div class="userDetails">
@@ -14,10 +14,10 @@
     </thead>
     <tbody>
       <tr>
-        <td>{{data.user.designation}}</td>
-        <td>{{data.user.joiningDate | date}}</td>
-        <td>{{data.user.lastAppraisalDate | date}}</td>
-        <td>{{data.user.duration}}&nbsp;months</td>
+        <td>{{data.currentUser.designation}}</td>
+        <td>{{data.currentUser.joiningDate | date}}</td>
+        <td>{{data.currentUser.lastAppraisalDate | date}}</td>
+        <td>{{data.currentUser.duration}}&nbsp;months</td>
         <td>{{data.userStatus}}</td>
       </tr>
     </tbody>
