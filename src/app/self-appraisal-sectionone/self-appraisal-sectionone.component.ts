@@ -74,13 +74,19 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   }
 
   calculateScore() {
+    this.score = [];
     this.totalScore = 0.0;
     this.sectionResponses.forEach(obj => {
+      const element = [];
       obj.response.forEach(item => {
         if (item.reviewerRating !== null) {
+          element.push(this.getScore(item.weightage, item.reviewerRating));
           this.totalScore = this.totalScore + this.getScore(item.weightage, item.reviewerRating);
+        } else {
+          element.push('');
         }
       });
+      this.score.push(element);
     });
   }
 
