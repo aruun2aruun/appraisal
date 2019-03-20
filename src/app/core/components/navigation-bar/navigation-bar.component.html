@@ -2,14 +2,15 @@
 
   <mat-toolbar-row class="mat-elevation-z8">
 
-    <a mat-stroked-button class="button-large logo" fxHide="false" fxHide.lt-md routerLink="/home">
-      <img src="https://westernacher-consulting.com/wp-content/uploads/2018/12/logo-retina.png" alt="Westernacher logo" class="tt-retina-logo" width="138" height="50">
+    <a mat-stroked-button class="button-large logo" fxHide="false" fxHide.lt-md style="cursor: auto">
+      <img src="https://westernacher-consulting.com/wp-content/uploads/2018/12/logo-retina.png" alt="Westernacher logo" class="tt-retina-logo" height="50">
     </a>
+    <button mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/home">Home</button>
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/self-appraisal">Self Appraisal</button>
     <button *ngIf="authService.isAdministrator" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/user-administration">Access Control</button>
     <button *ngIf="authService.isAdministrator" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/manage-appraisal">Manage Appraisal</button>
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/goal-definition">Goal Definition</button>
-    
+
     <a class="logo" mat-stroked-button fxShow="false" fxShow.lt-md [matMenuTriggerFor]="mobileMenu">
       <img src="https://westernacher-consulting.com/wp-content/uploads/2018/12/logo-retina.png" alt="Westernacher logo" class="tt-retina-logo" height="40">
     </a>
