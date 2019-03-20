@@ -113,7 +113,7 @@ export class ManageAppraisalComponent implements OnInit {
     dialogConfig.width = '80%';
     dialogConfig.data = {
       userStatus: row.status,
-      user: this.userNameMap[row.userId],
+      currentUser: this.userNameMap[row.userId],
       userId: row.userId
     };
     const dialogRef = this.dialog.open(ManageAppraisalDialogComponent, dialogConfig);

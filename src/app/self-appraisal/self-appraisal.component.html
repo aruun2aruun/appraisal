@@ -10,7 +10,7 @@
 
       </mat-expansion-panel-header>
 
-      <app-self-appraisal-sectionone [appraisalVisibility]="appraisalVisibility" [reviewerVisibility]="reviewerVisibility"></app-self-appraisal-sectionone>
+      <app-self-appraisal-sectionone [appraisalVisibility]="appraisalVisibility" [reviewerVisibility]="reviewerVisibility" [currentUser]="currentUser"></app-self-appraisal-sectionone>
     </mat-expansion-panel>
 
     <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
@@ -18,7 +18,7 @@
         <mat-panel-title style="width: 70%">Additional activities/tasks performed</mat-panel-title>
         <mat-panel-description fxHide="false" fxHide.lt-md style="justify-content: space-evenly"></mat-panel-description>
       </mat-expansion-panel-header>
-      <app-self-appraisal-sectiontwo [section]="'sectiontwo'" [appraisalVisibility]="appraisalVisibility" [reviewerVisibility]="reviewerVisibility"></app-self-appraisal-sectiontwo>
+      <app-self-appraisal-sectiontwo [section]="'sectiontwo'" [appraisalVisibility]="appraisalVisibility" [reviewerVisibility]="reviewerVisibility" [currentUser]="currentUser"></app-self-appraisal-sectiontwo>
     </mat-expansion-panel>
 
     <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
@@ -26,7 +26,7 @@
         <mat-panel-title style="width: 70%">Future Aspirations</mat-panel-title>
         <mat-panel-description fxHide="false" fxHide.lt-md style="justify-content: space-evenly"></mat-panel-description>
       </mat-expansion-panel-header>
-      <app-self-appraisal-sectiontwo [section]="'sectionthree'" [appraisalVisibility]="appraisalVisibility" [reviewerVisibility]="reviewerVisibility"></app-self-appraisal-sectiontwo>
+      <app-self-appraisal-sectiontwo [section]="'sectionthree'" [appraisalVisibility]="appraisalVisibility" [reviewerVisibility]="reviewerVisibility" [currentUser]="currentUser"></app-self-appraisal-sectiontwo>
     </mat-expansion-panel>
 
     <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
@@ -38,7 +38,7 @@
         </mat-panel-description>
 
       </mat-expansion-panel-header>
-      <app-self-appraisal-sectionfour></app-self-appraisal-sectionfour>
+      <app-self-appraisal-sectionfour [currentUser]="currentUser"></app-self-appraisal-sectionfour>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

@@ -20,6 +20,7 @@ export class SelfAppraisalComponent implements OnInit {
 
   currentCycle: CycleType;
   loggedInUser: UserType;
+  currentUser: UserType;
   appraisalId: string;
   appraisalVisibility = 'READ-ONLY';
   reviewerVisibility = 'HIDDEN';
@@ -39,6 +40,7 @@ export class SelfAppraisalComponent implements OnInit {
       this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
         data => {
           this.loggedInUser = data;
+          this.currentUser = data;
           this.initialize();
           this.authService.init();
         }

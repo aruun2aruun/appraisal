@@ -16,6 +16,7 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
 
   currentCycle: CycleType;
   loggedInUser: UserType;
+  currentUser: UserType;
   appraisalVisibility = 'READ-ONLY';
   reviewerVisibility = 'EDITABLE';
   appraisalId: string;

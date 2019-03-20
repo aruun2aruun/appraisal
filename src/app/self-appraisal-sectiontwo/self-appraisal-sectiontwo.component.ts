@@ -14,7 +14,7 @@ import {MatSnackBar} from '@angular/material';
 export class SelfAppraisalSectiontwoComponent implements OnInit {
 
   currentCycle: CycleType;
-  loggedInUser: UserType;
+  currentUser: UserType;
   sectionTopics: any[] = [];
   @Input() appraisalVisibility: string;
   @Input() reviewerVisibility: string;
@@ -31,7 +31,6 @@ export class SelfAppraisalSectiontwoComponent implements OnInit {
     setTimeout(() => {
       this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
         data => {
-          this.loggedInUser = data;
           this.initialize();
         }
       );
@@ -44,7 +43,7 @@ export class SelfAppraisalSectiontwoComponent implements OnInit {
   }
 
   loadTopics() {
-    this.appraisalService.getSectiontwobyUserId(this.section, this.currentCycle.id, this.loggedInUser.id).subscribe(
+    this.appraisalService.getSectiontwobyUserId(this.section, this.currentCycle.id, this.currentUser.id).subscribe(
       response => {
         this.sectionTopics = response;
       }
@@ -66,7 +65,7 @@ export class SelfAppraisalSectiontwoComponent implements OnInit {
 
   save(responseObject) {
     console.log(responseObject);
-    this.appraisalService.saveSectionTwoFeedback(this.section, responseObject, this.currentCycle.id, this.loggedInUser.id).subscribe(
+    this.appraisalService.saveSectionTwoFeedback(this.section, responseObject, this.currentCycle.id, this.currentUser.id).subscribe(
       response => {
         this.snackBar.open('Response Auto Saved', '', {
           duration: 3000,
