@@ -30,7 +30,6 @@ export class SelfAppraisalSectionfiveComponent implements OnInit {
     setTimeout(() => {
       this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
         data => {
-          this.currentUser = data;
           this.initialize();
         }
       );
