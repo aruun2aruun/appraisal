@@ -49,7 +49,7 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
   }
 
   ngAfterViewChecked() {
-    //    this.totalScore = this.child.totalScore;
+    this.totalScore = this.child.totalScore;
   }
 
   loadAppraisal() {
