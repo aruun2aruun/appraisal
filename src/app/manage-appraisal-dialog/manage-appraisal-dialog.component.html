@@ -18,7 +18,7 @@
         <td>{{data.currentUser.joiningDate | date}}</td>
         <td>{{data.currentUser.lastAppraisalDate | date}}</td>
         <td>{{data.currentUser.duration}}&nbsp;days</td>
-        <td>{{data.userStatus}}</td>
+        <td>{{status}}</td>
       </tr>
     </tbody>
   </table>
@@ -95,14 +95,14 @@
         Save
       </button>
       <button type="button" mat-stroked-button mat-button (click)="submitReviewerResponse()">
-        <mat-icon>done</mat-icon>
-        Schedule
+        <mat-icon>schedule</mat-icon>
+        Mark as Scheduled
       </button>
     </div>
     <div *ngIf="data.userStatus === 'SCHEDULED'">
       <button type="button" mat-stroked-button mat-button (click)="completeAppraisal()">
-        <mat-icon>create</mat-icon>
-        Complete
+        <mat-icon>done_outline</mat-icon>
+        Mark as Complete
       </button>  
     </div>
   </div>

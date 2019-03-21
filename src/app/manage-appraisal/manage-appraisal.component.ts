@@ -118,6 +118,7 @@ export class ManageAppraisalComponent implements OnInit {
     };
     const dialogRef = this.dialog.open(ManageAppraisalDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
+      this.initialize();
       if (result) {
         this.viewCycle(result.cycleId, result.extend);
       }
