@@ -80,7 +80,7 @@
 <mat-dialog-actions style="display: flex;">
   <div *ngIf="error" class="error">
     <mat-icon color="warn">error</mat-icon>
-    <mat-label class="label"><a title="Click to see Errors" (click)="openDialog()">{{error.sectionOneError.length}} errors</a></mat-label>
+    <mat-label class="label"><a title="Click to see Errors" (click)="openDialog()">{{error.error.sectionOneError.length}} errors</a></mat-label>
   </div>
   <div class="button-holder">
     <button type="button" mat-stroked-button mat-button (click)="save()">
