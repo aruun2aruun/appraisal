@@ -1,4 +1,4 @@
-<div *ngIf="!authService.isAdministrator">
+<!--<div *ngIf="!authService.isAdministrator">-->
   <h2>{{this.daysdiff |  number : '1.0-0'}} day/s to go</h2>
   <p><b>Evaluation period: </b>{{cycle.evaluationPeriod}}</p>
   <p><b>Self appraisal deadline:</b> {{cycle.selfAppraisalDeadline | date}}</p>
@@ -6,8 +6,8 @@
   <button mat-stroked-button class="btn btn-outline-primary sharp" routerLink="/self-appraisal">Act Now</button>
   &nbsp;
   <button mat-stroked-button class="btn btn-outline-primary sharp" routerLink="/home">Need support</button>
-</div>
+<!--</div>-->
 
-<div *ngIf="authService.isAdministrator">
-  Admin specific stats
-</div>
+<!--<div *ngIf="authService.isAdministrator">-->
+  <!--Admin specific stats-->
+<!--</div>-->
