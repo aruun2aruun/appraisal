@@ -16,4 +16,9 @@ export class HomeService {
       environment.baseUrl + '/cycle'
     );
   }
+  getStatus(): any {
+    return this.http.get(
+      environment.baseUrl + '/appraisal/getStatusCount'
+    );
+  }
 }

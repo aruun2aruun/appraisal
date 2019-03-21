@@ -23,19 +23,21 @@ export class HomeComponent implements OnInit, OnDestroy {
   cycle: any = [];
   today: any = Date.now();
   daysdiff: number;
+  status: any;
 
-  constructor( private pageHeaderService: PageHeaderService,
-                private homeService: HomeService,
-                private userService: UserService,
-                private cycleSelectionService: CycleSelectionService,
-                public authService: AuthService,
-                private cycleService: CycleService,
-                private router: Router) {
+  constructor(private pageHeaderService: PageHeaderService,
+              private homeService: HomeService,
+              private userService: UserService,
+              private cycleSelectionService: CycleSelectionService,
+              public authService: AuthService,
+              private cycleService: CycleService,
+              private router: Router) {
     pageHeaderService.setTitle('Home');
   }
 
   ngOnInit() {
-    this.pageHeaderService.hideCycle();    setTimeout(() => {
+    this.pageHeaderService.hideCycle();
+    setTimeout(() => {
       this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
         data => {
           this.loggedInUser = data;
@@ -54,13 +56,18 @@ export class HomeComponent implements OnInit, OnDestroy {
             this.cycle = cycle;
             var today = new Date(this.today).getTime();
             var endDate = new Date(this.cycle.selfAppraisalDeadline).getTime();
-            if(today > endDate) {
+            if (today > endDate) {
               this.daysdiff = 0;
             } else {
-              this.daysdiff = Math.abs(endDate - today) / (1000 * 60 * 60 * 24);              
+              this.daysdiff = Math.abs(endDate - today) / (1000 * 60 * 60 * 24);
             }
           }
         }
+      }
+    );
+    this.homeService.getStatus().subscribe(
+      status => {
+        this.status = status;
       }
     );
 
@@ -106,7 +113,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             if (this.cycleSelectionService.activeCycles.length > 0 && (
               this.cycleSelectionService.currentCycle === undefined ||
               this.cycleSelectionService.activeCycles.find(x => x.id === this.cycleSelectionService.currentCycle.id) === undefined)
-               ) {
+            ) {
               this.cycleSelectionService.currentCycle = this.cycleSelectionService.activeCycles[0];
               localStorage.setItem('currentCycle', JSON.stringify(this.cycleSelectionService.currentCycle));
             }
