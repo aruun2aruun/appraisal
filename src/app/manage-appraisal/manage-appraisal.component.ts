@@ -17,7 +17,7 @@ import {AuthService} from '../core/services/auth.service';
   styleUrls: ['./manage-appraisal.component.scss']
 })
 export class ManageAppraisalComponent implements OnInit {
-  displayedColumns: string[] = ['username', 'useremail', 'userid', 'duration', 'lastappraisal', 'status', 'action'];
+  displayedColumns: string[] = ['empid', 'username', 'useremail', 'duration', 'lastappraisal', 'status', 'action'];
   dataSource: any;
 
   currentCycle: CycleType;

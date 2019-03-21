@@ -59,6 +59,11 @@ export class AppraisalService {
     const url = environment.baseUrl + '/appraisal/' + appraisalId + '/submitReviewerAppraisal';
     return this.http.post<any>(url, httpOptions);
   }
+
+  completeAppraisal(appraisalId: string): Observable<any> {
+    const url = environment.baseUrl + '/appraisal/' + appraisalId + '/completeAppraisal';
+    return this.http.post<any>(url, httpOptions);
+  }
   
   errorCheck(appraisalId: string): Observable<any> {
     const url = environment.baseUrl + '/appraisal/' + appraisalId + '/errorCheck';
