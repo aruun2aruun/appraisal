@@ -49,11 +49,11 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
   }
 
   ngAfterViewChecked() {
-    this.totalScore = this.child.totalScore;
+    //    this.totalScore = this.child.totalScore;
   }
 
   loadAppraisal() {
-    this.appraisalService.getAppraisalbyUserId(this.currentCycle.id, this.currentUser.id).subscribe(
+    this.appraisalService.getAppraisalbyUserId(this.currentCycle.id, this.data.currentUser.id).subscribe(
       response => {
         this.status = response.status;
         if (response.status === 'SELF_REVIEW') {
