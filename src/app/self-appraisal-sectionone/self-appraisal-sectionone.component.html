@@ -1,6 +1,6 @@
 <ul *ngIf="appraisalVisibility === 'READ-ONLY'">
-  <li>* Ratings in each category is mandatory</li>
-  <li>* Comments should be more than 50 characters long</li>
+  <li type="none">&#42; Ratings in each category is mandatory</li>
+  <li type="none">&#42; Comments should be more than 50 characters long</li>
 </ul>
 <div *ngFor="let sectionResponse of sectionResponses; let i = index; trackBy:trackByIndex;">
   <h3 style="display: inline-block">{{sectionResponse.group}}</h3>
