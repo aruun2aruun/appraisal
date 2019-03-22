@@ -11,7 +11,7 @@
     <button *ngIf="authService.isAdministrator" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/manage-appraisal">Manage Appraisal</button>
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/goal-definition">Goal Definition</button>
 
-    <button mat-stroked-button fxShow="false" fxShow.lt-md [matMenuTriggerFor]="mobileMenu">
+    <button class="logo_menu" mat-stroked-button fxShow="false" fxShow.lt-md [matMenuTriggerFor]="mobileMenu">
       <mat-icon>menu</mat-icon>
     </button>
 
