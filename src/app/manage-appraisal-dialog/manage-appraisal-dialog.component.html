@@ -1,5 +1,5 @@
 <h2>{{data.currentUser.name}}
-  <span *ngIf="data.userStatus !== 'SELF_REVIEW'">TotalScore - <b>{{this.totalScore}}</b></span>
+  <span *ngIf="data.userStatus !== 'SELF_REVIEW'">TotalScore - <b>{{this.totalScore |  number : '1.0-0'}}</b></span>
 </h2>
 <div class="userDetails">
   <table>
