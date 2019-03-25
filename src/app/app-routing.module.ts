@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {HomeComponent} from './home/home.component';
+import {HelpComponent} from './help/help.component';
 import {ProvideFeedbackComponent} from './provide-feedback/provide-feedback.component';
 import {ReviewResponseComponent} from './review-response/review-response.component';
 import {ViewResponseComponent} from './view-response/view-response.component';
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'home', component: HomeComponent},
   { path: '', component: LoginComponent},
+  { path: 'help', component: HelpComponent},
   { path: 'provide-feedback', component: ProvideFeedbackComponent, canActivate: [AuthGuard]},
   { path: 'review-response', component: ReviewResponseComponent, canActivate: [AuthGuard]},
   { path: 'view-response', component: ViewResponseComponent, canActivate: [AuthGuard]},
