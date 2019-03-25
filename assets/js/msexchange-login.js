@@ -191,7 +191,7 @@ $(function() {
         renderTokens();
         
         // Redirect to home page
-        window.location.hash = '#';
+        // window.location.hash = '#';
       } else {
         clearUserState();
         // Report error
