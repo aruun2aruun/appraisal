@@ -1,13 +1,4 @@
 <div *ngIf="!authService.isAdministrator">
-
-  <mat-icon>notification_important</mat-icon>
-  <br>
-  Click unblock on the address bar and allow "Load unsafe scripts"
-  <br>
-
-  Supported browsers: Chrome, Firefox, Opera, Chromium
-  <br>
-
   <h2>{{this.daysdiff |  number : '1.0-0'}} day/s to go</h2>
   <p><b>Evaluation period: </b>{{cycle.evaluationPeriod}}</p>
   <p><b>Self appraisal deadline:</b> {{cycle.selfAppraisalDeadline | date}}</p>
@@ -18,8 +9,18 @@
 </div>
 
 <div *ngIf="authService.isAdministrator">
-<p><b>Self Review: </b>{{status.selfReview}}</p>
-<p><b>Head Review:</b> {{status.headReview}}</p>
-<p><b>Scheduled:</b> {{status.scheduled}}</p>
-<p><b>Closed:</b> {{status.complete}}</p>
+  <p><b>Self Review: </b>{{status.selfReview}}</p>
+  <p><b>Head Review:</b> {{status.headReview}}</p>
+  <p><b>Scheduled:</b> {{status.scheduled}}</p>
+  <p><b>Closed:</b> {{status.complete}}</p>
+  <br>
 </div>
+
+
+<br>
+<mat-icon>notification_important</mat-icon>
+<br>
+Click unblock on the address bar and allow "Load unsafe scripts"
+<br>
+
+Supported browsers: Chrome, Firefox, Opera, Chromium
