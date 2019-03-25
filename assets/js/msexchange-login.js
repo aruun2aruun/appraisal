@@ -190,7 +190,7 @@ $(function() {
         // Re-render token to handle refresh
         renderTokens();
         
-        // Redirect to home page
+        // Redirect to home pageas
         // window.location.hash = '#';
       } else {
         clearUserState();
