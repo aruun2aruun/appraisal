@@ -5,9 +5,13 @@ import {CycleSelectionService} from '../core/services/cycle-selection.service';
 import {UserService} from '../core/services/user.service';
 import {AuthService} from '../core/services/auth.service';
 import {CycleService} from '../core/services/cycle.service';
+import {AppraisalService} from '../core/services/appraisal.service';
 import {UserType} from '../model/user-type';
 import {CycleType} from '../model/cycle-type';
 import {Router} from '@angular/router';
+import {NotifyDialogComponent} from '../notify-dialog/notify-dialog.component';
+import {MatDialog, MatDialogConfig, MatSnackBar} from '@angular/material';
+import * as messageObject from '../message.json';
 
 @Component({
   selector: 'app-home',
@@ -26,12 +30,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   status: any;
 
   constructor(private pageHeaderService: PageHeaderService,
-              private homeService: HomeService,
-              private userService: UserService,
-              private cycleSelectionService: CycleSelectionService,
-              public authService: AuthService,
-              private cycleService: CycleService,
-              private router: Router) {
+               private homeService: HomeService,
+               private userService: UserService,
+               private cycleSelectionService: CycleSelectionService,
+               public authService: AuthService,
+               public dialog: MatDialog,
+               private snackBar: MatSnackBar,
+               private appraisalService: AppraisalService,
+               private cycleService: CycleService,
+               private router: Router) {
     pageHeaderService.setTitle('Home');
   }
 
@@ -78,6 +85,32 @@ export class HomeComponent implements OnInit, OnDestroy {
     );
   }
 
+  openSupportDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '50%';
+    dialogConfig.data = {
+      to: 'appraisal_westernacher@outlook.com',
+      subject: 'Subject',
+      body: 'Please specify your email Id while raising any question.'
+    };
+    const dialogRef = this.dialog.open(NotifyDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.notify(result);
+      }
+    });
+  }
+
+  notify(result: any) {
+    this.appraisalService.notifyUser(result).subscribe(
+      response =>{
+        this.snackBar.open(messageObject.NOTIFY.success, null, {
+          duration: 6000,
+        });
+      });   
+  }
+
   ngOnDestroy() {
     this.pageHeaderService.showCycle();
     this.initializeCycleAndAccess();
@@ -113,7 +146,7 @@ export class HomeComponent implements OnInit, OnDestroy {
             if (this.cycleSelectionService.activeCycles.length > 0 && (
               this.cycleSelectionService.currentCycle === undefined ||
               this.cycleSelectionService.activeCycles.find(x => x.id === this.cycleSelectionService.currentCycle.id) === undefined)
-            ) {
+               ) {
               this.cycleSelectionService.currentCycle = this.cycleSelectionService.activeCycles[0];
               localStorage.setItem('currentCycle', JSON.stringify(this.cycleSelectionService.currentCycle));
             }

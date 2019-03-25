@@ -137,7 +137,9 @@ export class ManageAppraisalComponent implements OnInit {
     dialogConfig.width = '50%';
     dialogConfig.data = {
       to: 'Open Self Review',
-      name: this.loggedInUser.name
+      name: this.loggedInUser.name,
+      subject: 'Subject',
+      body: 'Body'
     };
     const dialogRef = this.dialog.open(NotifyDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
@@ -164,7 +166,9 @@ export class ManageAppraisalComponent implements OnInit {
     dialogConfig.height = '575px';
     dialogConfig.data = {
       to:this.userNameMap[row.userId].email,
-      name: this.loggedInUser.name
+      name: this.loggedInUser.name,
+      subject: 'Subject',
+      body: 'Body'
     };
     const dialogRef = this.dialog.open(NotifyDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {

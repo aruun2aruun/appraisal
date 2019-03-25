@@ -3,9 +3,15 @@
   <p><b>Evaluation period: </b>{{cycle.evaluationPeriod}}</p>
   <p><b>Self appraisal deadline:</b> {{cycle.selfAppraisalDeadline | date}}</p>
   <br>
-  <button mat-stroked-button class="btn btn-outline-primary sharp" routerLink="/self-appraisal">Start Appraisal</button>
+  <button mat-stroked-button class="btn btn-outline-primary sharp" routerLink="/self-appraisal">
+    <mat-icon>play_arrow</mat-icon>
+    Start Appraisal
+  </button>
   &nbsp;
-  <!--<button mat-stroked-button class="btn btn-outline-primary sharp" routerLink="/home">Need support</button>-->
+  <button mat-stroked-button class="btn btn-outline-primary sharp" (click)="openSupportDialog()">
+    <mat-icon>email</mat-icon>
+    Contact support
+  </button>
 </div>
 
 <div *ngIf="authService.isAdministrator">
@@ -16,11 +22,9 @@
   <br>
 </div>
 
-
 <br>
 <mat-icon>notification_important</mat-icon>
 <br>
-Click unblock on the address bar and allow "Load unsafe scripts"
+Click unblock on the address bar and allow "Load unsafe scripts". <a href="/help">Know more</a>
 <br>
-
 Supported browsers: Chrome, Firefox, Opera, Chromium

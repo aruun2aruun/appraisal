@@ -15,8 +15,8 @@ export class NotifyDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.data.subject = 'Test Subject';
-    this.data.body = 'Test Body';
+    this.data.subject = this.data.subject;
+    this.data.body = this.data.body;
     this.data.signature = 'Regards,\n' + this.data.name;
   }
 }
