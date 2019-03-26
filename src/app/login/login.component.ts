@@ -43,6 +43,10 @@ export class LoginComponent implements OnInit, OnDestroy {
       this.initialize();
     }
 
+  help() {
+    this.router.navigate(['/appraisal/help']);
+  }
+
   ngOnDestroy(): void {
     this.pageHeaderService.showCycle();
   }

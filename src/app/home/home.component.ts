@@ -108,7 +108,11 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.snackBar.open(messageObject.NOTIFY.success, null, {
           duration: 6000,
         });
-      });   
+      });
+  }
+
+  help() {
+    this.router.navigate(['/appraisal/help']);
   }
 
   ngOnDestroy() {
