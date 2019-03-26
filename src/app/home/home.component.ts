@@ -112,7 +112,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   help() {
-    this.router.navigate(['/appraisal/help']);
+    this.router.navigate(['/help']);
   }
 
   ngOnDestroy() {
