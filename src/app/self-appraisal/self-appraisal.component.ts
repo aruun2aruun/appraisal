@@ -22,7 +22,7 @@ export class SelfAppraisalComponent implements OnInit {
   loggedInUser: UserType;
   currentUser: UserType;
   appraisalId: string;
-  appraisalVisibility = 'READ-ONLY';
+  appraisalVisibility = 'EDITABLE';
   reviewerVisibility = 'HIDDEN';
   error: string;
   status: string;
