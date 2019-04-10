@@ -51,21 +51,14 @@
       </div>
       <div style="display: inline-block"><mat-label>Self Appraisal Comment:</mat-label></div>
 
-      <mat-form-field style="width: 20%; float: right">
-        <mat-select [disabled]=true (focusout)="save(sectionResponses, 'Saved')" #MatSelect placeholder="Self Appraisal rating"
-                    [(ngModel)]="response.selfRating">
-          <mat-option (focusout)="save(sectionResponses, 'Saved')" #MatOption
-                      *ngFor="let rating of ratings" [value]="rating">
-            {{rating}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+      <div style="float: right">
+        <mat-label>{{response.selfRating}}</mat-label>
+      </div>
       <div>
         <mat-form-field class="response-full-width">
         <textarea [disabled]=true (focusout)="save(sectionResponses, 'Saved')"
-                  style="width: 100%" [(ngModel)]="response.selfComment" [ngModelOptions]="{ standalone: true }"
-                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
-                  placeholder="Provide a comment to support your rating"></textarea>
+                  style="width: 100%; color: black" [(ngModel)]="response.selfComment" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
         </mat-form-field>
       </div>
     </div>
