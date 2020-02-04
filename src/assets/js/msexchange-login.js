@@ -1,7 +1,7 @@
 $(function() {
   // App configuration
   var authEndpoint = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?';
-  var redirectUri = 'https://aruun2aruun.github.io/appraisal/home';
+  var redirectUri = 'https://appraisal.ioak.org/home';
   var appId = '9916f444-ecc7-4ced-b073-58c08d4283ce';
   var scopes = 'openid profile User.Read Mail.Read Calendars.Read Contacts.Read';
 
