@@ -57,16 +57,17 @@ export class ManageAppraisalComponent implements OnInit {
     this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
       data => {
         this.loggedInUser = data;
+        this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
+        this.getAllUsers();
+        this.RenderDataTable();
       });
-    this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
-    this.getAllUsers();
-    this.RenderDataTable();
   }
 
   RenderDataTable() {
+    console.log(this.loggedInUser.id);
     this.cycleId = this.currentCycle.id;
     this.userIds = [];
-    this.appraisalService.getAppraisal(this.cycleId)
+    this.appraisalService.getAppraisal(this.cycleId, this.loggedInUser.id)
       .subscribe(
       response => {
         if (response.length > 0) {

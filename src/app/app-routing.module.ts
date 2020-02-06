@@ -12,6 +12,7 @@ import {SelfAppraisalComponent} from './self-appraisal/self-appraisal.component'
 import {ManageAppraisalComponent} from './manage-appraisal/manage-appraisal.component';
 import {GoalDefinitionComponent} from './goal-definition/goal-definition.component';
 import {AuthGuard} from './auth.guard';
+import { RatingScaleComponent } from './rating-scale/rating-scale.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   { path: 'self-appraisal', component: SelfAppraisalComponent, canActivate: [AuthGuard]},
   { path: 'manage-appraisal', component: ManageAppraisalComponent, canActivate: [AuthGuard]},
   { path: 'goal-definition', component: GoalDefinitionComponent, canActivate: [AuthGuard]},
+  { path: 'rating-scale', component: RatingScaleComponent, canActivate: [AuthGuard]},
   { path: 'unauthorized', component: UnauthorizedComponent, canActivate: [AuthGuard]}
 ];
 

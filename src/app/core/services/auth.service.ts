@@ -13,7 +13,7 @@ export class AuthService {
   }
 
   isAdministrator = false;
-  isHeadof = false;
+  isManager = false;
 
   loggedIn = false;
   loggedInUser: UserType;
@@ -28,15 +28,15 @@ export class AuthService {
           if (data.roles.find(obj => obj.type === 'Administrator')) {
             this.isAdministrator = true;
           }
-          if (data.roles.find(obj => obj.type === 'Headof')) {
-            this.isHeadof = true;
+          if (data.roles.find(obj => obj.type === 'Manager')) {
+            this.isManager = true;
           }
         }
       );
     } else {
       this.loggedIn = false;
       this.isAdministrator = false;
-      this.isHeadof = false;
+      this.isManager = false;
     }
 
     this.cycleSelectionService.initialize();

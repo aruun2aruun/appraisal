@@ -51,6 +51,7 @@ import { SelfAppraisalSectiononeComponent } from './self-appraisal-sectionone/se
 import { SelfAppraisalSectiontwoComponent } from './self-appraisal-sectiontwo/self-appraisal-sectiontwo.component';
 import { ManageAppraisalDialogComponent } from './manage-appraisal-dialog/manage-appraisal-dialog.component';
 import { GoalDefinitionComponent } from './goal-definition/goal-definition.component';
+import { RatingScaleComponent } from './rating-scale/rating-scale.component';
 import { NotifyDialogComponent } from './notify-dialog/notify-dialog.component';
 import { SelfAppraisalSectionfourComponent } from './self-appraisal-sectionfour/self-appraisal-sectionfour.component';
 import { SubmitErrorDialogComponent } from './submit-error-dialog/submit-error-dialog.component';
@@ -78,6 +79,7 @@ import { HelpComponent } from './help/help.component';
     SelfAppraisalSectiontwoComponent,
     ManageAppraisalDialogComponent,
     GoalDefinitionComponent,
+    RatingScaleComponent,
     NotifyDialogComponent,
     SelfAppraisalSectionfourComponent,
     SelfAppraisalSectionfiveComponent,

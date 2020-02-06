@@ -6,7 +6,7 @@ import {UserService} from './core/services/user.service';
 export class AuthGuard implements CanActivate {
 
   ADMIN_PATHS = ['/user-administration'];
-  HEADOF_PATHS = ['/manage-template', '/manage-template-unit', '/review-response', '/review-selection'];
+  MANAGER_PATHS = ['/manage-appraisal'];
 
     constructor(private router: Router, private userService: UserService) {}
 
@@ -53,7 +53,7 @@ export class AuthGuard implements CanActivate {
       if (this.ADMIN_PATHS.find(obj => obj === url) && !roles.find(obj => obj.type === 'Administrator')) {
         this.router.navigate(['/unauthorized']);
         return false;
-      } else if (this.HEADOF_PATHS.find(obj => obj === url) && !roles.find(obj => obj.type === 'Headof')) {
+      } else if (this.MANAGER_PATHS.find(obj => obj === url) && !roles.find(obj => obj.type === 'Manager') && !roles.find(obj => obj.type === 'Administrator')) {
         this.router.navigate(['/unauthorized']);
         return false;
       } else {

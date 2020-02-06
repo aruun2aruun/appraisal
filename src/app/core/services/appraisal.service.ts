@@ -16,8 +16,8 @@ export class AppraisalService {
   constructor(private http: HttpClient) {
   }
 
-  getAppraisal(cycleId): Observable<any> {
-    return this.http.get(environment.baseUrl + '/appraisal/cycle/'+ cycleId).pipe(map(response => response));
+  getAppraisal(cycleId, userId): Observable<any> {
+    return this.http.get(environment.baseUrl + '/appraisal/cycle/'+ cycleId + '/manageable/' + userId).pipe(map(response => response));
   }
   
   getAppraisalbyAppraisalId(appraisalId): Observable<any> {

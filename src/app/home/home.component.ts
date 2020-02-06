@@ -128,14 +128,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
       data => {
         this.authService.isAdministrator = false;
-        this.authService.isHeadof = false;
+        this.authService.isManager = false;
         this.authService.loggedIn = true;
         this.authService.loggedInUser = data;
         if (data.roles.find(obj => obj.type === 'Administrator')) {
           this.authService.isAdministrator = true;
         }
-        if (data.roles.find(obj => obj.type === 'Headof')) {
-          this.authService.isHeadof = true;
+        if (data.roles.find(obj => obj.type === 'Manager')) {
+          this.authService.isManager = true;
         }
 
         this.homeService.getCycles().subscribe(
