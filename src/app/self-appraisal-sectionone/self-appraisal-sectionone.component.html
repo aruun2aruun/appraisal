@@ -65,25 +65,25 @@
     </div>
 
     <div *ngFor="let review of response.reviews | keyvalue">
-      <div style="float: right">
-        <mat-label>{{review.value.rating}}</mat-label>
-      </div>
-      <div>
-        <mat-label>Comment from {{review.key}}:</mat-label>
-        <mat-form-field class="response-full-width">
-        <textarea [disabled]="true" (focusout)="save(sectionResponses, 'Saved')" style="width: 100%; color: black"
-                  [(ngModel)]="review.value.comment" [ngModelOptions]="{ standalone: true }"
-                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
-        </mat-form-field>
+      <div *ngIf="review.key !== this.loggedInUser.id">
+        <div style="float: right">
+          <mat-label>{{review.value.rating}}</mat-label>
+        </div>
+        <div>
+          <mat-label>Comment from {{review.key}}:</mat-label>
+          <mat-form-field class="response-full-width">
+          <textarea [disabled]="true" (focusout)="save(sectionResponses, 'Saved')" style="width: 100%; color: black"
+                    [(ngModel)]="review.value.comment" [ngModelOptions]="{ standalone: true }"
+                    matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
+          </mat-form-field>
+        </div>
       </div>
     </div>
 
-
     <div *ngIf="reviewerVisibility === 'EDITABLE'">
-      <div *ngFor="let review of response.reviews">Test</div>
       <mat-form-field style="width: 20%; float: right">
         <mat-select (focusout)="save(sectionResponses, 'Saved')" #MatSelect placeholder="Reviewer rating"
-                    [(ngModel)]="response.reviewerRating">
+                    [(ngModel)]="this.selfReviewedData.rating">
           <mat-option #MatOption (focusout)="save(sectionResponses, 'Saved')"
                       *ngFor="let rating of ratings; let i = index;" [value]="rating">
             {{rating}}
@@ -94,7 +94,7 @@
         <mat-label>Reviewer Comment:</mat-label>
         <mat-form-field class="response-full-width">
         <textarea (focusout)="save(sectionResponses, 'Saved')" style="width: 100%"
-                  [(ngModel)]="response.reviewerComment" [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="this.selfReviewedData.comment" [ngModelOptions]="{ standalone: true }"
                   matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
                   placeholder="Provide a comment to support your rating"></textarea>
         </mat-form-field>
@@ -103,7 +103,7 @@
     <div *ngIf="reviewerVisibility === 'READ-ONLY'">
       <mat-form-field style="width: 20%; float: right">
         <mat-select [disabled]="true" (focusout)="save(sectionResponses, 'Saved')" #MatSelect
-                    placeholder="Reviewer rating" [(ngModel)]="response.reviewerRating">
+                    placeholder="Reviewer rating" [(ngModel)]="this.selfReviewedData.rating">
           <mat-option #MatOption (focusout)="save(sectionResponses, 'Saved')"
                       *ngFor="let rating of ratings; let i = index;" [value]="rating">
             {{rating}}
@@ -114,7 +114,7 @@
         <mat-label>Reviewer Comment:</mat-label>
         <mat-form-field class="response-full-width">
         <textarea [disabled]="true" (focusout)="save(sectionResponses, 'Saved')" style="width: 100%"
-                  [(ngModel)]="response.reviewerComment" [ngModelOptions]="{ standalone: true }"
+                  [(ngModel)]="this.selfReviewedData.comment" [ngModelOptions]="{ standalone: true }"
                   matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
                   placeholder="Provide a comment to support your rating"></textarea>
         </mat-form-field>

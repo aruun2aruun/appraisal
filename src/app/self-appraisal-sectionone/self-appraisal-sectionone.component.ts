@@ -26,6 +26,8 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   totalScore: number;
   loggedInUser: UserType;
 
+  selfReviewedData: any;
+
   constructor(private cycleSelectionService: CycleSelectionService, private pageHeaderService: PageHeaderService,
                private appraisalService: AppraisalService, private userService: UserService, private snackBar: MatSnackBar) {
     pageHeaderService.setTitle('Self Appraisal');
@@ -56,13 +58,21 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
     this.appraisalService.getSectiononebyUserId(this.currentCycle.id, this.currentUser.id).subscribe(
       response => {
         this.sectionResponses = response;
+        this.sectionResponses.forEach(obj => {
+          obj.response.forEach(item => {
+            for (const property in item.reviews) {
+              if (`${property}` === this.loggedInUser.id) {
+                this.selfReviewedData = item.reviews[property];
+              }
+            }
+          });
+        });
         this.calculateScore();
       }
     );
   }
 
   save(responseObject) {
-    console.log(responseObject);
     this.appraisalService.saveSectionOneFeedback(responseObject, this.currentCycle.id, this.currentUser.id).subscribe(
       response => {
         this.snackBar.open('Response Auto Saved', '', {
@@ -73,11 +83,11 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
     );
     this.appraisalService.saveSectionOneReviewerFeedback([
       {
-        "group": "Performance on Core Competency",
-        "criteria": "Technical Skills",
-        "reviewerId": "qwerty",
-        "rating": "1",
-        "comment": "safdsfds"
+        'group': responseObject[0].group,
+        'criteria': responseObject[0].response[0].criteria,
+        'reviewerId': this.loggedInUser.id,
+        'rating': this.selfReviewedData.rating,
+        'comment': this.selfReviewedData.comment
       }
     ], this.currentCycle.id, this.currentUser.id, this.loggedInUser.id).subscribe(
       response => {
@@ -96,14 +106,18 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
     this.sectionResponses.forEach(obj => {
       const element = [];
       obj.response.forEach(item => {
-        if (item.reviewerRating !== null) {
-          element.push(this.getScore(item.weightage, item.reviewerRating));
-          this.totalScore = this.totalScore + this.getScore(item.weightage, item.reviewerRating);
+        if (item.reviews !== null) {
+          // tslint:disable-next-line: forin
+          for (const property in item.reviews) {
+            element.push(this.getScore(item.weightage, item.reviews[property].rating));
+          }
         } else {
           element.push('');
         }
       });
       this.score.push(element);
+      const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length;
+      this.totalScore = arrAvg(element);
     });
   }
 
