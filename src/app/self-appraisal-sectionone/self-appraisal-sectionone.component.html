@@ -37,6 +37,7 @@
         </mat-form-field>
       </div>
     </div>
+
     <div *ngIf="appraisalVisibility === 'READ-ONLY'">
       <div>
         <h4 style="display: inline-block">{{response.criteria}}</h4>
@@ -63,8 +64,23 @@
       </div>
     </div>
 
+    <div *ngFor="let review of response.reviews | keyvalue">
+      <div style="float: right">
+        <mat-label>{{review.value.rating}}</mat-label>
+      </div>
+      <div>
+        <mat-label>Comment from {{review.key}}:</mat-label>
+        <mat-form-field class="response-full-width">
+        <textarea [disabled]="true" (focusout)="save(sectionResponses, 'Saved')" style="width: 100%; color: black"
+                  [(ngModel)]="review.value.comment" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
 
     <div *ngIf="reviewerVisibility === 'EDITABLE'">
+      <div *ngFor="let review of response.reviews">Test</div>
       <mat-form-field style="width: 20%; float: right">
         <mat-select (focusout)="save(sectionResponses, 'Saved')" #MatSelect placeholder="Reviewer rating"
                     [(ngModel)]="response.reviewerRating">

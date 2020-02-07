@@ -89,6 +89,11 @@ export class AppraisalService {
     const url = environment.baseUrl + '/appraisal/cycle/' + cycleId + '/user/' + userId + '/sectionone';
     return this.http.put<any>(url, jsonObj, httpOptions);
   }
+
+  saveSectionOneReviewerFeedback(jsonObj, cycleId, userId, reviewerId): Observable<any> {
+    const url = environment.baseUrl + '/appraisal/cycle/' + cycleId + '/user/' + userId + '/sectionone/reviewer/' + reviewerId;
+    return this.http.put<any>(url, jsonObj, httpOptions);
+  }
   saveSectionFourFeedback(jsonObj, cycleId, userId): Observable<any> {
     const url = environment.baseUrl + '/appraisal/cycle/' + cycleId + '/user/' + userId + '/sectionfour';
     return this.http.put<any>(url, jsonObj, httpOptions);

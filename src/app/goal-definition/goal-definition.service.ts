@@ -11,9 +11,9 @@ export class GoalDefinitionService {
   constructor(private http: HttpClient) {
   }
 
-  getDefinitions(): any {
+  getDefinitions(userId: String): any {
     return this.http.get<Array<GoalDefinitionType>>(
-      environment.baseUrl + '/goalDefinition'
+      environment.baseUrl + '/goalDefinition/' + userId
     );
   }
 }

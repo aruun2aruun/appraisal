@@ -24,6 +24,7 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   @Input() currentUser: UserType;
   score: any = [[0.0, 0.0], [0.0, 0.0]];
   totalScore: number;
+  loggedInUser: UserType;
 
   constructor(private cycleSelectionService: CycleSelectionService, private pageHeaderService: PageHeaderService,
                private appraisalService: AppraisalService, private userService: UserService, private snackBar: MatSnackBar) {
@@ -35,6 +36,7 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
     setTimeout(() => {
       this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
         data => {
+          this.loggedInUser = data;
           this.initialize();
         }
       );
@@ -60,8 +62,24 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   }
 
   save(responseObject) {
-    // console.log(responseObject)
+    console.log(responseObject);
     this.appraisalService.saveSectionOneFeedback(responseObject, this.currentCycle.id, this.currentUser.id).subscribe(
+      response => {
+        this.snackBar.open('Response Auto Saved', '', {
+          duration: 3000,
+          panelClass: ['custom-auto-save']
+        });
+      }
+    );
+    this.appraisalService.saveSectionOneReviewerFeedback([
+      {
+        "group": "Performance on Core Competency",
+        "criteria": "Technical Skills",
+        "reviewerId": "qwerty",
+        "rating": "1",
+        "comment": "safdsfds"
+      }
+    ], this.currentCycle.id, this.currentUser.id, this.loggedInUser.id).subscribe(
       response => {
         this.snackBar.open('Response Auto Saved', '', {
           duration: 3000,
