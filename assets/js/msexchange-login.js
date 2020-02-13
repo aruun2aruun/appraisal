@@ -1,8 +1,8 @@
 $(function() {
   // App configuration
   var authEndpoint = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?';
-  // var redirectUri = 'https://appraisal.ioak.org/home';
-  var redirectUri = 'http://localhost:4200/home';
+  var redirectUri = 'https://appraisal.ioak.org/home';
+  // var redirectUri = 'http://localhost:4200/home';login
   var appId = '9e8c7139-b37b-4498-896c-a36d0103a89b';
   var scopes = 'openid profile User.Read Mail.Read Calendars.Read Contacts.Read';
 
@@ -18,13 +18,13 @@ $(function() {
     render('#unsupportedbrowser');
     return;
   }
-  
+
   render(window.location.hash);
 
   $(window).on('hashchange', function() {
     render(window.location.hash);
   });
-  
+
   function render(hash) {
 
     var action = hash.split('=')[0];
@@ -36,9 +36,9 @@ $(function() {
     var isAuthenticated = (sessionStorage.accessToken != null && sessionStorage.accessToken.length > 0);
     renderNav(isAuthenticated);
     renderTokens();
-    
+
     var pagemap = {
-      
+
       // Welcome page
       '': function() {
         renderWelcome(isAuthenticated);
@@ -46,13 +46,13 @@ $(function() {
 
       // Receive access token
       '#access_token': function() {
-        handleTokenResponse(hash);             
+        handleTokenResponse(hash);
       },
 
       // Signout
       '#signout': function () {
         clearUserState();
-        
+
         // Redirect to home page
         window.location.hash = '#';
       },
@@ -75,7 +75,7 @@ $(function() {
         $('#unsupported').show();
       }
     }
-    
+
     if (pagemap[action]){
       pagemap[action]();
     } else {
@@ -122,7 +122,7 @@ $(function() {
     $('#error-desc', window.parent.document).text(decodePlusEscaped(description));
     $('#error-display', window.parent.document).show();
   }
-  
+
   function renderWelcome(isAuthed) {
 //    setActiveNav('#home-nav');
     if (isAuthed) {
@@ -150,7 +150,7 @@ $(function() {
       nonce: sessionStorage.authNonce,
       response_mode: 'fragment'
     };
-    
+
     return authEndpoint + $.param(authParams);
   }
 
@@ -175,7 +175,7 @@ $(function() {
 
     sessionStorage.authState = '';
     sessionStorage.accessToken = tokenresponse.access_token;
-    
+
     // Get the number of seconds the token is valid for,
     // Subract 5 minutes (300 sec) to account for differences in clock settings
     // Convert to milliseconds
@@ -190,7 +190,7 @@ $(function() {
       if (isValid) {
         // Re-render token to handle refresh
         renderTokens();
-        
+
         // Redirect to home pageas
         // window.location.hash = '#';
       } else {
@@ -260,7 +260,7 @@ $(function() {
     // Per the docs at:
     // https://azure.microsoft.com/en-us/documentation/articles/active-directory-v2-protocols-implicit/#send-the-sign-in-request
     // Check if this is a consumer account so we can set domain_hint properly
-    sessionStorage.userDomainType = 
+    sessionStorage.userDomainType =
       payload.tid === '9188040d-6c67-4c5b-b112-36a304b66dad' ? 'consumers' : 'organizations';
 
     callback(true);
@@ -277,9 +277,9 @@ $(function() {
     iframe.load(function() {
       callback(sessionStorage.accessToken);
     });
-    
-    iframe.attr('src', buildAuthUrl() + '&prompt=none&domain_hint=' + 
-      sessionStorage.userDomainType + '&login_hint=' + 
+
+    iframe.attr('src', buildAuthUrl() + '&prompt=none&domain_hint=' +
+      sessionStorage.userDomainType + '&login_hint=' +
       sessionStorage.userSigninName);
   }
 
@@ -318,13 +318,13 @@ $(function() {
 
   function parseHashParams(hash) {
     var params = hash.slice(1).split('&');
-    
+
     var paramarray = {};
     params.forEach(function(param) {
       param = param.split('=');
       paramarray[param[0]] = param[1];
     });
-    
+
     return paramarray;
   }
 
