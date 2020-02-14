@@ -64,7 +64,6 @@ export class ManageAppraisalComponent implements OnInit {
   }
 
   RenderDataTable() {
-    console.log(this.loggedInUser.id);
     this.cycleId = this.currentCycle.id;
     this.userIds = [];
     this.appraisalService.getAppraisal(this.cycleId, this.loggedInUser.id)

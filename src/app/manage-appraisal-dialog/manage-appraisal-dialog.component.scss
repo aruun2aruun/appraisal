@@ -38,7 +38,7 @@ table {
     font-weight: bold;
   }
 }
-.error{
+.error {
   float: left;
   display: inline-block;
   .label {
@@ -49,4 +49,14 @@ table {
 .button-holder {
   margin-left: auto;
   order: 2;
+}
+.mat-expansion-panel-header {
+  height: 48px !important;
+  padding: 0 10px;
+  border-bottom: 1px solid #ccc;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+.mat-expansion-panel-body {
+  margin: 10px 0 0 0;
 }

@@ -25,7 +25,7 @@ export class AuthService {
         data => {
           this.loggedInUser = data;
           this.loggedIn = true;
-          if (data.roles.find(obj => obj.type === 'Administrator')) {
+          if (data.roles.find(obj => obj.type === 'ProjectManager')) {
             this.isAdministrator = true;
           }
           if (data.roles.find(obj => obj.type === 'Manager')) {

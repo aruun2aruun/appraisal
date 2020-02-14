@@ -1,12 +1,31 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {CycleSelectionService} from '../core/services/cycle-selection.service';
-import {PageHeaderService} from '../core/services/page-header.service';
 import {AppraisalService} from '../core/services/appraisal.service';
 import {CycleType} from '../model/cycle-type';
 import {UserType} from '../model/user-type';
 import {UserService} from '../core/services/user.service';
 import {MatSnackBar} from '@angular/material';
 
+export interface IReviewResponse {
+ group: string;
+ response: IResponse[];
+}
+
+export interface IResponse {
+  criteria: string;
+  weightage:  string;
+  selfComment:  string;
+  selfRating: string;
+  projectManagerReviews: [Map<string, IReview>];
+}
+
+export interface IReview {
+  comment: string;
+  rating: string;
+  name: string;
+  complete: boolean;
+  roleType: string;
+}
 
 @Component({
   selector: 'app-self-appraisal-sectionone',
@@ -16,7 +35,7 @@ import {MatSnackBar} from '@angular/material';
 export class SelfAppraisalSectiononeComponent implements OnInit {
 
   currentCycle: CycleType;
-  sectionResponses: any = [];
+  sectionResponses: IReviewResponse[] = [];
   ratings: string[] = ['1. Outstanding', '2. Exceeds Expectation', '3. Meets+ Expectation',
                        '4. Meets Expectation', '5. Meets Partial Expectation', '6. Needs Improvement'];
   @Input() appraisalVisibility: string;
@@ -26,11 +45,13 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   totalScore: number;
   loggedInUser: UserType;
 
-  selfReviewedData: any;
+  selfReviewedData = {
+    rating: '',
+    comment: ''
+  };
 
-  constructor(private cycleSelectionService: CycleSelectionService, private pageHeaderService: PageHeaderService,
+  constructor(private cycleSelectionService: CycleSelectionService,
                private appraisalService: AppraisalService, private userService: UserService, private snackBar: MatSnackBar) {
-    pageHeaderService.setTitle('Self Appraisal');
     cycleSelectionService.cycleChangedEvent.subscribe(data => this.initialize());
   }
 
@@ -58,38 +79,14 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
     this.appraisalService.getSectiononebyUserId(this.currentCycle.id, this.currentUser.id).subscribe(
       response => {
         this.sectionResponses = response;
-        this.sectionResponses.forEach(obj => {
-          obj.response.forEach(item => {
-            for (const property in item.reviews) {
-              if (`${property}` === this.loggedInUser.id) {
-                this.selfReviewedData = item.reviews[property];
-              }
-            }
-          });
-        });
         this.calculateScore();
       }
     );
   }
 
   save(responseObject) {
+    console.log(responseObject);
     this.appraisalService.saveSectionOneFeedback(responseObject, this.currentCycle.id, this.currentUser.id).subscribe(
-      response => {
-        this.snackBar.open('Response Auto Saved', '', {
-          duration: 3000,
-          panelClass: ['custom-auto-save']
-        });
-      }
-    );
-    this.appraisalService.saveSectionOneReviewerFeedback([
-      {
-        'group': responseObject[0].group,
-        'criteria': responseObject[0].response[0].criteria,
-        'reviewerId': this.loggedInUser.id,
-        'rating': this.selfReviewedData.rating,
-        'comment': this.selfReviewedData.comment
-      }
-    ], this.currentCycle.id, this.currentUser.id, this.loggedInUser.id).subscribe(
       response => {
         this.snackBar.open('Response Auto Saved', '', {
           duration: 3000,
@@ -100,23 +97,46 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
     this.calculateScore();
   }
 
+  saveReview(sectionResponseObj, responseObj, i: number) {
+    console.log(sectionResponseObj);
+    console.log(responseObj);
+    this.appraisalService.saveSectionOneReviewerFeedback([
+      {
+        'group': sectionResponseObj.group,
+        'criteria': responseObj.criteria,
+        'reviewerId': this.loggedInUser.id,
+        'rating': responseObj.projectManagerReviews[this.loggedInUser.id].rating,
+        'comment': responseObj.projectManagerReviews[this.loggedInUser.id].comment,
+        'roleType': this.loggedInUser.roles[0].type
+      }
+    ], this.currentCycle.id, this.currentUser.id, this.loggedInUser.id).subscribe(
+      response => {
+        this.snackBar.open('Response Auto Saved', '', {
+          duration: 3000,
+          panelClass: ['custom-auto-save']
+        });
+      }
+    );
+  }
+
   calculateScore() {
     this.score = [];
     this.totalScore = 0.0;
     this.sectionResponses.forEach(obj => {
       const element = [];
       obj.response.forEach(item => {
-        if (item.reviews !== null) {
-          // tslint:disable-next-line: forin
-          for (const property in item.reviews) {
-            element.push(this.getScore(item.weightage, item.reviews[property].rating));
+        if (item.projectManagerReviews !== null) {
+          for (const property in item.projectManagerReviews) {
+            if (property) {
+              // element.push(this.getScore(item.weightage, item.reviews[property].rating));
+            }
           }
         } else {
           element.push('');
         }
       });
       this.score.push(element);
-      const arrAvg = arr => arr.reduce((a,b) => a + b, 0) / arr.length;
+      const arrAvg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
       this.totalScore = arrAvg(element);
     });
   }

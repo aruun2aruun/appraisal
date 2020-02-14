@@ -1,6 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {CycleSelectionService} from '../core/services/cycle-selection.service';
-import {PageHeaderService} from '../core/services/page-header.service';
 import {AppraisalService} from '../core/services/appraisal.service';
 import {CycleType} from '../model/cycle-type';
 import {UserType} from '../model/user-type';
@@ -20,9 +19,8 @@ export class SelfAppraisalSectionfourComponent implements OnInit {
   @Input() appraisalVisibility: string;
   @Input() reviewerVisibility: string;
 
-  constructor(private cycleSelectionService: CycleSelectionService, private pageHeaderService: PageHeaderService,
+  constructor(private cycleSelectionService: CycleSelectionService,
               private appraisalService: AppraisalService, private userService: UserService, private snackBar: MatSnackBar) {
-    pageHeaderService.setTitle('Self Appraisal');
     cycleSelectionService.cycleChangedEvent.subscribe(data => this.initialize());
   }
 

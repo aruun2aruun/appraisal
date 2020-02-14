@@ -5,10 +5,10 @@
 </div>
 
 <div *ngIf="authService.isAdministrator">
-  <p><b>Self Review: </b>{{status.selfReview}}</p>
-  <p><b>Head Review:</b> {{status.headReview}}</p>
-  <p><b>Scheduled:</b> {{status.scheduled}}</p>
-  <p><b>Closed:</b> {{status.complete}}</p>
+  <p><b>Self Review: </b>{{status?.selfReview}}</p>
+  <p><b>Head Review:</b> {{status?.headReview}}</p>
+  <p><b>Scheduled:</b> {{status?.scheduled}}</p>
+  <p><b>Closed:</b> {{status?.complete}}</p>
 </div>
 
 

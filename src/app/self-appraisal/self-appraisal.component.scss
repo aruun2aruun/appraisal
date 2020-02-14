@@ -2,7 +2,8 @@
   margin: 5px;
 }
 footer{
-  background-color: #F5F5F5;
+  background-color: #d6d8d9;
+  border-top: 1px solid #999999;
   position: fixed;
   width: 100%;
   bottom: 0px;
@@ -29,5 +30,6 @@ mat-label{
 }
 .submit-msg{
   color: green;
+  font-weight: bold;
   margin: 0 5px 0 0;
 }
