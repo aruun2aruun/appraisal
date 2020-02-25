@@ -210,13 +210,29 @@
       </mat-form-field>
     </div>
     
+    <!-- VIEW TEAM LEAD REVIEWS -->
+    <div *ngIf="reviewerVisibility === 'READ-ONLY' && response.teamLeadReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionReadOnly': reviewerVisibility == 'READ-ONLY' }">
+      <div style="float: right">
+        <mat-label>{{response.teamLeadReviews[this.loggedInUser.id].rating}}</mat-label>
+      </div>
+      <div>
+        <mat-label>Reviewed by {{loggedInUser.name}} <i>(Team Lead)</i></mat-label>
+        <mat-form-field class="response-full-width">
+        <textarea [disabled]="true" style="width: 100%; color: black"
+                  [(ngModel)]="response.teamLeadReviews[this.loggedInUser.id].comment" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
+                  placeholder="Provide a comment to support your rating"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    
     <!-- VIEW PROJECT MANAGER REVIEWS -->
-    <!-- <div *ngIf="reviewerVisibility === 'READ-ONLY'" [ngClass]="{'reviewerSectionReadOnly': reviewerVisibility == 'READ-ONLY' }">
+    <div *ngIf="reviewerVisibility === 'READ-ONLY' && response.projectManagerReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionReadOnly': reviewerVisibility == 'READ-ONLY' }">
       <div style="float: right">
         <mat-label>{{response.projectManagerReviews[this.loggedInUser.id].rating}}</mat-label>
       </div>
       <div>
-        <mat-label>Reviewed by {{loggedInUser.name}} <i>({{loggedInUser.jobName}})</i></mat-label>
+        <mat-label>Reviewed by {{loggedInUser.name}} <i>(Project Manager)</i></mat-label>
         <mat-form-field class="response-full-width">
         <textarea [disabled]="true" style="width: 100%; color: black"
                   [(ngModel)]="response.projectManagerReviews[this.loggedInUser.id].comment" [ngModelOptions]="{ standalone: true }"
@@ -224,7 +240,38 @@
                   placeholder="Provide a comment to support your rating"></textarea>
         </mat-form-field>
       </div>
-    </div> -->
+    </div>
+    
+    <!-- VIEW PRACTICE DIRECTOR REVIEWS -->
+    <div *ngIf="reviewerVisibility === 'READ-ONLY' && response.practiceDirectorReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionReadOnly': reviewerVisibility == 'READ-ONLY' }">
+      <div style="float: right">
+        <mat-label>{{response.practiceDirectorReviews[this.loggedInUser.id].rating}}</mat-label>
+      </div>
+      <div>
+        <mat-label>Reviewed by {{loggedInUser.name}} <i>(Practice Director)</i></mat-label>
+        <mat-form-field class="response-full-width">
+        <textarea [disabled]="true" style="width: 100%; color: black"
+                  [(ngModel)]="response.practiceDirectorReviews[this.loggedInUser.id].comment" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    
+    <!-- VIEW HR REVIEWS -->
+    <div *ngIf="reviewerVisibility === 'READ-ONLY' && response.hrReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionReadOnly': reviewerVisibility == 'READ-ONLY' }">
+      <div style="float: right">
+        <mat-label>{{response.hrReviews[this.loggedInUser.id].rating}}</mat-label>
+      </div>
+      <div>
+        <mat-label>Reviewed by {{loggedInUser.name}} <i>(HR)</i></mat-label>
+        <mat-form-field class="response-full-width">
+        <textarea [disabled]="true" style="width: 100%; color: black"
+                  [(ngModel)]="response.hrReviews[this.loggedInUser.id].comment" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
+                  placeholder="Provide a comment to support your rating"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
 
   </div>
 </div>

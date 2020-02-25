@@ -22,6 +22,7 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
   error: any;
   status: string;
   totalScore: string;
+  loggedInUser: UserType;
 
   @ViewChild(SelfAppraisalSectiononeComponent) child;
 
@@ -36,6 +37,7 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
     setTimeout(() => {
       this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
         data => {
+          this.loggedInUser = data;
           this.initialize();
         }
       );
@@ -80,21 +82,16 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
   }
 
   submitReviewerResponse() {
-
-    // appraisalId
-    // reviewerId = loggedInUser.id
-
-
-    // this.appraisalService.submitReviewerFeedback(this.appraisalId).subscribe(
-    //   response => {
-    //     this.initialize();
-    //   }, error => {
-    //     if (error.status === 406) {
-    //       this.error = error;
-    //       this.openDialog();
-    //     }
-    //   }
-    // );
+    this.appraisalService.submitSectionOneReviewerFeedback(this.appraisalId, this.loggedInUser.id).subscribe(
+      response => {
+        this.initialize();
+      }, error => {
+        if (error.status === 406) {
+          this.error = error;
+          this.openDialog();
+        }
+      }
+    );
   }
 
   markAsScheduled() {
