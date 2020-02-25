@@ -7,7 +7,7 @@
   <div class="response" *ngFor=" let response of sectionResponse.response; let x = index; trackBy:trackByIndex;">
 
     <!-- CREATE/EDIT SELF APPRAISAL -->
-    <div *ngIf="appraisalVisibility === 'EDITABLE'" class="selfAppraisalSection">
+    <div *ngIf="appraisalVisibility === 'EDITABLE'" [ngClass]="{'selfAppraisalEditable': appraisalVisibility == 'EDITABLE' }">
       <div>
         <h4 style="display: inline-block">{{response.criteria}}</h4>
         <button class="score" *ngIf="(reviewerVisibility === 'EDITABLE' || reviewerVisibility === 'READ-ONLY') && score[i][x]"
@@ -19,6 +19,7 @@
           <mat-label>Weightage:</mat-label>
           {{response.weightage}}
         </div>
+        <div class="description"><b>{{response.description}}</b></div>
       </div>
       <div style="display: inline-block"><mat-label>Self Appraisal Comment:</mat-label></div>
       <mat-form-field style="width: 20%; float: right">
@@ -40,7 +41,7 @@
     </div>
 
     <!-- VIEW SELF APPRAISAL -->
-    <div *ngIf="appraisalVisibility === 'READ-ONLY'" class="selfAppraisalSection">
+    <div *ngIf="appraisalVisibility === 'READ-ONLY'" [ngClass]="{'selfAppraisalReadOnly': appraisalVisibility == 'READ-ONLY' }">
       <div>
         <h4 style="display: inline-block">{{response.criteria}}</h4>
         <button class="score" *ngIf="(reviewerVisibility === 'EDITABLE' || reviewerVisibility === 'READ-ONLY') && score[i][x]"
@@ -52,6 +53,7 @@
           <mat-label>Weightage:</mat-label>
           {{response.weightage}}
         </div>
+        <div class="description"><b>{{response.description}}</b></div>
       </div>
       <div style="display: inline-block"><mat-label>Self Appraisal Comment:</mat-label></div>
       <div style="float: right">
@@ -67,13 +69,58 @@
     </div>
 
     <!-- VIEW ALL REVIEWS -->
-    <div *ngFor="let review of response.projectManagerReviews | keyvalue; let x = index; trackBy:trackByIndex;">
-      <div *ngIf="review.key !== this.loggedInUser.id" class="reviews">
+    <div *ngFor="let review of response.teamLeadReviews | keyvalue; let x = index; trackBy:trackByIndex;" class="reviewerSectionReadOnly">
+      <div *ngIf="review.key !== this.loggedInUser.id && review.value.complete" class="reviews">
         <div style="float: right">
           <mat-label>{{review.value.rating}}</mat-label>
         </div>
         <div>
-          <mat-label>Reviewed by {{review.value.name}}:</mat-label>
+          <mat-label>Reviewed by {{review.value.name}} <i>(Team Lead)</i></mat-label>
+          <mat-form-field class="response-full-width">
+          <textarea [disabled]="true" style="width: 100%; color: black"
+                    [(ngModel)]="review.value.comment" [ngModelOptions]="{ standalone: true }"
+                    matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let review of response.projectManagerReviews | keyvalue; let x = index; trackBy:trackByIndex;" class="reviewerSectionReadOnly">
+      <div *ngIf="review.key !== this.loggedInUser.id && review.value.complete" class="reviews">
+        <div style="float: right">
+          <mat-label>{{review.value.rating}}</mat-label>
+        </div>
+        <div>
+          <mat-label>Reviewed by {{review.value.name}} <i>(Project Manager)</i></mat-label>
+          <mat-form-field class="response-full-width">
+          <textarea [disabled]="true" style="width: 100%; color: black"
+                    [(ngModel)]="review.value.comment" [ngModelOptions]="{ standalone: true }"
+                    matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let review of response.practiceDirectorReviews | keyvalue; let x = index; trackBy:trackByIndex;" class="reviewerSectionReadOnly">
+      <div *ngIf="review.key !== this.loggedInUser.id && review.value.complete" class="reviews">
+        <div style="float: right">
+          <mat-label>{{review.value.rating}}</mat-label>
+        </div>
+        <div>
+          <mat-label>Reviewed by {{review.value.name}} <i>(Practice Director)</i></mat-label>
+          <mat-form-field class="response-full-width">
+          <textarea [disabled]="true" style="width: 100%; color: black"
+                    [(ngModel)]="review.value.comment" [ngModelOptions]="{ standalone: true }"
+                    matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+    <div *ngFor="let review of response.hrReviews | keyvalue; let x = index; trackBy:trackByIndex;" class="reviewerSectionReadOnly">
+      <div *ngIf="review.key !== this.loggedInUser.id && review.value.complete" class="reviews">
+        <div style="float: right">
+          <mat-label>{{review.value.rating}}</mat-label>
+        </div>
+        <div>
+          <mat-label>Reviewed by {{review.value.name}} <i>(HR)</i></mat-label>
           <mat-form-field class="response-full-width">
           <textarea [disabled]="true" style="width: 100%; color: black"
                     [(ngModel)]="review.value.comment" [ngModelOptions]="{ standalone: true }"
@@ -83,19 +130,39 @@
       </div>
     </div>
     
-    <!-- CREATE EDIT projectManagerReviews -->
-    <div *ngIf="reviewerVisibility === 'EDITABLE'" class="reviewerSection">
+    <!-- CREATE EDIT TEAM LEAD REVIEWS -->
+    <div *ngIf="reviewerVisibility === 'EDITABLE' && response.teamLeadReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionEditable': reviewerVisibility == 'EDITABLE' }">
       <mat-form-field style="width: 20%; float: right">
-        <mat-select (focusout)="saveReview(sectionResponse, response, i)" #MatSelect placeholder="Reviewer rating"
+        <mat-select (focusout)="saveReview(sectionResponse, response, 'TeamLead')" #MatSelect placeholder="Reviewer rating"
+                    [(ngModel)]="response.teamLeadReviews[this.loggedInUser.id].rating">
+          <mat-option #MatOption *ngFor="let rating of ratings; let i = index;" [value]="rating">
+            {{rating}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-label>Your Comment as a Team Lead</mat-label>
+      <mat-form-field class="response-full-width">
+        <textarea (focusout)="saveReview(sectionResponse, response, 'TeamLead')" style="width: 100%"
+                [(ngModel)]="response.teamLeadReviews[this.loggedInUser.id].comment" [ngModelOptions]="{ standalone: true }"
+                matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
+                placeholder="Provide a comment to support your rating">
+        </textarea>
+      </mat-form-field>
+    </div>
+    
+    <!-- CREATE EDIT PROJECT MANAGER REVIEWS -->
+    <div *ngIf="reviewerVisibility === 'EDITABLE' && response.projectManagerReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionEditable': reviewerVisibility == 'EDITABLE' }">
+      <mat-form-field style="width: 20%; float: right">
+        <mat-select (focusout)="saveReview(sectionResponse, response, 'ProjectManager')" #MatSelect placeholder="Reviewer rating"
                     [(ngModel)]="response.projectManagerReviews[this.loggedInUser.id].rating">
           <mat-option #MatOption *ngFor="let rating of ratings; let i = index;" [value]="rating">
             {{rating}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-label>Project Manager Review Comment:</mat-label>
+      <mat-label>Your Comment as a Project Manager</mat-label>
       <mat-form-field class="response-full-width">
-        <textarea (focusout)="saveReview(sectionResponse, response, i)" style="width: 100%"
+        <textarea (focusout)="saveReview(sectionResponse, response, 'ProjectManager')" style="width: 100%"
                 [(ngModel)]="response.projectManagerReviews[this.loggedInUser.id].comment" [ngModelOptions]="{ standalone: true }"
                 matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
                 placeholder="Provide a comment to support your rating">
@@ -103,26 +170,61 @@
       </mat-form-field>
     </div>
     
-    <!-- VIEW projectManagerReviews -->
-    <div *ngIf="reviewerVisibility === 'READ-ONLY'" class="reviewerSection">
+    <!-- CREATE EDIT PRACTICE DIRECTOR REVIEWS -->
+    <div *ngIf="reviewerVisibility === 'EDITABLE' && response.practiceDirectorReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionEditable': reviewerVisibility == 'EDITABLE' }">
       <mat-form-field style="width: 20%; float: right">
-        <mat-select [disabled]="true" #MatSelect
-                    placeholder="Reviewer rating" [(ngModel)]="response.projectManagerReviews[this.loggedInUser.id].rating">
+        <mat-select (focusout)="saveReview(sectionResponse, response, 'PracticeDirector')" #MatSelect placeholder="Reviewer rating"
+                    [(ngModel)]="response.practiceDirectorReviews[this.loggedInUser.id].rating">
           <mat-option #MatOption *ngFor="let rating of ratings; let i = index;" [value]="rating">
             {{rating}}
           </mat-option>
         </mat-select>
       </mat-form-field>
+      <mat-label>Your Comment as a Practice Director</mat-label>
+      <mat-form-field class="response-full-width">
+        <textarea (focusout)="saveReview(sectionResponse, response, 'PracticeDirector')" style="width: 100%"
+                [(ngModel)]="response.practiceDirectorReviews[this.loggedInUser.id].comment" [ngModelOptions]="{ standalone: true }"
+                matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
+                placeholder="Provide a comment to support your rating">
+        </textarea>
+      </mat-form-field>
+    </div>
+    
+    <!-- CREATE EDIT HR REVIEWS -->
+    <div *ngIf="reviewerVisibility === 'EDITABLE' && response.hrReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionEditable': reviewerVisibility == 'EDITABLE' }">
+      <mat-form-field style="width: 20%; float: right">
+        <mat-select (focusout)="saveReview(sectionResponse, response, 'HR')" #MatSelect placeholder="Reviewer rating"
+                    [(ngModel)]="response?.hrReviews[this.loggedInUser.id].rating">
+          <mat-option #MatOption *ngFor="let rating of ratings; let i = index;" [value]="rating">
+            {{rating}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-label>Your Comment as a HR</mat-label>
+      <mat-form-field class="response-full-width">
+        <textarea (focusout)="saveReview(sectionResponse, response, 'HR')" style="width: 100%"
+                [(ngModel)]="response?.hrReviews[this.loggedInUser.id].comment" [ngModelOptions]="{ standalone: true }"
+                matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
+                placeholder="Provide a comment to support your rating">
+        </textarea>
+      </mat-form-field>
+    </div>
+    
+    <!-- VIEW PROJECT MANAGER REVIEWS -->
+    <!-- <div *ngIf="reviewerVisibility === 'READ-ONLY'" [ngClass]="{'reviewerSectionReadOnly': reviewerVisibility == 'READ-ONLY' }">
+      <div style="float: right">
+        <mat-label>{{response.projectManagerReviews[this.loggedInUser.id].rating}}</mat-label>
+      </div>
       <div>
-        <mat-label>Project Manager Review Comment:</mat-label>
+        <mat-label>Reviewed by {{loggedInUser.name}} <i>({{loggedInUser.jobName}})</i></mat-label>
         <mat-form-field class="response-full-width">
-        <textarea [disabled]="true" style="width: 100%"
+        <textarea [disabled]="true" style="width: 100%; color: black"
                   [(ngModel)]="response.projectManagerReviews[this.loggedInUser.id].comment" [ngModelOptions]="{ standalone: true }"
                   matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
                   placeholder="Provide a comment to support your rating"></textarea>
         </mat-form-field>
       </div>
-    </div>
+    </div> -->
 
   </div>
 </div>

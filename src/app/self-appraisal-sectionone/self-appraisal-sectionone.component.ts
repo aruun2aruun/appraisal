@@ -13,10 +13,14 @@ export interface IReviewResponse {
 
 export interface IResponse {
   criteria: string;
-  weightage:  string;
+  weightage:  number;
+  description: string;
   selfComment:  string;
   selfRating: string;
+  teamLeadReviews: [Map<string, IReview>];
   projectManagerReviews: [Map<string, IReview>];
+  practiceDirectorReviews: [Map<string, IReview>];
+  hrReviews: [Map<string, IReview>];
 }
 
 export interface IReview {
@@ -45,7 +49,7 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   totalScore: number;
   loggedInUser: UserType;
 
-  selfReviewedData = {
+  reviewerData = {
     rating: '',
     comment: ''
   };
@@ -97,17 +101,39 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
     this.calculateScore();
   }
 
-  saveReview(sectionResponseObj, responseObj, i: number) {
-    console.log(sectionResponseObj);
-    console.log(responseObj);
+  findReviewType(roleType) {
+    let reviewType = null;
+    switch (roleType) {
+      case 'ProjectManager':
+        reviewType = 'projectManagerReviews';
+        break;
+      case 'TeamLead':
+        reviewType = 'teamLeadReviews';
+        break;
+      case 'PracticeDirector':
+        reviewType = 'practiceDirectorReviews';
+        break;
+      default:
+        reviewType = 'hrReviews';
+    }
+
+    return reviewType;
+  }
+
+  submitReview() {
+    console.log(this.sectionResponses);
+  }
+
+  saveReview(sectionResponseObj, responseObj, roleType) {
+    const reviewType = this.findReviewType(roleType);
     this.appraisalService.saveSectionOneReviewerFeedback([
       {
         'group': sectionResponseObj.group,
         'criteria': responseObj.criteria,
         'reviewerId': this.loggedInUser.id,
-        'rating': responseObj.projectManagerReviews[this.loggedInUser.id].rating,
-        'comment': responseObj.projectManagerReviews[this.loggedInUser.id].comment,
-        'roleType': this.loggedInUser.roles[0].type
+        'rating': responseObj[reviewType][this.loggedInUser.id].rating,
+        'comment': responseObj[reviewType][this.loggedInUser.id].comment,
+        'roleType': roleType
       }
     ], this.currentCycle.id, this.currentUser.id, this.loggedInUser.id).subscribe(
       response => {
@@ -128,7 +154,7 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
         if (item.projectManagerReviews !== null) {
           for (const property in item.projectManagerReviews) {
             if (property) {
-              // element.push(this.getScore(item.weightage, item.reviews[property].rating));
+              // element.push(this.getScore(item.weightage, item.projectManagerReviews[property].rating));
             }
           }
         } else {

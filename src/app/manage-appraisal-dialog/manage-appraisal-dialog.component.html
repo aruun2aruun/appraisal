@@ -94,7 +94,11 @@
         <mat-icon>create</mat-icon>
         Save
       </button>
-      <button type="button" mat-stroked-button mat-button (click)="submitReviewerResponse()">
+      <button type="button" mat-stroked-button mat-button>
+        <mat-icon>done</mat-icon>
+        Submit
+      </button>
+      <button type="button" mat-stroked-button mat-button (click)="markAsScheduled()">
         <mat-icon>schedule</mat-icon>
         Mark as Scheduled
       </button>

@@ -8,7 +8,7 @@
     <button mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/home">Home</button>
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/self-appraisal">Self Appraisal</button>
     <button *ngIf="authService.isAdministrator" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/user-administration">Access Control</button>
-    <button *ngIf="authService.isAdministrator || authService.isManager" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/manage-appraisal">Manage Appraisal</button>
+    <button *ngIf="authService.isAdministrator || authService.isReviewer" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/manage-appraisal">Manage Appraisal</button>
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/goal-definition">Goals</button>
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/rating-scale">Rating Scale</button>
     <button mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/help">Help</button>

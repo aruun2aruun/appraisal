@@ -13,7 +13,7 @@ export class AuthService {
   }
 
   isAdministrator = false;
-  isManager = false;
+  isReviewer = false;
 
   loggedIn = false;
   loggedInUser: UserType;
@@ -25,18 +25,21 @@ export class AuthService {
         data => {
           this.loggedInUser = data;
           this.loggedIn = true;
-          if (data.roles.find(obj => obj.type === 'ProjectManager')) {
+          if (data.roles.find(obj => obj.type === 'Administrator')) {
             this.isAdministrator = true;
           }
-          if (data.roles.find(obj => obj.type === 'Manager')) {
-            this.isManager = true;
+          if (data.roles.find(obj => obj.type === 'TeamLead') ||
+            data.roles.find(obj => obj.type === 'ProjectManager') ||
+            data.roles.find(obj => obj.type === 'PracticeDirector') ||
+            data.roles.find(obj => obj.type === 'HR')) {
+            this.isReviewer = true;
           }
         }
       );
     } else {
       this.loggedIn = false;
       this.isAdministrator = false;
-      this.isManager = false;
+      this.isReviewer = false;
     }
 
     this.cycleSelectionService.initialize();

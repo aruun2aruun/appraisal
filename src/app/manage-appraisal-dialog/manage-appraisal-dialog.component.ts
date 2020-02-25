@@ -51,9 +51,9 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
   ngAfterViewChecked() {
     setTimeout(() => {
       if(this.data.userStatus !== 'SELF_REVIEW') {
-        this.totalScore = this.child.totalScore;       
+        this.totalScore = this.child.totalScore;
       }
-    },100);
+    }, 100);
   }
 
   loadAppraisal() {
@@ -65,8 +65,7 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
         } else if (response.status === 'COMPLETE') {
           this.reviewerVisibility = 'READ-ONLY';
           this.appraisalVisibility = 'READ-ONLY';
-        }        
-        else {
+        } else {
           this.appraisalVisibility = 'READ-ONLY';
         }
         this.appraisalId = response.id;
@@ -81,6 +80,24 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
   }
 
   submitReviewerResponse() {
+
+    // appraisalId
+    // reviewerId = loggedInUser.id
+
+
+    // this.appraisalService.submitReviewerFeedback(this.appraisalId).subscribe(
+    //   response => {
+    //     this.initialize();
+    //   }, error => {
+    //     if (error.status === 406) {
+    //       this.error = error;
+    //       this.openDialog();
+    //     }
+    //   }
+    // );
+  }
+
+  markAsScheduled() {
     this.appraisalService.submitReviewerFeedback(this.appraisalId).subscribe(
       response => {
         this.initialize();
