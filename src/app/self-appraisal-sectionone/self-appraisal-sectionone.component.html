@@ -61,7 +61,7 @@
       </div>
       <div>
         <mat-form-field class="response-full-width">
-        <textarea [disabled]=true 
+        <textarea [disabled]=true
                   style="width: 100%; color: black" [(ngModel)]="response.selfComment" [ngModelOptions]="{ standalone: true }"
                   matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
         </mat-form-field>
@@ -129,9 +129,9 @@
         </div>
       </div>
     </div>
-    
+
     <!-- CREATE EDIT TEAM LEAD REVIEWS -->
-    <div *ngIf="reviewerVisibility === 'EDITABLE' && response.teamLeadReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionEditable': reviewerVisibility == 'EDITABLE' }">
+    <div *ngIf="reviewerVisibility === 'EDITABLE' && response.teamLeadReviews[this.loggedInUser.id] && !response.projectManagerReviews[this.loggedInUser.id].complete" [ngClass]="{'reviewerSectionEditable': reviewerVisibility == 'EDITABLE' }">
       <mat-form-field style="width: 20%; float: right">
         <mat-select (focusout)="saveReview(sectionResponse, response, 'TeamLead')" #MatSelect placeholder="Reviewer rating"
                     [(ngModel)]="response.teamLeadReviews[this.loggedInUser.id].rating">
@@ -149,9 +149,9 @@
         </textarea>
       </mat-form-field>
     </div>
-    
+
     <!-- CREATE EDIT PROJECT MANAGER REVIEWS -->
-    <div *ngIf="reviewerVisibility === 'EDITABLE' && response.projectManagerReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionEditable': reviewerVisibility == 'EDITABLE' }">
+    <div *ngIf="reviewerVisibility === 'EDITABLE' && response.projectManagerReviews[this.loggedInUser.id] && !response.projectManagerReviews[this.loggedInUser.id].complete" [ngClass]="{'reviewerSectionEditable': reviewerVisibility == 'EDITABLE' }">
       <mat-form-field style="width: 20%; float: right">
         <mat-select (focusout)="saveReview(sectionResponse, response, 'ProjectManager')" #MatSelect placeholder="Reviewer rating"
                     [(ngModel)]="response.projectManagerReviews[this.loggedInUser.id].rating">
@@ -169,9 +169,9 @@
         </textarea>
       </mat-form-field>
     </div>
-    
+
     <!-- CREATE EDIT PRACTICE DIRECTOR REVIEWS -->
-    <div *ngIf="reviewerVisibility === 'EDITABLE' && response.practiceDirectorReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionEditable': reviewerVisibility == 'EDITABLE' }">
+    <div *ngIf="reviewerVisibility === 'EDITABLE' && response.practiceDirectorReviews[this.loggedInUser.id] && !response.projectManagerReviews[this.loggedInUser.id].complete" [ngClass]="{'reviewerSectionEditable': reviewerVisibility == 'EDITABLE' }">
       <mat-form-field style="width: 20%; float: right">
         <mat-select (focusout)="saveReview(sectionResponse, response, 'PracticeDirector')" #MatSelect placeholder="Reviewer rating"
                     [(ngModel)]="response.practiceDirectorReviews[this.loggedInUser.id].rating">
@@ -189,9 +189,9 @@
         </textarea>
       </mat-form-field>
     </div>
-    
+
     <!-- CREATE EDIT HR REVIEWS -->
-    <div *ngIf="reviewerVisibility === 'EDITABLE' && response.hrReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionEditable': reviewerVisibility == 'EDITABLE' }">
+    <div *ngIf="reviewerVisibility === 'EDITABLE' && response.hrReviews[this.loggedInUser.id] && !response.projectManagerReviews[this.loggedInUser.id].complete" [ngClass]="{'reviewerSectionEditable': reviewerVisibility == 'EDITABLE' }">
       <mat-form-field style="width: 20%; float: right">
         <mat-select (focusout)="saveReview(sectionResponse, response, 'HR')" #MatSelect placeholder="Reviewer rating"
                     [(ngModel)]="response?.hrReviews[this.loggedInUser.id].rating">
@@ -209,7 +209,7 @@
         </textarea>
       </mat-form-field>
     </div>
-    
+
     <!-- VIEW TEAM LEAD REVIEWS -->
     <div *ngIf="reviewerVisibility === 'READ-ONLY' && response.teamLeadReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionReadOnly': reviewerVisibility == 'READ-ONLY' }">
       <div style="float: right">
@@ -225,7 +225,7 @@
         </mat-form-field>
       </div>
     </div>
-    
+
     <!-- VIEW PROJECT MANAGER REVIEWS -->
     <div *ngIf="reviewerVisibility === 'READ-ONLY' && response.projectManagerReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionReadOnly': reviewerVisibility == 'READ-ONLY' }">
       <div style="float: right">
@@ -241,7 +241,7 @@
         </mat-form-field>
       </div>
     </div>
-    
+
     <!-- VIEW PRACTICE DIRECTOR REVIEWS -->
     <div *ngIf="reviewerVisibility === 'READ-ONLY' && response.practiceDirectorReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionReadOnly': reviewerVisibility == 'READ-ONLY' }">
       <div style="float: right">
@@ -256,7 +256,7 @@
         </mat-form-field>
       </div>
     </div>
-    
+
     <!-- VIEW HR REVIEWS -->
     <div *ngIf="reviewerVisibility === 'READ-ONLY' && response.hrReviews[this.loggedInUser.id]" [ngClass]="{'reviewerSectionReadOnly': reviewerVisibility == 'READ-ONLY' }">
       <div style="float: right">
