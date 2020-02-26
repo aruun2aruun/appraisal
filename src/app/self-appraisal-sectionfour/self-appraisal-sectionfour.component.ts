@@ -18,6 +18,7 @@ export class SelfAppraisalSectionfourComponent implements OnInit {
   @Input() currentUser: UserType;
   @Input() appraisalVisibility: string;
   @Input() reviewerVisibility: string;
+  loggedInUser: UserType;
 
   constructor(private cycleSelectionService: CycleSelectionService,
               private appraisalService: AppraisalService, private userService: UserService, private snackBar: MatSnackBar) {
@@ -28,6 +29,7 @@ export class SelfAppraisalSectionfourComponent implements OnInit {
     setTimeout(() => {
       this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
         data => {
+          this.loggedInUser = data;
           this.initialize();
         }
       );
@@ -36,6 +38,9 @@ export class SelfAppraisalSectionfourComponent implements OnInit {
 
   initialize() {
     this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
+    if (!this.currentUser) {
+      this.currentUser = this.loggedInUser;
+    }
     this.loadAdditionalComment();
 
   }

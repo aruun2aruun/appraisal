@@ -19,6 +19,7 @@ export class SelfAppraisalSectiontwoComponent implements OnInit {
   @Input() reviewerVisibility: string;
   @Input() section: string;
   @Input() currentUser: UserType;
+  loggedInUser: UserType;
 
   constructor(private cycleSelectionService: CycleSelectionService,
                private appraisalService: AppraisalService,
@@ -31,6 +32,7 @@ export class SelfAppraisalSectiontwoComponent implements OnInit {
     setTimeout(() => {
       this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
         data => {
+          this.loggedInUser = data;
           this.initialize();
         }
       );
@@ -39,6 +41,9 @@ export class SelfAppraisalSectiontwoComponent implements OnInit {
 
   initialize() {
     this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
+    if (!this.currentUser) {
+      this.currentUser = this.loggedInUser;
+    }
     this.loadTopics();
   }
 
@@ -58,8 +63,8 @@ export class SelfAppraisalSectiontwoComponent implements OnInit {
     };
     this.sectionTopics.push(newTopic);
   }
-  
-  removeTopic (i) {    
+
+  removeTopic (i) {
     this.sectionTopics.splice(i, 1);
   }
 

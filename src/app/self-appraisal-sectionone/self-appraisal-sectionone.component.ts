@@ -72,6 +72,9 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
 
   initialize() {
     this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
+    if (!this.currentUser) {
+      this.currentUser = this.loggedInUser;
+    }
     this.loadQuestions();
   }
 
@@ -80,9 +83,6 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   }
 
   loadQuestions() {
-    if (!this.currentUser) {
-      this.currentUser = this.loggedInUser;
-    }
     this.appraisalService.getSectiononebyUserId(this.currentCycle.id, this.currentUser.id).subscribe(
       response => {
         this.sectionResponses = response;
@@ -92,7 +92,6 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   }
 
   save(responseObject) {
-    console.log(responseObject);
     this.appraisalService.saveSectionOneFeedback(responseObject, this.currentCycle.id, this.currentUser.id).subscribe(
       response => {
         this.snackBar.open('Response Auto Saved', '', {
