@@ -36,11 +36,12 @@ export class SelfAppraisalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser = undefined;
     setTimeout(() => {
       this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
         data => {
           this.loggedInUser = data;
-          this.currentUser = data;
+          // this.currentUser = data;
           this.initialize();
           this.authService.init();
         }

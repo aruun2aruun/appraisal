@@ -80,6 +80,9 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   }
 
   loadQuestions() {
+    if (!this.currentUser) {
+      this.currentUser = this.loggedInUser;
+    }
     this.appraisalService.getSectiononebyUserId(this.currentCycle.id, this.currentUser.id).subscribe(
       response => {
         this.sectionResponses = response;
