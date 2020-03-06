@@ -1,6 +1,6 @@
 export class RatingScaleType {
     group: string;
     criteria: string;
-    weightage: string;
+    weightage: number;
     elements: any[];
 }
