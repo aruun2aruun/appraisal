@@ -16,7 +16,7 @@ export class RatingScaleComponent implements OnInit {
   constructor(private ratingScaleService: RatingScaleService,
               private pageHeaderService: PageHeaderService,
               private authService: AuthService) {
-    pageHeaderService.setTitle('Rating Scale');
+    pageHeaderService.setTitle('Rating Definition');
   }
 
   ngOnInit() {
