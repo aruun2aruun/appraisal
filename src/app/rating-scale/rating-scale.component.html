@@ -6,14 +6,11 @@
           {{row.group}} > {{row.criteria}}
           <span style="float: right"> Weightage: {{row.weightage}}%</span>
         </mat-panel-title>
-
       </mat-expansion-panel-header>
-
       <div *ngFor="let rating of row.elements">
         <h4>{{rating.rating}}</h4>
         <p>{{rating.description}}</p>
       </div>
-
     </mat-expansion-panel>
   </mat-accordion>
   <br>
