@@ -36,7 +36,7 @@
           <mat-panel-title style="width: 70%">Goals/Targets achieved</mat-panel-title>
           <mat-panel-description fxHide="false" fxHide.lt-md style="justify-content: space-evenly"></mat-panel-description>
         </mat-expansion-panel-header>
-        <app-self-appraisal-sectionone [appraisalVisibility]="appraisalVisibility" [reviewerVisibility]="reviewerVisibility" [currentUser]="data.currentUser"></app-self-appraisal-sectionone>
+        <app-self-appraisal-sectionone [appraisalVisibility]="appraisalVisibility" [reviewerVisibility]="reviewerVisibility" [currentUser]="data.currentUser" [currentStatus]="status"></app-self-appraisal-sectionone>
       </mat-expansion-panel>
 
       <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
@@ -89,22 +89,22 @@
         Close
       </button>
     </div>
-    <div *ngIf="data.userStatus === 'HEAD_REVIEW'">
+    <div *ngIf="data.userStatus === 'PROJECT_MANAGER' || 'REPORTING_MANAGER' || 'PRACTICE_DIRECTOR' || 'HR'">
       <button type="button" mat-stroked-button mat-button (click)="save()">
         <mat-icon>create</mat-icon>
         Save
       </button>
-      <button type="button" mat-stroked-button mat-button (click)="submitReviewerResponse()">
+      <button type="button" mat-stroked-button mat-button (click)="submitReviewerResponse()" [mat-dialog-close]>
         <mat-icon>done</mat-icon>
         Submit
       </button>
-      <button type="button" mat-stroked-button mat-button (click)="markAsScheduled()">
+      <button type="button" mat-stroked-button mat-button (click)="markAsScheduled()" [mat-dialog-close]>
         <mat-icon>schedule</mat-icon>
         Mark as Scheduled
       </button>
     </div>
     <div *ngIf="data.userStatus === 'SCHEDULED'">
-      <button type="button" mat-stroked-button mat-button (click)="completeAppraisal()">
+      <button type="button" mat-stroked-button mat-button (click)="completeAppraisal()" [mat-dialog-close]>
         <mat-icon>done</mat-icon>
         Mark as Complete
       </button>  

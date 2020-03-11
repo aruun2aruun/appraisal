@@ -50,6 +50,8 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   @Input() appraisalVisibility: string;
   @Input() reviewerVisibility: string;
   @Input() currentUser: UserType;
+  @Input() currentStatus: string;
+
   score: any = [[0.0, 0.0], [0.0, 0.0]];
   totalScore: number;
   loggedInUser: UserType;
