@@ -82,7 +82,7 @@
     <mat-icon color="warn">error</mat-icon>
     <mat-label class="label"><a title="Click to see Errors" (click)="openDialog()">{{error.error.sectionOneError.length}} errors</a></mat-label>
   </div>
-  <div class="button-holder">
+  <div class="button-holder" *ngIf="showSaveSubmit">
     <div *ngIf="data.userStatus === 'SELF_REVIEW' || data.userStatus === 'COMPLETE'">    
       <button type="button" mat-stroked-button mat-button [mat-dialog-close] >
         <mat-icon>close</mat-icon>
@@ -98,10 +98,10 @@
         <mat-icon>done</mat-icon>
         Submit
       </button>
-      <button type="button" mat-stroked-button mat-button (click)="markAsScheduled()" [mat-dialog-close]>
+      <!-- <button type="button" mat-stroked-button mat-button (click)="markAsScheduled()" [mat-dialog-close]>
         <mat-icon>schedule</mat-icon>
         Mark as Scheduled
-      </button>
+      </button> -->
     </div>
     <div *ngIf="data.userStatus === 'SCHEDULED'">
       <button type="button" mat-stroked-button mat-button (click)="completeAppraisal()" [mat-dialog-close]>

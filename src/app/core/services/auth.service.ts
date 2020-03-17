@@ -28,10 +28,7 @@ export class AuthService {
           if (data.roles.find(obj => obj.type === 'Administrator')) {
             this.isAdministrator = true;
           }
-          if (data.roles.find(obj => obj.type === 'TeamLead') ||
-            data.roles.find(obj => obj.type === 'ProjectManager') ||
-            data.roles.find(obj => obj.type === 'PracticeDirector') ||
-            data.roles.find(obj => obj.type === 'HR')) {
+          if (data.roles.length > 0) {
             this.isReviewer = true;
           }
         }
