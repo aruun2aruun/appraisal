@@ -1,17 +1,36 @@
-<div>
-  <mat-accordion *ngFor="let row of data">
-    <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
-      <mat-expansion-panel-header>
-        <mat-panel-title style="display: inline-block">
-          {{row.group}} > {{row.criteria}}
-          <span style="float: right"> Weightage: {{row.weightage * 100}}%</span>
-        </mat-panel-title>
-      </mat-expansion-panel-header>
-      <div *ngFor="let rating of row.elements">
-        <h4>{{rating.rating}}</h4>
-        <p>{{rating.description}}</p>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
-  <br>
+
+
+<div class="table-container mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" matSort>
+
+    <!-- Rating Column -->
+    <ng-container matColumnDef="rating">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> rating </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span class="mobile-label">rating:</span>
+        {{row.rating}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- appraisalCriteria Column -->
+    <ng-container matColumnDef="appraisalCriteria">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> appraisalCriteria </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <span class="mobile-label">appraisalCriteria:</span>
+        {{row.appraisalCriteria}}
+      </mat-cell>
+    </ng-container>
+
+    <!-- reviewCriteria Column -->
+    <ng-container matColumnDef="reviewCriteria">
+      <mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="!authService.isReviewer"> reviewCriteria </mat-header-cell>
+      <mat-cell *matCellDef="let row" [hidden]="!authService.isReviewer">
+        <span class="mobile-label">reviewCriteria:</span>
+        {{row.reviewCriteria}}
+      </mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
 </div>

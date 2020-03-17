@@ -23,6 +23,9 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
   status: string;
   totalScore: string;
   loggedInUser: UserType;
+  appraisal: any;
+  repAppRes: any;
+  showSaveSubmit = false;
 
   @ViewChild(SelfAppraisalSectiononeComponent) child;
 
@@ -52,15 +55,20 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
 
   ngAfterViewChecked() {
     setTimeout(() => {
-      if(this.data.userStatus !== 'SELF_REVIEW') {
+      if (this.data.userStatus !== 'SELF_REVIEW') {
         this.totalScore = this.child.totalScore;
       }
     }, 100);
   }
 
   loadAppraisal() {
+    console.log('loggedIn User', this.loggedInUser);
+    console.log('selected user', this.data);
     this.appraisalService.getAppraisalbyUserId(this.currentCycle.id, this.data.currentUser.id).subscribe(
       response => {
+        this.appraisal = response;
+        this.repAppRes = response.sectiononeResponse[0].response[0];
+        console.log('repAppRes', this.repAppRes);
         this.status = response.status;
         if (response.status === 'SELF_REVIEW') {
           this.appraisalVisibility = 'EDITABLE';
@@ -71,8 +79,25 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
           this.appraisalVisibility = 'READ-ONLY';
         }
         this.appraisalId = response.id;
+        this.saveSubmit();
       }
     );
+  }
+
+  saveSubmit() {
+    console.log('Appraisal', this.appraisal);
+    if (this.appraisal.status === 'SELF_APPRAISAL' || this.appraisal.status === 'COMPLETE') {
+      this.showSaveSubmit = false;
+    } else if (this.appraisal.status === 'HR' && this.repAppRes.hrReviews[this.loggedInUser.id]) {
+      console.log(this.repAppRes.hrReviews[this.loggedInUser.id]);
+      this.showSaveSubmit = true;
+    } else if (this.appraisal.status === 'PRACTICE_DIRECTOR' && this.repAppRes.practiceDirectorReviews[this.loggedInUser.id]) {
+      this.showSaveSubmit = true;
+    } else if (this.appraisal.status === 'REPORTING_MANAGER' && this.repAppRes.teamLeadReviews[this.loggedInUser.id]) {
+      this.showSaveSubmit = true;
+    } else if (this.appraisal.status === 'PROJECT_MANAGER' && this.repAppRes.projectManagerReviews[this.loggedInUser.id]) {
+      this.showSaveSubmit = true;
+    }
   }
 
   save() {
