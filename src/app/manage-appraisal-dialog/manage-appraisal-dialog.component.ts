@@ -69,14 +69,13 @@ export class ManageAppraisalDialogComponent implements OnInit, AfterViewChecked 
           this.repAppRes = response.sectiononeResponse[0].response[0];
         }
         this.status = response.status;
-        if (response.status === 'SELF_REVIEW') {
-          this.appraisalVisibility = 'EDITABLE';
-        } else if (response.status === 'COMPLETE') {
-          this.reviewerVisibility = 'READ-ONLY';
+        // if (response.status === 'SELF_REVIEW') {
+        //   this.appraisalVisibility = 'EDITABLE';
+        //   this.reviewerVisibility = 'READ-ONLY';
+        // } else {
+          this.reviewerVisibility = 'EDITABLE';
           this.appraisalVisibility = 'READ-ONLY';
-        } else {
-          this.appraisalVisibility = 'READ-ONLY';
-        }
+        // }
         this.appraisalId = response.id;
         this.saveSubmit();
       }

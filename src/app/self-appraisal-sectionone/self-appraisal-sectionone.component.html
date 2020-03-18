@@ -69,7 +69,7 @@
     </div>
 
     <!-- VIEW ALL REVIEWS -->
-    <div *ngIf="(response.weightage * 100) !== 0">
+    <div *ngIf="(response.weightage * 100) !== 0 && reviewerVisibility === 'EDITABLE'">
       <div *ngIf="!response.projectManagerReviews[this.loggedInUser.id]">
         <div *ngFor="let review of response.projectManagerReviews | keyvalue; let x = index; trackBy:trackByIndex;" class="reviewerSectionReadOnly">
           <div *ngIf="review.key !== this.loggedInUser.id && review.value.complete" class="reviews">

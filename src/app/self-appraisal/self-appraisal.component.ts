@@ -59,6 +59,7 @@ export class SelfAppraisalComponent implements OnInit {
     this.appraisalService.getAppraisalbyUserId(this.currentCycle.id, this.loggedInUser.id).subscribe(
       response => {
         this.status = response.status;
+        this.reviewerVisibility = 'READ-ONLY';
         if (response.status === 'SELF_REVIEW') {
           this.appraisalVisibility = 'EDITABLE';
         } else {
