@@ -133,25 +133,27 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
     console.log(this.sectionResponses);
   }
 
-  saveReview(sectionResponseObj, responseObj, roleType) {
-    const reviewType = this.findReviewType(roleType);
-    this.appraisalService.saveSectionOneReviewerFeedback([
-      {
-        'group': sectionResponseObj.group,
-        'criteria': responseObj.criteria,
-        'reviewerId': this.loggedInUser.id,
-        'rating': responseObj[reviewType][this.loggedInUser.id].rating,
-        'comment': responseObj[reviewType][this.loggedInUser.id].comment,
-        'roleType': roleType
-      }
-    ], this.currentCycle.id, this.currentUser.id, this.loggedInUser.id).subscribe(
-      response => {
-        this.snackBar.open('Response Auto Saved', '', {
-          duration: 3000,
-          panelClass: ['custom-auto-save']
-        });
-      }
-    );
+  saveReview(sectionResponseObj, responseObj, roleType, isComplete) {
+    if (!isComplete) {
+      const reviewType = this.findReviewType(roleType);
+      this.appraisalService.saveSectionOneReviewerFeedback([
+        {
+          'group': sectionResponseObj.group,
+          'criteria': responseObj.criteria,
+          'reviewerId': this.loggedInUser.id,
+          'rating': responseObj[reviewType][this.loggedInUser.id].rating,
+          'comment': responseObj[reviewType][this.loggedInUser.id].comment,
+          'roleType': roleType
+        }
+      ], this.currentCycle.id, this.currentUser.id, this.loggedInUser.id).subscribe(
+        response => {
+          this.snackBar.open('Response Auto Saved', '', {
+            duration: 3000,
+            panelClass: ['custom-auto-save']
+          });
+        }
+      );
+    }
   }
 
   calculateScore() {
