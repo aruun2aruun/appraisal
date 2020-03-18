@@ -69,7 +69,8 @@
   <button mat-menu-item routerLink="/home">Home</button>
   <button *ngIf="authService.loggedIn" mat-menu-item routerLink="/self-appraisal">Self Appraisal</button>
   <button *ngIf="authService.isAdministrator" mat-menu-item routerLink="/user-administration">Access Control</button>
-  <button *ngIf="authService.isAdministrator" mat-menu-item routerLink="/manage-appraisal">Manage Appraisal</button>
-  <button *ngIf="authService.loggedIn" mat-menu-item routerLink="/goal-definition">Goal Definition</button>
+  <button *ngIf="authService.isReviewer" mat-menu-item routerLink="/manage-appraisal">Manage Appraisal</button>
+  <button *ngIf="authService.loggedIn" mat-menu-item routerLink="/goal-definition">Goals</button>
+  <button *ngIf="authService.loggedIn" mat-menu-item routerLink="/rating-scale">Rating Definition</button>
   <button mat-menu-item routerLink="/help">Help</button>
 </mat-menu>
