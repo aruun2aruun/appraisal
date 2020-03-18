@@ -23,8 +23,8 @@
 
     <!-- reviewCriteria Column -->
     <ng-container matColumnDef="reviewCriteria">
-      <mat-header-cell *matHeaderCellDef mat-sort-header [hidden]="!authService.isReviewer"> reviewCriteria </mat-header-cell>
-      <mat-cell *matCellDef="let row" [hidden]="!authService.isReviewer">
+      <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide': !authService.isReviewer}"> reviewCriteria </mat-header-cell>
+      <mat-cell *matCellDef="let row" [ngClass]="{'hide': !authService.isReviewer}">
         <span class="mobile-label">reviewCriteria:</span>
         {{row.reviewCriteria}}
       </mat-cell>

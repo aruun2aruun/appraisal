@@ -11,6 +11,9 @@ table{
     max-height: 500px;
     .mat-header-row {
       min-height: 48px;
+      .hide {
+        display: none;
+      }
       // .mat-column-appraisalCriteria {
       //   word-wrap: break-word !important;
       //   white-space: unset !important;
@@ -44,6 +47,9 @@ table{
         padding: 5px 10px;
         line-height: 18px;
         font-size: 13px;
+        &.hide {
+          display: none;
+        }
       }
     }
   }
