@@ -17,10 +17,10 @@ export interface IResponse {
   description: string;
   selfComment:  string;
   selfRating: string;
-  teamLeadReviews: [Map<string, IReview>];
-  projectManagerReviews: [Map<string, IReview>];
-  practiceDirectorReviews: [Map<string, IReview>];
-  hrReviews: [Map<string, IReview>];
+  teamLeadReviews: Map<string, IReview>;
+  projectManagerReviews: Map<string, IReview>;
+  practiceDirectorReviews: Map<string, IReview>;
+  hrReviews: Map<string, IReview>;
 }
 
 export interface IReview {
@@ -160,10 +160,10 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
     this.sectionResponses.forEach(obj => {
       const element = [];
       obj.response.forEach(item => {
-        if (item.projectManagerReviews !== null) {
-          for (const property in item.projectManagerReviews) {
+        if (item.practiceDirectorReviews[this.loggedInUser.id]) {
+          for (const property in item.practiceDirectorReviews) {
             if (property) {
-              // element.push(this.getScore(item.weightage, item.projectManagerReviews[property].rating));
+              element.push(this.getScore(item.weightage, item.practiceDirectorReviews[property].rating));
             }
           }
         } else {
@@ -189,8 +189,6 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
     } else if (reviewerRating === '5 - Excellent') {
       rating = 1;
     }
-
-    return (rating * weightage) / 100;
-
+    return (rating * weightage) * 100;
   }
 }

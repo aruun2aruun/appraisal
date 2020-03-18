@@ -13,11 +13,11 @@
         <button class="score" *ngIf="(reviewerVisibility === 'EDITABLE' || reviewerVisibility === 'READ-ONLY') && score[i][x]"
                 type="button" mat-stroked-button mat-button [disabled]="true">
           <mat-icon color="accent">check_circle</mat-icon>
-          {{score[i][x]}}
+          {{score[i][x] | number : '1.0-0'}}
         </button>
         <div style="float: right" *ngIf="(response.weightage * 100) !== 0">
           <mat-label>Weightage:</mat-label>
-          {{response.weightage * 100}}%
+          {{response.weightage * 100 | number : '1.0-0'}}%
         </div>
         <div class="description"><b>{{response.description}}</b></div>
       </div>
@@ -47,11 +47,11 @@
         <button class="score" *ngIf="(reviewerVisibility === 'EDITABLE' || reviewerVisibility === 'READ-ONLY') && score[i][x]"
                 type="button" mat-stroked-button mat-button [disabled]="true">
           <mat-icon color="accent">check_circle</mat-icon>
-          {{score[i][x]}}
+          {{score[i][x] | number : '1.0-0'}}
         </button>
         <div style="float: right" *ngIf="(response.weightage * 100) !== 0">
           <mat-label>Weightage:</mat-label>
-          {{response.weightage * 100}}%
+          {{response.weightage * 100 | number : '1.0-0'}}%
         </div>
         <div class="description"><b>{{response.description}}</b></div>
       </div>
