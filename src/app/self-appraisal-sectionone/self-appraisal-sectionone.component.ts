@@ -154,6 +154,7 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
         }
       );
     }
+    this.calculateScore();
   }
 
   calculateScore() {
@@ -173,24 +174,25 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
         }
       });
       this.score.push(element);
-      const arrAvg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
-      this.totalScore = arrAvg(element);
+      const flatArr = this.score.flat();
+      const arrAvg = arr => arr.reduce((a, b) => a + b);
+      this.totalScore = arrAvg(flatArr);
     });
   }
 
   private getScore(weightage: number, reviewerRating: any) {
     let rating = 1;
     if (reviewerRating === '1 - Deficient') {
-      rating = 5;
+      rating = 1;
     } else if (reviewerRating === '2 - Improvements Required') {
-      rating = 4;
+      rating = 2;
     } else if (reviewerRating === '3 - Meets Expectations') {
       rating = 3;
     } else if (reviewerRating === '4 - Above Expectations') {
-      rating = 2;
+      rating = 4;
     } else if (reviewerRating === '5 - Excellent') {
-      rating = 1;
+      rating = 5;
     }
-    return (rating * weightage) * 100;
+    return rating * weightage;
   }
 }
