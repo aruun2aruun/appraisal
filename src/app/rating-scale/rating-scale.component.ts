@@ -11,7 +11,7 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
   styleUrls: ['./rating-scale.component.scss']
 })
 export class RatingScaleComponent implements OnInit {
-  displayedColumns: string[] = ['rating', 'appraisalCriteria', 'reviewCriteria'];
+  displayedColumns: string[] = ['rating', 'appraisalCriteria', 'reviewerCriteria'];
   dataSource: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;

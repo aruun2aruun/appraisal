@@ -14,19 +14,19 @@
 
     <!-- appraisalCriteria Column -->
     <ng-container matColumnDef="appraisalCriteria">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> appraisalCriteria </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Appraisee criteria </mat-header-cell>
       <mat-cell *matCellDef="let row">
         <span class="mobile-label">appraisalCriteria:</span>
         {{row.appraisalCriteria}}
       </mat-cell>
     </ng-container>
 
-    <!-- reviewCriteria Column -->
-    <ng-container matColumnDef="reviewCriteria">
-      <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide': !authService.isReviewer}"> reviewCriteria </mat-header-cell>
+    <!-- reviewerCriteria Column -->
+    <ng-container matColumnDef="reviewerCriteria">
+      <mat-header-cell *matHeaderCellDef mat-sort-header [ngClass]="{'hide': !authService.isReviewer}"> Reviewer criteria </mat-header-cell>
       <mat-cell *matCellDef="let row" [ngClass]="{'hide': !authService.isReviewer}">
-        <span class="mobile-label">reviewCriteria:</span>
-        {{row.reviewCriteria}}
+        <span class="mobile-label">Reviewer criteria:</span>
+        {{row.reviewerCriteria}}
       </mat-cell>
     </ng-container>
     
