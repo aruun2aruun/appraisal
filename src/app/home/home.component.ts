@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     dialogConfig.autoFocus = true;
     dialogConfig.width = '50%';
     dialogConfig.data = {
-      to: 'appraisal_westernacher@outlook.com',
+      to: 'appraisal.westernacher@gmail.com',
       subject: 'Subject',
       body: 'Please specify your email Id while raising any question.'
     };
