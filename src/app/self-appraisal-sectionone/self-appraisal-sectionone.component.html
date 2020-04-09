@@ -17,7 +17,7 @@
         </button>
         <div style="float: right">
           <mat-label>Weightage:</mat-label>
-          {{response.weightage * 100 | number : '1.0-0'}}%
+          {{response.weightage * 100 | number : '1.1-1'}}%
         </div>
         <div class="description"><b>{{response.description}}</b></div>
       </div>
@@ -51,7 +51,7 @@
         </button>
         <div style="float: right" *ngIf="(response.weightage * 100) !== 0">
           <mat-label>Weightage:</mat-label>
-          {{response.weightage * 100 | number : '1.0-0'}}%
+          {{response.weightage * 100 | number : '1.1-1'}}%
         </div>
         <div class="description"><b>{{response.description}}</b></div>
       </div>

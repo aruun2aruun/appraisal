@@ -4,11 +4,10 @@ table{
 .table-container {
   display: flex;
   flex-direction: column;
-  max-height: 500px;
   min-width: 300px;
+  margin-bottom: 16px;
   .mat-table {
     overflow: auto;
-    max-height: 500px;
     .mat-header-row {
       min-height: 48px;
       .hide {

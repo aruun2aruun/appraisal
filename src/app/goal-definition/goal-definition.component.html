@@ -4,9 +4,8 @@
       <mat-expansion-panel-header>
         <mat-panel-title style="display: inline-block">
           {{row.group}} > {{row.criteria}}
-          <span style="float: right"> Weightage: {{row.weightage * 100}}%</span>
+          <span style="float: right"> Weightage: {{row.weightage * 100 | number : '1.1-1'}}%</span>
         </mat-panel-title>
-
       </mat-expansion-panel-header>
       <p>{{row.description}}</p>
     </mat-expansion-panel>
