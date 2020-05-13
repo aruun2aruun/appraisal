@@ -58,6 +58,8 @@ import { SubmitErrorDialogComponent } from './submit-error-dialog/submit-error-d
 import { SubmitConfirmationDialogComponent } from './submit-confirmation-dialog/submit-confirmation-dialog.component';
 import {SelfAppraisalSectionfiveComponent} from './self-appraisal-sectionfive/self-appraisal-sectionfive.component';
 import { HelpComponent } from './help/help.component';
+import { SetGoalsComponent } from './set-goals/set-goals.component';
+import { SetGoalsDialogComponent } from './set-goals-dialog/set-goals-dialog.component';
 
 @NgModule({
   declarations: [
@@ -85,7 +87,9 @@ import { HelpComponent } from './help/help.component';
     SelfAppraisalSectionfiveComponent,
     SubmitErrorDialogComponent,
     SubmitConfirmationDialogComponent,
-    HelpComponent
+    HelpComponent,
+    SetGoalsComponent,
+    SetGoalsDialogComponent
   ],
   imports: [
     MatToolbarModule,
@@ -130,7 +134,8 @@ import { HelpComponent } from './help/help.component';
     ManageAppraisalDialogComponent,
     NotifyDialogComponent,
     SubmitErrorDialogComponent,
-    SubmitConfirmationDialogComponent
+    SubmitConfirmationDialogComponent,
+    SetGoalsDialogComponent
   ]
 })
 export class AppModule { }

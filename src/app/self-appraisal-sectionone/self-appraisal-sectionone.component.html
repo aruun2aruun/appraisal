@@ -6,6 +6,38 @@
   <h3>{{sectionResponse.group}}</h3>
   <div class="response" *ngFor=" let response of sectionResponse.response; let x = index; trackBy:trackByIndex;">
 
+    <!-- CREATE/EDIT SELF GOALS -->
+    <div *ngIf="showSetGoals" [ngClass]="{'selfAppraisalEditable': showSetGoals }">
+      <div>
+        <h4 style="display: inline-block">{{response.criteria}}</h4>
+        <button class="score" *ngIf="(reviewerVisibility === 'EDITABLE' || reviewerVisibility === 'READ-ONLY') && score[i][x]"
+                type="button" mat-stroked-button mat-button [disabled]="true">
+          <mat-icon color="accent">check_circle</mat-icon>
+          {{score[i][x]}}
+        </button>
+        <div style="float: right">
+          <mat-label>Weightage:</mat-label>
+          {{response.weightage * 100 | number : '1.1-1'}}%
+        </div>
+        <div class="description"><b>{{response.description}}</b></div>
+      </div>
+      <div style="display: inline-block"><mat-label>Set Self Goal:</mat-label></div>
+      <div class="set-goals">
+        <mat-form-field class="response-full-width">
+        <textarea (focusout)="save(sectionResponses, 'Saved')"
+                  style="width: 100%" [(ngModel)]="response.selfDescription" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
+                  placeholder="Description"></textarea>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input (focusout)="save(sectionResponses, 'Saved')"
+                  type="number" [(ngModel)]="response.selfWeightage" [ngModelOptions]="{ standalone: true }"
+                  matInput onkeypress="if (this.value.length > 1) return false;" max="100"
+                  placeholder="Weightage" value="">
+        </mat-form-field>
+      </div>
+    </div>
+
     <!-- CREATE/EDIT SELF APPRAISAL -->
     <div *ngIf="appraisalVisibility === 'EDITABLE' && (response.weightage * 100) !== 0" [ngClass]="{'selfAppraisalEditable': appraisalVisibility == 'EDITABLE' }">
       <div>
@@ -21,6 +53,20 @@
         </div>
         <div class="description"><b>{{response.description}}</b></div>
       </div>
+      <div style="display: inline-block"><mat-label>Self Goal:</mat-label></div>
+      <div class="set-goals">
+        <mat-form-field class="response-full-width">
+        <textarea [disabled]=true
+                  style="width: 100%; color: black" [(ngModel)]="response.selfDescription" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input [disabled]=true
+                style="width: 100%; color: black" [(ngModel)]="response.selfWeightage" [ngModelOptions]="{ standalone: true }"
+                matInput type="number" #weightage onkeypress="if (this.value.length > 1) return false;" max="100"
+                placeholder="Weightage" value="">
+        </mat-form-field>
+      </div>
       <div style="display: inline-block"><mat-label>Self Appraisal Comment:</mat-label></div>
       <mat-form-field style="width: 20%; float: right">
         <mat-select (focusout)="save(sectionResponses, 'Saved')" #MatSelect placeholder="Self Appraisal rating"
@@ -35,7 +81,9 @@
         <textarea (focusout)="save(sectionResponses, 'Saved')"
                   style="width: 100%" [(ngModel)]="response.selfComment" [ngModelOptions]="{ standalone: true }"
                   matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
-                  placeholder="Provide a comment to support your rating"></textarea>
+                  placeholder="Provide a comment to support your rating" #selfReviewComment></textarea>
+        <mat-hint align="start"><strong>Comment should be atleast 50 characters</strong> </mat-hint>
+        <mat-hint align="end">{{selfReviewComment.value.length}} / {{selfReviewComment.value.length}}</mat-hint>
         </mat-form-field>
       </div>
     </div>
@@ -54,6 +102,20 @@
           {{response.weightage * 100 | number : '1.1-1'}}%
         </div>
         <div class="description"><b>{{response.description}}</b></div>
+      </div>
+      <div style="display: inline-block"><mat-label>Self Goal:</mat-label></div>
+      <div class="set-goals">
+        <mat-form-field class="response-full-width">
+        <textarea [disabled]=true
+                  style="width: 100%; color: black" [(ngModel)]="response.selfDescription" [ngModelOptions]="{ standalone: true }"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input [disabled]=true
+                style="width: 100%; color: black" [(ngModel)]="response.selfWeightage" [ngModelOptions]="{ standalone: true }"
+                matInput type="number" #weightage onkeypress="if (this.value.length > 1) return false;" max="100"
+                placeholder="Weightage" value="">
+        </mat-form-field>
       </div>
       <div style="display: inline-block"><mat-label>Self Appraisal Comment:</mat-label></div>
       <div style="float: right">

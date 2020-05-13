@@ -21,6 +21,8 @@ export interface IResponse {
   projectManagerReviews: Map<string, IReview>;
   practiceDirectorReviews: Map<string, IReview>;
   hrReviews: Map<string, IReview>;
+  selfDescription:  string;
+  selfWeightage: string;
 }
 
 export interface IReview {
@@ -51,6 +53,7 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   @Input() reviewerVisibility: string;
   @Input() currentUser: UserType;
   @Input() currentStatus: string;
+  @Input() showSetGoals: boolean;
 
   score: any = [[0.0, 0.0], [0.0, 0.0]];
   totalScore: number;
@@ -99,6 +102,7 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   }
 
   save(responseObject) {
+    console.log(responseObject);
     this.appraisalService.saveSectionOneFeedback(responseObject, this.currentCycle.id, this.currentUser.id).subscribe(
       response => {
         this.snackBar.open('Response Auto Saved', '', {
