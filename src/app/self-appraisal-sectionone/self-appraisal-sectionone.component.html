@@ -25,13 +25,13 @@
       <div class="set-goals">
         <mat-form-field class="response-full-width">
         <textarea (focusout)="save(sectionResponses, 'Saved')"
-                  style="width: 100%" [(ngModel)]="response.selfDescription" [ngModelOptions]="{ standalone: true }"
+                  style="width: 100%" [(ngModel)]="response.customCriteria" [ngModelOptions]="{ standalone: true }"
                   matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
                   placeholder="Description"></textarea>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <input (focusout)="save(sectionResponses, 'Saved')"
-                  type="number" [(ngModel)]="response.selfWeightage" [ngModelOptions]="{ standalone: true }"
+                  type="number" [(ngModel)]="response.customWeightage" [ngModelOptions]="{ standalone: true }"
                   matInput onkeypress="if (this.value.length > 1) return false;" max="100"
                   placeholder="Weightage" value="">
         </mat-form-field>
@@ -57,12 +57,12 @@
       <div class="set-goals">
         <mat-form-field class="response-full-width">
         <textarea [disabled]=true
-                  style="width: 100%; color: black" [(ngModel)]="response.selfDescription" [ngModelOptions]="{ standalone: true }"
+                  style="width: 100%; color: black" [(ngModel)]="response.customCriteria" [ngModelOptions]="{ standalone: true }"
                   matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <input [disabled]=true
-                style="width: 100%; color: black" [(ngModel)]="response.selfWeightage" [ngModelOptions]="{ standalone: true }"
+                style="width: 100%; color: black" [(ngModel)]="response.customWeightage" [ngModelOptions]="{ standalone: true }"
                 matInput type="number" #weightage onkeypress="if (this.value.length > 1) return false;" max="100"
                 placeholder="Weightage" value="">
         </mat-form-field>
@@ -107,12 +107,12 @@
       <div class="set-goals">
         <mat-form-field class="response-full-width">
         <textarea [disabled]=true
-                  style="width: 100%; color: black" [(ngModel)]="response.selfDescription" [ngModelOptions]="{ standalone: true }"
+                  style="width: 100%; color: black" [(ngModel)]="response.customCriteria" [ngModelOptions]="{ standalone: true }"
                   matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
         </mat-form-field>
         <mat-form-field class="example-full-width">
           <input [disabled]=true
-                style="width: 100%; color: black" [(ngModel)]="response.selfWeightage" [ngModelOptions]="{ standalone: true }"
+                style="width: 100%; color: black" [(ngModel)]="response.customWeightage" [ngModelOptions]="{ standalone: true }"
                 matInput type="number" #weightage onkeypress="if (this.value.length > 1) return false;" max="100"
                 placeholder="Weightage" value="">
         </mat-form-field>

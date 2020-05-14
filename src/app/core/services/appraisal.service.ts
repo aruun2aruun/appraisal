@@ -43,6 +43,10 @@ export class AppraisalService {
     const url = environment.baseUrl + '/appraisal/cycle/' + cycleId + '/user/' + userId + '/sectionfive';
     return this.http.get(url).pipe(map(response => response));
   }
+  submitSelfGoals(appraisalId: string): Observable<any> {
+    const url = environment.baseUrl + '/appraisal/' + appraisalId + '/submitSelfGoals';
+    return this.http.post<any>(url, httpOptions);
+  }
   submitFeedback(appraisalId: string): Observable<any> {
     const url = environment.baseUrl + '/appraisal/' + appraisalId + '/submitSelfAppraisal';
     return this.http.post<any>(url, httpOptions);

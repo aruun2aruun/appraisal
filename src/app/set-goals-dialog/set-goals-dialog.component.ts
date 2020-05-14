@@ -6,6 +6,7 @@ import {AppraisalService} from '../core/services/appraisal.service';
 import {CycleType} from '../model/cycle-type';
 import {UserType} from '../model/user-type';
 import {UserService} from '../core/services/user.service';
+import { AuthService } from '../core/services/auth.service';
 
 @Component({
   selector: 'app-set-goals-dialog',
@@ -14,22 +15,61 @@ import {UserService} from '../core/services/user.service';
 })
 export class SetGoalsDialogComponent implements OnInit {
 
+  currentCycle: CycleType;
+  loggedInUser: UserType;
+  currentUser: UserType;
+  appraisalId: string;
+
   @ViewChild(SelfAppraisalSectiononeComponent) child;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
                private snackBar: MatSnackBar,
                private appraisalService: AppraisalService,
                private userService: UserService,
+               private authService: AuthService,
                public dialog: MatDialog) {
                  console.log(data);
   }
 
   ngOnInit() {
+    this.currentUser = undefined;
+    setTimeout(() => {
+      this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
+        data => {
+          this.loggedInUser = data;
+          // this.currentUser = data;
+          this.initialize();
+          this.authService.init();
+        }
+      );
+    }, 100);
+  }
+
+  initialize() {
+    this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
+    this.loadAppraisal();
+  }
+
+  loadAppraisal() {
+    this.appraisalService.getAppraisalbyUserId(this.currentCycle.id, this.loggedInUser.id).subscribe(
+      response => {
+        this.appraisalId = response.id;
+      }
+    );
   }
 
   save() {
     this.snackBar.open('Response Saved', null, {
       duration: 3000,
     });
+  }
+
+  submitSelfGoal() {
+    this.appraisalService.submitSelfGoals(this.appraisalId).subscribe(
+      response => {
+        this.initialize();
+      }, error => {
+      }
+    );
   }
 }

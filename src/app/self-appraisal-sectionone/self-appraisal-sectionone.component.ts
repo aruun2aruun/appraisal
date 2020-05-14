@@ -21,8 +21,8 @@ export interface IResponse {
   projectManagerReviews: Map<string, IReview>;
   practiceDirectorReviews: Map<string, IReview>;
   hrReviews: Map<string, IReview>;
-  selfDescription:  string;
-  selfWeightage: string;
+  customCriteria:  string;
+  customWeightage: string;
 }
 
 export interface IReview {

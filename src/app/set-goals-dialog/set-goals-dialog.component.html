@@ -23,11 +23,11 @@
 </div>
 
 <mat-dialog-content>
-  <div *ngIf="data.userStatus !== 'SELF_REVIEW'">
+  <div *ngIf="data.userStatus !== 'SET_GOALS'">
     <p><strong>Cannot Set Goals Now!</strong> Goals can be set only before the start of appraisal!</p>
   </div>
 
-  <div *ngIf="data.userStatus === 'SELF_REVIEW'">
+  <div *ngIf="data.userStatus === 'SET_GOALS'">
     <app-self-appraisal-sectionone
       [currentUser]="data.currentUser"
       [currentStatus]="data.userStatus"
@@ -41,8 +41,8 @@
     <mat-icon>close</mat-icon>
     Close
   </button>
-  <button type="button" *ngIf="data.userStatus === 'SELF_REVIEW'" mat-stroked-button mat-button [mat-dialog-close] (click)="save()">
+  <button type="button" *ngIf="data.userStatus === 'SET_GOALS'" mat-stroked-button mat-button [mat-dialog-close] (click)="submitSelfGoal()">
     <mat-icon>create</mat-icon>
-    Save
+    Submit
   </button>
 </mat-dialog-actions>
