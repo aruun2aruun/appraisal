@@ -25,7 +25,7 @@
       <div class="set-goals">
         <mat-form-field class="response-full-width">
         <textarea (focusout)="save(sectionResponses, 'Saved')"
-                  style="width: 100%" [(ngModel)]="response.customCriteria" [ngModelOptions]="{ standalone: true }"
+                  style="width: 100%" [(ngModel)]="response.customDescription" [ngModelOptions]="{ standalone: true }"
                   matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
                   placeholder="Description"></textarea>
         </mat-form-field>
@@ -57,7 +57,7 @@
       <div class="set-goals">
         <mat-form-field class="response-full-width">
         <textarea [disabled]=true
-                  style="width: 100%; color: black" [(ngModel)]="response.customCriteria" [ngModelOptions]="{ standalone: true }"
+                  style="width: 100%; color: black" [(ngModel)]="response.customDescription" [ngModelOptions]="{ standalone: true }"
                   matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
         </mat-form-field>
         <mat-form-field class="example-full-width">
@@ -107,7 +107,7 @@
       <div class="set-goals">
         <mat-form-field class="response-full-width">
         <textarea [disabled]=true
-                  style="width: 100%; color: black" [(ngModel)]="response.customCriteria" [ngModelOptions]="{ standalone: true }"
+                  style="width: 100%; color: black" [(ngModel)]="response.customDescription" [ngModelOptions]="{ standalone: true }"
                   matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
         </mat-form-field>
         <mat-form-field class="example-full-width">

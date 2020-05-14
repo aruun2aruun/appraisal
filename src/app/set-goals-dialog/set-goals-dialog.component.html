@@ -37,12 +37,16 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-  <button type="button" mat-stroked-button mat-button [mat-dialog-close]>
+  <button type="button" *ngIf="data.userStatus !== 'SET_GOALS'" mat-stroked-button mat-button [mat-dialog-close]>
     <mat-icon>close</mat-icon>
     Close
   </button>
-  <button type="button" *ngIf="data.userStatus === 'SET_GOALS'" mat-stroked-button mat-button [mat-dialog-close] (click)="submitSelfGoal()">
+  <button type="button" *ngIf="data.userStatus === 'SET_GOALS'" mat-stroked-button mat-button [mat-dialog-close] (click)="save()">
     <mat-icon>create</mat-icon>
+    Save as Draft
+  </button>
+  <button type="button" *ngIf="data.userStatus === 'SET_GOALS'" mat-stroked-button mat-button [mat-dialog-close] (click)="submitSelfGoal()">
+    <mat-icon>done</mat-icon>
     Submit
   </button>
 </mat-dialog-actions>

@@ -21,7 +21,7 @@ export interface IResponse {
   projectManagerReviews: Map<string, IReview>;
   practiceDirectorReviews: Map<string, IReview>;
   hrReviews: Map<string, IReview>;
-  customCriteria:  string;
+  customDescription:  string;
   customWeightage: string;
 }
 
@@ -102,7 +102,6 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   }
 
   save(responseObject) {
-    console.log(responseObject);
     this.appraisalService.saveSectionOneFeedback(responseObject, this.currentCycle.id, this.currentUser.id).subscribe(
       response => {
         this.snackBar.open('Response Auto Saved', '', {
