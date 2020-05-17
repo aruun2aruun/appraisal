@@ -13,6 +13,7 @@ import {ManageAppraisalComponent} from './manage-appraisal/manage-appraisal.comp
 import {GoalDefinitionComponent} from './goal-definition/goal-definition.component';
 import {AuthGuard} from './auth.guard';
 import { RatingScaleComponent } from './rating-scale/rating-scale.component';
+import { SetGoalsComponent } from './set-goals/set-goals.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -27,7 +28,8 @@ const routes: Routes = [
   { path: 'manage-appraisal', component: ManageAppraisalComponent, canActivate: [AuthGuard]},
   { path: 'goal-definition', component: GoalDefinitionComponent, canActivate: [AuthGuard]},
   { path: 'rating-scale', component: RatingScaleComponent, canActivate: [AuthGuard]},
-  { path: 'unauthorized', component: UnauthorizedComponent, canActivate: [AuthGuard]}
+  { path: 'unauthorized', component: UnauthorizedComponent, canActivate: [AuthGuard]},
+  { path: 'set-goals', component: SetGoalsComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

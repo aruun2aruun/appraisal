@@ -82,6 +82,10 @@
   },
   "LABELS": {
     "VIEW_RESPONSE_CYCLE_CHECkBOX": "Show feedback for previous cycle"
+  },
+  "SET_GOALS": {
+    "success": "Goals saved successfully!",
+    "submit": "Goals submitted successfully!"
   }
 }
 

@@ -21,6 +21,8 @@ export interface IResponse {
   projectManagerReviews: Map<string, IReview>;
   practiceDirectorReviews: Map<string, IReview>;
   hrReviews: Map<string, IReview>;
+  customDescription:  string;
+  customWeightage: string;
 }
 
 export interface IReview {
@@ -51,6 +53,7 @@ export class SelfAppraisalSectiononeComponent implements OnInit {
   @Input() reviewerVisibility: string;
   @Input() currentUser: UserType;
   @Input() currentStatus: string;
+  @Input() showSetGoals: boolean;
 
   score: any = [[0.0, 0.0], [0.0, 0.0]];
   totalScore: number;

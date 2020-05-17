@@ -24,7 +24,7 @@ export class SelfAppraisalComponent implements OnInit {
   appraisalId: string;
   appraisalVisibility = 'EDITABLE';
   reviewerVisibility = 'HIDDEN';
-  error: string;
+  error: any;
   status: string;
 
 
@@ -60,7 +60,7 @@ export class SelfAppraisalComponent implements OnInit {
       response => {
         this.status = response.status;
         this.reviewerVisibility = 'READ-ONLY';
-        if (response.status === 'SELF_REVIEW') {
+        if (response.status === 'SELF_REVIEW' || response.status === 'SET_GOALS') {
           this.appraisalVisibility = 'EDITABLE';
         } else {
           this.appraisalVisibility = 'READ-ONLY';
@@ -89,7 +89,8 @@ export class SelfAppraisalComponent implements OnInit {
       }
     );
   }
- checkResponse() {
+
+  checkResponse() {
     this.appraisalService.errorCheck(this.appraisalId).subscribe(
       response => {
         this.openConfirmationDialog();
