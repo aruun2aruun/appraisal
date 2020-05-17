@@ -2,7 +2,7 @@ $(function() {
   // App configuration
   var authEndpoint = 'https://login.microsoftonline.com/common/oauth2/v2.0/authorize?';
   var redirectUri = 'https://appraisal.ioak.org/home';
-  // var redirectUri = 'http://localhost:4200/home';login
+  // var redirectUri = 'http://localhost:4200/home';
   var appId = '9e8c7139-b37b-4498-896c-a36d0103a89b';
   var scopes = 'openid profile User.Read Mail.Read Calendars.Read Contacts.Read';
 
