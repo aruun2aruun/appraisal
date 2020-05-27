@@ -36,7 +36,7 @@ export class SetGoalsComponent implements OnInit {
                public dialog: MatDialog,
                private authService: AuthService) {
     pageHeaderService.setTitle('Set Goals');
-    cycleSelectionService.cycleChangedEvent.subscribe(data => this.initialize());
+    cycleSelectionService.cycleChangedEvent.subscribe(data => this.ngOnInit());
   }
 
   ngOnInit() {
