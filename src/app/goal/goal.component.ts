@@ -6,6 +6,8 @@ import {AuthService} from '../core/services/auth.service';
 import { UserService } from '../core/services/user.service';
 import { UserType } from '../model/user-type';
 import { InitializationService } from '../core/services/initialization.service';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../app-state';
 
 @Component({
   selector: 'app-goal',
@@ -14,34 +16,26 @@ import { InitializationService } from '../core/services/initialization.service';
 })
 export class GoalComponent implements OnInit {
 
-  data: GoalDefinitionType[];
+  data: any[];
   loggedInUser: UserType;
 
   constructor(private goalService: GoalService,
               private pageHeaderService: PageHeaderService,
               private userService: UserService,
               private authService: AuthService,
+              private store: Store<AppState>,
               private initializationService: InitializationService) {
     pageHeaderService.setTitle('Goal');
   }
 
   ngOnInit() {
-    console.log(sessionStorage.getItem('userSigninName'));
-    //After loggin for the first time: When user navigates to any page from home page, the initialization of current and active cycles does not complete until ngOnInit on the second page finishes. So, timeout is set for the first navigation away from home component.
     this.initializationService.loggedInUser$.subscribe(user => {
-      this.loggedInUser = user;
-      
       if (user) {
-        this.initialize();
+        this.store.pipe(select(state => state.goals.filter(item => item.jobName === user.jobName)))
+        .subscribe(result => {
+          this.data = result;
+        });
       }
     });
   }
-
-  initialize() {
-    this.goalService.getDefinitions(this.loggedInUser.id).subscribe(
-      response => {
-        this.data = response;
-      });
-  }
-
 }

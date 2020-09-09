@@ -11,15 +11,15 @@ export class GoalService {
   constructor(private http: HttpClient) {
   }
 
-  getDefinitions(userId: String): any {
+  getDefinitions(userId: string): any {
     return this.http.get<Array<GoalDefinitionType>>(
       environment.baseUrl + '/goal/' + userId
     );
   }
 
-  getAllGoals(): any {
+  getGoals(cycleId: string): any {
     return this.http.get<Array<GoalDefinitionType>>(
-      environment.baseUrl + '/goal/'
+      `${environment.baseUrl}/appraisal/goal?cycleId=${cycleId}`
     );
   }
 }

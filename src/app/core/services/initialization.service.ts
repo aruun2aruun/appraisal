@@ -58,20 +58,19 @@ export class InitializationService {
   }
 
   getAllRoles() {
-    this.roleService.getRoles().subscribe(
+    this.cycleSelectionService.cycleChangedEvent.subscribe(data => this.roleService.getRoles(data.id).subscribe(
       roles => {
         this.store.dispatch(new RoleReload(roles))
       }
-    );
+    ));
   }
 
   getAllGoals() {
-    this.cycleSelectionService.cycleChangedEvent.subscribe(data => console.log(data));
-    this.goalService.getAllGoals().subscribe(
+    this.cycleSelectionService.cycleChangedEvent.subscribe(data => this.goalService.getGoals(data.id).subscribe(
       goals => {
         this.store.dispatch(new GoalReload(goals))
       }
-    );
+    ));
   }
 
   getAllCycles() {

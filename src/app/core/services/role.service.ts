@@ -16,7 +16,7 @@ export class RoleService {
   constructor(private http: HttpClient) {
   }
 
-  getRoles(): Observable<any> {
-    return this.http.get(environment.baseUrl + '/role').pipe(map(response => response));
+  getRoles(cycleId: string): Observable<any> {
+    return this.http.get(`${environment.baseUrl}/appraisal/role?cycleId=${cycleId}`).pipe(map(response => response));
   }
 }
