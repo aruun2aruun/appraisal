@@ -6,14 +6,20 @@ import {GoalDefinitionType} from '../model/goal-definition-type';
 @Injectable({
   providedIn: 'root'
 })
-export class GoalDefinitionService {
+export class GoalService {
 
   constructor(private http: HttpClient) {
   }
 
   getDefinitions(userId: String): any {
     return this.http.get<Array<GoalDefinitionType>>(
-      environment.baseUrl + '/goalDefinition/' + userId
+      environment.baseUrl + '/goal/' + userId
+    );
+  }
+
+  getAllGoals(): any {
+    return this.http.get<Array<GoalDefinitionType>>(
+      environment.baseUrl + '/goal/'
     );
   }
 }

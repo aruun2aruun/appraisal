@@ -27,7 +27,7 @@ export class RatingScaleComponent implements OnInit {
 
   ngOnInit() {
     this.initialize();
-    this.authService.init();
+    
   }
 
   initialize() {

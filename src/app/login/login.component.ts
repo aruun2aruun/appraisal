@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
       this.initialize();
-      this.authService.init();
+      
     }
 
     refresh() {

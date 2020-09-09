@@ -43,7 +43,7 @@ export class SelfAppraisalComponent implements OnInit {
           this.loggedInUser = data;
           // this.currentUser = data;
           this.initialize();
-          this.authService.init();
+          
         }
       );
     }, 100);

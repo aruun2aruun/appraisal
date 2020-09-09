@@ -46,7 +46,7 @@ export class SetGoalsComponent implements OnInit {
           this.loggedInUser = data;
           this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
           this.initialize();
-          this.authService.init();
+          
         }
       );
     }, 100);

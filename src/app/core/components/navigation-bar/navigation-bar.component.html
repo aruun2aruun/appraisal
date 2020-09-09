@@ -1,7 +1,6 @@
 <mat-toolbar color="primary" style="position: fixed; z-index: 999;">
 
   <mat-toolbar-row class="mat-elevation-z8">
-
     <a class="logo" fxHide="false" fxHide.lt-md>
       <img src="../../../../assets/img/logo.png" alt="Westernacher logo" class="tt-retina-logo" height="40">
     </a>
@@ -62,7 +61,7 @@
 
 <!--Sub menu for Feedback cycle selection-->
 <mat-menu #cycleMenu="matMenu">
-  <button *ngFor="let item of cycleSelectionService.activeCycles" mat-menu-item (click)="changeCycle(item)">{{item.name}}</button>
+  <button *ngFor="let item of cycles" mat-menu-item (click)="changeCycle(item)">{{item.name}}</button>
 </mat-menu>
 
 <!--Sub menu for small displays-->

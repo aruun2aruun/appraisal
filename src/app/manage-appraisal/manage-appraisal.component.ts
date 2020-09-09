@@ -47,7 +47,7 @@ export class ManageAppraisalComponent implements OnInit {
         data => {
           this.loggedInUser = data;
           this.initialize();
-          this.authService.init();
+          
         }
       );
     }, 100);
