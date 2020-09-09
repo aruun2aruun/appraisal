@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   roles: any[];
   goals: any[];
   cycles: any[];
+  appraisalReviews: any[];
   currentCycle: CycleType;
   loggedInUser: UserType;
   cards: any;
@@ -75,6 +76,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     const goals$ = this.store.pipe(select('goals'));
     goals$.subscribe(result => {
       this.goals = result;
+    });
+    const appraisalReviews$ = this.store.pipe(select('appraisalReviews'));
+    appraisalReviews$.subscribe(result => {
+      this.appraisalReviews = result;
     });
     const cycles$ = this.store.pipe(select('cycles'));
     cycles$.subscribe(result => {

@@ -99,4 +99,10 @@ export class AppraisalService {
     const url = environment.baseUrl + '/appraisal/cycle/' + cycleId + '/user/' + userId + '/' + section;
     return this.http.put<any>(url, jsonObj, httpOptions);
   }
+
+  getAppraisalReviews(cycleId: string): any {
+    return this.http.get(
+      `${environment.baseUrl}/appraisal/review?cycleId=${cycleId}`
+    );
+  }
 }

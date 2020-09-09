@@ -66,6 +66,7 @@ import { UserReducer } from './store/user.reducer';
 import { RoleReducer } from './store/role.reducer';
 import { GoalReducer } from './store/goal.reducer';
 import { CycleReducer } from './store/cycle.reducer';
+import { AppraisalReviewReducer } from './store/appraisal-reviews.reducer';
 
 @NgModule({
   declarations: [
@@ -135,7 +136,8 @@ import { CycleReducer } from './store/cycle.reducer';
       users: UserReducer,
       roles: RoleReducer,
       goals: GoalReducer,
-      cycles: CycleReducer
+      cycles: CycleReducer,
+      appraisalReviews: AppraisalReviewReducer
     })
   ],
   providers: [AuthGuard],

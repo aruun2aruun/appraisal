@@ -4,4 +4,5 @@ export interface AppState {
   roles: any[];
   goals: any[];
   cycles: any[];
+  appraisalReviews: any[];
 }

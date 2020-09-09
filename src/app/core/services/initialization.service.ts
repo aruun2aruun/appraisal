@@ -11,6 +11,8 @@ import { GoalReload } from 'src/app/store/Goal.actions';
 import { CycleService } from './cycle.service';
 import { CycleReload } from 'src/app/store/Cycle.actions';
 import { CycleSelectionService } from './cycle-selection.service';
+import { AppraisalService } from './appraisal.service';
+import { AppraisalReviewReload } from 'src/app/store/appraisal-review.actions';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +28,7 @@ export class InitializationService {
     private roleService: RoleService,
     private goalService: GoalService,
     private cycleService: CycleService,
+    private appraisalService: AppraisalService,
     private store: Store<AppState>
   ) {
     this.cycleSelectionService.initialize();
@@ -34,6 +37,7 @@ export class InitializationService {
     this.getAllRoles();
     this.getAllGoals();
     this.getAllCycles();
+    this.getAllAppraisalReviews();
   }
 
   initializeLoggedInUser() {
@@ -79,5 +83,13 @@ export class InitializationService {
         this.store.dispatch(new CycleReload(cycles))
       }
     );
+  }
+
+  getAllAppraisalReviews() {
+    this.cycleSelectionService.cycleChangedEvent.subscribe(data => this.appraisalService.getAppraisalReviews(data.id).subscribe(
+      appraisalReviews => {
+        this.store.dispatch(new AppraisalReviewReload(appraisalReviews))
+      }
+    ));
   }
 }
