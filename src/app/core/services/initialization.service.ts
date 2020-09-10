@@ -62,19 +62,26 @@ export class InitializationService {
   }
 
   getAllRoles() {
-    this.cycleSelectionService.cycleChangedEvent.subscribe(data => this.roleService.getRoles(data.id).subscribe(
-      roles => {
-        this.store.dispatch(new RoleReload(roles))
+    this.cycleSelectionService.cycleChangedEvent.subscribe(data => {
+      if (data) {
+        this.roleService.getRoles(data.id).subscribe(
+          roles => {
+            this.store.dispatch(new RoleReload(roles))
+          })
       }
-    ));
+    });
   }
 
   getAllGoals() {
-    this.cycleSelectionService.cycleChangedEvent.subscribe(data => this.goalService.getGoals(data.id).subscribe(
-      goals => {
-        this.store.dispatch(new GoalReload(goals))
+    this.cycleSelectionService.cycleChangedEvent.subscribe(data => {
+      if (data) {
+        this.goalService.getGoals(data.id).subscribe(
+          goals => {
+            this.store.dispatch(new GoalReload(goals))
+          })
+        }
       }
-    ));
+    );
   }
 
   getAllCycles() {
@@ -86,10 +93,14 @@ export class InitializationService {
   }
 
   getAllAppraisalReviews() {
-    this.cycleSelectionService.cycleChangedEvent.subscribe(data => this.appraisalService.getAppraisalReviews(data.id).subscribe(
-      appraisalReviews => {
-        this.store.dispatch(new AppraisalReviewReload(appraisalReviews))
+    this.cycleSelectionService.cycleChangedEvent.subscribe(data => {
+      if (data) {
+        this.appraisalService.getAppraisalReviews(data.id).subscribe(
+          appraisalReviews => {
+            this.store.dispatch(new AppraisalReviewReload(appraisalReviews))
+          })
+        }
       }
-    ));
+    );
   }
 }
