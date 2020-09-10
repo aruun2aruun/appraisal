@@ -70,6 +70,8 @@ import { AppraisalReviewReducer } from './store/appraisal-reviews.reducer';
 import { AppraisalComponent } from './appraisal/appraisal.component';
 import { AppraisalReviewGoalComponent } from './appraisal/appraisal-review-goal/appraisal-review-goal.component';
 import { AppraisalReviewGoalReviewComponent } from './appraisal/appraisal-review-goal-review/appraisal-review-goal-review.component';
+import { IdToNamePipe } from './core/services/id-to-name.pipe';
+import { IdToJobnamePipe } from './core/services/id-to-jobname.pipe';
 
 @NgModule({
   declarations: [
@@ -102,7 +104,9 @@ import { AppraisalReviewGoalReviewComponent } from './appraisal/appraisal-review
     SetGoalsDialogComponent,
     AppraisalComponent,
     AppraisalReviewGoalComponent,
-    AppraisalReviewGoalReviewComponent
+    AppraisalReviewGoalReviewComponent,
+    IdToNamePipe,
+    IdToJobnamePipe
   ],
   imports: [
     MatToolbarModule,

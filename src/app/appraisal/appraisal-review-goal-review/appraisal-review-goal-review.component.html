@@ -1,22 +1,3 @@
-<div style="display: inline-block"><mat-label>Self Appraisal Comment:</mat-label></div>
-<mat-form-field style="width: 20%; float: right">
-  <mat-select #MatSelect placeholder="Self Appraisal rating"
-              [(ngModel)]="response.selfRating">
-    <mat-option #MatOption *ngFor="let rating of ratings" [value]="rating">
-      {{rating}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
-<div>
-  <mat-form-field class="response-full-width">
-    <textarea style="width: 100%" [(ngModel)]="response.selfComment" [ngModelOptions]="{ standalone: true }"
-              matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
-              placeholder="Provide a comment to support your rating" #selfReviewComment></textarea>
-    <mat-hint align="start"><strong>Comment should be atleast 50 characters</strong> </mat-hint>
-    <mat-hint align="end">{{selfReviewComment.value.length}} / {{selfReviewComment.value.length}}</mat-hint>
-  </mat-form-field>
-</div>
-
 <!-- <div class="reviews">
   <div style="float: right">
     <mat-label>{{response.value?.rating}}</mat-label>
@@ -30,74 +11,22 @@
   </div>
 </div> -->
 
-<!-- CREATE EDIT PROJECT MANAGER REVIEWS -->
-<div class="reviewerSectionEditable">
+<div class="reviewerSectionEditable" *ngFor="let appraisalGoal of appraisalGoals">
   <mat-form-field style="width: 20%; float: right">
-    <mat-select (focusout)="saveReview(response, 'ProjectManager', response.projectManagerReviews[this.loggedInUser.id].complete)" #MatSelect placeholder="Reviewer rating">
+    <mat-select #MatSelect placeholder="Reviewer rating"
+      [(ngModel)]="appraisalGoal.rating">
       <mat-option #MatOption *ngFor="let rating of ratings; let i = index;" [value]="rating">
         {{rating}}
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <mat-label>Your Comment as a Project Manager</mat-label>
+  <mat-label>{{appraisalGoal.reviewerId | idToName}} ({{appraisalGoal.reviewerId | idToJobname}})</mat-label>
   <mat-form-field class="response-full-width">
-    <textarea (focusout)="saveReview(response, 'ProjectManager', response.projectManagerReviews[this.loggedInUser.id].complete)" style="width: 100%"
+    <textarea style="width: 100%" [(ngModel)]="appraisalGoal.comment" [ngModelOptions]="{ standalone: true }"
             matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
-            placeholder="Provide a comment to support your rating">
-    </textarea>
-  </mat-form-field>
-</div>
-
-<!-- CREATE EDIT REPORTING MANAGER (TEAM LEAD) REVIEWS -->
-<div class="reviewerSectionEditable">
-  <mat-form-field style="width: 20%; float: right">
-    <mat-select (focusout)="saveReview(response, 'TeamLead', response.teamLeadReviews[this.loggedInUser.id].complete)" #MatSelect placeholder="Reviewer rating">
-      <mat-option #MatOption *ngFor="let rating of ratings; let i = index;" [value]="rating">
-        {{rating}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-label>Your Comment as a Reporting Manager</mat-label>
-  <mat-form-field class="response-full-width">
-    <textarea (focusout)="saveReview(response, 'TeamLead', response.teamLeadReviews[this.loggedInUser.id].complete)" style="width: 100%"
-            matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
-            placeholder="Provide a comment to support your rating">
-    </textarea>
-  </mat-form-field>
-</div>
-
-<!-- CREATE EDIT PRACTICE DIRECTOR REVIEWS -->
-<div class="reviewerSectionEditable">
-  <mat-form-field style="width: 20%; float: right">
-    <mat-select (focusout)="saveReview(response, 'PracticeDirector', response.practiceDirectorReviews[this.loggedInUser.id].complete)" #MatSelect placeholder="Reviewer rating">
-      <mat-option #MatOption *ngFor="let rating of ratings; let i = index;" [value]="rating">
-        {{rating}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-label>Your Comment as a Practice Director</mat-label>
-  <mat-form-field class="response-full-width">
-    <textarea (focusout)="saveReview(response, 'PracticeDirector', response.practiceDirectorReviews[this.loggedInUser.id].complete)" style="width: 100%"
-            matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
-            placeholder="Provide a comment to support your rating">
-    </textarea>
-  </mat-form-field>
-</div>
-
-<!-- CREATE EDIT HR REVIEWS -->
-<div class="reviewerSectionEditable">
-  <mat-form-field style="width: 20%; float: right">
-    <mat-select (focusout)="saveReview(response, 'HR', response.hrReviews[this.loggedInUser.id].complete)" #MatSelect placeholder="Reviewer rating">
-      <mat-option #MatOption *ngFor="let rating of ratings; let i = index;" [value]="rating">
-        {{rating}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-label>Your Comment as a HR</mat-label>
-  <mat-form-field class="response-full-width">
-    <textarea (focusout)="saveReview(response, 'HR', response.hrReviews[this.loggedInUser.id].complete)" style="width: 100%"
-            matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
-            placeholder="Provide a comment to support your rating">
+            placeholder="Provide a comment to support your rating" #reviewComment>
+            <mat-hint align="start"><strong>Comment should be atleast 50 characters</strong> </mat-hint>
+            <mat-hint align="end">{{reviewComment.value.length}} / {{reviewComment.value.length}}</mat-hint>
     </textarea>
   </mat-form-field>
 </div>
