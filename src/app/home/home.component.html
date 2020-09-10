@@ -13,7 +13,7 @@
 
 
 <br>
-<button mat-stroked-button class="btn btn-outline-primary sharp" routerLink="/goal-definition">
+<button mat-stroked-button class="btn btn-outline-primary sharp" [routerLink]="['/appraisal']" [queryParams]="{id: '5f59c26f19cb199b44a5ac4a'}">
   <mat-icon>play_arrow</mat-icon>
   Start Appraisal
 </button>
@@ -31,13 +31,13 @@
 
 <div>
   <br /><br />All Cycles from NgRx<br/>
-  {{cycles | json}}
+  <pre>{{cycles | json}}</pre>
   <br /><br />All Users from NgRx<br/>
-  {{users | json}}
+  <pre>{{users | json}}</pre>
   <br /><br />All Roles from NgRx<br/>
-  {{roles | json}}
+  <pre>{{roles | json}}</pre>
   <br /><br />All Appraisal Reviews from NgRx<br/>
-  {{appraisalReviews | json}}
+  <pre>{{appraisalReviews | json}}</pre>
   <br /><br />All Goals from NgRx<br/>
-  {{goals | json}}
+  <pre>{{goals | json}}</pre>
 </div>

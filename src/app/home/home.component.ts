@@ -97,11 +97,11 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       }
     });
-    this.homeService.getStatus().subscribe(
-      status => {
-        this.status = status;
-      }
-    );
+    // this.homeService.getStatus().subscribe(
+    //   status => {
+    //     this.status = status;
+    //   }
+    // );
   }
 
   openSupportDialog() {
@@ -150,15 +150,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.authService.isReviewer = false;
         this.authService.loggedIn = true;
         this.authService.loggedInUser = data;
-        if (data.roles.find(obj => obj.type === 'Administrator')) {
-          this.authService.isAdministrator = true;
-        }
-        if (data.roles.find(obj => obj.type === 'TeamLead') ||
-          data.roles.find(obj => obj.type === 'ProjectManager') ||
-          data.roles.find(obj => obj.type === 'PracticeDirector') ||
-          data.roles.find(obj => obj.type === 'HR')) {
-            this.authService.isReviewer = true;
-        }
+        // if (data.roles.find(obj => obj.type === 'Administrator')) {
+        //   this.authService.isAdministrator = true;
+        // }
+        // if (data.roles.find(obj => obj.type === 'TeamLead') ||
+        //   data.roles.find(obj => obj.type === 'ProjectManager') ||
+        //   data.roles.find(obj => obj.type === 'PracticeDirector') ||
+        //   data.roles.find(obj => obj.type === 'HR')) {
+        //     this.authService.isReviewer = true;
+        // }
       }
     );
   }

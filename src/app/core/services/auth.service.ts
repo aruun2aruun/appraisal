@@ -39,7 +39,7 @@ export class AuthService {
         this.loggedIn = false;
         this.roles = [];
       }
-    })
+    });
   }
 
   clear() {

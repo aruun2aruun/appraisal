@@ -10,6 +10,7 @@ import {NotifyDialogComponent} from '../notify-dialog/notify-dialog.component';
 import {PageHeaderService} from '../core/services/page-header.service';
 import * as messageObject from '../message.json';
 import {AuthService} from '../core/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-manage-appraisal',
@@ -36,7 +37,8 @@ export class ManageAppraisalComponent implements OnInit {
                private snackBar: MatSnackBar,
                private appraisalService: AppraisalService,
                public dialog: MatDialog,
-               private authService: AuthService) {
+               private authService: AuthService,
+               private router: Router) {
     pageHeaderService.setTitle('Manage Appraisal');
     cycleSelectionService.cycleChangedEvent.subscribe(data => this.initialize());
   }
@@ -131,6 +133,10 @@ export class ManageAppraisalComponent implements OnInit {
     });
   }
 
+  viewAppraisal() {
+    this.router.navigate([`appraisal?cycleId=${this.cycleId}`]);
+  }
+
   openNotifyDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
@@ -156,7 +162,7 @@ export class ManageAppraisalComponent implements OnInit {
         this.snackBar.open(messageObject.NOTIFY.success, null, {
           duration: 6000,
         });
-      });   
+      });
   }
 
   openNotifyUserDialog(row) {
@@ -185,6 +191,6 @@ export class ManageAppraisalComponent implements OnInit {
         this.snackBar.open(messageObject.NOTIFY.success, null, {
           duration: 6000,
         });
-      });   
+      });
   }
 }

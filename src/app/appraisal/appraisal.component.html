@@ -1,0 +1,16 @@
+<mat-tab-group>
+  <mat-tab label="Goals/Targets achieved">
+    <div>
+      <ul>
+        <li>Ratings in each category is mandatory</li>
+        <li>Comments should be more than 50 characters long</li>
+      </ul>
+      <div *ngFor=" let response of goals; let x = index; trackBy:trackByIndex;">
+        <h3>{{response.group}}</h3>
+        <app-appraisal-review-goal [response]="response" [appraisalGoals]="appraisalGoals"></app-appraisal-review-goal>
+      </div>   
+    </div>
+  </mat-tab>
+  <mat-tab label="Second"> Content 2 </mat-tab>
+  <mat-tab label="Third"> Content 3 </mat-tab>
+</mat-tab-group>

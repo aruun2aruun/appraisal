@@ -14,12 +14,14 @@ import {GoalComponent} from './goal/goal.component';
 import {AuthGuard} from './auth.guard';
 import { RatingScaleComponent } from './rating-scale/rating-scale.component';
 import { SetGoalsComponent } from './set-goals/set-goals.component';
+import { AppraisalComponent } from './appraisal/appraisal.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'home', component: HomeComponent},
   { path: '', component: LoginComponent},
   { path: 'help', component: HelpComponent},
+  { path: 'appraisal', component: AppraisalComponent, canActivate: [AuthGuard]},
   { path: 'provide-feedback', component: ProvideFeedbackComponent, canActivate: [AuthGuard]},
   { path: 'review-response', component: ReviewResponseComponent, canActivate: [AuthGuard]},
   { path: 'view-response', component: ViewResponseComponent, canActivate: [AuthGuard]},

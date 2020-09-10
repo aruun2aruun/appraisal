@@ -16,6 +16,10 @@ export class AppraisalService {
   constructor(private http: HttpClient) {
   }
 
+  getReviewGoal(appraisalId): Observable<any> {
+    return this.http.get(environment.baseUrl + '/appraisal/review/goal?appraisalId=' + appraisalId).pipe(map(response => response));
+  }
+
   getAppraisal(cycleId, userId): Observable<any> {
     return this.http.get(environment.baseUrl + '/appraisal/cycle/' + cycleId + '/manageable/' + userId).pipe(map(response => response));
   }

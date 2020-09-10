@@ -67,6 +67,9 @@ import { RoleReducer } from './store/role.reducer';
 import { GoalReducer } from './store/goal.reducer';
 import { CycleReducer } from './store/cycle.reducer';
 import { AppraisalReviewReducer } from './store/appraisal-reviews.reducer';
+import { AppraisalComponent } from './appraisal/appraisal.component';
+import { AppraisalReviewGoalComponent } from './appraisal/appraisal-review-goal/appraisal-review-goal.component';
+import { AppraisalReviewGoalReviewComponent } from './appraisal/appraisal-review-goal-review/appraisal-review-goal-review.component';
 
 @NgModule({
   declarations: [
@@ -96,7 +99,10 @@ import { AppraisalReviewReducer } from './store/appraisal-reviews.reducer';
     SubmitConfirmationDialogComponent,
     HelpComponent,
     SetGoalsComponent,
-    SetGoalsDialogComponent
+    SetGoalsDialogComponent,
+    AppraisalComponent,
+    AppraisalReviewGoalComponent,
+    AppraisalReviewGoalReviewComponent
   ],
   imports: [
     MatToolbarModule,

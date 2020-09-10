@@ -5,6 +5,7 @@
       <img src="../../../../assets/img/logo.png" alt="Westernacher logo" class="tt-retina-logo" height="40">
     </a>
     <button mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/home">Home</button>
+    <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md [routerLink]="['/appraisal']" [queryParams]="{id: appraisal.id}">Appraisal</button>
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/self-appraisal">Self Appraisal</button>
     <button *ngIf="authService.isAdministrator" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/user-administration">Access Control</button>
     <button *ngIf="authService.isReviewer" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/manage-appraisal">Manage Appraisal</button>
@@ -27,8 +28,8 @@
 
     <span mat-icon-button fxHide="false" fxHide.lt-md  *ngIf="this.authService.loggedInUser">{{this.authService.loggedInUser.name}}</span>
 
-    <button mat-icon-button onclick="location.href='https://appraisal.ioak.org/login'">
-      <!--<button mat-icon-button routerLink="/login">-->
+    <!-- <button mat-icon-button onclick="location.href='https://appraisal.ioak.org/login'"> -->
+    <button mat-icon-button routerLink="/login">
       <mat-icon>account_circle</mat-icon>
     </button>
   </mat-toolbar-row>
