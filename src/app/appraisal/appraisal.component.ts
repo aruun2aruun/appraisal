@@ -37,7 +37,6 @@ export class AppraisalComponent implements OnInit {
       }
     );
     this.initialize();
-    this.getReviewGoal();
   }
 
   trackByIndex(index: number, obj: any): any {
@@ -53,17 +52,15 @@ export class AppraisalComponent implements OnInit {
         this.appraisal = result.filter(item => item.employeeId === this.authService.loggedInUser.id);
       }
     });
-    console.log(this.appraisal);
     const users$ = this.store.pipe(select('users'));
     users$.subscribe(result => {
       this.user = result.filter(item => item.id === this.appraisal[0].employeeId);
     });
-    console.log(this.user);
     const goals$ = this.store.pipe(select('goals'));
     goals$.subscribe(result => {
       this.goals = result.filter(item => item.jobName === this.user[0].jobName);
     });
-    console.log(this.goals);
+    this.getReviewGoal();
   }
 
   getReviewGoal() {
@@ -71,7 +68,7 @@ export class AppraisalComponent implements OnInit {
     .subscribe(
       response => {
         this.appraisalGoals = response;
-        console.log(response);
+        console.log(this.appraisalGoals);
       },
       error => {
         console.log(error);

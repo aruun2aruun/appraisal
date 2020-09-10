@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { AppraisalService } from 'src/app/core/services/appraisal.service';
 
 @Component({
   selector: 'app-appraisal-review-goal-review',
@@ -20,16 +19,20 @@ export class AppraisalReviewGoalReviewComponent implements OnInit {
   loggedInUser: any;
 
   constructor(
-    private appraisalService: AppraisalService,
     private authService: AuthService) {
-    }
+  }
 
   ngOnInit() {
     this.loggedInUser = this.authService.loggedInUser;
-    console.log(this.response);
+    setTimeout(() => {
+      this.initialize();
+    }, 1000);
   }
 
-  saveReview(sectionResponseObj, responseObj, roleType, isComplete) {
-    alert('TBD');
+  initialize() {
+    if (this.appraisalGoals) {
+      this.appraisalGoals = this.appraisalGoals.filter(item => item.goalId === this.response.id);
+      console.log(this.appraisalGoals);
+    }
   }
 }

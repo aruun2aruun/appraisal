@@ -72,6 +72,8 @@ import { AppraisalReviewReducer } from './store/appraisal-reviews.reducer';
 import { AppraisalComponent } from './appraisal/appraisal.component';
 import { AppraisalReviewGoalComponent } from './appraisal/appraisal-review-goal/appraisal-review-goal.component';
 import { AppraisalReviewGoalReviewComponent } from './appraisal/appraisal-review-goal-review/appraisal-review-goal-review.component';
+import { IdToNamePipe } from './core/services/id-to-name.pipe';
+import { IdToJobnamePipe } from './core/services/id-to-jobname.pipe';
 import { AppraisalSpinnerComponent } from './core/components/appraisal-spinner/appraisal-spinner.component';
 
 
@@ -107,6 +109,8 @@ import { AppraisalSpinnerComponent } from './core/components/appraisal-spinner/a
     AppraisalComponent,
     AppraisalReviewGoalComponent,
     AppraisalReviewGoalReviewComponent,
+    IdToNamePipe,
+    IdToJobnamePipe,
     AppraisalSpinnerComponent
   ],
   imports: [
