@@ -28,6 +28,8 @@ import {MatToolbarModule, MatListModule, MatTooltipModule} from '@angular/materi
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth.guard';
@@ -70,6 +72,8 @@ import { AppraisalReviewReducer } from './store/appraisal-reviews.reducer';
 import { AppraisalComponent } from './appraisal/appraisal.component';
 import { AppraisalReviewGoalComponent } from './appraisal/appraisal-review-goal/appraisal-review-goal.component';
 import { AppraisalReviewGoalReviewComponent } from './appraisal/appraisal-review-goal-review/appraisal-review-goal-review.component';
+import { AppraisalSpinnerComponent } from './core/components/appraisal-spinner/appraisal-spinner.component';
+
 
 @NgModule({
   declarations: [
@@ -102,7 +106,8 @@ import { AppraisalReviewGoalReviewComponent } from './appraisal/appraisal-review
     SetGoalsDialogComponent,
     AppraisalComponent,
     AppraisalReviewGoalComponent,
-    AppraisalReviewGoalReviewComponent
+    AppraisalReviewGoalReviewComponent,
+    AppraisalSpinnerComponent
   ],
   imports: [
     MatToolbarModule,
@@ -135,6 +140,7 @@ import { AppraisalReviewGoalReviewComponent } from './appraisal/appraisal-review
     MatCheckboxModule,
     MatRadioModule,
     MatDatepickerModule,
+    MatProgressSpinnerModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
     HttpClientModule,

@@ -1,25 +1,20 @@
-import {environment} from '../../environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {GoalDefinitionType} from '../model/goal-definition-type';
+import {HttpService} from '../core/services/http.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GoalService {
 
-  constructor(private http: HttpClient) {
+  constructor(private httpService: HttpService) {
   }
 
   getDefinitions(userId: string): any {
-    return this.http.get<Array<GoalDefinitionType>>(
-      environment.baseUrl + '/goal/' + userId
-    );
+    return this.httpService.get(`/goal/${userId}`);
   }
 
   getGoals(cycleId: string): any {
-    return this.http.get<Array<GoalDefinitionType>>(
-      `${environment.baseUrl}/appraisal/goal?cycleId=${cycleId}`
-    );
+    return this.httpService.get(`/appraisal/goal?cycleId=${cycleId}`);
   }
 }

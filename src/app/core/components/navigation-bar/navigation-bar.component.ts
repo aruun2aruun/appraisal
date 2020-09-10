@@ -13,7 +13,7 @@ import { AppState } from 'src/app/app-state';
 })
 export class NavigationBarComponent {
   appraisal = {
-    id: '5f59c26f19cb199b44a5ac4a'
+    id: '5f5a2f930ccdc63c6069ea6b'
   };
 
   cycles: any[];

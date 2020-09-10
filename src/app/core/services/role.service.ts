@@ -3,6 +3,7 @@ import {environment} from '../../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {HttpService} from './http.service';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -13,10 +14,10 @@ const httpOptions = {
 })
 export class RoleService {
 
-  constructor(private http: HttpClient) {
+  constructor(private httpService: HttpService) {
   }
 
   getRoles(cycleId: string): Observable<any> {
-    return this.http.get(`${environment.baseUrl}/appraisal/role?cycleId=${cycleId}`).pipe(map(response => response));
+    return this.httpService.get(`$/appraisal/role?cycleId=${cycleId}`).pipe(map(response => response));
   }
 }

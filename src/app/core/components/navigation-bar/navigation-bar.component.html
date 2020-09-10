@@ -1,14 +1,23 @@
 <mat-toolbar color="primary" style="position: fixed; z-index: 999;">
-
   <mat-toolbar-row class="mat-elevation-z8">
     <a class="logo" fxHide="false" fxHide.lt-md>
       <img src="../../../../assets/img/logo.png" alt="Westernacher logo" class="tt-retina-logo" height="40">
     </a>
     <button mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/home">Home</button>
+
+    <button  mat-button [matMenuTriggerFor]="menu" fxHide.lt-md>
+      Apprisal
+      <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color" aria-hidden="true">arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button  routerLink="/appraisal" mat-menu-item>Self</button>
+      <button  routerLink="/appraisal/reportees"  mat-menu-item>Reportees</button>
+    </mat-menu>
+
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md [routerLink]="['/appraisal']" [queryParams]="{id: appraisal.id}">Appraisal</button>
-    <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/self-appraisal">Self Appraisal</button>
+    <!--<button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/self-appraisal">Self Appraisal</button>-->
     <button *ngIf="authService.isAdministrator" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/user-administration">Access Control</button>
-    <button *ngIf="authService.isReviewer" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/manage-appraisal">Manage Appraisal</button>
+    <!--<button *ngIf="authService.isReviewer" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/manage-appraisal">Manage Appraisal</button>-->
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/goal-definition">Goals</button>
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/set-goals">Set Goals</button>
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/rating-scale">Rating definition</button>
