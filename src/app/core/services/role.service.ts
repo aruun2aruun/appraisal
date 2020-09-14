@@ -18,6 +18,6 @@ export class RoleService {
   }
 
   getRoles(cycleId: string): Observable<any> {
-    return this.httpService.get(`$/appraisal/role?cycleId=${cycleId}`).pipe(map(response => response));
+    return this.httpService.get(`appraisal/role?cycleId=${cycleId}`).pipe(map(response => response));
   }
 }

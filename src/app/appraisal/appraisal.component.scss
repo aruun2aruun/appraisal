@@ -30,7 +30,7 @@
     margin: 5px 0 10px;
   }
   .selfAppraisalEditable {
-    background-color: rgba($color: #cce5ff, $alpha: 0.5);
+    // background-color: rgba($color: #cce5ff, $alpha: 0.5);
     border-radius: 4px;
     border: 1px solid #b8daff;
     color: #004085;
@@ -46,7 +46,7 @@
     margin: 10px 0 0;
   }
   .reviewerSectionEditable {
-    background-color: rgba($color: #cce5ff, $alpha: 0.5);
+    // background-color: rgba($color: #cce5ff, $alpha: 0.5);
     border-radius: 4px;
     border: 1px solid #b8daff;
     color: #004085;
@@ -64,3 +64,13 @@
     }
   }
   
+
+  .appraisal-summary {
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 10px;
+    column-gap: 20px;
+    justify-content: flex-start;
+    font-size: 14px;
+    margin-top: 50px;
+  }

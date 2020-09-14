@@ -1,16 +1,35 @@
 <mat-tab-group>
-  <mat-tab label="Goals/Targets achieved">
-    <div>
-      <ul>
-        <li>Ratings in each category is mandatory</li>
-        <li>Comments should be more than 50 characters long</li>
-      </ul>
-      <div *ngFor=" let response of goals; let x = index; trackBy:trackByIndex;">
-        <h3>{{response.group}}</h3>
-        <app-appraisal-review-goal [response]="response" [appraisalGoals]="appraisalGoals"></app-appraisal-review-goal>
-      </div>   
+  <mat-tab label="Goals and objectives">
+    <div *ngIf="appraisalGoals">
+      <mat-accordion *ngFor="let group of goalsGroup">
+        <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
+          <mat-expansion-panel-header>
+            <mat-panel-title style="display: inline-block">
+              {{ group }}
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div
+            *ngFor="let response of goals; let x = index; trackBy: trackByIndex"
+          >
+            <app-appraisal-review-goal
+              *ngIf="response.group === group"
+              [response]="response"
+              [appraisalGoals]="appraisalGoals"
+              [appraisalReview]="appraisalReview"
+            ></app-appraisal-review-goal>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
     </div>
   </mat-tab>
-  <mat-tab label="Second"> Content 2 </mat-tab>
-  <mat-tab label="Third"> Content 3 </mat-tab>
+  <mat-tab label="Notable contributions"> Content 2 </mat-tab>
+  <mat-tab label="Career aspirations"> Content 3 </mat-tab>
+  <mat-tab label="Summary">
+    <div class="appraisal-summary">
+      <div>Workflow status</div>
+      <div>{{ appraisalReview?.status }}</div>
+      <div>Overall Score</div>
+      <div>Waiting for appraisal completion</div>
+  </div>
+  </mat-tab>
 </mat-tab-group>

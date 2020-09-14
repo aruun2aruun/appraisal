@@ -11,7 +11,7 @@
         <mat-label>Weightage:</mat-label>
         {{response.weightage * 100 | number : '1.1-1'}}%
       </div>
-      <div class="description"><b>{{response.description}}</b></div>
+      <div class="description">{{response.description}}</div>
     </div>
     <!-- <div style="display: inline-block"><mat-label>Set Self Goal:</mat-label></div>
     <div class="set-goals">
@@ -26,6 +26,6 @@
                 placeholder="Weightage" value="">
       </mat-form-field>
     </div> -->
-    <app-appraisal-review-goal-review [response]="response" [appraisalGoals]="appraisalGoals"></app-appraisal-review-goal-review>
+    <app-appraisal-review-goal-review [response]="response" [appraisalGoals]="appraisalGoals" [appraisalReview]="appraisalReview"></app-appraisal-review-goal-review>
   </div>
 </div>

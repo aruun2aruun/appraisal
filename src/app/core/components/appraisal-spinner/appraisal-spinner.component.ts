@@ -11,9 +11,7 @@ export class AppraisalSpinnerComponent implements OnInit {
   activeSessions: string[] = [];
 
   constructor(private appraisalSpinnerService: AppraisalSpinnerService) {
-    console.log('##############################')
     this.appraisalSpinnerService.spinnerEvent$.subscribe(event => {
-      console.log(event);
       event.status === true ? this.activeSessions.push(event.uid) :
         this.activeSessions.splice(this.activeSessions.indexOf(event.uid));
     });

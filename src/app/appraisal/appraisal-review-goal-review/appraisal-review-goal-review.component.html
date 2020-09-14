@@ -11,22 +11,59 @@
   </div>
 </div> -->
 
-<div class="reviewerSectionEditable" *ngFor="let appraisalGoal of appraisalGoals">
-  <mat-form-field style="width: 20%; float: right">
-    <mat-select #MatSelect placeholder="Reviewer rating"
-      [(ngModel)]="appraisalGoal.rating">
-      <mat-option #MatOption *ngFor="let rating of ratings; let i = index;" [value]="rating">
-        {{rating}}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  <mat-label>{{appraisalGoal.reviewerId | idToName}} ({{appraisalGoal.reviewerId | idToJobname}})</mat-label>
-  <mat-form-field class="response-full-width">
-    <textarea style="width: 100%" [(ngModel)]="appraisalGoal.comment" [ngModelOptions]="{ standalone: true }"
-            matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
-            placeholder="Provide a comment to support your rating" #reviewComment>
+<div
+  *ngFor="let appraisalGoal of filteredGoals"
+  class="appraisal-review-goal-review"
+>
+  <div
+    *ngIf="appraisalGoal.visibility !== 'HIDE'"
+    class="appraisal-review-goal-review--default"
+    [ngClass]="{
+      'appraisal-review-goal-review--write':
+        appraisalGoal.visibility === 'WRITE'
+    }"
+  >
+    <mat-form-field style="width: 20%; float: right">
+      <mat-select
+        #MatSelect
+        placeholder="Reviewer rating"
+        [(ngModel)]="appraisalGoal.rating"
+        [disabled]="appraisalGoal.visibility !== 'WRITE'"
+      >
+        <mat-option
+          #MatOption
+          *ngFor="let rating of ratings; let i = index"
+          [value]="rating"
+        >
+          {{ rating }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-label
+      >{{ appraisalGoal.reviewerId | idToName }} ({{
+        appraisalGoal.reviewerType
+      }})</mat-label
+    >
+    <mat-form-field class="response-full-width">
+      <textarea
+        style="width: 100%"
+        [(ngModel)]="appraisalGoal.comment"
+        [ngModelOptions]="{ standalone: true }"
+        matInput
+        matTextareaAutosize
+        matAutosizeMinRows="1"
+        matAutosizeMaxRows="4"
+        data-ng-minLength="10"
+        placeholder="Provide a comment to support your rating"
+        #reviewComment
+        [disabled]="appraisalGoal.visibility !== 'WRITE'"
+      >
             <mat-hint align="start"><strong>Comment should be atleast 50 characters</strong> </mat-hint>
-            <mat-hint align="end">{{reviewComment.value.length}} / {{reviewComment.value.length}}</mat-hint>
-    </textarea>
-  </mat-form-field>
+            <mat-hint align="end">{{ reviewComment.value.length }} / {{
+          reviewComment.value.length
+        }}</mat-hint>
+    </textarea
+      >
+    </mat-form-field>
+  </div>
 </div>
