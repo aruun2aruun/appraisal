@@ -1,24 +1,26 @@
-import { Component, OnInit, Input } from "@angular/core";
-import { InitializationService } from "src/app/core/services/initialization.service";
-import { Store, select } from "@ngrx/store";
-import { AppState } from "src/app/app-state";
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { InitializationService } from 'src/app/core/services/initialization.service';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/app-state';
 
 @Component({
-  selector: "app-appraisal-review-goal-review",
-  templateUrl: "./appraisal-review-goal-review.component.html",
-  styleUrls: ["./appraisal-review-goal-review.component.scss"],
+  selector: 'app-appraisal-review-goal-review',
+  templateUrl: './appraisal-review-goal-review.component.html',
+  styleUrls: ['./appraisal-review-goal-review.component.scss'],
 })
 export class AppraisalReviewGoalReviewComponent implements OnInit {
   @Input() response: any;
   @Input() appraisalGoals: any;
   @Input() appraisalReview: any;
   ratings: string[] = [
-    "1 - Deficient",
-    "2 - Improvements Required",
-    "3 - Meets Expectations",
-    "4 - Above Expectations",
-    "5 - Excellent",
+    '1 - Deficient',
+    '2 - Improvements Required',
+    '3 - Meets Expectations',
+    '4 - Above Expectations',
+    '5 - Excellent',
   ];
+
+  @Output() testValue = new EventEmitter();
 
   filteredGoals: any = [];
 
@@ -49,9 +51,9 @@ export class AppraisalReviewGoalReviewComponent implements OnInit {
   }
 
   getVisibility(loggedInUser, appraisalGoal) {
-    let visibility = "WRITE";
+    let visibility = 'WRITE';
     if (loggedInUser.id !== appraisalGoal.reviewerId || appraisalGoal.reviewerType !== this.appraisalReview.status || appraisalGoal.isComplete) {
-      visibility = "READ";
+      visibility = 'READ';
     }
 
     switch (this.appraisalReview.status) {
@@ -60,7 +62,7 @@ export class AppraisalReviewGoalReviewComponent implements OnInit {
           visibility = 'HIDE';
         }
         if (appraisalGoal.reviewerType === 'Self' && !appraisalGoal.isComplete && appraisalGoal.reviewerId !== loggedInUser.id) {
-          visibility = 'HIDE'
+          visibility = 'HIDE';
         }
         break;
       case 'PROJECT_MANAGER':
@@ -68,7 +70,7 @@ export class AppraisalReviewGoalReviewComponent implements OnInit {
           visibility = 'HIDE';
         }
         if (appraisalGoal.reviewerType === 'ProjectManager' && !appraisalGoal.isComplete && appraisalGoal.reviewerId !== loggedInUser.id) {
-          visibility = 'HIDE'
+          visibility = 'HIDE';
         }
         break;
       // TBD Extend for other stages using getVisibilityBasedOnStatusAndType()
@@ -79,5 +81,9 @@ export class AppraisalReviewGoalReviewComponent implements OnInit {
 
   getVisibilityBasedOnStatusAndType() {
     // TBD reusable function
+  }
+
+  onChange (id, comment, rating) {
+    this.testValue.emit({id, comment, rating});
   }
 }

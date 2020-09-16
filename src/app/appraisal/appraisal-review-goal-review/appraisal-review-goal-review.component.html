@@ -28,6 +28,7 @@
         #MatSelect
         placeholder="Reviewer rating"
         [(ngModel)]="appraisalGoal.rating"
+        (ngModelChange)="onChange(appraisalGoal.id, appraisalGoal.comment, appraisalGoal.rating)"
         [disabled]="appraisalGoal.visibility !== 'WRITE'"
       >
         <mat-option
@@ -49,6 +50,7 @@
         style="width: 100%"
         [(ngModel)]="appraisalGoal.comment"
         [ngModelOptions]="{ standalone: true }"
+        (focusout)="onChange(appraisalGoal.id, appraisalGoal.comment, appraisalGoal.rating)"
         matInput
         matTextareaAutosize
         matAutosizeMinRows="1"

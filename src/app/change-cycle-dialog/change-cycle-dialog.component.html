@@ -1,0 +1,11 @@
+<h2>Change Appraisal Cycle</h2>
+
+<mat-dialog-content>
+  <mat-card *ngFor="let item of cycles">
+    <p><b>Name: </b>{{item.name}}</p>
+    <p><b>Evaluation period: </b>{{item.evaluationPeriod}}</p>
+    <p><b>Start Date: </b>{{item.startDate}}</p>
+    <p><b>Self appraisal deadline:</b> {{item.selfAppraisalDeadline | date}}</p>
+    <button mat-raised-button color="primary" (click)="changeCycle(item)" [mat-dialog-close]>Select</button>
+  </mat-card>
+</mat-dialog-content>

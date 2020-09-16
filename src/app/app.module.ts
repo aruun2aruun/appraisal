@@ -75,6 +75,7 @@ import { AppraisalReviewGoalReviewComponent } from './appraisal/appraisal-review
 import { IdToNamePipe } from './core/services/id-to-name.pipe';
 import { IdToJobnamePipe } from './core/services/id-to-jobname.pipe';
 import { AppraisalSpinnerComponent } from './core/components/appraisal-spinner/appraisal-spinner.component';
+import { ChangeCycleDialogComponent } from './change-cycle-dialog/change-cycle-dialog.component';
 
 
 @NgModule({
@@ -111,7 +112,8 @@ import { AppraisalSpinnerComponent } from './core/components/appraisal-spinner/a
     AppraisalReviewGoalReviewComponent,
     IdToNamePipe,
     IdToJobnamePipe,
-    AppraisalSpinnerComponent
+    AppraisalSpinnerComponent,
+    ChangeCycleDialogComponent
   ],
   imports: [
     MatToolbarModule,
@@ -165,7 +167,8 @@ import { AppraisalSpinnerComponent } from './core/components/appraisal-spinner/a
     NotifyDialogComponent,
     SubmitErrorDialogComponent,
     SubmitConfirmationDialogComponent,
-    SetGoalsDialogComponent
+    SetGoalsDialogComponent,
+    ChangeCycleDialogComponent
   ]
 })
 export class AppModule { }

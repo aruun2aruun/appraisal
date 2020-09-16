@@ -11,6 +11,9 @@ import {PageHeaderService} from '../core/services/page-header.service';
 import * as messageObject from '../message.json';
 import {AuthService} from '../core/services/auth.service';
 import { Router } from '@angular/router';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../app-state';
+import { InitializationService } from '../core/services/initialization.service';
 
 @Component({
   selector: 'app-manage-appraisal',
@@ -18,7 +21,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./manage-appraisal.component.scss']
 })
 export class ManageAppraisalComponent implements OnInit {
-  displayedColumns: string[] = ['empid', 'username', 'useremail', 'duration', 'lastappraisal', 'status', 'action'];
+  displayedColumns: string[] = ['username', 'action'];
   dataSource: any;
 
   currentCycle: CycleType;
@@ -30,6 +33,7 @@ export class ManageAppraisalComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  roles: any;
 
   constructor(private cycleSelectionService: CycleSelectionService,
                private pageHeaderService: PageHeaderService,
@@ -38,7 +42,9 @@ export class ManageAppraisalComponent implements OnInit {
                private appraisalService: AppraisalService,
                public dialog: MatDialog,
                private authService: AuthService,
-               private router: Router) {
+               private router: Router,
+               public initializationService: InitializationService,
+               private store: Store<AppState>) {
     pageHeaderService.setTitle('Manage Appraisal');
     cycleSelectionService.cycleChangedEvent.subscribe(data => this.initialize());
   }
@@ -49,45 +55,58 @@ export class ManageAppraisalComponent implements OnInit {
         data => {
           this.loggedInUser = data;
           this.initialize();
-          
         }
       );
     }, 100);
   }
 
   initialize() {
-    this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
-      data => {
-        this.loggedInUser = data;
-        this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
-        this.getAllUsers();
+    this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
+      if (loggedInUser) {
+        this.store
+          .pipe(
+            select((state) =>
+              state.roles.filter((item) => item.reviewerId === loggedInUser.id)
+            )
+          ).subscribe((roles) => {
+            this.roles = roles;
+          });
+      }
+    });
+    console.log(this.roles);
+
+    // this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
+    //   data => {
+    //     this.loggedInUser = data;
+    //     this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
+    //     this.getAllUsers();
         this.RenderDataTable();
-      });
+      // });
   }
 
   RenderDataTable() {
-    this.cycleId = this.currentCycle.id;
-    this.userIds = [];
-    this.appraisalService.getAppraisal(this.cycleId, this.loggedInUser.id)
-      .subscribe(
-      response => {
-        if (response.length > 0) {
-          response.forEach((item => {
-            const obj ={
-              userId: ''
-            };
-            obj.userId = item.userId;
-            this.userIds.push(item.userId);
-          }));
+    // this.cycleId = this.currentCycle.id;
+    // this.userIds = [];
+    // this.appraisalService.getAppraisal(this.cycleId, this.loggedInUser.id)
+    //   .subscribe(
+    //   response => {
+    //     if (response.length > 0) {
+    //       response.forEach((item => {
+    //         const obj = {
+    //           userId: ''
+    //         };
+    //         obj.userId = item.userId;
+    //         this.userIds.push(item.userId);
+    //       }));
           this.dataSource = new MatTableDataSource();
-          this.dataSource.data = response;
+          this.dataSource.data = this.roles;
           this.dataSource.sort = this.sort;
           this.dataSource.paginator = this.paginator;
-        }
-      },
-      error => {
-        console.log('There was an error while retrieving Posts !!!' + error);
-      });
+      //   }
+      // },
+      // error => {
+      //   console.log('There was an error while retrieving Posts !!!' + error);
+      // });
   }
 
   applyFilter(filterValue: string) {
@@ -133,8 +152,18 @@ export class ManageAppraisalComponent implements OnInit {
     });
   }
 
-  viewAppraisal() {
-    this.router.navigate([`appraisal?cycleId=${this.cycleId}`]);
+  viewAppraisal(role) {
+    this.store
+    .pipe(
+      select((state) =>
+        state.appraisalReviews.filter((item) => item.employeeId  === role.employeeId)
+      )
+    ).subscribe((appraisalReviews) => {
+      console.log(appraisalReviews[0].id);
+      this.router.navigate([`appraisal`], {
+        queryParams: {id: appraisalReviews[0].id},
+      });
+    });
   }
 
   openNotifyDialog() {
@@ -158,7 +187,7 @@ export class ManageAppraisalComponent implements OnInit {
   notify(result: any) {
     this.cycleId = this.currentCycle.id;
     this.appraisalService.notifyAppraisal(this.cycleId, result).subscribe(
-      response =>{
+      response => {
         this.snackBar.open(messageObject.NOTIFY.success, null, {
           duration: 6000,
         });
@@ -171,7 +200,7 @@ export class ManageAppraisalComponent implements OnInit {
     dialogConfig.width = '50%';
     dialogConfig.height = '575px';
     dialogConfig.data = {
-      to:this.userNameMap[row.userId].email,
+      to: 'test',
       name: this.loggedInUser.name,
       subject: 'Subject',
       body: 'Body'

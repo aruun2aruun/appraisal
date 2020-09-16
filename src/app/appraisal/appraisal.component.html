@@ -1,8 +1,15 @@
+  <mat-toolbar-row>
+    Appraisal
+    <span class="fill-remaining-space"></span>
+    <button mat-raised-button color="primary" (click)="submitAppraisal()">Submit</button>
+    <button mat-stroked-button color="primary" (click)="saveAsDraft()">Save as Draft</button>
+  </mat-toolbar-row>
+
 <mat-tab-group>
   <mat-tab label="Goals and objectives">
-    <div *ngIf="appraisalGoals">
-      <mat-accordion *ngFor="let group of goalsGroup">
-        <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
+    <div *ngIf="appraisalGoals" class="accordion-container">
+      <mat-accordion>
+        <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel" *ngFor="let group of goalsGroup">
           <mat-expansion-panel-header>
             <mat-panel-title style="display: inline-block">
               {{ group }}
@@ -16,6 +23,7 @@
               [response]="response"
               [appraisalGoals]="appraisalGoals"
               [appraisalReview]="appraisalReview"
+              (changeGoalReview)="changeGoalReview($event)"
             ></app-appraisal-review-goal>
           </div>
         </mat-expansion-panel>
@@ -28,7 +36,7 @@
     <div class="appraisal-summary">
       <div>Workflow status</div>
       <div>{{ appraisalReview?.status }}</div>
-      <div>Overall Score</div>
+      <div>Overall Score</div> 
       <div>Waiting for appraisal completion</div>
   </div>
   </mat-tab>

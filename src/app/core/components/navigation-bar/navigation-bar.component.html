@@ -30,8 +30,8 @@
 
     <span fxShow="false" fxShow.lt-md class="fill-remaining-space"></span>
 
+    <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md (click)="openChangeCycleDialog()">Change Cycle</button>
     <span mat-icon-button fxHide="false" fxHide.lt-md  *ngIf="this.authService.loggedInUser">{{this.authService.loggedInUser.name}}</span>
-
     <!-- <button mat-icon-button onclick="location.href='https://appraisal.ioak.org/login'"> -->
     <button mat-icon-button routerLink="/login">
       <mat-icon>account_circle</mat-icon>
@@ -41,7 +41,7 @@
 
 <mat-toolbar>
   <mat-toolbar-row></mat-toolbar-row>
-  <mat-toolbar-row>
+  <!-- <mat-toolbar-row>
     <span fxShow="false" fxShow.lt-md class="header-mobile">{{pageHeaderService.title}}</span>
     <span fxHide="false" fxHide.lt-md>{{pageHeaderService.title}}</span>
     <span class="fill-remaining-space"></span>
@@ -50,7 +50,7 @@
       <span *ngIf="cycleSelectionService.currentCycle">{{cycleSelectionService.currentCycle.name}}</span>
       <mat-icon>expand_more</mat-icon>
     </button>
-  </mat-toolbar-row>
+  </mat-toolbar-row> -->
 </mat-toolbar>
 
 <div class="container">

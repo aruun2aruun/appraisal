@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-appraisal-review-goal',
@@ -10,9 +10,15 @@ export class AppraisalReviewGoalComponent implements OnInit {
   @Input() appraisalGoals: any;
   @Input() appraisalReview: string;
 
+  @Output() changeGoalReview = new EventEmitter();
+
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  testValue (event) {
+    this.changeGoalReview.emit(event);
+  }
 }

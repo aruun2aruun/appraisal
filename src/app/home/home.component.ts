@@ -87,8 +87,8 @@ export class HomeComponent implements OnInit, OnDestroy {
       for (const cycle of result) {
         if (cycle.status === 'ACTIVE') {
           this.cycle = cycle;
-          var today = new Date(this.today).getTime();
-          var endDate = new Date(this.cycle.selfAppraisalDeadline).getTime();
+          const today = new Date(this.today).getTime();
+          const endDate = new Date(this.cycle.selfAppraisalDeadline).getTime();
           if (today > endDate) {
             this.daysdiff = 0;
           } else {
@@ -123,7 +123,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   notify(result: any) {
     this.appraisalService.notifyUser(result).subscribe(
-      response =>{
+      response => {
         this.snackBar.open(messageObject.NOTIFY.success, null, {
           duration: 6000,
         });

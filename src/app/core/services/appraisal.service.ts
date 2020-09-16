@@ -22,6 +22,11 @@ export class AppraisalService {
       .pipe(map(response => response));
   }
 
+  saveReviewGoal(jsonObj): Observable<any> {
+    return this.httpService.put(`appraisal/review/goal`, jsonObj, httpOptions)
+      .pipe(map(response => response));
+  }
+
   getAppraisal(cycleId, userId): Observable<any> {
     return this.httpService.get( 'appraisal/cycle/' + cycleId + '/manageable/' + userId)
       .pipe(map(response => response));
