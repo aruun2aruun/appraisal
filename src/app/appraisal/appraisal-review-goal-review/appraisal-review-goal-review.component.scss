@@ -2,6 +2,12 @@
   width: 100%;
 }
 
+.set-goals {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+}
+
 .appraisal-review-goal-review {
   .appraisal-review-goal-review--default {
     margin-top: 20px;
@@ -13,5 +19,18 @@
   .appraisal-review-goal-review--write {
     border: 1px dotted #ffd007;
     background-color: #ffd0070a;
+  }
+}
+
+.mat-input-element:disabled {
+  color: black;
+}
+
+::ng-deep .mat-select-disabled {
+  .mat-select-value {
+    color: black;
+  }
+  .mat-select-arrow {
+    visibility: hidden;
   }
 }

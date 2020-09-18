@@ -29,7 +29,7 @@ export class IdToJobnamePipe implements PipeTransform {
 
   transform(id: string) {
     if (this.users.find(user => user.id === id)) {
-      const value = this.users.find(user => user.id === id).jobName;
+      const value = this.users.find(user => user.id === id).job;
       return value;
     } else {
       return id;

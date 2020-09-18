@@ -1,43 +1,68 @@
-  <mat-toolbar-row>
-    Appraisal
-    <span class="fill-remaining-space"></span>
-    <button mat-raised-button color="primary" (click)="submitAppraisal()">Submit</button>
-    <button mat-stroked-button color="primary" (click)="saveAsDraft()">Save as Draft</button>
-  </mat-toolbar-row>
 
-<mat-tab-group>
-  <mat-tab label="Goals and objectives">
-    <div *ngIf="appraisalGoals" class="accordion-container">
-      <mat-accordion>
-        <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel" *ngFor="let group of goalsGroup">
-          <mat-expansion-panel-header>
-            <mat-panel-title style="display: inline-block">
-              {{ group }}
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <div
-            *ngFor="let response of goals; let x = index; trackBy: trackByIndex"
-          >
-            <app-appraisal-review-goal
-              *ngIf="response.group === group"
-              [response]="response"
-              [appraisalGoals]="appraisalGoals"
-              [appraisalReview]="appraisalReview"
-              (changeGoalReview)="changeGoalReview($event)"
-            ></app-appraisal-review-goal>
-          </div>
-        </mat-expansion-panel>
-      </mat-accordion>
+<div class="appraisal-landing" *ngIf="appraisalReview">
+  <mat-tab-group>
+    <mat-tab label="Goals and objectives">
+      <div *ngIf="appraisalGoals" class="tab-body-container">
+        <mat-accordion>
+          <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel" *ngFor="let group of jobGoalsGroup">
+            <mat-expansion-panel-header>
+              <mat-panel-title style="display: inline-block">
+                {{ group }}
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let jobGoal of jobGoals; let x = index; trackBy: trackByIndex">
+              <app-appraisal-review-goal
+                *ngIf="jobGoal.group === group"
+                [jobGoal]="jobGoal"
+                [appraisalGoals]="appraisalGoals"
+                [appraisalReview]="appraisalReview"
+                (changeGoalReview)="changeGoalReview($event)">
+              </app-appraisal-review-goal>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>{{ cuGoals[0]?.group }}</ng-template>
+      <div class="tab-body-container">
+        <div *ngFor="let cuGoal of cuGoals; let x = index; trackBy: trackByIndex">
+          <app-appraisal-review-goal
+            [jobGoal]="cuGoal"
+            [appraisalGoals]="appraisalGoals"
+            [appraisalReview]="appraisalReview"
+            (changeGoalReview)="changeGoalReview($event)">
+          </app-appraisal-review-goal>
+        </div>
+      </div> 
+    </mat-tab>
+    <mat-tab label="Career aspirations"> Content 3 </mat-tab>
+    <mat-tab label="Summary">
+      <div class="appraisal-summary">
+        <div>Workflow status</div>
+        <div>{{ appraisalReview?.status }}</div>
+        <div>Overall Score</div> 
+        <div>Waiting for appraisal completion</div>
     </div>
-  </mat-tab>
-  <mat-tab label="Notable contributions"> Content 2 </mat-tab>
-  <mat-tab label="Career aspirations"> Content 3 </mat-tab>
-  <mat-tab label="Summary">
-    <div class="appraisal-summary">
-      <div>Workflow status</div>
-      <div>{{ appraisalReview?.status }}</div>
-      <div>Overall Score</div> 
-      <div>Waiting for appraisal completion</div>
-  </div>
-  </mat-tab>
-</mat-tab-group>
+    </mat-tab>
+  </mat-tab-group>
+
+  <footer>
+    <div layout="row" layout-align="center center" class="footer-button">
+      <button type="button" mat-raised-button (click)="submitAppraisal()"
+              class="btn btn-outline-primary sharp">
+        <mat-icon>done</mat-icon>
+        Submit
+      </button>
+      &nbsp;
+      <button type="button" mat-raised-button color="primary" (click)="saveAsDraft()"
+              class="btn btn-outline-primary sharp">
+        <mat-icon>create</mat-icon>
+        Save as Draft
+      </button>
+    </div>
+    <!-- <div layout="row" layout-align="center center" class="footer-button">
+      <p class="submit-msg">Your self appraisal is submitted</p>
+    </div> -->
+  </footer>
+</div>

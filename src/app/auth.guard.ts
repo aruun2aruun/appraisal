@@ -54,9 +54,9 @@ export class AuthGuard implements CanActivate {
         this.router.navigate(['/unauthorized']);
         return false;
       } else if (this.MANAGER_PATHS.find(obj => obj === url) &&
-                !roles.find(obj => obj.type === 'TeamLead') &&
-                !roles.find(obj => obj.type === 'ProjectManager') &&
-                !roles.find(obj => obj.type === 'PracticeDirector') &&
+                !roles.find(obj => obj.type === 'PROJECT_MANAGER') &&
+                !roles.find(obj => obj.type === 'REPORTING_MANAGER') &&
+                !roles.find(obj => obj.type === 'PRACTICE_DIRECTOR') &&
                 !roles.find(obj => obj.type === 'HR') &&
                 !roles.find(obj => obj.type === 'Administrator')) {
         this.router.navigate(['/unauthorized']);

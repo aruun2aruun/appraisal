@@ -64,8 +64,9 @@ h4 {
   }
 }
 
-.accordion-container {
+.tab-body-container {
   padding: 20px;
+  margin-bottom: 60px;
 }
 
 .appraisal-summary {
@@ -76,4 +77,22 @@ h4 {
   justify-content: flex-start;
   font-size: 14px;
   margin-top: 50px;
+}
+
+footer{
+  background-color: #ececec;
+  border-top: 1px solid #b8b8b8;
+  position: fixed;
+  width: 100%;
+  bottom: 0px;
+  right: 0px;
+  z-index: 1;
+}
+.footer-button{
+  margin: 10px;
+  float: right;
+}
+.error {
+  margin: 10px 0 0 10px;
+  display: inline-block;
 }

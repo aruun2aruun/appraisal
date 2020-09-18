@@ -17,8 +17,9 @@ export class AppraisalComponent implements OnInit {
   queryParamId: any;
   appraisalReview: any;
   appraisalGoals: any[];
-  goals: any[] = [];
-  goalsGroup: string[] = [];
+  jobGoals: any[] = [];
+  jobGoalsGroup: string[] = [];
+  cuGoals: any[];
 
   constructor(
     private pageHeaderService: PageHeaderService,
@@ -74,14 +75,14 @@ export class AppraisalComponent implements OnInit {
                     .pipe(
                       select((state) =>
                         state.goals.filter(
-                          (item) => item.jobName === user.jobName
+                          (item) => item.job === user.job || item.cu === user.cu
                         )
                       )
                     )
                     .subscribe((goals) => {
-                      console.log('****goals');
-                      this.goals = goals;
-                      this.goalsGroup = goals.map(item => item.group).filter((value, index, self) => self.indexOf(value) === index);
+                      this.jobGoals = goals.filter((item) => item.job !== '');
+                      this.jobGoalsGroup = this.jobGoals.map(item => item.group).filter((value, index, self) => self.indexOf(value) === index);
+                      this.cuGoals = goals.filter((item) => item.cu !== '');
                     });
                 });
               this.getReviewGoal(appraisalReview);
@@ -126,5 +127,15 @@ export class AppraisalComponent implements OnInit {
 
   submitAppraisal () {
     this.saveAsDraft();
+    this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
+      this.appraisalService.submitReviewGoal(this.appraisalGoals.filter((item) => item.reviewerId === loggedInUser.id)).subscribe(
+        (response) => {
+          console.log(response);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    });
   }
 }

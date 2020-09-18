@@ -1,15 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { InitializationService } from 'src/app/core/services/initialization.service';
 import { Store, select } from '@ngrx/store';
 import { AppState } from 'src/app/app-state';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-appraisal-review-goal-review',
   templateUrl: './appraisal-review-goal-review.component.html',
   styleUrls: ['./appraisal-review-goal-review.component.scss'],
 })
-export class AppraisalReviewGoalReviewComponent implements OnInit {
-  @Input() response: any;
+export class AppraisalReviewGoalReviewComponent implements OnChanges {
+  @Input() jobGoal: any;
   @Input() appraisalGoals: any;
   @Input() appraisalReview: any;
   ratings: string[] = [
@@ -29,7 +30,7 @@ export class AppraisalReviewGoalReviewComponent implements OnInit {
     private store: Store<AppState>
   ) {}
 
-  ngOnInit() {
+  ngOnChanges() {
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
       if (loggedInUser) {
         this.initialize(loggedInUser);
@@ -40,7 +41,7 @@ export class AppraisalReviewGoalReviewComponent implements OnInit {
   initialize(loggedInUser) {
     if (this.appraisalGoals) {
       this.filteredGoals = this.appraisalGoals
-        .filter((appraisalGoal) => appraisalGoal.goalId === this.response.id)
+        .filter((appraisalGoal) => appraisalGoal.goalId === this.jobGoal.id)
         .map((appraisalGoal) => {
           return {
             ...appraisalGoal,
@@ -58,7 +59,7 @@ export class AppraisalReviewGoalReviewComponent implements OnInit {
 
     switch (this.appraisalReview.status) {
       case 'SELF_APPRAISAL':
-        if (['ProjectManager', 'TeamLead', 'PracticeDirector', 'HR'].includes(appraisalGoal.reviewerType)) {
+        if (['PROJECT_MANAGER', 'REPORTING_MANAGER', 'PRACTICE_DIRECTOR', 'HR'].includes(appraisalGoal.reviewerType)) {
           visibility = 'HIDE';
         }
         if (appraisalGoal.reviewerType === 'Self' && !appraisalGoal.isComplete && appraisalGoal.reviewerId !== loggedInUser.id) {
@@ -66,10 +67,10 @@ export class AppraisalReviewGoalReviewComponent implements OnInit {
         }
         break;
       case 'PROJECT_MANAGER':
-        if (['TeamLead', 'PracticeDirector', 'HR'].includes(appraisalGoal.reviewerType)) {
+        if (['REPORTING_MANAGER', 'PRACTICE_DIRECTOR', 'HR'].includes(appraisalGoal.reviewerType)) {
           visibility = 'HIDE';
         }
-        if (appraisalGoal.reviewerType === 'ProjectManager' && !appraisalGoal.isComplete && appraisalGoal.reviewerId !== loggedInUser.id) {
+        if (appraisalGoal.reviewerType === 'PROJECT_MANAGER' && !appraisalGoal.isComplete && appraisalGoal.reviewerId !== loggedInUser.id) {
           visibility = 'HIDE';
         }
         break;

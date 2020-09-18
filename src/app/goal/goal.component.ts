@@ -31,7 +31,7 @@ export class GoalComponent implements OnInit {
   ngOnInit() {
     this.initializationService.loggedInUser$.subscribe(user => {
       if (user) {
-        this.store.pipe(select(state => state.goals.filter(item => item.jobName === user.jobName)))
+        this.store.pipe(select(state => state.goals.filter(item => item.job === user.job)))
         .subscribe(result => {
           this.data = result;
         });

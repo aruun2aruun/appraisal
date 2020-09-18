@@ -6,7 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./appraisal-review-goal.component.scss']
 })
 export class AppraisalReviewGoalComponent implements OnInit {
-  @Input() response: any;
+  @Input() jobGoal: any;
   @Input() appraisalGoals: any;
   @Input() appraisalReview: string;
 
