@@ -12,6 +12,8 @@ import {Router} from '@angular/router';
 import {NotifyDialogComponent} from '../notify-dialog/notify-dialog.component';
 import {MatDialog, MatDialogConfig, MatSnackBar} from '@angular/material';
 import * as messageObject from '../message.json';
+import { Store, select } from '@ngrx/store';
+import { AppState } from '../app-state';
 
 @Component({
   selector: 'app-home',
@@ -21,6 +23,10 @@ import * as messageObject from '../message.json';
 export class HomeComponent implements OnInit, OnDestroy {
 
   users: UserType[];
+  roles: any[];
+  goals: any[];
+  cycles: any[];
+  appraisalReviews: any[];
   currentCycle: CycleType;
   loggedInUser: UserType;
   cards: any;
@@ -38,14 +44,17 @@ export class HomeComponent implements OnInit, OnDestroy {
                private snackBar: MatSnackBar,
                private appraisalService: AppraisalService,
                private cycleService: CycleService,
-               private router: Router) {
+               private router: Router,
+               private store: Store<AppState>) {
     pageHeaderService.setTitle('Home');
   }
 
   ngOnInit() {
     this.pageHeaderService.hideCycle();
+    console.log(sessionStorage.getItem('userSigninName'));
     setTimeout(() => {
-      this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
+      console.log(sessionStorage.getItem('userSigninName'));
+      this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName')).subscribe(
         data => {
           this.loggedInUser = data;
           this.initialize();
@@ -56,33 +65,43 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   initialize() {
-    this.homeService.getCycles().subscribe(
-      cycles => {
-        for (const cycle of cycles) {
-          if (cycle.status === 'ACTIVE') {
-            this.cycle = cycle;
-            var today = new Date(this.today).getTime();
-            var endDate = new Date(this.cycle.selfAppraisalDeadline).getTime();
-            if (today > endDate) {
-              this.daysdiff = 0;
-            } else {
-              this.daysdiff = Math.abs(endDate - today) / (1000 * 60 * 60 * 24);
-            }
+    const users$ = this.store.pipe(select('users'));
+    users$.subscribe(result => {
+      this.users = result;
+    });
+    const roles$ = this.store.pipe(select('roles'));
+    roles$.subscribe(result => {
+      this.roles = result;
+    });
+    const goals$ = this.store.pipe(select('goals'));
+    goals$.subscribe(result => {
+      this.goals = result;
+    });
+    const appraisalReviews$ = this.store.pipe(select('appraisalReviews'));
+    appraisalReviews$.subscribe(result => {
+      this.appraisalReviews = result;
+    });
+    const cycles$ = this.store.pipe(select('cycles'));
+    cycles$.subscribe(result => {
+      this.cycles = result;
+      for (const cycle of result) {
+        if (cycle.status === 'ACTIVE') {
+          this.cycle = cycle;
+          const today = new Date(this.today).getTime();
+          const endDate = new Date(this.cycle.selfAppraisalDeadline).getTime();
+          if (today > endDate) {
+            this.daysdiff = 0;
+          } else {
+            this.daysdiff = Math.abs(endDate - today) / (1000 * 60 * 60 * 24);
           }
         }
       }
-    );
-    this.homeService.getStatus().subscribe(
-      status => {
-        this.status = status;
-      }
-    );
-
-    this.userService.getUsers().subscribe(
-      users => {
-        this.users = users;
-      }
-    );
+    });
+    // this.homeService.getStatus().subscribe(
+    //   status => {
+    //     this.status = status;
+    //   }
+    // );
   }
 
   openSupportDialog() {
@@ -104,7 +123,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   notify(result: any) {
     this.appraisalService.notifyUser(result).subscribe(
-      response =>{
+      response => {
         this.snackBar.open(messageObject.NOTIFY.success, null, {
           duration: 6000,
         });
@@ -131,35 +150,15 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.authService.isReviewer = false;
         this.authService.loggedIn = true;
         this.authService.loggedInUser = data;
-        if (data.roles.find(obj => obj.type === 'Administrator')) {
-          this.authService.isAdministrator = true;
-        }
-        if (data.roles.find(obj => obj.type === 'TeamLead') ||
-          data.roles.find(obj => obj.type === 'ProjectManager') ||
-          data.roles.find(obj => obj.type === 'PracticeDirector') ||
-          data.roles.find(obj => obj.type === 'HR')) {
-            this.authService.isReviewer = true;
-        }
-
-        this.homeService.getCycles().subscribe(
-          cycles => {
-            this.cycleSelectionService.activeCycles = [];
-            for (const cycle of cycles) {
-              if (cycle.status === 'ACTIVE') {
-                this.cycleSelectionService.activeCycles.push(cycle);
-              }
-            }
-
-            if (this.cycleSelectionService.activeCycles.length > 0 && (
-              this.cycleSelectionService.currentCycle === undefined ||
-              this.cycleSelectionService.activeCycles.find(x => x.id === this.cycleSelectionService.currentCycle.id) === undefined)
-               ) {
-              this.cycleSelectionService.currentCycle = this.cycleSelectionService.activeCycles[0];
-              localStorage.setItem('currentCycle', JSON.stringify(this.cycleSelectionService.currentCycle));
-            }
-
-            localStorage.setItem('activeCycles', JSON.stringify(this.cycleSelectionService.activeCycles));
-          });
+        // if (data.roles.find(obj => obj.type === 'Administrator')) {
+        //   this.authService.isAdministrator = true;
+        // }
+        // if (data.roles.find(obj => obj.type === 'TeamLead') ||
+        //   data.roles.find(obj => obj.type === 'ProjectManager') ||
+        //   data.roles.find(obj => obj.type === 'PracticeDirector') ||
+        //   data.roles.find(obj => obj.type === 'HR')) {
+        //     this.authService.isReviewer = true;
+        // }
       }
     );
   }

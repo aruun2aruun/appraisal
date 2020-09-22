@@ -1,0 +1,70 @@
+<!-- <div class="reviews">
+  <div style="float: right">
+    <mat-label>{{response.value?.rating}}</mat-label>
+  </div>
+  <div>
+    <mat-label>Reviewed by {{response.value?.name}} <i>(Project Manager)</i></mat-label>
+    <mat-form-field class="response-full-width">
+    <textarea [disabled]="true" style="width: 100%; color: black"
+              matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
+    </mat-form-field>
+  </div>
+</div> -->
+
+<div
+  *ngFor="let appraisalGoal of filteredGoals"
+  class="appraisal-review-goal-review">
+  <div *ngIf="appraisalGoal.visibility !== 'HIDE'"
+    class="appraisal-review-goal-review--default"
+    [ngClass]="{'appraisal-review-goal-review--write': appraisalGoal.visibility === 'WRITE'}">
+    <div class="reviews" *ngIf="appraisalGoal.visibility !== 'WRITE'">
+      <div style="float: right">
+        <mat-label>{{appraisalGoal.rating}}</mat-label>
+      </div>
+      <div>
+        <mat-label>Reviewed by {{ appraisalGoal.reviewerId | idToName }} <i>({{appraisalGoal.reviewerType}})</i></mat-label>
+        <mat-form-field class="response-full-width">
+        <textarea [disabled]="true" style="width: 100%; color: black" [(ngModel)]="appraisalGoal.comment"
+                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div *ngIf="appraisalGoal.visibility === 'WRITE'">
+      <mat-form-field style="width: 20%; float: right">
+        <mat-select
+          #MatSelect
+          placeholder="Reviewer rating"
+          [(ngModel)]="appraisalGoal.rating"
+          (ngModelChange)="onChange(appraisalGoal.id, appraisalGoal.comment, appraisalGoal.rating)"
+          required>
+          <mat-option
+            #MatOption
+            *ngFor="let rating of ratings; let i = index"
+            [value]="rating">
+            {{ rating }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-label>
+        {{ appraisalGoal.reviewerId | idToName }} ({{appraisalGoal.reviewerType}})
+      </mat-label>
+      <mat-form-field class="response-full-width">
+        <textarea
+          style="width: 100%"
+          [(ngModel)]="appraisalGoal.comment"
+          (focusout)="onChange(appraisalGoal.id, appraisalGoal.comment, appraisalGoal.rating)"
+          matInput
+          matTextareaAutosize
+          matAutosizeMinRows="1"
+          matAutosizeMaxRows="4"
+          data-ng-minLength="10"
+          placeholder="Provide a comment to support your rating"
+          #reviewComment
+          required>
+        </textarea>
+        <!-- <mat-hint *ngIf="appraisalGoal.comment.length < 50" align="start"><strong>Comment should be atleast 50 characters</strong></mat-hint>
+        <mat-hint *ngIf="appraisalGoal.comment === ''" align="end">{{ reviewComment.value.length }} / {{reviewComment.value.length}}</mat-hint> -->
+      </mat-form-field>
+    </div>
+  </div>
+</div>

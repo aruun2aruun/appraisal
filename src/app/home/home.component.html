@@ -13,7 +13,7 @@
 
 
 <br>
-<button mat-stroked-button class="btn btn-outline-primary sharp" routerLink="/goal-definition">
+<button mat-stroked-button class="btn btn-outline-primary sharp" [routerLink]="['/appraisal']">
   <mat-icon>play_arrow</mat-icon>
   Start Appraisal
 </button>
@@ -27,3 +27,17 @@
   <!--<mat-icon>block</mat-icon>-->
   <!--How to unblock content on my browser?-->
 <!--</button>-->
+
+
+<div>
+  <br /><br />All Cycles from NgRx<br/>
+  <pre>{{cycles | json}}</pre>
+  <br /><br />All Users from NgRx<br/>
+  <pre>{{users | json}}</pre>
+  <br /><br />All Roles from NgRx<br/>
+  <pre>{{roles | json}}</pre>
+  <br /><br />All Appraisal Reviews from NgRx<br/>
+  <pre>{{appraisalReviews | json}}</pre>
+  <br /><br />All Goals from NgRx<br/>
+  <pre>{{goals | json}}</pre>
+</div>

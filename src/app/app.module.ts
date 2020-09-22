@@ -28,6 +28,8 @@ import {MatToolbarModule, MatListModule, MatTooltipModule} from '@angular/materi
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatStepperModule} from '@angular/material/stepper';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth.guard';
@@ -50,7 +52,7 @@ import { ManageAppraisalComponent } from './manage-appraisal/manage-appraisal.co
 import { SelfAppraisalSectiononeComponent } from './self-appraisal-sectionone/self-appraisal-sectionone.component';
 import { SelfAppraisalSectiontwoComponent } from './self-appraisal-sectiontwo/self-appraisal-sectiontwo.component';
 import { ManageAppraisalDialogComponent } from './manage-appraisal-dialog/manage-appraisal-dialog.component';
-import { GoalDefinitionComponent } from './goal-definition/goal-definition.component';
+import { GoalComponent } from './goal/goal.component';
 import { RatingScaleComponent } from './rating-scale/rating-scale.component';
 import { NotifyDialogComponent } from './notify-dialog/notify-dialog.component';
 import { SelfAppraisalSectionfourComponent } from './self-appraisal-sectionfour/self-appraisal-sectionfour.component';
@@ -60,6 +62,22 @@ import {SelfAppraisalSectionfiveComponent} from './self-appraisal-sectionfive/se
 import { HelpComponent } from './help/help.component';
 import { SetGoalsComponent } from './set-goals/set-goals.component';
 import { SetGoalsDialogComponent } from './set-goals-dialog/set-goals-dialog.component';
+
+import { StoreModule } from '@ngrx/store'; 
+import { UserReducer } from './store/user.reducer';
+import { RoleReducer } from './store/role.reducer';
+import { GoalReducer } from './store/goal.reducer';
+import { CycleReducer } from './store/cycle.reducer';
+import { AppraisalReviewReducer } from './store/appraisal-reviews.reducer';
+import { AppraisalComponent } from './appraisal/appraisal.component';
+import { AppraisalReviewGoalComponent } from './appraisal/appraisal-review-goal/appraisal-review-goal.component';
+import { AppraisalReviewGoalReviewComponent } from './appraisal/appraisal-review-goal-review/appraisal-review-goal-review.component';
+import { IdToNamePipe } from './core/services/id-to-name.pipe';
+import { IdToJobnamePipe } from './core/services/id-to-jobname.pipe';
+import { AppraisalSpinnerComponent } from './core/components/appraisal-spinner/appraisal-spinner.component';
+import { ChangeCycleDialogComponent } from './change-cycle-dialog/change-cycle-dialog.component';
+import { AppraisalSummaryComponent } from './appraisal/appraisal-summary/appraisal-summary.component';
+
 
 @NgModule({
   declarations: [
@@ -80,7 +98,7 @@ import { SetGoalsDialogComponent } from './set-goals-dialog/set-goals-dialog.com
     SelfAppraisalSectiononeComponent,
     SelfAppraisalSectiontwoComponent,
     ManageAppraisalDialogComponent,
-    GoalDefinitionComponent,
+    GoalComponent,
     RatingScaleComponent,
     NotifyDialogComponent,
     SelfAppraisalSectionfourComponent,
@@ -89,7 +107,15 @@ import { SetGoalsDialogComponent } from './set-goals-dialog/set-goals-dialog.com
     SubmitConfirmationDialogComponent,
     HelpComponent,
     SetGoalsComponent,
-    SetGoalsDialogComponent
+    SetGoalsDialogComponent,
+    AppraisalComponent,
+    AppraisalReviewGoalComponent,
+    AppraisalReviewGoalReviewComponent,
+    IdToNamePipe,
+    IdToJobnamePipe,
+    AppraisalSpinnerComponent,
+    ChangeCycleDialogComponent,
+    AppraisalSummaryComponent
   ],
   imports: [
     MatToolbarModule,
@@ -122,9 +148,18 @@ import { SetGoalsDialogComponent } from './set-goals-dialog/set-goals-dialog.com
     MatCheckboxModule,
     MatRadioModule,
     MatDatepickerModule,
+    MatProgressSpinnerModule,
     MatNativeDateModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    MatStepperModule,
+    StoreModule.forRoot({
+      users: UserReducer,
+      roles: RoleReducer,
+      goals: GoalReducer,
+      cycles: CycleReducer,
+      appraisalReviews: AppraisalReviewReducer
+    })
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
@@ -135,7 +170,8 @@ import { SetGoalsDialogComponent } from './set-goals-dialog/set-goals-dialog.com
     NotifyDialogComponent,
     SubmitErrorDialogComponent,
     SubmitConfirmationDialogComponent,
-    SetGoalsDialogComponent
+    SetGoalsDialogComponent,
+    ChangeCycleDialogComponent
   ]
 })
 export class AppModule { }

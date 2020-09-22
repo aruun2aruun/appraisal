@@ -37,7 +37,7 @@ export class UserAdministrationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.initialize();
-    this.authService.init();
+    
   }
 
   initialize() {

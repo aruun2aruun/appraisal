@@ -1,0 +1,46 @@
+<div class="appraisal-summary">
+  <div>Overall Score</div> 
+  <div>Waiting for appraisal completion</div>
+</div>
+
+
+<mat-vertical-stepper [linear]="true" #stepper>
+  <mat-step *ngFor="let role of roles">
+    <ng-template matStepLabel>Workflow status</ng-template>
+    <mat-card>
+      <p>{{ appraisalReview?.status }}</p>
+    </mat-card>
+    <div>
+      <button mat-button color="primary" matStepperPrevious>Back</button>
+      <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Waiting for appraisal completion</ng-template>
+    <mat-card>
+      <p>{{ appraisalReview?.status }}</p>
+    </mat-card>
+    <div>
+      <button mat-button color="primary" matStepperPrevious>Back</button>
+      <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Overall Score</ng-template>
+    <mat-card>
+      <p>{{ appraisalReview?.status }}</p>
+    </mat-card>
+    <div>
+      <button mat-button color="primary" matStepperPrevious>Back</button>
+      <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+  <mat-step>
+    <ng-template matStepLabel>Done</ng-template>
+    <p>You are now done.</p>
+    <div>
+      <button mat-button color="primary" matStepperPrevious>Back</button>
+      <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
+    </div>
+  </mat-step>
+</mat-vertical-stepper>

@@ -1,0 +1,31 @@
+<div class="response">
+  <!-- CREATE/EDIT SELF GOALS -->
+  <div class="selfAppraisalEditable">
+    <div>
+      <h4 style="display: inline-block">{{jobGoal.criteria}}</h4>
+      <button class="score" type="button" mat-stroked-button mat-button [disabled]="true">
+        <mat-icon color="accent">check_circle</mat-icon>
+        <!-- {{score[i][x]}} -->
+      </button>
+      <div style="float: right">
+        <mat-label>Weightage:</mat-label>
+        {{jobGoal.weightage * 100 | number : '1.1-1'}}%
+      </div>
+      <div class="description">{{jobGoal.description}}</div>
+    </div>
+    <!-- <div style="display: inline-block"><mat-label>Set Self Goal:</mat-label></div>
+    <div class="set-goals">
+      <mat-form-field class="response-full-width">  
+      <textarea style="width: 100%" [(ngModel)]="jobGoal.description" [ngModelOptions]="{ standalone: true }"
+                matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
+                placeholder="Description"></textarea>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input type="number" [(ngModel)]="jobGoal.weightage" [ngModelOptions]="{ standalone: true }"
+                matInput onkeypress="if (this.value.length > 1) return false;" max="100"
+                placeholder="Weightage" value="">
+      </mat-form-field>
+    </div> -->
+    <app-appraisal-review-goal-review [jobGoal]="jobGoal" [appraisalGoals]="appraisalGoals" [appraisalReview]="appraisalReview" (testValue)="testValue($event)"></app-appraisal-review-goal-review>
+  </div>
+</div>

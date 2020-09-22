@@ -2,7 +2,7 @@ export class UserType {
     id: string;
     empId: string;
     name: string;
-    jobName: string;
+    job: string;
     email: string;
     unit: string;
     joiningDate: string;
