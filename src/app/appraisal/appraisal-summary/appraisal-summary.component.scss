@@ -1,0 +1,9 @@
+.appraisal-summary {
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 10px;
+    column-gap: 20px;
+    justify-content: flex-start;
+    font-size: 14px;
+    margin-top: 20px;
+}

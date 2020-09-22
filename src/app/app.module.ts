@@ -29,7 +29,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatCardModule} from '@angular/material/card';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import {MatStepperModule} from '@angular/material/stepper';
 
 import { HttpClientModule } from '@angular/common/http';
 import { AuthGuard } from './auth.guard';
@@ -76,6 +76,7 @@ import { IdToNamePipe } from './core/services/id-to-name.pipe';
 import { IdToJobnamePipe } from './core/services/id-to-jobname.pipe';
 import { AppraisalSpinnerComponent } from './core/components/appraisal-spinner/appraisal-spinner.component';
 import { ChangeCycleDialogComponent } from './change-cycle-dialog/change-cycle-dialog.component';
+import { AppraisalSummaryComponent } from './appraisal/appraisal-summary/appraisal-summary.component';
 
 
 @NgModule({
@@ -113,7 +114,8 @@ import { ChangeCycleDialogComponent } from './change-cycle-dialog/change-cycle-d
     IdToNamePipe,
     IdToJobnamePipe,
     AppraisalSpinnerComponent,
-    ChangeCycleDialogComponent
+    ChangeCycleDialogComponent,
+    AppraisalSummaryComponent
   ],
   imports: [
     MatToolbarModule,
@@ -150,6 +152,7 @@ import { ChangeCycleDialogComponent } from './change-cycle-dialog/change-cycle-d
     MatNativeDateModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatStepperModule,
     StoreModule.forRoot({
       users: UserReducer,
       roles: RoleReducer,

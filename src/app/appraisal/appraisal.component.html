@@ -36,14 +36,8 @@
         </div>
       </div> 
     </mat-tab>
-    <mat-tab label="Career aspirations"> Content 3 </mat-tab>
     <mat-tab label="Summary">
-      <div class="appraisal-summary">
-        <div>Workflow status</div>
-        <div>{{ appraisalReview?.status }}</div>
-        <div>Overall Score</div> 
-        <div>Waiting for appraisal completion</div>
-    </div>
+      <app-appraisal-summary [appraisalReview]="appraisalReview"></app-appraisal-summary>
     </mat-tab>
   </mat-tab-group>
 
