@@ -379,6 +379,10 @@ THE SOFTWARE.
 
 @angular/material/tabs
 
+@angular/material/stepper
+
+@angular/material/card
+
 @angular/material/checkbox
 
 @angular/material/sort
@@ -394,8 +398,6 @@ THE SOFTWARE.
 @angular/material/snack-bar
 
 @angular/material/datepicker
-
-@angular/material/card
 
 @angular/material/progress-spinner
 
