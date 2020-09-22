@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build_prod": "ng build --prod --base-href \"https://appraisal-beta.ioak.org/\""
+    "build_prod": "ng build --prod --base-href \"https://appraisalbeta.ioak.org/\""
   },
   "private": true,
   "dependencies": {
