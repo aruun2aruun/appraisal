@@ -9,7 +9,7 @@
       <h4>{{role.reviewerType}}</h4>
     </ng-template>
     <div class="appraisal-summary" fxLayout="row wrap" fxLayoutGap="16px">
-      <mat-card *ngFor="let num of [1,2,3,4,5,6,7]">
+      <mat-card>
         <div>Name: <b>{{ role?.reviewerId | idToName }}</b></div>
         <!-- <div>Role : <b>{{ role?.reviewerId | idToJobname }}</b></div> -->
         <div>Status: <b [ngClass]="role.complete ? 'complete' : 'pending'">{{role.complete ? 'Complete' : 'Pending'}}</b></div>
@@ -19,7 +19,7 @@
         <div *ngIf="role.reviewerType === 'PRACTICE_DIRECTOR'">Deadline: <b>{{cycle?.deadline.PRACTICE_DIRECTOR | date}}</b></div>
         <div *ngIf="role.reviewerType === 'HR'">Deadline: <b>{{cycle?.deadline.HR | date}}</b></div>
         <div>Submitted Date:</div>
-        <div>Score: <b>{{ role?.totalScore | idToJobname }}</b></div>
+        <div>Score: <b>{{ role?.totalScore | number : '1.1-1' }}</b></div>
       </mat-card>
     </div>
     <!-- <div>

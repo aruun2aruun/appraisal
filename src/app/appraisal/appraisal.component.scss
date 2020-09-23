@@ -77,6 +77,13 @@ footer{
   bottom: 0px;
   right: 0px;
   z-index: 1;
+  .submit-msg{
+    color: green;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
 }
 .footer-button{
   margin: 10px;

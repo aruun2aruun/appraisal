@@ -21,7 +21,7 @@ import { InitializationService } from '../core/services/initialization.service';
   styleUrls: ['./manage-appraisal.component.scss']
 })
 export class ManageAppraisalComponent implements OnInit {
-  displayedColumns: string[] = ['username', 'action'];
+  displayedColumns: string[] = ['username', 'status', 'action'];
   dataSource: any;
 
   currentCycle: CycleType;

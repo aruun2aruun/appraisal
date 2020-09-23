@@ -42,7 +42,7 @@
   </mat-tab-group>
 
   <footer>
-    <div layout="row" layout-align="center center" class="footer-button">
+    <div *ngIf="showSubmit" layout="row" layout-align="center center" class="footer-button">
       <button type="button" mat-raised-button (click)="submitAppraisal()"
               class="btn btn-outline-primary sharp">
         <mat-icon>done</mat-icon>
@@ -55,8 +55,8 @@
         Save as Draft
       </button>
     </div>
-    <!-- <div layout="row" layout-align="center center" class="footer-button">
+    <div *ngIf="!showSubmit" layout="row" layout-align="center center" class="footer-button">
       <p class="submit-msg">Your self appraisal is submitted</p>
-    </div> -->
+    </div>
   </footer>
 </div>
