@@ -379,9 +379,9 @@ THE SOFTWARE.
 
 @angular/material/tabs
 
-@angular/material/card
-
 @angular/material/stepper
+
+@angular/material/card
 
 @angular/material/checkbox
 
