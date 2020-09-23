@@ -1,46 +1,30 @@
-<div class="appraisal-summary">
-  <div>Overall Score</div> 
-  <div>Waiting for appraisal completion</div>
-</div>
-
-
 <mat-vertical-stepper [linear]="true" #stepper>
-  <mat-step *ngFor="let role of roles">
-    <ng-template matStepLabel>Workflow status</ng-template>
-    <mat-card>
-      <p>{{ appraisalReview?.status }}</p>
-    </mat-card>
-    <div>
+  <!-- change default 'edit' icon -->
+  <ng-template matStepperIcon="edit">
+    <mat-icon>bubble_chart</mat-icon>
+  </ng-template>
+
+  <mat-step *ngFor="let role of roles" [ngClass]="role.complete ? 'test' : 'new'">
+    <ng-template matStepLabel>
+      <h4>{{role.reviewerType}}</h4>
+    </ng-template>
+    <div class="appraisal-summary" fxLayout="row wrap" fxLayoutGap="16px">
+      <mat-card *ngFor="let num of [1,2,3,4,5,6,7]">
+        <div>Name: <b>{{ role?.reviewerId | idToName }}</b></div>
+        <!-- <div>Role : <b>{{ role?.reviewerId | idToJobname }}</b></div> -->
+        <div>Status: <b [ngClass]="role.complete ? 'complete' : 'pending'">{{role.complete ? 'Complete' : 'Pending'}}</b></div>
+        <div *ngIf="role.reviewerType === 'SELF_APPRAISAL'">Deadline: <b>{{cycle?.deadline.SELF_APPRAISAL | date}}</b></div>
+        <div *ngIf="role.reviewerType === 'PROJECT_MANAGER'">Deadline: <b>{{cycle?.deadline.PROJECT_MANAGER | date}}</b></div>
+        <div *ngIf="role.reviewerType === 'REPORTING_MANAGER'">Deadline: <b>{{cycle?.deadline.REPORTING_MANAGER | date}}</b></div>
+        <div *ngIf="role.reviewerType === 'PRACTICE_DIRECTOR'">Deadline: <b>{{cycle?.deadline.PRACTICE_DIRECTOR | date}}</b></div>
+        <div *ngIf="role.reviewerType === 'HR'">Deadline: <b>{{cycle?.deadline.HR | date}}</b></div>
+        <div>Submitted Date:</div>
+        <div>Score: <b>{{ role?.totalScore | idToJobname }}</b></div>
+      </mat-card>
+    </div>
+    <!-- <div>
       <button mat-button color="primary" matStepperPrevious>Back</button>
       <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Waiting for appraisal completion</ng-template>
-    <mat-card>
-      <p>{{ appraisalReview?.status }}</p>
-    </mat-card>
-    <div>
-      <button mat-button color="primary" matStepperPrevious>Back</button>
-      <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Overall Score</ng-template>
-    <mat-card>
-      <p>{{ appraisalReview?.status }}</p>
-    </mat-card>
-    <div>
-      <button mat-button color="primary" matStepperPrevious>Back</button>
-      <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
-    </div>
-  </mat-step>
-  <mat-step>
-    <ng-template matStepLabel>Done</ng-template>
-    <p>You are now done.</p>
-    <div>
-      <button mat-button color="primary" matStepperPrevious>Back</button>
-      <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
-    </div>
+    </div> -->
   </mat-step>
 </mat-vertical-stepper>

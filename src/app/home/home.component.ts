@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         if (cycle.status === 'ACTIVE') {
           this.cycle = cycle;
           const today = new Date(this.today).getTime();
-          const endDate = new Date(this.cycle.selfAppraisalDeadline).getTime();
+          const endDate = new Date(this.cycle.deadline.SELF_APPRAISAL).getTime();
           if (today > endDate) {
             this.daysdiff = 0;
           } else {

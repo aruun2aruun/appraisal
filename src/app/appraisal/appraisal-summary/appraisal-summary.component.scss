@@ -1,9 +1,23 @@
 .appraisal-summary {
-    display: grid;
-    grid-template-columns: auto auto;
-    row-gap: 10px;
-    column-gap: 20px;
-    justify-content: flex-start;
     font-size: 14px;
-    margin-top: 20px;
+    line-height: 24px;
+    padding: 16px;
+    & > mat-card {
+        width: 210px;
+        margin: 16px 16px 0 0;
+    }
+    h4 {
+        margin: 0;
+        width: 150px;
+    }
+    div {
+        display: grid;
+        grid-template-columns: 120px auto;
+    }
+    .complete {
+        color: green;
+    }
+    .pending {
+        color: orange;
+    }
 }

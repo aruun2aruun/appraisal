@@ -1,7 +1,7 @@
 <div *ngIf="!authService.isAdministrator">
   <h2>{{this.daysdiff |  number : '1.0-0'}} day/s to go</h2>
   <p><b>Evaluation period: </b>{{cycle.evaluationPeriod}}</p>
-  <p><b>Self appraisal deadline:</b> {{cycle.selfAppraisalDeadline | date}}</p>
+  <p><b>Self appraisal deadline:</b> {{cycle.deadline?.SELF_APPRAISAL | date}}</p>
 </div>
 
 <div *ngIf="authService.isAdministrator">
