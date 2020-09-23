@@ -22,6 +22,7 @@ export class AppraisalComponent implements OnInit {
   cuGoals: any[];
   showSubmit = true;
   roles: any[];
+  appraisalCycle: any;
 
   constructor(
     private pageHeaderService: PageHeaderService,
@@ -82,14 +83,15 @@ export class AppraisalComponent implements OnInit {
                       )
                     )
                     .subscribe((goals) => {
-                      this.jobGoals = goals.filter((item) => item.job !== '');
+                      this.jobGoals = goals.filter((item) => item.job !== null);
                       this.jobGoalsGroup = this.jobGoals
                                             .map(item => item.group)
                                             .filter((value, index, self) => self.indexOf(value) === index);
-                      this.cuGoals = goals.filter((item) => item.cu !== '');
+                      this.cuGoals = goals.filter((item) => item.cu !== null);
                     });
                 });
-              this.getReviewGoal(appraisalReview);
+                this.getAppraisalCycle(appraisalReview);
+                this.getReviewGoal(appraisalReview);
             }
           });
 
@@ -111,6 +113,20 @@ export class AppraisalComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  getAppraisalCycle(appraisalReview) {
+      this.store
+        .pipe(
+          select((state) =>
+            state.cycles.find(
+              (item) => item.id === appraisalReview.cycleId
+            )
+          )
+        )
+        .subscribe((appraisalCycle) => {
+          this.appraisalCycle = appraisalCycle;
+        });
   }
 
   changeGoalReview (event) {

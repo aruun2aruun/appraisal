@@ -20,6 +20,7 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
   @Input() jobGoal: any;
   @Input() appraisalGoals: any;
   @Input() appraisalReview: any;
+  @Input() appraisalCycle: any;
   ratings: string[] = [
     "1 - Deficient",
     "2 - Improvements Required",
@@ -31,7 +32,6 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
   @Output() testValue = new EventEmitter();
 
   filteredGoals: any = [];
-  appraisalCycle: any;
 
   constructor(
     private initializationService: InitializationService,
@@ -55,19 +55,6 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
             ...appraisalGoal,
             visibility: this.getVisibility(loggedInUser, appraisalGoal),
           };
-        });
-    }
-    if (this.appraisalReview) {
-      this.store
-        .pipe(
-          select((state) =>
-            state.cycles.find(
-              (item) => item.id === this.appraisalReview.cycleId
-            )
-          )
-        )
-        .subscribe((appraisalCycle) => {
-          this.appraisalCycle = appraisalCycle;
         });
     }
   }
