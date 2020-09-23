@@ -20,7 +20,7 @@
       <tbody>
         <tr *ngFor="let role of roles" (click)="viewAppraisal(role)">
           <td>{{role.employeeId | idToName}}</td>
-          <td>Pending</td>
+          <td>{{role.reviewerType}}</td>
           <td>
             <button mat-icon-button matTooltip="View Appraisal Cycle" matTooltipPosition="before" class="mat-primary" (click)="viewAppraisal(role)">
               <mat-icon>assessment</mat-icon>
