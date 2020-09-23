@@ -122,7 +122,7 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
     }
 
     if (
-      this.appraisalCycle.showReviewToSelf &&
+      !this.appraisalCycle.showReviewToSelf &&
       loggedInUser.id === appraisalGoal.employeeId &&
       loggedInUser.id !== appraisalGoal.reviewerId
     ) {
