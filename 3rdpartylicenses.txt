@@ -341,12 +341,12 @@ MIT
 @ngrx/store
 MIT
 
+@angular/material/core
+
 @angular/material/form-field
 
 @angular/forms
 MIT
-
-@angular/material/core
 
 @angular/material/select
 
@@ -378,8 +378,6 @@ THE SOFTWARE.
 @angular/material/expansion
 
 @angular/material/tabs
-
-@angular/material/stepper
 
 @angular/material/card
 
