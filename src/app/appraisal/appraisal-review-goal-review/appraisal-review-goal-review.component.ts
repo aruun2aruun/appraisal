@@ -105,6 +105,30 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
           visibility = 'HIDE';
         }
         break;
+      case 'REPORTING_MANAGER':
+        if (['PRACTICE_DIRECTOR', 'HR'].includes(appraisalGoal.reviewerType)) {
+          visibility = 'HIDE';
+        }
+        if (
+          appraisalGoal.reviewerType === 'REPORTING_MANAGER' &&
+          !appraisalGoal.complete &&
+          appraisalGoal.reviewerId !== loggedInUser.id
+        ) {
+          visibility = 'HIDE';
+        }
+        break;
+      case 'PRACTICE_DIRECTOR':
+        if (['HR'].includes(appraisalGoal.reviewerType)) {
+          visibility = 'HIDE';
+        }
+        if (
+          appraisalGoal.reviewerType === 'PRACTICE_DIRECTOR' &&
+          !appraisalGoal.complete &&
+          appraisalGoal.reviewerId !== loggedInUser.id
+        ) {
+          visibility = 'HIDE';
+        }
+        break;
       // TBD Extend for other stages using getVisibilityBasedOnStatusAndType()
     }
 

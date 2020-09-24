@@ -1,28 +1,19 @@
-<mat-vertical-stepper [linear]="true" #stepper>
-  <!-- change default 'edit' icon -->
-  <ng-template matStepperIcon="edit">
-    <mat-icon>bubble_chart</mat-icon>
-  </ng-template>
-
-  {{appraisalReview}}
-  {{appraisalCycle}}
-
-  <mat-step *ngFor="let role of roles" [ngClass]="role.complete ? 'test' : 'new'">
-    <ng-template matStepLabel>
-      <h4>{{role.reviewerType}}</h4>
-    </ng-template>
-    <div class="appraisal-summary" fxLayout="row wrap" fxLayoutGap="16px">
-      <mat-card>
-        <div>Name: <b>{{ role?.reviewerId | idToName }}</b></div>
-        <!-- <div>Role : <b>{{ role?.reviewerId | idToJobname }}</b></div> -->
-        <div>Status: <b [ngClass]="role.complete ? 'complete' : 'pending'">{{role.complete ? 'Complete' : 'Pending'}}</b></div>
-        <div>Submitted Date:</div>
-        <div>Score: <b>{{ role?.totalScore | number : '1.1-1' }}</b></div>
-      </mat-card>
-    </div>
-    <!-- <div>
-      <button mat-button color="primary" matStepperPrevious>Back</button>
-      <button mat-button color="primary" (click)="stepper.reset()">Reset</button>
-    </div> -->
-  </mat-step>
-</mat-vertical-stepper>
+<div class="appraisal-summary">
+  <mat-accordion>
+    <mat-expansion-panel hideToogle *ngFor="let roles of rolesArray | keyvalue">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h4>{{roles.key}}</h4>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div fxLayout="row wrap" fxLayoutGap="16px">
+        <mat-card *ngFor="let role of roles.value">
+          <div>Name: <b>{{ role.reviewerId | idToName }}</b></div>
+          <div>Status: <b [ngClass]="role.complete ? 'complete' : 'pending'">{{role.complete ? 'Complete' : 'Pending'}}</b></div>
+          <div>Submitted Date:</div>
+          <div>Score: <b>{{ role.totalScore | number : '1.1-1' }}</b></div>
+        </mat-card>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
