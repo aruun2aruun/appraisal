@@ -21,9 +21,13 @@
     background-color: #ffd0070a;
   }
   .reviews {
+    .reviewed-by {
+      font-weight: bold;
+    }
     p {
       margin: 0;
-    line-height: 18px;
+      line-height: 18px;
+      margin-top: 10px;
     }
   }
 }

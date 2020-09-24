@@ -39,12 +39,12 @@
       </div> 
     </mat-tab>
     <mat-tab label="Summary">
-      <app-appraisal-summary [appraisalReview]="appraisalReview" [appraisalCycle]="appraisalCycle"></app-appraisal-summary>
+      <app-appraisal-summary [appraisalReview]="appraisalReview" [appraisalCycle]="appraisalCycle" [roles]="roles"></app-appraisal-summary>
     </mat-tab>
   </mat-tab-group>
 
-  <footer>
-    <div *ngIf="showSubmit" layout="row" layout-align="center center" class="footer-button">
+  <footer *ngIf="showSubmit">
+    <div layout="row" layout-align="center center" class="footer-button">
       <button type="button" mat-raised-button (click)="submitAppraisal()"
               class="btn btn-outline-primary sharp">
         <mat-icon>done</mat-icon>
@@ -56,9 +56,6 @@
         <mat-icon>create</mat-icon>
         Save as Draft
       </button>
-    </div>
-    <div *ngIf="!showSubmit" layout="row" layout-align="center center" class="footer-button">
-      <p class="submit-msg">Your self appraisal is submitted</p>
     </div>
   </footer>
 </div>

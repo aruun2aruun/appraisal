@@ -1,6 +1,6 @@
-import {Injectable} from '@angular/core';
-import {Store, select} from '@ngrx/store';
-import {BehaviorSubject, Subject} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Store, select } from '@ngrx/store';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { AppState } from 'src/app/app-state';
 import { UserService } from './user.service';
 import { UserReload } from '../../store/user.actions';
@@ -15,15 +15,15 @@ import { AppraisalService } from './appraisal.service';
 import { AppraisalReviewReload } from 'src/app/store/appraisal-review.actions';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class InitializationService {
-  
   loggedInUser$ = new BehaviorSubject(null);
-  
-  users$ = this.store.pipe(select(state => state.users));
 
-  constructor(private cycleSelectionService: CycleSelectionService,
+  users$ = this.store.pipe(select((state) => state.users));
+
+  constructor(
+    private cycleSelectionService: CycleSelectionService,
     private userService: UserService,
     private roleService: RoleService,
     private goalService: GoalService,
@@ -41,66 +41,66 @@ export class InitializationService {
   }
 
   initializeLoggedInUser() {
-    console.log("******* Retrieving Login data *******");
+    console.log('******* Retrieving Login data *******');
     if (sessionStorage.getItem('userSigninName')) {
-      this.users$.subscribe(users => {
-        console.log(users);
-        this.loggedInUser$.next(users.find(item => item.email === sessionStorage.getItem('userSigninName').toLowerCase()));
-      })
-      console.log("******* Login data read *******");
+      this.users$.subscribe((users) => {
+        this.loggedInUser$.next(
+          users.find(
+            (item) =>
+              item.email ===
+              sessionStorage.getItem('userSigninName').toLowerCase()
+          )
+        );
+      });
+      console.log('******* Login data read *******');
     } else {
-      setTimeout(() => {this.initializeLoggedInUser()}, 500);
+      setTimeout(() => {
+        this.initializeLoggedInUser();
+      }, 500);
     }
   }
 
   getAllUsers() {
-    this.userService.getUsers().subscribe(
-      users => {
-        this.store.dispatch(new UserReload(users))
-      }
-    );
+    this.userService.getUsers().subscribe((users) => {
+      this.store.dispatch(new UserReload(users));
+    });
   }
 
   getAllRoles() {
-    this.cycleSelectionService.cycleChangedEvent.subscribe(data => {
+    this.cycleSelectionService.cycleChangedEvent.subscribe((data) => {
       if (data) {
-        this.roleService.getRoles(data.id).subscribe(
-          roles => {
-            this.store.dispatch(new RoleReload(roles))
-          })
+        this.roleService.getRoles(data.id).subscribe((roles) => {
+          this.store.dispatch(new RoleReload(roles));
+        });
       }
     });
   }
 
   getAllGoals() {
-    this.cycleSelectionService.cycleChangedEvent.subscribe(data => {
+    this.cycleSelectionService.cycleChangedEvent.subscribe((data) => {
       if (data) {
-        this.goalService.getGoals(data.id).subscribe(
-          goals => {
-            this.store.dispatch(new GoalReload(goals))
-          })
-        }
+        this.goalService.getGoals(data.id).subscribe((goals) => {
+          this.store.dispatch(new GoalReload(goals));
+        });
       }
-    );
+    });
   }
 
   getAllCycles() {
-    this.cycleService.getCycles().subscribe(
-      cycles => {
-        this.store.dispatch(new CycleReload(cycles))
-      }
-    );
+    this.cycleService.getCycles().subscribe((cycles) => {
+      this.store.dispatch(new CycleReload(cycles));
+    });
   }
 
   getAllAppraisalReviews() {
-    this.cycleSelectionService.cycleChangedEvent.subscribe(data => {
+    this.cycleSelectionService.cycleChangedEvent.subscribe((data) => {
       if (data) {
-        this.appraisalService.getAppraisalReviews(data.id).subscribe(
-          appraisalReviews => {
-            this.store.dispatch(new AppraisalReviewReload(appraisalReviews))
-          })
-        }
+        this.appraisalService
+          .getAppraisalReviews(data.id)
+          .subscribe((appraisalReviews) => {
+            this.store.dispatch(new AppraisalReviewReload(appraisalReviews));
+          });
       }
-    );
+    });
   }
 }

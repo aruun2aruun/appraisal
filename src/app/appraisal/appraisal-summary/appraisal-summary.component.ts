@@ -8,7 +8,7 @@ import { Component, Input, OnChanges, OnInit } from "@angular/core";
 export class AppraisalSummaryComponent implements OnChanges {
   @Input() appraisalReview: any;
   @Input() appraisalCycle: any;
-  roles: any[];
+  @Input() roles: any[];
   daysdiff: number;
 
   constructor() {}

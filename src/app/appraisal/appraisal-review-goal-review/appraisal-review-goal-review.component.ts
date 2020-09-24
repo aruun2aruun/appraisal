@@ -5,16 +5,16 @@ import {
   Output,
   EventEmitter,
   OnChanges,
-} from "@angular/core";
-import { InitializationService } from "src/app/core/services/initialization.service";
-import { Store, select } from "@ngrx/store";
-import { AppState } from "src/app/app-state";
-import { FormControl, Validators } from "@angular/forms";
+} from '@angular/core';
+import { InitializationService } from 'src/app/core/services/initialization.service';
+import { Store, select } from '@ngrx/store';
+import { AppState } from 'src/app/app-state';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
-  selector: "app-appraisal-review-goal-review",
-  templateUrl: "./appraisal-review-goal-review.component.html",
-  styleUrls: ["./appraisal-review-goal-review.component.scss"],
+  selector: 'app-appraisal-review-goal-review',
+  templateUrl: './appraisal-review-goal-review.component.html',
+  styleUrls: ['./appraisal-review-goal-review.component.scss'],
 })
 export class AppraisalReviewGoalReviewComponent implements OnChanges {
   @Input() jobGoal: any;
@@ -22,11 +22,11 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
   @Input() appraisalReview: any;
   @Input() appraisalCycle: any;
   ratings: string[] = [
-    "1 - Deficient",
-    "2 - Improvements Required",
-    "3 - Meets Expectations",
-    "4 - Above Expectations",
-    "5 - Excellent",
+    '1 - Deficient',
+    '2 - Improvements Required',
+    '3 - Meets Expectations',
+    '4 - Above Expectations',
+    '5 - Excellent',
   ];
 
   @Output() testValue = new EventEmitter();
@@ -60,49 +60,49 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
   }
 
   getVisibility(loggedInUser, appraisalGoal) {
-    let visibility = "WRITE";
+    let visibility = 'WRITE';
     if (
       loggedInUser.id !== appraisalGoal.reviewerId ||
       appraisalGoal.reviewerType !== this.appraisalReview.status ||
-      appraisalGoal.isComplete
+      appraisalGoal.complete
     ) {
-      visibility = "READ";
+      visibility = 'READ';
     }
 
     switch (this.appraisalReview.status) {
-      case "SELF_APPRAISAL":
+      case 'SELF_APPRAISAL':
         if (
           [
-            "PROJECT_MANAGER",
-            "REPORTING_MANAGER",
-            "PRACTICE_DIRECTOR",
-            "HR",
+            'PROJECT_MANAGER',
+            'REPORTING_MANAGER',
+            'PRACTICE_DIRECTOR',
+            'HR',
           ].includes(appraisalGoal.reviewerType)
         ) {
-          visibility = "HIDE";
+          visibility = 'HIDE';
         }
         if (
-          appraisalGoal.reviewerType === "Self" &&
-          !appraisalGoal.isComplete &&
+          appraisalGoal.reviewerType === 'SELF_APPRAISAL' &&
+          !appraisalGoal.complete &&
           appraisalGoal.reviewerId !== loggedInUser.id
         ) {
-          visibility = "HIDE";
+          visibility = 'HIDE';
         }
         break;
-      case "PROJECT_MANAGER":
+      case 'PROJECT_MANAGER':
         if (
-          ["REPORTING_MANAGER", "PRACTICE_DIRECTOR", "HR"].includes(
+          ['REPORTING_MANAGER', 'PRACTICE_DIRECTOR', 'HR'].includes(
             appraisalGoal.reviewerType
           )
         ) {
-          visibility = "HIDE";
+          visibility = 'HIDE';
         }
         if (
-          appraisalGoal.reviewerType === "PROJECT_MANAGER" &&
-          !appraisalGoal.isComplete &&
+          appraisalGoal.reviewerType === 'PROJECT_MANAGER' &&
+          !appraisalGoal.complete &&
           appraisalGoal.reviewerId !== loggedInUser.id
         ) {
-          visibility = "HIDE";
+          visibility = 'HIDE';
         }
         break;
       // TBD Extend for other stages using getVisibilityBasedOnStatusAndType()
@@ -114,7 +114,7 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
       loggedInUser.id === appraisalGoal.employeeId &&
       loggedInUser.id !== appraisalGoal.reviewerId
     ) {
-      visibility = "HIDE";
+      visibility = 'HIDE';
     }
 
     return visibility;

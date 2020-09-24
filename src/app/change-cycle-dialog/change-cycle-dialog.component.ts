@@ -4,6 +4,7 @@ import { CycleSelectionService } from '../core/services/cycle-selection.service'
 import { Store, select } from '@ngrx/store';
 
 import { AppState } from '../app-state';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-change-cycle-dialog',
@@ -19,6 +20,7 @@ export class ChangeCycleDialogComponent implements OnInit {
 
   constructor(public pageHeaderService: PageHeaderService,
               public cycleSelectionService: CycleSelectionService,
+              private router: Router,
               private store: Store<AppState>) {
               }
 
@@ -43,6 +45,7 @@ export class ChangeCycleDialogComponent implements OnInit {
 
   changeCycle(cycle) {
     this.cycleSelectionService.changeCycle(cycle);
+    this.router.navigate(['/home']);
   }
 
 }

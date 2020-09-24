@@ -15,6 +15,7 @@ import {AuthGuard} from './auth.guard';
 import { RatingScaleComponent } from './rating-scale/rating-scale.component';
 import { SetGoalsComponent } from './set-goals/set-goals.component';
 import { AppraisalComponent } from './appraisal/appraisal.component';
+import { ChangeCycleDialogComponent } from './change-cycle-dialog/change-cycle-dialog.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'help', component: HelpComponent},
   { path: 'appraisal', component: AppraisalComponent, canActivate: [AuthGuard]},
+  { path: 'change-cycle', component: ChangeCycleDialogComponent, canActivate: [AuthGuard]},
   { path: 'provide-feedback', component: ProvideFeedbackComponent, canActivate: [AuthGuard]},
   { path: 'review-response', component: ReviewResponseComponent, canActivate: [AuthGuard]},
   { path: 'view-response', component: ViewResponseComponent, canActivate: [AuthGuard]},

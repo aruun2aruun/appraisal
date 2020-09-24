@@ -3,10 +3,10 @@
   <div class="selfAppraisalEditable">
     <div>
       <h4 style="display: inline-block">{{jobGoal.criteria}}</h4>
-      <button class="score" type="button" mat-stroked-button mat-button [disabled]="true">
+      <!-- <button class="score" type="button" mat-stroked-button mat-button [disabled]="true">
         <mat-icon color="accent">check_circle</mat-icon>
-        <!-- {{score[i][x]}} -->
-      </button>
+        {{score[i][x]}}
+      </button> -->
       <div style="float: right">
         <mat-label>Weightage:</mat-label>
         {{jobGoal.weightage * 100 | number : '1.1-1'}}%

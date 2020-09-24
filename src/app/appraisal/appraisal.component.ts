@@ -20,7 +20,7 @@ export class AppraisalComponent implements OnInit {
   jobGoals: any[] = [];
   jobGoalsGroup: string[] = [];
   cuGoals: any[];
-  showSubmit = true;
+  showSubmit = false;
   roles: any[];
   appraisalCycle: any;
 
@@ -94,21 +94,9 @@ export class AppraisalComponent implements OnInit {
                       this.cuGoals = goals.filter((item) => item.cu !== null);
                     });
                 });
-              this.getAppraisalCycle(appraisalReview);
+              this.getAppraisalCycleAndRoles(appraisalReview, loggedInUser);
               this.getReviewGoal(appraisalReview);
             }
-          });
-
-        this.store
-          .pipe(
-            select((state) =>
-              state.roles.filter(
-                (item) => item.employeeId === this.appraisalReview.employeeId
-              )
-            )
-          )
-          .subscribe((result) => {
-            this.roles = result;
           });
       }
     });
@@ -125,7 +113,7 @@ export class AppraisalComponent implements OnInit {
     );
   }
 
-  getAppraisalCycle(appraisalReview) {
+  getAppraisalCycleAndRoles(appraisalReview, loggedInUser) {
     this.store
       .pipe(
         select((state) =>
@@ -134,6 +122,19 @@ export class AppraisalComponent implements OnInit {
       )
       .subscribe((appraisalCycle) => {
         this.appraisalCycle = appraisalCycle;
+        this.store
+          .pipe(
+            select((state) =>
+              state.roles.filter(
+                (item) => item.employeeId === appraisalReview.employeeId
+              )
+            )
+          )
+          .subscribe((result) => {
+            this.roles = result;
+            const reviewer = result.find((item) => item.reviewerId === loggedInUser.id);
+            this.showSubmit = appraisalReview.status === reviewer.reviewerType && !reviewer.complete;
+          });
       });
   }
 

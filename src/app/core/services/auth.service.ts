@@ -32,7 +32,6 @@ export class AuthService {
         this.loggedIn = true;
         this.store.pipe(select(state => state.roles.filter(item => item.employeeId === user.id)))
         .subscribe(result => {
-          console.log(result);
           this.roles = result;
         });
       } else {

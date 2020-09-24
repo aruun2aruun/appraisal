@@ -10,11 +10,11 @@
       <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color" aria-hidden="true">arrow_drop_down</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button  routerLink="/appraisal" mat-menu-item>Self</button>
-      <button  routerLink="/appraisal/reportees"  mat-menu-item>Reportees</button>
+      <button routerLink="/appraisal" mat-menu-item>Self</button>
+      <button routerLink="/appraisal/reportees"  mat-menu-item>Reportees</button>
     </mat-menu>
 
-    <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md (click)="openChangeCycleDialog()">Change Cycle</button>
+    <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/change-cycle">Change Cycle</button>
 
     <button class="logo_menu" mat-stroked-button fxShow="false" fxShow.lt-md [matMenuTriggerFor]="mobileMenu">
       <mat-icon>menu</mat-icon>
@@ -67,6 +67,6 @@
 <mat-menu #mobileMenu="matMenu">
   <button mat-menu-item routerLink="/home">Home</button>
   <button mat-menu-item [matMenuTriggerFor]="menu">Appraisal</button>
-  <button *ngIf="authService.loggedIn" mat-menu-item (click)="openChangeCycleDialog()">Change Cycle</button>
+  <button *ngIf="authService.loggedIn" mat-menu-item routerLink="/change-cycle">Change Cycle</button>
 
 </mat-menu>

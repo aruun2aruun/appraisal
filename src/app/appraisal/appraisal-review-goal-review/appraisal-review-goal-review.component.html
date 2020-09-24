@@ -17,19 +17,15 @@
   <div *ngIf="appraisalGoal.visibility !== 'HIDE'"
     class="appraisal-review-goal-review--default"
     [ngClass]="{'appraisal-review-goal-review--write': appraisalGoal.visibility === 'WRITE'}">
-
     <!-- VIEW REVIEWS -->
     <div class="reviews" *ngIf="appraisalGoal.visibility !== 'WRITE'">
       <div style="float: right">
         <mat-label>{{appraisalGoal.rating}}</mat-label>
       </div>
       <div>
-        <mat-label>Reviewed by {{ appraisalGoal.reviewerId | idToName }} <i>({{appraisalGoal.reviewerType}})</i></mat-label>
-        <mat-form-field class="response-full-width">
-        <textarea [disabled]="true" style="display: none;" [(ngModel)]="appraisalGoal.comment"
-                  matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"></textarea>
-        <p>{{appraisalGoal.comment}}</p>
-        </mat-form-field>
+        <mat-label class="reviewed-by">Reviewed by {{ appraisalGoal.reviewerId | idToName }} <i>({{appraisalGoal.reviewerType}})</i></mat-label>
+        <p *ngIf="appraisalGoal.comment">{{appraisalGoal.comment}}</p>
+        <p *ngIf="!appraisalGoal.comment">No Reviews submitted!</p>
       </div>
     </div>
 
