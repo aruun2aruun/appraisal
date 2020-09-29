@@ -6,14 +6,7 @@
           <h4>{{roles.key}}</h4>
         </mat-panel-title>
       </mat-expansion-panel-header>
-      <div fxLayout="row wrap" fxLayoutGap="16px">
-        <mat-card *ngFor="let role of roles.value">
-          <div>Name: <b>{{ role.reviewerId | idToName }}</b></div>
-          <div>Status: <b [ngClass]="role.complete ? 'complete' : 'pending'">{{role.complete ? 'Complete' : 'Pending'}}</b></div>
-          <div>Submitted Date:</div>
-          <div>Score: <b>{{ role.totalScore | number : '1.1-1' }}</b></div>
-        </mat-card>
-      </div>
+      <app-appraisal-summary-card [rolesValue]="roles.value"></app-appraisal-summary-card>
     </mat-expansion-panel>
   </mat-accordion>
 </div>

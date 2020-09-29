@@ -1,0 +1,8 @@
+<div fxLayout="row wrap" fxLayoutGap="16px">
+  <mat-card *ngFor="let role of rolesValue">
+    <div>Name: <b>{{ role.reviewerId | idToName }}</b></div>
+    <div>Status: <b [ngClass]="role.complete ? 'complete' : 'pending'">{{role.complete ? 'Complete' : 'Pending'}}</b></div>
+    <div>Submitted Date:</div>
+    <div>Score: <b>{{ role.totalScore | number : '1.1-1' }}</b></div>
+  </mat-card>
+</div>

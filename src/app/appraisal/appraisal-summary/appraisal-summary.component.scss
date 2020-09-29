@@ -2,22 +2,4 @@
     font-size: 14px;
     line-height: 24px;
     padding: 16px;
-    mat-card {
-        width: 210px;
-        margin: 0;
-    }
-    h4 {
-        margin: 0;
-        width: 150px;
-    }
-    div {
-        display: grid;
-        grid-template-columns: 120px auto;
-    }
-    .complete {
-        color: green;
-    }
-    .pending {
-        color: orange;
-    }
 }

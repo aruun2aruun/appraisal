@@ -1,0 +1,18 @@
+div {
+    display: grid;
+    grid-template-columns: 120px auto;
+    mat-card {
+        width: 210px;
+        margin: 0;
+        h4 {
+            margin: 0;
+            width: 150px;
+        }
+        .complete {
+            color: green;
+        }
+        .pending {
+            color: orange;
+        }
+    }
+}
