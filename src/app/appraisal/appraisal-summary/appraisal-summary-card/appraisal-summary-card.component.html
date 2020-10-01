@@ -1,8 +1,14 @@
-<div fxLayout="row wrap" fxLayoutGap="16px">
-  <mat-card *ngFor="let role of rolesValue">
-    <div>Name: <b>{{ role.reviewerId | idToName }}</b></div>
-    <div>Status: <b [ngClass]="role.complete ? 'complete' : 'pending'">{{role.complete ? 'Complete' : 'Pending'}}</b></div>
-    <div>Submitted Date:</div>
-    <div>Score: <b>{{ role.totalScore | number : '1.1-1' }}</b></div>
-  </mat-card>
+<div class="summary-card">
+  <div class="left">
+    <div [class]="'status-indicator ' + indicator" [ngClass]="{'not-last-element': !isLast}">
+      <div [class]="'status-symbol ' + indicator"></div>
+    </div>
+  </div>
+  <div class="right">
+    <div class="title">{{user.name}} ({{role.reviewerType}})</div>
+    <div *ngIf="indicator=='complete'" class="subtitle">Score = {{role.totalScore}}</div>
+    <div *ngIf="indicator=='overdue'" class="subtitle">Overdue</div>
+    <div *ngIf="indicator=='notstarted'" class="subtitle">Not open yet</div>
+    <div *ngIf="indicator=='ongoing'" class="subtitle">{{daysRemaining}} days remaining</div>
+  </div>
 </div>

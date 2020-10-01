@@ -131,6 +131,8 @@ export class AppraisalComponent implements OnInit {
             )
           )
           .subscribe((result) => {
+            console.log(result)
+            console.log(loggedInUser)
             this.roles = result;
             const reviewer = result.find((item) => item.reviewerId === loggedInUser.id);
             this.showSubmit = appraisalReview.status === reviewer.reviewerType && !reviewer.complete;

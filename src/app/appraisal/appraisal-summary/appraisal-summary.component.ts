@@ -5,20 +5,11 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
   templateUrl: './appraisal-summary.component.html',
   styleUrls: ['./appraisal-summary.component.scss'],
 })
-export class AppraisalSummaryComponent implements OnInit {
+export class AppraisalSummaryComponent {
   @Input() roles: any[];
-  panelOpenState = false;
-  rolesArray = {};
+  @Input() appraisalReview: any;
+  @Input() appraisalCycle: any;
 
   constructor() {}
 
-  ngOnInit() {
-    this.roles.forEach((item) => {
-        if (this.rolesArray[item.reviewerType]) {
-            this.rolesArray[`${item.reviewerType}`].push(item);
-        } else {
-            this.rolesArray[`${item.reviewerType}`] = [item];
-        }
-    });
-  }
 }

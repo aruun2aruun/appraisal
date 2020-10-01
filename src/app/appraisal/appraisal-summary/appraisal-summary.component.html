@@ -1,12 +1,14 @@
 <div class="appraisal-summary">
-  <mat-accordion>
+  <!-- <mat-accordion>
     <mat-expansion-panel hideToogle *ngFor="let roles of rolesArray | keyvalue">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <h4>{{roles.key}}</h4>
         </mat-panel-title>
-      </mat-expansion-panel-header>
-      <app-appraisal-summary-card [rolesValue]="roles.value"></app-appraisal-summary-card>
-    </mat-expansion-panel>
-  </mat-accordion>
+      </mat-expansion-panel-header> -->
+      <div *ngFor="let role of roles; index as i">
+      <app-appraisal-summary-card [role]="role" [appraisalReview] = "appraisalReview" [appraisalCycle]="appraisalCycle" [isLast]="roles.length === i + 1"></app-appraisal-summary-card>
+    </div>
+    <!-- </mat-expansion-panel>
+  </mat-accordion> -->
 </div>

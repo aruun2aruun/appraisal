@@ -3,19 +3,10 @@
     <a class="logo" fxHide="false" fxHide.lt-md>
       <img src="../../../../assets/img/logo.svg" alt="Westernacher logo" class="tt-retina-logo" height="40">
     </a>
-    <button mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/home">Home</button>
 
-    <button  mat-button [matMenuTriggerFor]="menu" fxHide.lt-md>
-      Appraisal
-      <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color" aria-hidden="true">arrow_drop_down</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button routerLink="/appraisal" mat-menu-item>Self</button>
-      <button routerLink="/appraisal/reportees"  mat-menu-item>Reportees</button>
-    </mat-menu>
-
-    <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/change-cycle">Change Cycle</button>
-
+    <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/reportees">Appraisal</button>
+    <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/choose-cycle">Choose Cycle</button>
+    <button mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/home">Dev Console</button>
     <button class="logo_menu" mat-stroked-button fxShow="false" fxShow.lt-md [matMenuTriggerFor]="mobileMenu">
       <mat-icon>menu</mat-icon>
     </button>
@@ -65,8 +56,8 @@
 
 <!--Sub menu for small displays-->
 <mat-menu #mobileMenu="matMenu">
-  <button mat-menu-item routerLink="/home">Home</button>
-  <button mat-menu-item [matMenuTriggerFor]="menu">Appraisal</button>
-  <button *ngIf="authService.loggedIn" mat-menu-item routerLink="/change-cycle">Change Cycle</button>
+  <button mat-menu-item routerLink="/reportees">Appraisal</button>
+  <button *ngIf="authService.loggedIn" mat-menu-item routerLink="/choose-cycle">Choose Cycle</button>
+  <button *ngIf="authService.loggedIn" mat-menu-item routerLink="/home">Dev Console</button>
 
 </mat-menu>
