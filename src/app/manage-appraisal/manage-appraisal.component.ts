@@ -34,6 +34,9 @@ export class ManageAppraisalComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   roles: any;
+  appraisalReview: any;
+  appraisalCycle: any;
+  allRoles: any[];
 
   constructor(private cycleSelectionService: CycleSelectionService,
                private pageHeaderService: PageHeaderService,
@@ -73,7 +76,6 @@ export class ManageAppraisalComponent implements OnInit {
           });
       }
     });
-    console.log(this.roles);
 
     // this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
     //   data => {
@@ -82,6 +84,46 @@ export class ManageAppraisalComponent implements OnInit {
     //     this.getAllUsers();
         this.RenderDataTable();
       // });
+  }
+
+  getSummaryData(role) {
+    this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
+      console.log('****loggedInUser');
+      if (loggedInUser) {
+        this.store
+          .pipe(
+            select((state) =>
+              state.roles
+            )
+          )
+          .subscribe((roles) => {
+            this.allRoles = roles;
+          });
+        this.store
+          .pipe(
+            select((state) =>
+              state.appraisalReviews.find(
+                (item) => item.employeeId === role.employeeId
+              )
+            )
+          )
+          .subscribe((appraisalReview) => {
+            console.log(appraisalReview);
+            this.appraisalReview = appraisalReview;
+            if (appraisalReview) {
+              this.store
+                .pipe(
+                  select((state) =>
+                    state.cycles.find((item) => item.id === appraisalReview.cycleId)
+                  )
+                )
+                .subscribe((appraisalCycle) => {
+                  this.appraisalCycle = appraisalCycle;
+                });
+            }
+          });
+      }
+    });
   }
 
   RenderDataTable() {
@@ -163,6 +205,22 @@ export class ManageAppraisalComponent implements OnInit {
       this.router.navigate([`appraisal`], {
         queryParams: {id: appraisalReviews[0].id},
       });
+    });
+  }
+
+  openSummaryDialog(role) {
+    this.getSummaryData(role);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '80%';
+    dialogConfig.data = {
+      roles: this.allRoles,
+      appraisalReview: this.appraisalReview,
+      appraisalCycle: this.appraisalCycle
+    };
+    const dialogRef = this.dialog.open(ManageAppraisalDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
     });
   }
 
