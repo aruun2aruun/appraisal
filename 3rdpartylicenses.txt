@@ -379,8 +379,6 @@ THE SOFTWARE.
 
 @angular/material/tabs
 
-@angular/material/card
-
 @angular/material/checkbox
 
 @angular/material/sort
