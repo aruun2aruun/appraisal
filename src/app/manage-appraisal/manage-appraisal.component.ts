@@ -93,7 +93,9 @@ export class ManageAppraisalComponent implements OnInit {
         this.store
           .pipe(
             select((state) =>
-              state.roles
+              state.roles.filter(
+                (item) => item.employeeId === role.employeeId
+              )
             )
           )
           .subscribe((roles) => {
