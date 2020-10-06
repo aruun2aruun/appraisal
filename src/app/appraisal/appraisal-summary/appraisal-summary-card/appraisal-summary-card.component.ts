@@ -36,25 +36,25 @@ export class AppraisalSummaryCardComponent implements OnChanges {
         this.indicator = 'ongoing';
       } else {
         switch (this.appraisalReview.status) {
-          case 'PROJECT_MANAGER':
+          case 'Level_1':
             if (
-              ['SELF_APPRAISAL'].includes(this.role.reviewerType)
+              ['Self'].includes(this.role.reviewerType)
             ) {
               this.indicator = 'overdue';
             }
             break;
-          case 'REPORTING_MANAGER':
-            if (['SELF_APPRAISAL', 'PROJECT_MANAGER'].includes(this.role.reviewerType)) {
+          case 'Level_2':
+            if (['Self', 'Level_1'].includes(this.role.reviewerType)) {
               this.indicator = 'overdue';
             }
             break;
-          case 'PRACTICE_DIRECTOR':
-            if (['SELF_APPRAISAL', 'PROJECT_MANAGER', 'REPORTING_MANAGER'].includes(this.role.reviewerType)) {
+          case 'Level_3':
+            if (['Self', 'Level_1', 'Level_2'].includes(this.role.reviewerType)) {
               this.indicator = 'overdue';
             }
             break;
-          case 'HR':
-            if (['SELF_APPRAISAL', 'PROJECT_MANAGER', 'REPORTING_MANAGER', 'PRACTICE_DIRECTOR'].includes(this.role.reviewerType)) {
+          case 'Level_4':
+            if (['Self', 'Level_1', 'Level_2', 'Level_3'].includes(this.role.reviewerType)) {
               this.indicator = 'overdue';
             }
             break;

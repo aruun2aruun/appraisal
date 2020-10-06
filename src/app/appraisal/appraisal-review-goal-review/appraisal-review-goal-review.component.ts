@@ -70,59 +70,59 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
     }
 
     switch (this.appraisalReview.status) {
-      case 'SELF_APPRAISAL':
+      case 'Self':
         if (
           [
-            'PROJECT_MANAGER',
-            'REPORTING_MANAGER',
-            'PRACTICE_DIRECTOR',
-            'HR',
+            'Level_1',
+            'Level_2',
+            'Level_3',
+            'Level_4',
           ].includes(appraisalGoal.reviewerType)
         ) {
           visibility = 'HIDE';
         }
         if (
-          appraisalGoal.reviewerType === 'SELF_APPRAISAL' &&
+          appraisalGoal.reviewerType === 'Self' &&
           !appraisalGoal.complete &&
           appraisalGoal.reviewerId !== loggedInUser.id
         ) {
           visibility = 'HIDE';
         }
         break;
-      case 'PROJECT_MANAGER':
+      case 'Level_1':
         if (
-          ['REPORTING_MANAGER', 'PRACTICE_DIRECTOR', 'HR'].includes(
+          ['Level_2', 'Level_3', 'Level_4'].includes(
             appraisalGoal.reviewerType
           )
         ) {
           visibility = 'HIDE';
         }
         if (
-          appraisalGoal.reviewerType === 'PROJECT_MANAGER' &&
+          appraisalGoal.reviewerType === 'Level_1' &&
           !appraisalGoal.complete &&
           appraisalGoal.reviewerId !== loggedInUser.id
         ) {
           visibility = 'HIDE';
         }
         break;
-      case 'REPORTING_MANAGER':
-        if (['PRACTICE_DIRECTOR', 'HR'].includes(appraisalGoal.reviewerType)) {
+      case 'Level_2':
+        if (['Level_3', 'Level_4'].includes(appraisalGoal.reviewerType)) {
           visibility = 'HIDE';
         }
         if (
-          appraisalGoal.reviewerType === 'REPORTING_MANAGER' &&
+          appraisalGoal.reviewerType === 'Level_2' &&
           !appraisalGoal.complete &&
           appraisalGoal.reviewerId !== loggedInUser.id
         ) {
           visibility = 'HIDE';
         }
         break;
-      case 'PRACTICE_DIRECTOR':
-        if (['HR'].includes(appraisalGoal.reviewerType)) {
+      case 'Level_3':
+        if (['Level_4'].includes(appraisalGoal.reviewerType)) {
           visibility = 'HIDE';
         }
         if (
-          appraisalGoal.reviewerType === 'PRACTICE_DIRECTOR' &&
+          appraisalGoal.reviewerType === 'Level_3' &&
           !appraisalGoal.complete &&
           appraisalGoal.reviewerId !== loggedInUser.id
         ) {

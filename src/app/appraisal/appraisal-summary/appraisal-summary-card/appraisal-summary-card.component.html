@@ -1,14 +1,43 @@
-<div class="summary-card">
+<!-- <div class="summary-card">
   <div class="left">
-    <div [class]="'status-indicator ' + indicator" [ngClass]="{'not-last-element': !isLast}">
+    <div
+      [class]="'status-indicator ' + indicator"
+      [ngClass]="{ 'not-last-element': !isLast }"
+    >
       <div [class]="'status-symbol ' + indicator"></div>
     </div>
   </div>
   <div class="right">
-    <div class="title">{{user.name}} ({{role.reviewerType}})</div>
-    <div *ngIf="indicator=='complete'" class="subtitle">Score = {{role.totalScore}}</div>
-    <div *ngIf="indicator=='overdue'" class="subtitle">Overdue</div>
-    <div *ngIf="indicator=='notstarted'" class="subtitle">Not open yet</div>
-    <div *ngIf="indicator=='ongoing'" class="subtitle">{{daysRemaining}} days remaining</div>
+    <div class="title">{{ user.name }} ({{ role.reviewerType }})</div>
+    <div *ngIf="indicator == 'complete'" class="subtitle">
+      Score = {{ role.totalScore | number: "1.0-2" }}
+    </div>
+    <div *ngIf="indicator == 'overdue'" class="subtitle">Overdue</div>
+    <div *ngIf="indicator == 'notstarted'" class="subtitle">Not open yet</div>
+    <div *ngIf="indicator == 'ongoing'" class="subtitle">
+      {{ daysRemaining }} days remaining
+    </div>
   </div>
-</div>
+</div> -->
+
+<tr>
+  <td scope="row" data-label="Employee Name">{{ role.employeeId | idToName }}</td>
+  <td scope="row" data-label="Reviewer Name">{{ role.reviewerId | idToName }}</td>
+  <td data-label="Role">{{ role.reviewerType }}</td>
+  <td data-label="Score">{{ role.totalScore | number: "1.0-2" }}</td>
+  <td data-label="Status">
+    <div
+      [class]="'status-indicator ' + indicator"
+      [ngClass]="{ 'not-last-element': !isLast }"
+    >
+      <div [class]="'status-symbol ' + indicator"></div>
+    </div>
+  </td>
+  <td data-label="Rating">
+    <span *ngIf="role.totalScore > 4 && role.totalScore < 5">Excellent</span>
+    <span *ngIf="role.totalScore > 3 && role.totalScore < 4">Above Expectations</span>
+    <span *ngIf="role.totalScore > 2 && role.totalScore < 3">Meets Expectations</span>
+    <span *ngIf="role.totalScore > 1 && role.totalScore < 2">Improvements Required</span>
+    <span *ngIf="role.totalScore > 0 && role.totalScore < 1">Deficient</span>
+  </td>
+</tr>

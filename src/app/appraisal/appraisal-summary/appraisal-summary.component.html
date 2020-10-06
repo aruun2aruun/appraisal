@@ -6,9 +6,38 @@
           <h4>{{roles.key}}</h4>
         </mat-panel-title>
       </mat-expansion-panel-header> -->
-      <div *ngFor="let role of roles; index as i">
-      <app-appraisal-summary-card [role]="role" [appraisalReview] = "appraisalReview" [appraisalCycle]="appraisalCycle" [isLast]="roles.length === i + 1"></app-appraisal-summary-card>
-    </div>
-    <!-- </mat-expansion-panel>
+  <!-- <div *ngFor="let role of roles; index as i">
+    <app-appraisal-summary-card
+      [role]="role"
+      [appraisalReview]="appraisalReview"
+      [appraisalCycle]="appraisalCycle"
+      [isLast]="roles.length === i + 1"
+    ></app-appraisal-summary-card>
+  </div> -->
+  <!-- </mat-expansion-panel>
   </mat-accordion> -->
+  <div class="table-container mat-elevation-z8">
+    <div class="userDetails">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Employee Name</th>
+            <th scope="col">Reviewer Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">Score</th>
+            <th scope="col">Status</th>
+            <th scope="col">Rating</th>
+          </tr>
+        </thead>
+        <tbody  *ngFor="let role of roles; index as i">
+            <app-appraisal-summary-card
+              [role]="role"
+              [appraisalReview]="appraisalReview"
+              [appraisalCycle]="appraisalCycle"
+              [isLast]="roles.length === i + 1"
+            ></app-appraisal-summary-card>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
