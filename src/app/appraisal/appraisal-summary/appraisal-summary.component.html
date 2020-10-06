@@ -26,16 +26,20 @@
             <th scope="col">Role</th>
             <th scope="col">Score</th>
             <th scope="col">Status</th>
+            <th scope="col">Days remaining</th>
             <th scope="col">Rating</th>
           </tr>
         </thead>
         <tbody  *ngFor="let role of roles; index as i">
-            <app-appraisal-summary-card
-              [role]="role"
-              [appraisalReview]="appraisalReview"
-              [appraisalCycle]="appraisalCycle"
-              [isLast]="roles.length === i + 1"
-            ></app-appraisal-summary-card>
+          <tr>
+            <td>{{role.employeeId | idToName}}</td>
+            <td>{{role.reviewerId | idToName}}</td>
+            <td>{{role.reviewerType}}</td>
+            <td><span *ngIf="role.complete">{{role.totalScore}}</span></td>
+            <td>{{additionalFields[role.id]?.indicator}}</td>
+            <td><span *ngIf="additionalFields[role.id]?.indicator === 'Ongoing'">{{role.reviewerType === 'Master' ? 'NA' : additionalFields[role.id]?.daysRemaining}} days</span></td>
+            <td><span *ngIf="role.complete">{{additionalFields[role.id]?.rating}}</span></td>
+          </tr>
         </tbody>
       </table>
     </div>
