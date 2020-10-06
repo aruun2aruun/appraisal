@@ -3,8 +3,7 @@
   grid-auto-flow: row;
   row-gap: 90px;
   justify-content: flex-start;
-  padding-top: 20px;
-  padding-left: 20px;
+  padding: 20px;
 }
 
 .table-container {
@@ -29,14 +28,6 @@
     padding: 0;
     width: 100%;
     table-layout: fixed;
-    tbody {
-      tr {
-        &:hover {
-          background-color: #d4edff;
-          cursor: pointer;
-        }
-      }
-    }
   }
 
   table tr {
@@ -49,6 +40,25 @@
   table td {
     padding: 0.625em;
     text-align: center;
+    b {
+      height: 12px;
+      width: 12px;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 0 10px 0 0;
+      &.notstarted {
+        background-color: #ed3731;
+      }
+      &.Ongoing {
+        background-color: #276fbf;
+      }
+      &.Complete {
+        background-color: #60992d;
+      }
+      &.Overdue {
+        background-color: #949b96;
+      }
+    }
   }
 
   table th {
