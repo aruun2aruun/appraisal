@@ -1,0 +1,67 @@
+<div class="discussion-summary">
+  <div class="table-container mat-elevation-z8">
+    <div class="userDetails">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Reviewer Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let role of roles; index as i">
+            <td>{{role.reviewerId | idToName}}</td>
+            <td>{{role.reviewerType}}</td>
+            <td><span *ngIf="role.complete">{{additionalFields[role.id]?.rating}}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="appraisal-review-goal-review--default">
+    <!-- EDIT/WRITE REVIEWS -->
+    <div *ngFor="let discussionSummary of discussionSummary">
+      <mat-form-field style="width: 20%; float: right">
+        <mat-select
+          #MatSelect
+          placeholder="Reviewer rating"
+          [(ngModel)]="discussionSummary.rating"
+          required>
+          <mat-option
+            #MatOption
+            *ngFor="let rating of ratings; let i = index"
+            [value]="rating">
+            {{ rating }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-label>
+        {{ discussionSummary.reviewerId | idToName }}
+      </mat-label>
+      <mat-form-field class="response-full-width">
+        <textarea
+          style="width: 100%"
+          [(ngModel)]="discussionSummary.comment"
+          matInput
+          matTextareaAutosize
+          matAutosizeMinRows="1"
+          matAutosizeMaxRows="4"
+          data-ng-minLength="10"
+          placeholder="Provide a comment to support your rating"
+          #reviewComment
+          required>
+        </textarea>
+        <!-- <mat-hint *ngIf="appraisalGoal.comment.length < 50" align="start"><strong>Comment should be atleast 50 characters</strong></mat-hint>
+        <mat-hint *ngIf="appraisalGoal.comment === ''" align="end">{{ reviewComment.value.length }} / {{reviewComment.value.length}}</mat-hint> -->
+      </mat-form-field>
+    </div>
+  </div>
+  <div layout="row" layout-align="center center" class="footer-button">
+    <button type="button" mat-raised-button color="primary" (click)="submitDiscussionSummary()"
+            class="btn btn-outline-primary sharp">
+      <mat-icon>done</mat-icon>
+      Submit Discussion
+    </button>
+  </div>
+</div>
