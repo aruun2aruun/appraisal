@@ -78,6 +78,7 @@ import { AppraisalSpinnerComponent } from './core/components/appraisal-spinner/a
 import { ChangeCycleDialogComponent } from './change-cycle-dialog/change-cycle-dialog.component';
 import { AppraisalSummaryComponent } from './appraisal/appraisal-summary/appraisal-summary.component';
 import { DiscussionSummaryComponent } from './appraisal/discussion-summary/discussion-summary.component';
+import { AppraisalReviewCommentRatingComponent } from './appraisal/appraisal-review-comment-rating/appraisal-review-comment-rating.component';
 
 
 @NgModule({
@@ -117,7 +118,8 @@ import { DiscussionSummaryComponent } from './appraisal/discussion-summary/discu
     AppraisalSpinnerComponent,
     ChangeCycleDialogComponent,
     AppraisalSummaryComponent,
-    DiscussionSummaryComponent
+    DiscussionSummaryComponent,
+    AppraisalReviewCommentRatingComponent
   ],
   imports: [
     MatToolbarModule,
