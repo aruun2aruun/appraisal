@@ -1,11 +1,11 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
-import { AppraisalService } from 'src/app/core/services/appraisal.service';
-import { InitializationService } from 'src/app/core/services/initialization.service';
+import { Component, Input, OnChanges, OnInit } from "@angular/core";
+import { AppraisalService } from "src/app/core/services/appraisal.service";
+import { InitializationService } from "src/app/core/services/initialization.service";
 
 @Component({
-  selector: 'app-discussion-summary',
-  templateUrl: './discussion-summary.component.html',
-  styleUrls: ['./discussion-summary.component.scss']
+  selector: "app-discussion-summary",
+  templateUrl: "./discussion-summary.component.html",
+  styleUrls: ["./discussion-summary.component.scss"],
 })
 export class DiscussionSummaryComponent implements OnChanges {
   @Input() roles: any[];
@@ -13,11 +13,11 @@ export class DiscussionSummaryComponent implements OnChanges {
   @Input() appraisalCycle: any;
   additionalFields: any = {};
   ratings: string[] = [
-    '1 - Deficient',
-    '2 - Improvements Required',
-    '3 - Meets Expectations',
-    '4 - Above Expectations',
-    '5 - Excellent',
+    "1 - Deficient",
+    "2 - Improvements Required",
+    "3 - Meets Expectations",
+    "4 - Above Expectations",
+    "5 - Excellent",
   ];
   discussionSummary: any;
 
@@ -29,29 +29,29 @@ export class DiscussionSummaryComponent implements OnChanges {
   }
 
   ngOnChanges() {
-    this.roles.forEach(role => this.populateAdditionalFields(role));
+    this.roles.forEach((role) => this.populateAdditionalFields(role));
     this.getDiscussionSummary();
   }
 
   populateAdditionalFields = (role: any) => {
     if (this.appraisalCycle && this.appraisalReview) {
-      const additionalFieldsEntry = {rating: ''};
+      const additionalFieldsEntry = { rating: "" };
 
       switch (Math.round(role.totalScore)) {
         case 1:
-          additionalFieldsEntry.rating = '1 - Deficient';
+          additionalFieldsEntry.rating = "1 - Deficient";
           break;
         case 2:
-          additionalFieldsEntry.rating = '2 - Improvements Required';
+          additionalFieldsEntry.rating = "2 - Improvements Required";
           break;
         case 3:
-          additionalFieldsEntry.rating = '3 - Meets Expectations';
+          additionalFieldsEntry.rating = "3 - Meets Expectations";
           break;
         case 4:
-          additionalFieldsEntry.rating = '4 - Above Expectations';
+          additionalFieldsEntry.rating = "4 - Above Expectations";
           break;
         case 5:
-          additionalFieldsEntry.rating = '5 - Excellent';
+          additionalFieldsEntry.rating = "5 - Excellent";
           break;
         default:
           break;
@@ -59,7 +59,7 @@ export class DiscussionSummaryComponent implements OnChanges {
 
       this.additionalFields[role.id] = additionalFieldsEntry;
     }
-  }
+  };
 
   getDiscussionSummary() {
     this.appraisalService.getDiscussion(this.appraisalReview.id).subscribe(
@@ -75,16 +75,21 @@ export class DiscussionSummaryComponent implements OnChanges {
 
   submitDiscussionSummary() {
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
-      this.appraisalService
-        .submitDiscussion(this.discussionSummary)
-        .subscribe(
-          (response) => {
-            console.log(response);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+      const data = this.discussionSummary.find(
+        (element) => loggedInUser.id === element.reviewerId
+      );
+      if (data) {
+        this.appraisalService
+          .submitDiscussion({...data, complete: true})
+          .subscribe(
+            (response) => {
+              console.log(response);
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
+      }
     });
   }
 }

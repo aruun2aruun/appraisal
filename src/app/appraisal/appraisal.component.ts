@@ -23,6 +23,7 @@ export class AppraisalComponent implements OnInit {
   showSubmit = false;
   roles: any[];
   appraisalCycle: any;
+  showDiscussion = false;
 
   constructor(
     private pageHeaderService: PageHeaderService,
@@ -130,12 +131,12 @@ export class AppraisalComponent implements OnInit {
               )
             )
           )
-          .subscribe((result) => {
-            console.log(result)
-            console.log(loggedInUser)
-            this.roles = result;
-            const reviewer = result.find((item) => item.reviewerId === loggedInUser.id);
+          .subscribe((roles) => {
+            this.roles = roles;
+            const reviewer = roles.find((item) => item.reviewerId === loggedInUser.id && item.reviewerType !== 'Master');
             this.showSubmit = appraisalReview.status === reviewer.reviewerType && !reviewer.complete;
+            const master = roles.find((item) => item.reviewerId === loggedInUser.id && item.reviewerType === 'Master');
+            this.showDiscussion = master && ['Master', 'Complete'].includes(appraisalReview.status) ? true : false;
           });
       });
   }
