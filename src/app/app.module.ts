@@ -79,6 +79,7 @@ import { ChangeCycleDialogComponent } from './change-cycle-dialog/change-cycle-d
 import { AppraisalSummaryComponent } from './appraisal/appraisal-summary/appraisal-summary.component';
 import { DiscussionSummaryComponent } from './appraisal/discussion-summary/discussion-summary.component';
 import { AppraisalReviewCommentRatingComponent } from './appraisal/appraisal-review-comment-rating/appraisal-review-comment-rating.component';
+import { WorkflowMapPipe } from './core/services/workflow-map.pipe';
 
 
 @NgModule({
@@ -119,7 +120,8 @@ import { AppraisalReviewCommentRatingComponent } from './appraisal/appraisal-rev
     ChangeCycleDialogComponent,
     AppraisalSummaryComponent,
     DiscussionSummaryComponent,
-    AppraisalReviewCommentRatingComponent
+    AppraisalReviewCommentRatingComponent,
+    WorkflowMapPipe
   ],
   imports: [
     MatToolbarModule,
