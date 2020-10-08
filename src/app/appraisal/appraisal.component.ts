@@ -86,13 +86,13 @@ export class AppraisalComponent implements OnInit {
                       )
                     )
                     .subscribe((goals) => {
-                      this.jobGoals = goals.filter((item) => item.job !== null);
+                      this.jobGoals = goals.filter((item) => !!item.job);
                       this.jobGoalsGroup = this.jobGoals
                         .map((item) => item.group)
                         .filter(
                           (value, index, self) => self.indexOf(value) === index
                         );
-                      this.cuGoals = goals.filter((item) => item.cu !== null);
+                      this.cuGoals = goals.filter((item) => !!item.cu);
                     });
                 });
               this.getAppraisalCycleAndRoles(appraisalReview, loggedInUser);

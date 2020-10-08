@@ -103,7 +103,7 @@ pre {
       border-radius: 12px;
       display: inline-block;
       margin: 0 10px 0 0;
-      &.notstarted {
+      &.Overdue {
         background-color: #ed3731;
       }
       &.Ongoing {
@@ -112,7 +112,7 @@ pre {
       &.Complete {
         background-color: #60992d;
       }
-      &.Overdue {
+      &.Awaiting {
         background-color: #949b96;
       }
     }

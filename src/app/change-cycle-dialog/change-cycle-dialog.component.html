@@ -6,17 +6,15 @@
           <th scope="col">Name</th>
           <th scope="col">Evaluation period</th>
           <th scope="col">Status</th>
-          <th scope="col">Country Unit</th>
-          <th scope="col">Start Date</th>
+          <th scope="col">Consulting Unit</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let item of cycles" (click)="changeCycle(item)">
           <td scope="row" data-label="Name">{{item.name}}</td>
-          <td data-label="Evaluation period">{{item.evaluationPeriod}}</td>
+          <td data-label="Evaluation period">{{item.start | date}} to {{item.end | date}}</td>
           <td data-label="Status">{{item.status}}</td>
-          <td data-label="Country Unit">{{item.cu}}</td>
-          <td data-label="Start Date">{{item.deadline.Self | date}}</td>
+          <td data-label="Consulting Unit">{{item.cu}}</td>
         </tr>
       </tbody>
     </table>

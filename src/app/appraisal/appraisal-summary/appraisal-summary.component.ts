@@ -19,7 +19,7 @@ export class AppraisalSummaryComponent implements OnChanges {
 
   populateAdditionalFields = (role: any) => {
     if (this.appraisalCycle && this.appraisalReview) {
-      const additionalFieldsEntry = {daysRemaining: 0, indicator: 'Overdue', rating: ''};
+      const additionalFieldsEntry = {daysRemaining: 0, indicator: 'Awaiting', rating: ''};
       const oneDay = 24 * 60 * 60 * 1000;
       additionalFieldsEntry.daysRemaining = Math.round(
         Math.abs(
@@ -63,6 +63,15 @@ export class AppraisalSummaryComponent implements OnChanges {
               additionalFieldsEntry.indicator = "Overdue";
             }
             break;
+            case "Master":
+              if (
+                ["Self", "Level_1", "Level_2", "Level_3", "Level_4"].includes(
+                  role.reviewerType
+                )
+              ) {
+                additionalFieldsEntry.indicator = "Overdue";
+              }
+              break;
           // TBD Extend for other stages using getVisibilityBasedOnStatusAndType()
         }
       }
@@ -84,6 +93,7 @@ export class AppraisalSummaryComponent implements OnChanges {
           additionalFieldsEntry.rating = '5 - Excellent';
           break;
         default:
+          additionalFieldsEntry.rating = "0 - No rating";
           break;
       }
 
