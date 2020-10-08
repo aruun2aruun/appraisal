@@ -27,6 +27,9 @@
       }
     }
   }
+  .mat-expansion-panel {
+    width: calc(100vw - 160px);
+  }
   .mat-expansion-panel-header {
     height: 48px !important;
     padding: 0 10px;
@@ -35,114 +38,5 @@
   }
   .mat-expansion-panel-content {
     margin: 10px 0 0 0 !important;
-  }
-}
-
-.table-container {
-  display: flex;
-  flex-direction: column;
-  .mat-table {
-    overflow: auto;
-    max-height: 500px;
-    .mat-header-row {
-      min-height: 48px;
-    }
-    .mat-row {
-      min-height: 40px;
-    }
-  }
-  table {
-    border: 1px solid #ccc;
-    border-collapse: collapse;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    table-layout: fixed;
-  }
-
-  table tr {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 0.35em;
-  }
-
-  table th,
-  table td {
-    padding: 0.625em;
-    text-align: center;
-    b {
-      height: 12px;
-      width: 12px;
-      border-radius: 12px;
-      display: inline-block;
-      margin: 0 10px 0 0;
-      &.notstarted {
-        background-color: #ed3731;
-      }
-      &.Ongoing {
-        background-color: #276fbf;
-      }
-      &.Complete {
-        background-color: #60992d;
-      }
-      &.Overdue {
-        background-color: #949b96;
-      }
-    }
-  }
-
-  table th {
-    font-size: 0.85em;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  @media screen and (max-width: 600px) {
-    table {
-      border: 0;
-    }
-
-    table caption {
-      font-size: 1.3em;
-    }
-
-    table thead {
-      border: none;
-      clip: rect(0 0 0 0);
-      height: 1px;
-      margin: -1px;
-      overflow: hidden;
-      padding: 0;
-      position: absolute;
-      width: 1px;
-    }
-
-    table tr {
-      border-bottom: 3px solid #ddd;
-      display: block;
-      margin-bottom: 0.625em;
-    }
-
-    table td {
-      border-bottom: 1px solid #ddd;
-      display: block;
-      font-size: 0.8em;
-      text-align: right;
-    }
-
-    table td::before {
-      /*
-            * aria-label has no advantage, it won't be read inside a table
-            content: attr(aria-label);
-            */
-      content: attr(data-label);
-      float: left;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-
-    table td:last-child {
-      border-bottom: 0;
-    }
   }
 }

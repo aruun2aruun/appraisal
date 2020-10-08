@@ -5,7 +5,8 @@
 @include angular-material-theme($theme-360);
 
 /* for sidenav to take a whole page */
-html, body {
+html,
+body {
   margin: 0;
   height: 100%;
 }
@@ -13,11 +14,11 @@ html, body {
 /* Font family settings across application */
 * {
   // font-family: Raleway, sans-serif !important;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .material-icons {
-  font-family: 'Material Icons' !important;
+  font-family: "Material Icons" !important;
 }
 
 .container {
@@ -31,18 +32,18 @@ html, body {
 }
 // Blocks of code
 pre {
-    display: block;
-    padding: 9.5px;
-    margin: 0 0 10px;
-    font-size: 13px;
-    line-height: 1.42857143;
-    color: #333;
-    word-break: break-all;
-    word-wrap: break-word;
-    background-color: #f5f5f5;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    white-space: break-spaces;
+  display: block;
+  padding: 9.5px;
+  margin: 0 0 10px;
+  font-size: 13px;
+  line-height: 1.42857143;
+  color: #333;
+  word-break: break-all;
+  word-wrap: break-word;
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  white-space: break-spaces;
 
   // Account for some code outputs that place code tags in pre tags
   code {
@@ -54,11 +55,121 @@ pre {
     border-radius: 0;
   }
 }
-.custom-auto-save{
+.custom-auto-save {
   background: none;
   margin: 10px 0 0 !important;
   box-shadow: none;
   color: green;
-
 }
 
+// Table Styles
+.table-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+    .mat-header-row {
+      min-height: 48px;
+    }
+    .mat-row {
+      min-height: 40px;
+    }
+  }
+  table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+  table tr {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 0.35em;
+  }
+
+  table th,
+  table td {
+    padding: 0.625em;
+    text-align: left;
+    b {
+      height: 12px;
+      width: 12px;
+      border-radius: 12px;
+      display: inline-block;
+      margin: 0 10px 0 0;
+      &.notstarted {
+        background-color: #ed3731;
+      }
+      &.Ongoing {
+        background-color: #276fbf;
+      }
+      &.Complete {
+        background-color: #60992d;
+      }
+      &.Overdue {
+        background-color: #949b96;
+      }
+    }
+  }
+
+  table th {
+    font-size: 0.85em;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  @media screen and (max-width: 600px) {
+    table {
+      border: 0;
+    }
+
+    table caption {
+      font-size: 1.3em;
+    }
+
+    table thead {
+      border: none;
+      clip: rect(0 0 0 0);
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      padding: 0;
+      position: absolute;
+      width: 1px;
+    }
+
+    table tr {
+      border-bottom: 3px solid #ddd;
+      display: block;
+      margin-bottom: 0.625em;
+    }
+
+    table td {
+      border-bottom: 1px solid #ddd;
+      display: block;
+      font-size: 0.8em;
+      text-align: right;
+    }
+
+    table td::before {
+      /*
+          * aria-label has no advantage, it won't be read inside a table
+          content: attr(aria-label);
+          */
+      content: attr(data-label);
+      float: left;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    table td:last-child {
+      border-bottom: 0;
+    }
+  }
+}
