@@ -20,7 +20,7 @@
       <tbody>
         <tr *ngFor="let role of roles" (click)="viewAppraisal(role)">
           <td scope="row" data-label="Name">{{role.employeeId | idToName}}</td>
-          <td data-label="Status">{{role.reviewerType}}</td>
+          <td data-label="Status">{{role.reviewerType | workflowMap}}</td>
           <td>
             <button mat-icon-button matTooltip="View Workflow" matTooltipPosition="before" class="mat-primary" (click)="openSummaryDialog(role); $event.stopPropagation();">
               <mat-icon>assessment</mat-icon>
