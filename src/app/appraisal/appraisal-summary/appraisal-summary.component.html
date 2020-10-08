@@ -34,7 +34,7 @@
           <tr *ngFor="let role of roles; index as i">
             <td>{{role.employeeId | idToName}}</td>
             <td>{{role.reviewerId | idToName}}</td>
-            <td>{{role.reviewerType}}</td>
+            <td>{{role.reviewerType | workflowMap}}</td>
             <td><span *ngIf="role.complete">{{role.totalScore}}</span></td>
             <td><b [ngClass]="additionalFields[role.id]?.indicator"></b>{{additionalFields[role.id]?.indicator}}</td>
             <td><span *ngIf="additionalFields[role.id]?.indicator === 'Ongoing'">{{role.reviewerType === 'Master' ? 'NA' : additionalFields[role.id]?.daysRemaining}} days</span></td>

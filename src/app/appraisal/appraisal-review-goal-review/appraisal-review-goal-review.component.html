@@ -23,7 +23,7 @@
         <mat-label>{{appraisalGoal.rating}}</mat-label>
       </div>
       <div>
-        <mat-label class="reviewed-by">Reviewed by {{ appraisalGoal.reviewerId | idToName }} <i>({{appraisalGoal.reviewerType}})</i></mat-label>
+        <mat-label class="reviewed-by">Reviewed by {{ appraisalGoal.reviewerId | idToName }} <i>({{appraisalGoal.reviewerType | workflowMap}})</i></mat-label>
         <p *ngIf="appraisalGoal.comment">{{appraisalGoal.comment}}</p>
         <p *ngIf="!appraisalGoal.comment">No Reviews submitted!</p>
       </div>
@@ -47,7 +47,7 @@
         </mat-select>
       </mat-form-field>
       <mat-label>
-        {{ appraisalGoal.reviewerId | idToName }} ({{appraisalGoal.reviewerType}})
+        {{ appraisalGoal.reviewerId | idToName }} ({{appraisalGoal.reviewerType | workflowMap}})
       </mat-label>
       <mat-form-field class="response-full-width">
         <textarea
@@ -63,8 +63,8 @@
           #reviewComment
           required>
         </textarea>
-        <!-- <mat-hint *ngIf="appraisalGoal.comment.length < 50" align="start"><strong>Comment should be atleast 50 characters</strong></mat-hint>
-        <mat-hint *ngIf="appraisalGoal.comment === ''" align="end">{{ reviewComment.value.length }} / {{reviewComment.value.length}}</mat-hint> -->
+        <mat-hint *ngIf="appraisalGoal.comment.length < 50" align="start"><strong>Comment should be atleast 50 characters</strong></mat-hint>
+        <mat-hint *ngIf="appraisalGoal.comment === ''" align="end">{{ reviewComment.value.length }} / {{reviewComment.value.length}}</mat-hint>
       </mat-form-field>
     </div>
   </div>
