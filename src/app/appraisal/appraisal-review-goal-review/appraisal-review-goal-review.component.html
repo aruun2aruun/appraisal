@@ -33,7 +33,7 @@
     <div *ngIf="appraisalGoal.visibility === 'WRITE'">
       <mat-form-field style="width: 20%; float: right">
         <mat-select
-          #MatSelect
+          #MatSelect = 'ngModel'
           placeholder="Reviewer rating"
           [(ngModel)]="appraisalGoal.rating"
           (ngModelChange)="onChange(appraisalGoal.id, appraisalGoal.comment, appraisalGoal.rating)"
@@ -45,6 +45,7 @@
             {{ rating }}
           </mat-option>
         </mat-select>
+        <mat-error *ngIf="MatSelect.errors" align="start"><strong>Please provide a rating.</strong></mat-error>
       </mat-form-field>
       <mat-label>
         {{ appraisalGoal.reviewerId | idToName }} ({{appraisalGoal.reviewerType | workflowMap}})
@@ -60,11 +61,12 @@
           matAutosizeMaxRows="4"
           data-ng-minLength="10"
           placeholder="Provide a comment to support your rating"
-          #reviewComment
+          [minlength]='appraisalCycle.minCommentLength'
+          #reviewComment = 'ngModel'
           required>
         </textarea>
-        <mat-hint *ngIf="appraisalGoal.comment.length < 50" align="start"><strong>Comment should be atleast 50 characters</strong></mat-hint>
-        <mat-hint *ngIf="appraisalGoal.comment === ''" align="end">{{ reviewComment.value.length }} / {{reviewComment.value.length}}</mat-hint>
+        <mat-error *ngIf="reviewComment.errors?.minlength" align="start"><strong>Comment should be atleast {{appraisalCycle.minCommentLength}} characters.</strong></mat-error>
+        <mat-hint *ngIf="appraisalGoal.comment.length < appraisalCycle.minCommentLength" align="end">{{ appraisalGoal.comment.length }} / {{appraisalCycle.minCommentLength}}</mat-hint>
       </mat-form-field>
     </div>
   </div>

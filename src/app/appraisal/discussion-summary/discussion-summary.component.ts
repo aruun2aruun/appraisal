@@ -1,6 +1,8 @@
 import { Component, Input, OnChanges, OnInit } from "@angular/core";
+import { MatSnackBar } from '@angular/material';
 import { AppraisalService } from "src/app/core/services/appraisal.service";
 import { InitializationService } from "src/app/core/services/initialization.service";
+import * as messageObject from '../../message.json';
 
 @Component({
   selector: "app-discussion-summary",
@@ -24,9 +26,9 @@ export class DiscussionSummaryComponent implements OnChanges {
 
   constructor(
     private appraisalService: AppraisalService,
-    public initializationService: InitializationService
+    public initializationService: InitializationService,
+    private snackBar: MatSnackBar
   ) {
-    console.log(this.appraisalReview);
   }
 
   ngOnChanges() {
@@ -67,7 +69,6 @@ export class DiscussionSummaryComponent implements OnChanges {
       this.appraisalService.getDiscussion(this.appraisalReview.id).subscribe(
         (response) => {
           this.discussionSummary = response;
-          console.log(response, loggedInUser);
           this.showSubmit = !!response.find(
             (item) => !item.complete && item.reviewerId === loggedInUser.id
           );
@@ -82,17 +83,24 @@ export class DiscussionSummaryComponent implements OnChanges {
       const data = this.discussionSummary.find(
         (element) => loggedInUser.id === element.reviewerId
       );
-      if (data) {
+      if (data &&
+          this.discussionSummary.find((element) => loggedInUser.id === element.reviewerId).comment !== '' &&
+          this.discussionSummary.find((element) => loggedInUser.id === element.reviewerId).rating !== '') {
         this.appraisalService
           .submitDiscussion({ ...data, complete: true })
           .subscribe(
             (response) => {
-              console.log(response);
+              // this.initializationService.initialize();
             },
             (error) => {
               console.log(error);
             }
           );
+      } else {
+        this.snackBar.open(messageObject.MANDATORY.all, null, {
+          duration: 6000,
+          panelClass: 'error'
+        });
       }
     });
   }

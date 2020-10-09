@@ -86,6 +86,11 @@
   "SET_GOALS": {
     "success": "Goals saved successfully!",
     "submit": "Goals submitted successfully!"
+  },
+  "MANDATORY": {
+    "comment": "Appraisal comment minimum length should be",
+    "rating": "Appraisal ratings are mandatory. Please fill all the Ratings!",
+    "all": "All comments and ratings are mandatory. Please fill all Comments and Ratings!"
   }
 }
 

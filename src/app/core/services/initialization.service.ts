@@ -31,6 +31,10 @@ export class InitializationService {
     private appraisalService: AppraisalService,
     private store: Store<AppState>
   ) {
+    this.initialize();
+  }
+
+  initialize() {
     this.cycleSelectionService.initialize();
     this.initializeLoggedInUser();
     this.getAllUsers();

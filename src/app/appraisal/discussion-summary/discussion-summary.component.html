@@ -28,10 +28,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="appraisal-review-goal-review" *ngFor="let discussionSummary of discussionSummary">
-      <div class="appraisal-review-goal-review--default"
-        [ngClass]="{'appraisal-review-goal-review--write': !discussionSummary.complete}">
-          <app-appraisal-review-comment-rating [discussionSummary]="discussionSummary"></app-appraisal-review-comment-rating>
-      </div>
+      <app-appraisal-review-comment-rating [discussionSummary]="discussionSummary"></app-appraisal-review-comment-rating>
     </div>
   </mat-expansion-panel>
   <div *ngIf="showSubmit" layout="row" layout-align="center center" class="footer-button">

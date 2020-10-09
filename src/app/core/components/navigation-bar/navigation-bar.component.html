@@ -16,7 +16,7 @@
     </a>
 
     <span class="fill-remaining-space"></span>
-    <span mat-icon-button fxHide="false" fxHide.lt-md  *ngIf="this.authService.loggedInUser">{{this.authService.loggedInUser.name}}</span>
+    <span mat-icon-button fxHide="false" fxHide.lt-md  *ngIf="this.authService.loggedInUser">{{this.authService.loggedInUser.id | idToName}}</span>
     <!-- <button mat-icon-button onclick="location.href='https://appraisal.ioak.org/login'"> -->
     <button mat-icon-button routerLink="/login">
       <mat-icon>account_circle</mat-icon>
