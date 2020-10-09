@@ -7,6 +7,8 @@ import { AppState } from '../app-state';
 import { UserType } from '../model/user-type';
 import { AuthService } from '../core/services/auth.service';
 import { InitializationService } from '../core/services/initialization.service';
+import { MatSnackBar } from '@angular/material';
+import * as messageObject from '../message.json';
 
 @Component({
   selector: 'app-appraisal',
@@ -23,6 +25,7 @@ export class AppraisalComponent implements OnInit {
   showSubmit = false;
   roles: any[];
   appraisalCycle: any;
+  showDiscussion = false;
 
   constructor(
     private pageHeaderService: PageHeaderService,
@@ -30,7 +33,8 @@ export class AppraisalComponent implements OnInit {
     private route: ActivatedRoute,
     public authService: AuthService,
     public initializationService: InitializationService,
-    private store: Store<AppState>
+    private store: Store<AppState>,
+    private snackBar: MatSnackBar
   ) {
     this.pageHeaderService.setTitle('Appraisal');
   }
@@ -85,13 +89,13 @@ export class AppraisalComponent implements OnInit {
                       )
                     )
                     .subscribe((goals) => {
-                      this.jobGoals = goals.filter((item) => item.job !== null);
+                      this.jobGoals = goals.filter((item) => !!item.job);
                       this.jobGoalsGroup = this.jobGoals
                         .map((item) => item.group)
                         .filter(
                           (value, index, self) => self.indexOf(value) === index
                         );
-                      this.cuGoals = goals.filter((item) => item.cu !== null);
+                      this.cuGoals = goals.filter((item) => !!item.cu);
                     });
                 });
               this.getAppraisalCycleAndRoles(appraisalReview, loggedInUser);
@@ -130,12 +134,12 @@ export class AppraisalComponent implements OnInit {
               )
             )
           )
-          .subscribe((result) => {
-            console.log(result)
-            console.log(loggedInUser)
-            this.roles = result;
-            const reviewer = result.find((item) => item.reviewerId === loggedInUser.id);
+          .subscribe((roles) => {
+            this.roles = roles;
+            const reviewer = roles.find((item) => item.reviewerId === loggedInUser.id && item.reviewerType !== 'Master');
             this.showSubmit = appraisalReview.status === reviewer.reviewerType && !reviewer.complete;
+            const master = roles.find((item) => item.reviewerId === loggedInUser.id && item.reviewerType === 'Master');
+            this.showDiscussion = master && ['Master', 'Complete'].includes(appraisalReview.status) ? true : false;
           });
       });
   }
@@ -150,27 +154,30 @@ export class AppraisalComponent implements OnInit {
 
   saveAsDraft() {
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
-      this.appraisalService
-        .saveReviewGoal(
-          this.appraisalGoals.filter(
-            (item) => item.reviewerId === loggedInUser.id
+        this.appraisalService
+          .saveReviewGoal(
+            this.appraisalGoals.filter(
+              (item) => item.reviewerId === loggedInUser.id
+            )
           )
-        )
-        .subscribe(
-          (response) => {
-            console.log(response);
-            this.initialize();
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
+          .subscribe(
+            (response) => {
+              this.initialize();
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
     });
   }
 
   submitAppraisal() {
     this.saveAsDraft();
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
+      if (this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id && item.rating === '') ||
+                                            (item.reviewerId === loggedInUser.id && item.comment === '') ||
+                                            (item.reviewerId === loggedInUser.id && item.comment.length <
+                                              this.appraisalCycle.minCommentLength)).length === 0) {
       this.appraisalService
         .submitReviewGoal(
           this.appraisalGoals.filter(
@@ -179,13 +186,26 @@ export class AppraisalComponent implements OnInit {
         )
         .subscribe(
           (response) => {
-            console.log(response);
-            this.initialize();
+            this.initializationService.initialize();
+            this.ngOnInit();
           },
           (error) => {
             console.log(error);
           }
         );
+      } else if (this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id && item.rating === '') ||
+                                                    (item.reviewerId === loggedInUser.id && item.comment === '')).length > 0) {
+        this.snackBar.open(messageObject.MANDATORY.all, null, {
+          duration: 6000,
+          panelClass: 'error'
+        });
+      } else if (this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id && item.comment.length <
+                                                      this.appraisalCycle.minCommentLength)).length > 0) {
+        this.snackBar.open(messageObject.MANDATORY.comment, this.appraisalCycle.minCommentLength, {
+          duration: 6000,
+          panelClass: 'error'
+        });
+      }
     });
   }
 }

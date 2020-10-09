@@ -1,0 +1,42 @@
+.discussion-summary {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 20px;
+  justify-content: flex-start;
+  padding: 20px;
+  .appraisal-review-goal-review {
+    .appraisal-review-goal-review--default {
+      margin-top: 20px;
+      border: 1px dotted #d2d2d2;
+      background-color: #ffffff;
+      border-radius: 4px;
+      padding: 10px 20px;
+    }
+    .appraisal-review-goal-review--write {
+      border: 1px dotted #ffd007;
+      background-color: #ffd0070a;
+    }
+    .reviews {
+      .reviewed-by {
+        font-weight: bold;
+      }
+      p {
+        margin: 0;
+        line-height: 18px;
+        margin-top: 10px;
+      }
+    }
+  }
+  .mat-expansion-panel {
+    width: calc(100vw - 200px);
+  }
+  .mat-expansion-panel-header {
+    height: 48px !important;
+    padding: 0 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+  .mat-expansion-panel-content {
+    margin: 10px 0 0 0 !important;
+  }
+}

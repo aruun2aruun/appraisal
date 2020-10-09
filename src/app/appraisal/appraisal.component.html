@@ -41,6 +41,9 @@
     <mat-tab label="Workflow">
       <app-appraisal-summary [roles]="roles" [appraisalReview]="appraisalReview" [appraisalCycle]="appraisalCycle"></app-appraisal-summary>
     </mat-tab>
+    <mat-tab label="Discussion Summary" *ngIf="showDiscussion">
+      <app-discussion-summary [roles]="roles" [appraisalReview]="appraisalReview" [appraisalCycle]="appraisalCycle"></app-discussion-summary>
+    </mat-tab>
   </mat-tab-group>
 
   <footer *ngIf="showSubmit">

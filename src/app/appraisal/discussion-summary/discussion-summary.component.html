@@ -1,0 +1,41 @@
+<div class="discussion-summary">
+  <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
+    <mat-expansion-panel-header>
+      <mat-panel-title style="display: inline-block">
+        Other Ratings
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="appraisal-review-goal-review">
+      <div *ngFor="let role of roles; index as i">
+        <div class="appraisal-review-goal-review--default" *ngIf="role.reviewerType !== 'Master'">
+          <!-- VIEW REVIEWS -->
+          <div class="reviews">
+            <div style="float: right">
+              <mat-label>{{additionalFields[role.id]?.rating}}</mat-label>
+            </div>
+            <div>
+              <mat-label class="reviewed-by">{{ role.reviewerId | idToName }} <i>({{role.reviewerType | workflowMap}})</i></mat-label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="expansion-panel" #mep="matExpansionPanel">
+    <mat-expansion-panel-header>
+      <mat-panel-title style="display: inline-block">
+        Your Comment & Rating
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="appraisal-review-goal-review" *ngFor="let discussionSummary of discussionSummary">
+      <app-appraisal-review-comment-rating [discussionSummary]="discussionSummary"></app-appraisal-review-comment-rating>
+    </div>
+  </mat-expansion-panel>
+  <div *ngIf="showSubmit" layout="row" layout-align="center center" class="footer-button">
+    <button type="button" mat-raised-button color="primary" (click)="submitDiscussionSummary()"
+            class="btn btn-outline-primary sharp">
+      <mat-icon>done</mat-icon>
+      Submit Discussion
+    </button>
+  </div>
+</div>

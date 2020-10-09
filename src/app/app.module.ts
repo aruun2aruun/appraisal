@@ -77,7 +77,9 @@ import { IdToJobnamePipe } from './core/services/id-to-jobname.pipe';
 import { AppraisalSpinnerComponent } from './core/components/appraisal-spinner/appraisal-spinner.component';
 import { ChangeCycleDialogComponent } from './change-cycle-dialog/change-cycle-dialog.component';
 import { AppraisalSummaryComponent } from './appraisal/appraisal-summary/appraisal-summary.component';
-import { AppraisalSummaryCardComponent } from './appraisal/appraisal-summary/appraisal-summary-card/appraisal-summary-card.component';
+import { DiscussionSummaryComponent } from './appraisal/discussion-summary/discussion-summary.component';
+import { AppraisalReviewCommentRatingComponent } from './appraisal/appraisal-review-comment-rating/appraisal-review-comment-rating.component';
+import { WorkflowMapPipe } from './core/services/workflow-map.pipe';
 
 
 @NgModule({
@@ -117,7 +119,9 @@ import { AppraisalSummaryCardComponent } from './appraisal/appraisal-summary/app
     AppraisalSpinnerComponent,
     ChangeCycleDialogComponent,
     AppraisalSummaryComponent,
-    AppraisalSummaryCardComponent
+    DiscussionSummaryComponent,
+    AppraisalReviewCommentRatingComponent,
+    WorkflowMapPipe
   ],
   imports: [
     MatToolbarModule,

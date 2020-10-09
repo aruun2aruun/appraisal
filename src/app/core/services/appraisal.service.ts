@@ -32,6 +32,16 @@ export class AppraisalService {
       .pipe(map(response => response));
   }
 
+  getDiscussion(appraisalId): Observable<any> {
+    return this.httpService.get(`appraisal/review/master?appraisalId=${appraisalId}`, false)
+      .pipe(map(response => response));
+  }
+
+  submitDiscussion(jsonObj): Observable<any> {
+    return this.httpService.put(`appraisal/review/master`, jsonObj, httpOptions)
+      .pipe(map(response => response));
+  }
+
   getAppraisal(cycleId, userId): Observable<any> {
     return this.httpService.get( 'appraisal/cycle/' + cycleId + '/manageable/' + userId)
       .pipe(map(response => response));

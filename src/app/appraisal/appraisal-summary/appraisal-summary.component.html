@@ -6,9 +6,42 @@
           <h4>{{roles.key}}</h4>
         </mat-panel-title>
       </mat-expansion-panel-header> -->
-      <div *ngFor="let role of roles; index as i">
-      <app-appraisal-summary-card [role]="role" [appraisalReview] = "appraisalReview" [appraisalCycle]="appraisalCycle" [isLast]="roles.length === i + 1"></app-appraisal-summary-card>
-    </div>
-    <!-- </mat-expansion-panel>
+  <!-- <div *ngFor="let role of roles; index as i">
+    <app-appraisal-summary-card
+      [role]="role"
+      [appraisalReview]="appraisalReview"
+      [appraisalCycle]="appraisalCycle"
+      [isLast]="roles.length === i + 1"
+    ></app-appraisal-summary-card>
+  </div> -->
+  <!-- </mat-expansion-panel>
   </mat-accordion> -->
+  <div class="table-container mat-elevation-z8">
+    <div class="userDetails">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Employee Name</th>
+            <th scope="col">Reviewer Name</th>
+            <th scope="col">Role</th>
+            <th scope="col">Score</th>
+            <th scope="col">Status</th>
+            <th scope="col">Days remaining</th>
+            <th scope="col">Rating</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let role of roles; index as i">
+            <td>{{role.employeeId | idToName}}</td>
+            <td>{{role.reviewerId | idToName}}</td>
+            <td>{{role.reviewerType | workflowMap}}</td>
+            <td><span *ngIf="role.complete">{{role.totalScore}}</span></td>
+            <td><b [ngClass]="additionalFields[role.id]?.indicator"></b>{{additionalFields[role.id]?.indicator}}</td>
+            <td><span *ngIf="additionalFields[role.id]?.indicator === 'Ongoing'">{{role.reviewerType === 'Master' ? 'NA' : additionalFields[role.id]?.daysRemaining}} days</span></td>
+            <td><span *ngIf="role.complete">{{additionalFields[role.id]?.rating}}</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

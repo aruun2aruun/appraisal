@@ -1,0 +1,59 @@
+<div
+  class="appraisal-review-goal-review--default"
+  [ngClass]="{
+    'appraisal-review-goal-review--write': visibility === 'WRITE'
+  }"
+>
+  <!-- EDIT/WRITE REVIEWS -->
+  <div *ngIf="visibility === 'WRITE'">
+    <mat-form-field style="width: 20%; float: right">
+      <mat-select
+        #MatSelect
+        placeholder="Reviewer rating"
+        [(ngModel)]="discussionSummary.rating"
+        required
+      >
+        <mat-option
+          #MatOption
+          *ngFor="let rating of ratings; let i = index"
+          [value]="rating"
+        >
+          {{ rating }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-label>
+      {{ discussionSummary.reviewerId | idToName }}
+    </mat-label>
+    <mat-form-field class="response-full-width">
+      <textarea
+        style="width: 100%"
+        [(ngModel)]="discussionSummary.comment"
+        matInput
+        matTextareaAutosize
+        matAutosizeMinRows="1"
+        matAutosizeMaxRows="4"
+        data-ng-minLength="10"
+        placeholder="Provide a comment to support your rating"
+        #reviewComment
+        required
+      >
+      </textarea>
+    </mat-form-field>
+  </div>
+
+  <!-- VIEW REVIEWS -->
+  <div class="reviews" *ngIf="visibility === 'READ'">
+    <div style="float: right">
+      <mat-label>{{ discussionSummary.rating }}</mat-label>
+    </div>
+    <div>
+      <mat-label class="reviewed-by"
+        >{{ discussionSummary.reviewerId | idToName }}
+        <i>({{ discussionSummary.reviewerType | workflowMap }})</i></mat-label
+      >
+      <p *ngIf="discussionSummary.comment">{{ discussionSummary.comment }}</p>
+      <p *ngIf="!discussionSummary.comment">No Reviews submitted!</p>
+    </div>
+  </div>
+</div>

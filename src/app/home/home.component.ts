@@ -88,7 +88,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         if (cycle.status === 'ACTIVE') {
           this.cycle = cycle;
           const today = new Date(this.today).getTime();
-          const endDate = new Date(this.cycle.deadline.SELF_APPRAISAL).getTime();
+          const endDate = new Date(this.cycle.deadline.Self).getTime();
           if (today > endDate) {
             this.daysdiff = 0;
           } else {
@@ -156,7 +156,7 @@ export class HomeComponent implements OnInit, OnDestroy {
         // if (data.roles.find(obj => obj.type === 'TeamLead') ||
         //   data.roles.find(obj => obj.type === 'ProjectManager') ||
         //   data.roles.find(obj => obj.type === 'PracticeDirector') ||
-        //   data.roles.find(obj => obj.type === 'HR')) {
+        //   data.roles.find(obj => obj.type === 'Level_4')) {
         //     this.authService.isReviewer = true;
         // }
       }
