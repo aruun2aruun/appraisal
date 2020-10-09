@@ -34,7 +34,7 @@
       </div>
     </div>
   </mat-expansion-panel>
-  <div layout="row" layout-align="center center" class="footer-button">
+  <div *ngIf="showSubmit" layout="row" layout-align="center center" class="footer-button">
     <button type="button" mat-raised-button color="primary" (click)="submitDiscussionSummary()"
             class="btn btn-outline-primary sharp">
       <mat-icon>done</mat-icon>

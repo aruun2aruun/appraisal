@@ -1,11 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from "@angular/core";
+import { InitializationService } from "src/app/core/services/initialization.service";
 
 @Component({
-  selector: 'app-appraisal-review-comment-rating',
-  templateUrl: './appraisal-review-comment-rating.component.html',
-  styleUrls: ['./appraisal-review-comment-rating.component.scss']
+  selector: "app-appraisal-review-comment-rating",
+  templateUrl: "./appraisal-review-comment-rating.component.html",
+  styleUrls: ["./appraisal-review-comment-rating.component.scss"],
 })
-export class AppraisalReviewCommentRatingComponent implements OnInit {
+export class AppraisalReviewCommentRatingComponent implements OnChanges {
   @Input() discussionSummary: any;
   ratings: string[] = [
     "1 - Deficient",
@@ -15,9 +16,15 @@ export class AppraisalReviewCommentRatingComponent implements OnInit {
     "5 - Excellent",
   ];
 
-  constructor() { }
+  visibility = "WRITE";
 
-  ngOnInit() {
+  constructor(private initializationService: InitializationService) {}
+
+  ngOnChanges() {
+    this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
+      if (this.discussionSummary.complete || loggedInUser.id !== this.discussionSummary.reviewerId) {
+        this.visibility = "READ";
+      }
+    });
   }
-
 }

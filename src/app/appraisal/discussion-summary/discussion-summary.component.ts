@@ -20,6 +20,7 @@ export class DiscussionSummaryComponent implements OnChanges {
     "5 - Excellent",
   ];
   discussionSummary: any;
+  showSubmit: boolean;
 
   constructor(
     private appraisalService: AppraisalService,
@@ -62,15 +63,18 @@ export class DiscussionSummaryComponent implements OnChanges {
   };
 
   getDiscussionSummary() {
-    this.appraisalService.getDiscussion(this.appraisalReview.id).subscribe(
-      (response) => {
-        this.discussionSummary = response;
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
+      this.appraisalService.getDiscussion(this.appraisalReview.id).subscribe(
+        (response) => {
+          this.discussionSummary = response;
+          console.log(response, loggedInUser);
+          this.showSubmit = !!response.find(
+            (item) => !item.complete && item.reviewerId === loggedInUser.id
+          );
+        },
+        (error) => {}
+      );
+    });
   }
 
   submitDiscussionSummary() {
@@ -80,7 +84,7 @@ export class DiscussionSummaryComponent implements OnChanges {
       );
       if (data) {
         this.appraisalService
-          .submitDiscussion({...data, complete: true})
+          .submitDiscussion({ ...data, complete: true })
           .subscribe(
             (response) => {
               console.log(response);
