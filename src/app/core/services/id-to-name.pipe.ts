@@ -29,7 +29,7 @@ export class IdToNamePipe implements PipeTransform {
 
   transform(id: string) {
     if (this.users.find(user => user.id === id)) {
-      const value = this.users.find(user => user.id === id).firstName + '-' + this.users.find(user => user.id === id).lastName;
+      const value = this.users.find(user => user.id === id).firstName + ' ' + this.users.find(user => user.id === id).lastName;
       return value;
     } else {
       return id;

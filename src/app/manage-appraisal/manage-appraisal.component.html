@@ -13,6 +13,7 @@
       <thead>
         <tr>
           <th scope="col">Name</th>
+          <th scope="col">Your role</th>
           <th scope="col">Status</th>
           <!-- <th scope="col">Action</th> -->
         </tr>
@@ -21,13 +22,14 @@
         <tr *ngFor="let role of roles" (click)="viewAppraisal(role)">
           <td scope="row" data-label="Name">{{role.employeeId | idToName}}</td>
           <td data-label="Status">{{role.reviewerType | workflowMap}}</td>
+          <td data-label="Status">{{appraisalReviewMap[role.employeeId]?.status | workflowMap}}</td>
           <td>
             <button mat-icon-button matTooltip="View Workflow" matTooltipPosition="before" class="mat-primary" (click)="openSummaryDialog(role); $event.stopPropagation();">
-              <mat-icon>assessment</mat-icon>
+              <mat-icon>read_more</mat-icon> Workflow
             </button>
-            <button mat-icon-button matTooltip="Send Appraisal Reminder" matTooltipPosition="before" class="mat-primary" (click)="openNotifyUserDialog(role); $event.stopPropagation();">
+            <!-- <button mat-icon-button matTooltip="Send Appraisal Reminder" matTooltipPosition="before" class="mat-primary" (click)="openNotifyUserDialog(role); $event.stopPropagation();">
               <mat-icon>mail_outline</mat-icon>
-            </button>
+            </button> -->
           </td>
         </tr>
       </tbody>

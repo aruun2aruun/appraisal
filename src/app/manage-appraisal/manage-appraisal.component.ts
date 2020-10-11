@@ -37,6 +37,7 @@ export class ManageAppraisalComponent implements OnInit {
   appraisalReview: any;
   appraisalCycle: any;
   allRoles: any[];
+  appraisalReviewMap: any = {};
 
   constructor(private cycleSelectionService: CycleSelectionService,
                private pageHeaderService: PageHeaderService,
@@ -73,6 +74,16 @@ export class ManageAppraisalComponent implements OnInit {
             )
           ).subscribe((roles) => {
             this.roles = roles;
+          });
+
+        this.store
+          .pipe(
+            select((state) =>
+              state.appraisalReviews
+            )
+          ).subscribe((appraisalReviews) => {
+            console.log(appraisalReviews);
+            appraisalReviews.forEach(item => this.appraisalReviewMap[item.employeeId] = item);
           });
       }
     });
