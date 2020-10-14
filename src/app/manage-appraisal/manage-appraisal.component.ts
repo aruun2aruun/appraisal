@@ -34,10 +34,13 @@ export class ManageAppraisalComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   roles: any[] = [];
+  rolesView: any[] = [];
   appraisalReview: any;
   appraisalCycle: any;
   allRoles: any[];
   appraisalReviewMap: any = {};
+  searchText: any;
+  users: any[];
 
   constructor(private cycleSelectionService: CycleSelectionService,
                private pageHeaderService: PageHeaderService,
@@ -67,6 +70,7 @@ export class ManageAppraisalComponent implements OnInit {
   initialize() {
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
       if (loggedInUser) {
+        this.store.select((state) => state.users).subscribe(users => this.users = users);
         this.store
           .pipe(
             select((state) =>
@@ -84,6 +88,7 @@ export class ManageAppraisalComponent implements OnInit {
                 })
               }
             })
+            this.filterRolesForView();
           });
 
         this.store
@@ -105,6 +110,22 @@ export class ManageAppraisalComponent implements OnInit {
     //     this.getAllUsers();
         this.RenderDataTable();
       // });
+  }
+
+  filterRolesForView() {
+    if (this.users.length > 0 && this.searchText) {
+      this.rolesView = this.roles.filter(item => {
+        const employee = this.users.find(user => user.id === item.employeeId);
+        console.log(this.userNameMap, employee, this.searchText);
+        if (employee && (`${employee.firstName} ${employee.lastName}`).toLowerCase().includes(this.searchText.toLowerCase())) {
+          return true;
+        } else {
+          return false;
+        }
+      })
+    } else {
+      this.rolesView = this.roles;
+    }
   }
 
   getSummaryData(role) {
@@ -180,6 +201,9 @@ export class ManageAppraisalComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+
+    this.searchText = filterValue;
+    this.filterRolesForView();
   }
 
   getAllUsers() {

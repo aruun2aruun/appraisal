@@ -1,7 +1,8 @@
-<!-- <mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search by employee name">
 </mat-form-field>
 
+<!-- 
 <button mat-stroked-button class="mat-primary notify" (click)="openNotifyDialog()">
   <mat-icon>notifications</mat-icon>
   Send Notification
@@ -19,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let role of roles" (click)="viewAppraisal(role)">
+        <tr *ngFor="let role of rolesView" (click)="viewAppraisal(role)">
           <td scope="row" data-label="Name">{{role.employeeId | idToName}}</td>
           <td data-label="Your roles">
             <span *ngFor="let reviewerType of role.reviewerType">
