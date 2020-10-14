@@ -81,13 +81,13 @@ export class ManageAppraisalComponent implements OnInit {
             roles.forEach(role => {
               const existingElement = this.roles.find(item => item.employeeId === role.employeeId);
               if (existingElement) {
-                existingElement["reviewerType"] = [...existingElement["reviewerType"], role.reviewerType]
+                existingElement['reviewerType'] = [...existingElement['reviewerType'], role.reviewerType];
               } else {
                 this.roles.push({
                   ...role, reviewerType: [role.reviewerType]
-                })
+                });
               }
-            })
+            });
             this.filterRolesForView();
           });
 
@@ -122,7 +122,7 @@ export class ManageAppraisalComponent implements OnInit {
         } else {
           return false;
         }
-      })
+      });
     } else {
       this.rolesView = this.roles;
     }
@@ -321,7 +321,7 @@ export class ManageAppraisalComponent implements OnInit {
   notifyUser(result: any) {
     result.body = result.body + '\n\n' + result.signature;
     this.appraisalService.notifyUser(result).subscribe(
-      response =>{
+      response => {
         this.snackBar.open(messageObject.NOTIFY.success, null, {
           duration: 6000,
         });
