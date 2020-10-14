@@ -13,7 +13,7 @@
       <thead>
         <tr>
           <th scope="col">Name</th>
-          <th scope="col">Your role</th>
+          <th scope="col">Your roles</th>
           <th scope="col">Status</th>
           <!-- <th scope="col">Action</th> -->
         </tr>
@@ -21,7 +21,11 @@
       <tbody>
         <tr *ngFor="let role of roles" (click)="viewAppraisal(role)">
           <td scope="row" data-label="Name">{{role.employeeId | idToName}}</td>
-          <td data-label="Your role">{{role.reviewerType | workflowMap}}</td>
+          <td data-label="Your roles">
+            <span *ngFor="let reviewerType of role.reviewerType">
+              {{reviewerType | workflowMap}}<br/>
+            </span>
+          </td>
           <td data-label="Status">{{appraisalReviewMap[role.employeeId]?.status | workflowMap}}</td>
           <td>
             <button mat-button matTooltip="View Workflow" matTooltipPosition="before" class="mat-primary" (click)="openSummaryDialog(role); $event.stopPropagation();">

@@ -33,7 +33,7 @@ export class ManageAppraisalComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  roles: any;
+  roles: any[] = [];
   appraisalReview: any;
   appraisalCycle: any;
   allRoles: any[];
@@ -73,7 +73,17 @@ export class ManageAppraisalComponent implements OnInit {
               state.roles.filter((item) => item.reviewerId === loggedInUser.id)
             )
           ).subscribe((roles) => {
-            this.roles = roles;
+            this.roles = [];
+            roles.forEach(role => {
+              const existingElement = this.roles.find(item => item.employeeId === role.employeeId);
+              if (existingElement) {
+                existingElement["reviewerType"] = [...existingElement["reviewerType"], role.reviewerType]
+              } else {
+                this.roles.push({
+                  ...role, reviewerType: [role.reviewerType]
+                })
+              }
+            })
           });
 
         this.store
