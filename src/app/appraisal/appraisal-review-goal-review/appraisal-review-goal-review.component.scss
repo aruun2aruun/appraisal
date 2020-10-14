@@ -44,3 +44,16 @@
     visibility: hidden;
   }
 }
+
+::ng-deep .inValid {
+  .mat-form-field-underline {
+    background-color: red !important;
+  }
+  .mat-select-arrow, .mat-select-value, .mat-form-field-infix {
+    color: red !important;
+    -webkit-text-fill-color: red !important;
+  }
+  .mat-select-placeholder {
+    display: none;
+  }
+}

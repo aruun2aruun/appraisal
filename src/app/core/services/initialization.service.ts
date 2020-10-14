@@ -19,6 +19,7 @@ import { AppraisalReviewReload } from 'src/app/store/appraisal-review.actions';
 })
 export class InitializationService {
   loggedInUser$ = new BehaviorSubject(null);
+  showValidationErrors$ = new BehaviorSubject(false);
 
   users$ = this.store.pipe(select((state) => state.users));
 

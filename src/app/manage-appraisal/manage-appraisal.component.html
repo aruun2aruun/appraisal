@@ -1,11 +1,11 @@
-<mat-form-field>
+<!-- <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
 </mat-form-field>
 
 <button mat-stroked-button class="mat-primary notify" (click)="openNotifyDialog()">
   <mat-icon>notifications</mat-icon>
   Send Notification
-</button>
+</button> -->
 
 <div class="table-container mat-elevation-z8">
   <div class="userDetails">
@@ -21,10 +21,10 @@
       <tbody>
         <tr *ngFor="let role of roles" (click)="viewAppraisal(role)">
           <td scope="row" data-label="Name">{{role.employeeId | idToName}}</td>
-          <td data-label="Status">{{role.reviewerType | workflowMap}}</td>
+          <td data-label="Your role">{{role.reviewerType | workflowMap}}</td>
           <td data-label="Status">{{appraisalReviewMap[role.employeeId]?.status | workflowMap}}</td>
           <td>
-            <button mat-icon-button matTooltip="View Workflow" matTooltipPosition="before" class="mat-primary" (click)="openSummaryDialog(role); $event.stopPropagation();">
+            <button mat-button matTooltip="View Workflow" matTooltipPosition="before" class="mat-primary" (click)="openSummaryDialog(role); $event.stopPropagation();">
               <mat-icon>read_more</mat-icon> Workflow
             </button>
             <!-- <button mat-icon-button matTooltip="Send Appraisal Reminder" matTooltipPosition="before" class="mat-primary" (click)="openNotifyUserDialog(role); $event.stopPropagation();">

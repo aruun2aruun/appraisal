@@ -40,6 +40,7 @@ export class AppraisalComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.initializationService.showValidationErrors$.next(false);
     this.route.queryParams.subscribe((params) => {
       this.queryParamId = params.id;
     });
@@ -173,6 +174,7 @@ export class AppraisalComponent implements OnInit {
 
   submitAppraisal() {
     this.saveAsDraft();
+    this.initializationService.showValidationErrors$.next(true);
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
       if (this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id && item.rating === '') ||
                                             (item.reviewerId === loggedInUser.id && item.comment === '') ||
@@ -195,7 +197,7 @@ export class AppraisalComponent implements OnInit {
         );
       } else if (this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id && item.rating === '') ||
                                                     (item.reviewerId === loggedInUser.id && item.comment === '')).length > 0) {
-        this.snackBar.open(messageObject.MANDATORY.all, null, {
+        this.snackBar.open(messageObject.MANDATORY.rating, null, {
           duration: 6000,
           panelClass: 'error'
         });

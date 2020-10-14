@@ -45,7 +45,7 @@ export class ChangeCycleDialogComponent implements OnInit {
 
   changeCycle(cycle) {
     this.cycleSelectionService.changeCycle(cycle);
-    this.router.navigate(['/home']);
+    this.router.navigate(['/reportees']);
   }
 
 }

@@ -32,11 +32,16 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
   @Output() testValue = new EventEmitter();
 
   filteredGoals: any = [];
+  showValidationErrors: boolean;
 
   constructor(
     private initializationService: InitializationService,
     private store: Store<AppState>
-  ) {}
+  ) {
+    this.initializationService.showValidationErrors$.subscribe((showValidationErrors) => {
+      this.showValidationErrors = showValidationErrors;
+    });
+  }
 
   ngOnChanges() {
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {

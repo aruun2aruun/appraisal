@@ -31,7 +31,7 @@
 
     <!-- EDIT/WRITE REVIEWS -->
     <div *ngIf="appraisalGoal.visibility === 'WRITE'">
-      <mat-form-field style="width: 20%; float: right">
+      <mat-form-field style="width: 20%; float: right" [ngClass]="{'inValid': showValidationErrors && !appraisalGoal.rating}">
         <mat-select
           #MatSelect = 'ngModel'
           placeholder="Reviewer rating"
@@ -61,12 +61,10 @@
           matAutosizeMaxRows="4"
           data-ng-minLength="10"
           placeholder="Provide a comment to support your rating"
-          [minlength]='appraisalCycle.minCommentLength'
-          #reviewComment = 'ngModel'
-          required>
+          #reviewComment = 'ngModel'>
         </textarea>
-        <mat-error *ngIf="reviewComment.errors?.minlength" align="start"><strong>Comment should be atleast {{appraisalCycle.minCommentLength}} characters.</strong></mat-error>
-        <mat-hint *ngIf="appraisalGoal.comment.length < appraisalCycle.minCommentLength" align="end">{{ appraisalGoal.comment.length }} / {{appraisalCycle.minCommentLength}}</mat-hint>
+        <!-- <mat-error *ngIf="reviewComment.errors?.minlength" align="start"><strong>Comment should be atleast {{appraisalCycle.minCommentLength}} characters.</strong></mat-error>
+        <mat-hint *ngIf="appraisalGoal.comment.length < appraisalCycle.minCommentLength" align="end">{{ appraisalGoal.comment.length }} / {{appraisalCycle.minCommentLength}}</mat-hint> -->
       </mat-form-field>
     </div>
   </div>
