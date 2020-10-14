@@ -97,7 +97,6 @@ export class ManageAppraisalComponent implements OnInit {
               state.appraisalReviews
             )
           ).subscribe((appraisalReviews) => {
-            console.log(appraisalReviews);
             appraisalReviews.forEach(item => this.appraisalReviewMap[item.employeeId] = item);
           });
       }
@@ -116,7 +115,6 @@ export class ManageAppraisalComponent implements OnInit {
     if (this.users.length > 0 && this.searchText) {
       this.rolesView = this.roles.filter(item => {
         const employee = this.users.find(user => user.id === item.employeeId);
-        console.log(this.userNameMap, employee, this.searchText);
         if (employee && (`${employee.firstName} ${employee.lastName}`).toLowerCase().includes(this.searchText.toLowerCase())) {
           return true;
         } else {
@@ -152,7 +150,6 @@ export class ManageAppraisalComponent implements OnInit {
             )
           )
           .subscribe((appraisalReview) => {
-            console.log(appraisalReview);
             this.appraisalReview = appraisalReview;
             if (appraisalReview) {
               this.store
@@ -248,7 +245,6 @@ export class ManageAppraisalComponent implements OnInit {
         state.appraisalReviews.filter((item) => item.employeeId  === role.employeeId)
       )
     ).subscribe((appraisalReviews) => {
-      console.log(appraisalReviews[0].id);
       this.router.navigate([`appraisal`], {
         queryParams: {id: appraisalReviews[0].id},
       });
