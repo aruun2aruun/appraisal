@@ -21,7 +21,6 @@
       <table>
         <thead>
           <tr>
-            <th scope="col">Employee Name</th>
             <th scope="col">Reviewer Name</th>
             <th scope="col">Role</th>
             <th scope="col">Score</th>
@@ -32,7 +31,6 @@
         </thead>
         <tbody>
           <tr *ngFor="let role of roles; index as i">
-            <td data-label="Employee Name">{{role.employeeId | idToName}}</td>
             <td data-label="Reviewer Name">{{role.reviewerId | idToName}}</td>
             <td data-label="Role">{{role.reviewerType | workflowMap}}</td>
             <td data-label="Score"><span *ngIf="role.complete">{{role.totalScore}}</span></td>
