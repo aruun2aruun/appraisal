@@ -74,10 +74,14 @@ export class InitializationService {
   getAllRoles() {
     this.cycleSelectionService.cycleChangedEvent.subscribe((data) => {
       if (data) {
-        this.roleService.getRoles(data.id).subscribe((roles) => {
-          this.store.dispatch(new RoleReload(roles));
-        });
+        this.refreshAllRoles(data.id);
       }
+    });
+  }
+
+  refreshAllRoles(cycleId) {
+    this.roleService.getRoles(cycleId).subscribe((roles) => {
+      this.store.dispatch(new RoleReload(roles));
     });
   }
 

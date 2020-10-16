@@ -137,8 +137,8 @@ export class AppraisalComponent implements OnInit {
           )
           .subscribe((roles) => {
             this.roles = roles;
-            const reviewer = roles.find((item) => item.reviewerId === loggedInUser.id && item.reviewerType !== 'Master');
-            this.showSubmit = appraisalReview.status === reviewer.reviewerType && !reviewer.complete;
+            const reviewer = roles.find((item) => item.reviewerId === loggedInUser.id && item.reviewerType === appraisalReview.status && item.reviewerType !== 'Master');
+            this.showSubmit = !reviewer.complete;
             const master = roles.find((item) => item.reviewerId === loggedInUser.id && item.reviewerType === 'Master');
             this.showDiscussion = master && ['Master', 'Complete'].includes(appraisalReview.status) ? true : false;
           });
@@ -158,7 +158,7 @@ export class AppraisalComponent implements OnInit {
         this.appraisalService
           .saveReviewGoal(
             this.appraisalGoals.filter(
-              (item) => item.reviewerId === loggedInUser.id
+              (item) => item.reviewerId === loggedInUser.id && item.reviewerType === this.appraisalReview.status
             )
           )
           .subscribe(
@@ -176,12 +176,11 @@ export class AppraisalComponent implements OnInit {
 
   submitAppraisal() {
     this.saveAsDraft();
-    this.initializationService.showValidationErrors$.next(true);
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
       const submitObj = this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id &&
-                                                       item.rating !== '' &&
                                                        item.reviewerType === this.appraisalReview.status));
       if (submitObj.find(item => item.rating === '') ) {
+        this.initializationService.showValidationErrors$.next(true);
         this.snackBar.open(messageObject.MANDATORY.rating, null, {
           duration: 6000,
           panelClass: 'error'
@@ -193,7 +192,8 @@ export class AppraisalComponent implements OnInit {
             (response) => {
               console.log(response);
               if (response.length > 0) {
-                this.ngOnInit();
+                this.getReviewGoal(this.appraisalReview);
+                this.initializationService.refreshAllRoles(this.appraisalCycle.id);
               }
             },
             (error) => {
