@@ -163,7 +163,9 @@ export class AppraisalComponent implements OnInit {
           )
           .subscribe(
             (response) => {
-              this.initialize();
+              if (response) {
+                this.initialize();
+              }
             },
             (error) => {
               console.log(error);
@@ -176,37 +178,28 @@ export class AppraisalComponent implements OnInit {
     this.saveAsDraft();
     this.initializationService.showValidationErrors$.next(true);
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
-      if (this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id && item.rating === '') ||
-                                            (item.reviewerId === loggedInUser.id && item.comment === '') ||
-                                            (item.reviewerId === loggedInUser.id && item.comment.length <
-                                              this.appraisalCycle.minCommentLength)).length === 0) {
-      this.appraisalService
-        .submitReviewGoal(
-          this.appraisalGoals.filter(
-            (item) => item.reviewerId === loggedInUser.id
-          )
-        )
-        .subscribe(
-          (response) => {
-            this.initializationService.initialize();
-            this.ngOnInit();
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      } else if (this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id && item.rating === '') ||
-                                                    (item.reviewerId === loggedInUser.id && item.comment === '')).length > 0) {
+      const submitObj = this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id &&
+                                                       item.rating !== '' &&
+                                                       item.reviewerType === this.appraisalReview.status));
+      if (submitObj.find(item => item.rating === '') ) {
         this.snackBar.open(messageObject.MANDATORY.rating, null, {
           duration: 6000,
           panelClass: 'error'
         });
-      } else if (this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id && item.comment.length <
-                                                      this.appraisalCycle.minCommentLength)).length > 0) {
-        this.snackBar.open(messageObject.MANDATORY.comment, this.appraisalCycle.minCommentLength, {
-          duration: 6000,
-          panelClass: 'error'
-        });
+      } else {
+        this.appraisalService
+          .submitReviewGoal(submitObj)
+          .subscribe(
+            (response) => {
+              console.log(response);
+              if (response.length > 0) {
+                this.ngOnInit();
+              }
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
       }
     });
   }
