@@ -99,19 +99,19 @@ export class AppraisalSummaryComponent implements OnChanges {
 
       switch (Math.round(role.secondaryScore)) {
         case 1:
-          additionalFieldsEntry.secondaryRating = 'Deficient';
+          additionalFieldsEntry.secondaryRating = 'Not Met';
           break;
         case 2:
-          additionalFieldsEntry.secondaryRating = 'Improvements Required';
+          additionalFieldsEntry.secondaryRating = 'Started but not completed';
           break;
         case 3:
-          additionalFieldsEntry.secondaryRating = 'Meets Expectations';
+          additionalFieldsEntry.secondaryRating = 'Partially Met';
           break;
         case 4:
-          additionalFieldsEntry.secondaryRating = 'Above Expectations';
+          additionalFieldsEntry.secondaryRating = 'Almost Fully Met';
           break;
         case 5:
-          additionalFieldsEntry.secondaryRating = 'Excellent';
+          additionalFieldsEntry.secondaryRating = 'Fully Met';
           break;
         default:
           additionalFieldsEntry.secondaryRating = "No rating";
