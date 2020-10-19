@@ -10,6 +10,7 @@ export class AppraisalReviewGoalComponent implements OnInit {
   @Input() appraisalGoals: any;
   @Input() appraisalReview: string;
   @Input() appraisalCycle: string;
+  @Input() ratings: any;
 
   @Output() changeGoalReview = new EventEmitter();
 

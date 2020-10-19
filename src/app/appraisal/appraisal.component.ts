@@ -9,6 +9,7 @@ import { AuthService } from '../core/services/auth.service';
 import { InitializationService } from '../core/services/initialization.service';
 import { MatSnackBar } from '@angular/material';
 import * as messageObject from '../message.json';
+import { CuRatings, Ratings } from '../core/enum/ratings.enum';
 
 @Component({
   selector: 'app-appraisal',
@@ -26,6 +27,8 @@ export class AppraisalComponent implements OnInit {
   roles: any[];
   appraisalCycle: any;
   showDiscussion = false;
+  ratings: Ratings[];
+  cuRatings: CuRatings[];
 
   constructor(
     private pageHeaderService: PageHeaderService,
@@ -52,6 +55,8 @@ export class AppraisalComponent implements OnInit {
   }
 
   initialize() {
+    this.ratings = Object.values(Ratings);
+    this.cuRatings = Object.values(CuRatings);
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
       console.log('****loggedInUser');
       if (loggedInUser) {
@@ -175,7 +180,6 @@ export class AppraisalComponent implements OnInit {
   }
 
   submitAppraisal() {
-    this.saveAsDraft();
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
       const submitObj = this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id &&
                                                        item.reviewerType === this.appraisalReview.status));

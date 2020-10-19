@@ -21,13 +21,7 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
   @Input() appraisalGoals: any;
   @Input() appraisalReview: any;
   @Input() appraisalCycle: any;
-  ratings: string[] = [
-    '1 - Deficient',
-    '2 - Improvements Required',
-    '3 - Meets Expectations',
-    '4 - Above Expectations',
-    '5 - Excellent',
-  ];
+  @Input() ratings: any;
 
   @Output() testValue = new EventEmitter();
 
