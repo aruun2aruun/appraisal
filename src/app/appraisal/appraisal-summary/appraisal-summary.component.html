@@ -23,20 +23,34 @@
           <tr>
             <th scope="col">Reviewer Name</th>
             <th scope="col">Role</th>
-            <th scope="col">Score</th>
             <th scope="col">Status</th>
-            <th scope="col">Days remaining</th>
-            <th scope="col">Rating</th>
+            <th scope="col">Goals and objectives</th>
+            <th scope="col">Personal Targets</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let role of roles; index as i">
-            <td data-label="Reviewer Name">{{role.reviewerId | idToName}}</td>
-            <td data-label="Role">{{role.reviewerType | workflowMap}}</td>
-            <td data-label="Score"><span *ngIf="role.complete">{{role.totalScore}}</span></td>
-            <td data-label="Status"><b [ngClass]="additionalFields[role.id]?.indicator"></b>{{additionalFields[role.id]?.indicator}}</td>
-            <td data-label="Days remaining"><span *ngIf="additionalFields[role.id]?.indicator === 'Ongoing'">{{role.reviewerType === 'Master' ? 'NA' : additionalFields[role.id]?.daysRemaining}} days</span></td>
-            <td data-label="Rating"><span *ngIf="role.complete">{{additionalFields[role.id]?.rating}}</span></td>
+            <td data-label="Reviewer Name">{{ role.reviewerId | idToName }}</td>
+            <td data-label="Role">{{ role.reviewerType | workflowMap }}</td>
+            <td data-label="Status">
+              <b [ngClass]="additionalFields[role.id]?.indicator"></b
+              >{{ additionalFields[role.id]?.indicator }}
+              <span *ngIf="additionalFields[role.id]?.indicator === 'Ongoing'"
+                >({{ additionalFields[role.id]?.daysRemaining }} days remain)</span
+              >
+            </td>
+            <td data-label="Rating">
+              <span *ngIf="role.complete">{{
+                additionalFields[role.id]?.primaryRating
+              }}</span>
+              <span *ngIf="role.complete"> ({{ role.primaryScore }})</span>
+            </td>
+            <td data-label="Rating">
+              <span *ngIf="role.complete">{{
+                additionalFields[role.id]?.secondaryRating
+              }}</span>
+              <span *ngIf="role.complete"> ({{ role.secondaryScore }})</span>
+            </td>
           </tr>
         </tbody>
       </table>

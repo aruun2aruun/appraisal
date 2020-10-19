@@ -19,7 +19,7 @@ export class AppraisalSummaryComponent implements OnChanges {
 
   populateAdditionalFields = (role: any) => {
     if (this.appraisalCycle && this.appraisalReview) {
-      const additionalFieldsEntry = {daysRemaining: 0, indicator: 'Awaiting', rating: ''};
+      const additionalFieldsEntry = {daysRemaining: 0, indicator: 'Awaiting', primaryRating: '', secondaryRating: ''};
       const oneDay = 24 * 60 * 60 * 1000;
       additionalFieldsEntry.daysRemaining = Math.round(
         Math.abs(
@@ -76,24 +76,45 @@ export class AppraisalSummaryComponent implements OnChanges {
         }
       }
 
-      switch (Math.round(role.totalScore)) {
+      switch (Math.round(role.primaryScore)) {
         case 1:
-          additionalFieldsEntry.rating = '1 - Deficient';
+          additionalFieldsEntry.primaryRating = 'Deficient';
           break;
         case 2:
-          additionalFieldsEntry.rating = '2 - Improvements Required';
+          additionalFieldsEntry.primaryRating = 'Improvements Required';
           break;
         case 3:
-          additionalFieldsEntry.rating = '3 - Meets Expectations';
+          additionalFieldsEntry.primaryRating = 'Meets Expectations';
           break;
         case 4:
-          additionalFieldsEntry.rating = '4 - Above Expectations';
+          additionalFieldsEntry.primaryRating = 'Above Expectations';
           break;
         case 5:
-          additionalFieldsEntry.rating = '5 - Excellent';
+          additionalFieldsEntry.primaryRating = 'Excellent';
           break;
         default:
-          additionalFieldsEntry.rating = "0 - No rating";
+          additionalFieldsEntry.primaryRating = "No rating";
+          break;
+      }
+
+      switch (Math.round(role.secondaryScore)) {
+        case 1:
+          additionalFieldsEntry.secondaryRating = 'Deficient';
+          break;
+        case 2:
+          additionalFieldsEntry.secondaryRating = 'Improvements Required';
+          break;
+        case 3:
+          additionalFieldsEntry.secondaryRating = 'Meets Expectations';
+          break;
+        case 4:
+          additionalFieldsEntry.secondaryRating = 'Above Expectations';
+          break;
+        case 5:
+          additionalFieldsEntry.secondaryRating = 'Excellent';
+          break;
+        default:
+          additionalFieldsEntry.secondaryRating = "No rating";
           break;
       }
 
