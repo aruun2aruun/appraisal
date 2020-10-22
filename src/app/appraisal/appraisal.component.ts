@@ -143,7 +143,7 @@ export class AppraisalComponent implements OnInit {
           .subscribe((roles) => {
             this.roles = roles;
             const reviewer = roles.find((item) => item.reviewerId === loggedInUser.id && item.reviewerType === appraisalReview.status && item.reviewerType !== 'Master');
-            this.showSubmit = !reviewer.complete;
+            this.showSubmit = reviewer && !reviewer.complete;
             const master = roles.find((item) => item.reviewerId === loggedInUser.id && item.reviewerType === 'Master');
             this.showDiscussion = master && ['Master', 'Complete'].includes(appraisalReview.status) ? true : false;
           });
