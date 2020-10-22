@@ -11,7 +11,7 @@
           <!-- VIEW REVIEWS -->
           <div class="reviews">
             <div style="float: right">
-              <mat-label>{{additionalFields[role.id]?.rating}}</mat-label>
+              <mat-label>{{additionalFields[role.id]?.primaryRating}}, {{additionalFields[role.id]?.secondaryRating}}</mat-label>
             </div>
             <div>
               <mat-label class="reviewed-by">{{ role.reviewerId | idToName }} <i>({{role.reviewerType | workflowMap}})</i></mat-label>

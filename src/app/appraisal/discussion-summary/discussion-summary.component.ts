@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, OnInit } from "@angular/core";
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from "@angular/material";
 import { AppraisalService } from "src/app/core/services/appraisal.service";
 import { InitializationService } from "src/app/core/services/initialization.service";
-import * as messageObject from '../../message.json';
+import * as messageObject from "../../message.json";
 
 @Component({
   selector: "app-discussion-summary",
@@ -28,8 +28,7 @@ export class DiscussionSummaryComponent implements OnChanges {
     private appraisalService: AppraisalService,
     public initializationService: InitializationService,
     private snackBar: MatSnackBar
-  ) {
-  }
+  ) {}
 
   ngOnChanges() {
     this.roles.forEach((role) => this.populateAdditionalFields(role));
@@ -38,25 +37,47 @@ export class DiscussionSummaryComponent implements OnChanges {
 
   populateAdditionalFields = (role: any) => {
     if (this.appraisalCycle && this.appraisalReview) {
-      const additionalFieldsEntry = { rating: "" };
+      const additionalFieldsEntry = { primaryRating: "", secondaryRating: "" };
 
-      switch (Math.round(role.totalScore)) {
+      switch (Math.round(role.primaryScore)) {
         case 1:
-          additionalFieldsEntry.rating = "1 - Deficient";
+          additionalFieldsEntry.primaryRating = "Deficient";
           break;
         case 2:
-          additionalFieldsEntry.rating = "2 - Improvements Required";
+          additionalFieldsEntry.primaryRating = "Improvements Required";
           break;
         case 3:
-          additionalFieldsEntry.rating = "3 - Meets Expectations";
+          additionalFieldsEntry.primaryRating = "Meets Expectations";
           break;
         case 4:
-          additionalFieldsEntry.rating = "4 - Above Expectations";
+          additionalFieldsEntry.primaryRating = "Above Expectations";
           break;
         case 5:
-          additionalFieldsEntry.rating = "5 - Excellent";
+          additionalFieldsEntry.primaryRating = "Excellent";
           break;
         default:
+          additionalFieldsEntry.primaryRating = "No rating";
+          break;
+      }
+
+      switch (Math.round(role.secondaryScore)) {
+        case 1:
+          additionalFieldsEntry.secondaryRating = "Not Met";
+          break;
+        case 2:
+          additionalFieldsEntry.secondaryRating = "Started but not completed";
+          break;
+        case 3:
+          additionalFieldsEntry.secondaryRating = "Partially Met";
+          break;
+        case 4:
+          additionalFieldsEntry.secondaryRating = "Almost Fully Met";
+          break;
+        case 5:
+          additionalFieldsEntry.secondaryRating = "Fully Met";
+          break;
+        default:
+          additionalFieldsEntry.secondaryRating = "No rating";
           break;
       }
 
@@ -83,9 +104,15 @@ export class DiscussionSummaryComponent implements OnChanges {
       const data = this.discussionSummary.find(
         (element) => loggedInUser.id === element.reviewerId
       );
-      if (data &&
-          this.discussionSummary.find((element) => loggedInUser.id === element.reviewerId).comment !== '' &&
-          this.discussionSummary.find((element) => loggedInUser.id === element.reviewerId).rating !== '') {
+      if (
+        data &&
+        this.discussionSummary.find(
+          (element) => loggedInUser.id === element.reviewerId
+        ).comment !== "" &&
+        this.discussionSummary.find(
+          (element) => loggedInUser.id === element.reviewerId
+        ).rating !== ""
+      ) {
         this.appraisalService
           .submitDiscussion({ ...data, complete: true })
           .subscribe(
@@ -99,7 +126,7 @@ export class DiscussionSummaryComponent implements OnChanges {
       } else {
         this.snackBar.open(messageObject.MANDATORY.all, null, {
           duration: 6000,
-          panelClass: 'error'
+          panelClass: "error",
         });
       }
     });
