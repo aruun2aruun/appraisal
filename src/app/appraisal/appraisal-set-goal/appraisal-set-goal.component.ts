@@ -14,8 +14,10 @@ export class AppraisalSetGoalComponent implements OnChanges {
   @Input() appraisalGoals: any;
   @Input() appraisalReview: any;
   @Input() appraisalCycle: any;
+  @Input() goalType: string;
   loggedInUser: UserType;
-  filteredGoals: any = [];
+  setGoal: any = null;
+  reviewGoal: any = null;
 
   constructor(
     private initializationService: InitializationService,
@@ -33,14 +35,13 @@ export class AppraisalSetGoalComponent implements OnChanges {
 
   initialize(loggedInUser) {
     if (this.appraisalGoals) {
-      this.filteredGoals = this.appraisalGoals
-        .filter((appraisalGoal) => appraisalGoal.goalId === this.jobGoal.id)
-        .map((appraisalGoal) => {
-          return {
-            ...appraisalGoal,
-            visibility: this.getVisibility(loggedInUser, appraisalGoal),
-          };
-        });
+      if (this.goalType === 'SET_GOAL') {
+        this.setGoal = this.appraisalGoals
+        .find((appraisalGoal) => appraisalGoal.goalId === this.jobGoal.id && appraisalGoal.reviewerType === 'SET_GOAL');
+      } else {
+        this.reviewGoal = this.appraisalGoals
+          .find((appraisalGoal) => appraisalGoal.goalId === this.jobGoal.id && appraisalGoal.reviewerType === 'REVIEW_GOAL');
+      }
     }
   }
 

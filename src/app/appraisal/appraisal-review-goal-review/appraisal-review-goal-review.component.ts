@@ -51,7 +51,7 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
   initialize(loggedInUser) {
     if (this.appraisalGoals) {
       this.filteredGoals = this.appraisalGoals
-        .filter((appraisalGoal) => appraisalGoal.goalId === this.jobGoal.id)
+        .filter((appraisalGoal) => appraisalGoal.goalId === this.jobGoal.id && !['SET_GOAL', 'REVIEW_GOAL'].includes(appraisalGoal.reviewerType))
         .map((appraisalGoal) => {
           return {
             ...appraisalGoal,

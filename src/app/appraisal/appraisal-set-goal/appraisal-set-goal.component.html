@@ -1,11 +1,26 @@
 <!-- SET GOALS -->
-<div class="set-self-goals">
-  <mat-label>{{loggedInUser.id | idToName}} (Set Self Goal)</mat-label>
+<div class="set-self-goals" *ngIf="setGoal">
   <div class="self-goals">
-    <mat-form-field class="response-full-width">  
-      <textarea style="width: 100%" [(ngModel)]="jobGoal.description" [ngModelOptions]="{ standalone: true }"
+    <div>
+      <div>
+        <mat-label class="reviewed-by">Goals set in previous year</mat-label>
+        <p *ngIf="setGoal.comment">{{setGoal.comment}}</p>
+        <p *ngIf="!setGoal.comment">No targets defined in previous year</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- REVIEW GOALS -->
+<div class="set-review-goals" *ngIf="reviewGoal">
+  <mat-label>Targets for the next year</mat-label>
+  <div class="review-goals">
+    <mat-form-field class="response-full-width">
+      <textarea style="width: 100%" [(ngModel)]="reviewGoal.comment" [ngModelOptions]="{ standalone: true }"
                 matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
-                placeholder="Description">
+                placeholder="Set targets for the next year">
       </textarea>
     </mat-form-field>
   </div>

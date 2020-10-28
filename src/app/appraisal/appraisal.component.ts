@@ -163,7 +163,7 @@ export class AppraisalComponent implements OnInit {
         this.appraisalService
           .saveReviewGoal(
             this.appraisalGoals.filter(
-              (item) => item.reviewerId === loggedInUser.id && item.reviewerType === this.appraisalReview.status
+              (item) => (item.reviewerId === loggedInUser.id && item.reviewerType === this.appraisalReview.status) || item.reviewerType === 'REVIEW_GOAL'
             )
           )
           .subscribe(
