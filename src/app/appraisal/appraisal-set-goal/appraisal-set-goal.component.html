@@ -1,14 +1,9 @@
 <!-- SET GOALS -->
 <div class="set-self-goals" *ngIf="setGoal">
   <div class="self-goals">
-    <div>
-      <div>
-        <mat-label class="reviewed-by">Goals set in previous year</mat-label>
-        <p *ngIf="setGoal.comment">{{setGoal.comment}}</p>
-        <p *ngIf="!setGoal.comment">No targets defined in previous year</p>
-      </div>
-    </div>
-
+    <mat-label class="reviewed-by">Goals set in previous year</mat-label>
+    <p *ngIf="setGoal.comment">{{setGoal.comment}}</p>
+    <p *ngIf="!setGoal.comment">No targets defined in previous year</p>
   </div>
 </div>
 

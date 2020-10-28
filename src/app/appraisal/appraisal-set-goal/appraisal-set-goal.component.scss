@@ -4,22 +4,25 @@
   border: 1px solid #b8daff;
   color: #004085;
   padding: 10px;
-  margin: 0 0 10px 0;
+  margin: 10px 0 0 0;
   .self-goals {
-    display: flex;
-    align-items: flex-end;
     margin: 10px 0 0;
+    .reviewed-by {
+      font-weight: bold;
+    }
   }
 }
 .set-self-goals {
   background-color: white;
+  border: 1px solid #ccc;
   border-radius: 4px;
   padding: 10px;
-  margin: 0 0 10px 0;
+  margin: 10px 0 0 0;
   .self-goals {
-    display: flex;
-    align-items: flex-end;
     margin: 10px 0 0;
+    .reviewed-by {
+      font-weight: bold;
+    }
   }
 }
 .response-full-width {
