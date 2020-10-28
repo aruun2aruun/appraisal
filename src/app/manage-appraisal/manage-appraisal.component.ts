@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 import { Store, select } from '@ngrx/store';
 import { AppState } from '../app-state';
 import { InitializationService } from '../core/services/initialization.service';
+import { SubmitConfirmationDialogComponent } from '../submit-confirmation-dialog/submit-confirmation-dialog.component';
 
 @Component({
   selector: 'app-manage-appraisal',
@@ -102,13 +103,13 @@ export class ManageAppraisalComponent implements OnInit {
       }
     });
 
-    // this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
-    //   data => {
-    //     this.loggedInUser = data;
-    //     this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
-    //     this.getAllUsers();
+    this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
+      data => {
+        this.loggedInUser = data;
+        this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
+        // this.getAllUsers();
         this.RenderDataTable();
-      // });
+      });
   }
 
   filterRolesForView() {
@@ -168,7 +169,7 @@ export class ManageAppraisalComponent implements OnInit {
   }
 
   RenderDataTable() {
-    // this.cycleId = this.currentCycle.id;
+    this.cycleId = this.currentCycle.id;
     // this.userIds = [];
     // this.appraisalService.getAppraisal(this.cycleId, this.loggedInUser.id)
     //   .subscribe(
@@ -265,6 +266,39 @@ export class ManageAppraisalComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(result);
     });
+  }
+
+  openReminderDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '50%';
+    dialogConfig.data = {
+      type: 'Reminder'
+    };
+    const dialogRef = this.dialog.open(SubmitConfirmationDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.appraisalReminder(result);
+      }
+    });
+  }
+
+  appraisalReminder(result: any) {
+    console.log(this.rolesView);
+    console.log(this.roles);
+    const empId = [];
+    this.roles.forEach(element => {
+      empId.push(element.employeeId);
+    });
+    console.log(empId);
+    if (result.send) {
+      this.appraisalService.remindCycle(this.currentCycle.id, empId).subscribe(
+        response => {
+          this.snackBar.open(messageObject.NOTIFY.success, null, {
+            duration: 6000,
+          });
+        });
+    }
   }
 
   openNotifyDialog() {

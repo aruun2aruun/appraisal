@@ -1,43 +1,26 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-} from '@angular/core';
-import { InitializationService } from 'src/app/core/services/initialization.service';
-import { Store, select } from '@ngrx/store';
+import { Component, Input, OnChanges } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/app-state';
-import { FormControl, Validators } from '@angular/forms';
+import { InitializationService } from 'src/app/core/services/initialization.service';
 import { UserType } from 'src/app/model/user-type';
 
 @Component({
-  selector: 'app-appraisal-review-goal-review',
-  templateUrl: './appraisal-review-goal-review.component.html',
-  styleUrls: ['./appraisal-review-goal-review.component.scss'],
+  selector: 'app-appraisal-set-goal',
+  templateUrl: './appraisal-set-goal.component.html',
+  styleUrls: ['./appraisal-set-goal.component.scss']
 })
-export class AppraisalReviewGoalReviewComponent implements OnChanges {
+export class AppraisalSetGoalComponent implements OnChanges {
   @Input() jobGoal: any;
   @Input() appraisalGoals: any;
   @Input() appraisalReview: any;
   @Input() appraisalCycle: any;
-  @Input() ratings: any;
-
-  @Output() testValue = new EventEmitter();
-
   loggedInUser: UserType;
   filteredGoals: any = [];
-  showValidationErrors: boolean;
 
   constructor(
     private initializationService: InitializationService,
     private store: Store<AppState>
-  ) {
-    this.initializationService.showValidationErrors$.subscribe((showValidationErrors) => {
-      this.showValidationErrors = showValidationErrors;
-    });
-  }
+  ) { }
 
   ngOnChanges() {
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
@@ -146,11 +129,4 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
     return visibility;
   }
 
-  getVisibilityBasedOnStatusAndType() {
-    // TBD reusable function
-  }
-
-  onChange(id, comment, rating) {
-    this.testValue.emit({ id, comment, rating });
-  }
 }

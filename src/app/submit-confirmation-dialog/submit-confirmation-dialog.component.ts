@@ -17,6 +17,6 @@ export class SubmitConfirmationDialogComponent implements OnInit {
   }
 
   proceed() {
-    this.data.proceed = true;
+    this.data.send = true;
   }
 }

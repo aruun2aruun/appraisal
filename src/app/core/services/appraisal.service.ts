@@ -122,8 +122,15 @@ export class AppraisalService {
     const url = environment.baseUrl + 'appraisal/cycle/' + cycleId + '/user/' + userId + '/' + section;
     return this.http.put<any>(url, jsonObj, httpOptions);
   }
-
   getAppraisalReviews(cycleId: string): any {
     return this.httpService.get(`appraisal/review?cycleId=${cycleId}`);
+  }
+  remindCycle(cycleId: string, result: any): Observable<any> {
+    const url = environment.baseUrl + `/notification/send/all/${cycleId}`;
+    return this.http.post<any>(url, result, httpOptions);
+  }
+  remindAppraisal(cycleId: string, appraisalId: any): Observable<any> {
+    const url = environment.baseUrl + `/notification/send/one/${cycleId}/${appraisalId}`;
+    return this.http.post<any>(url, httpOptions);
   }
 }

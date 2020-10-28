@@ -77,7 +77,7 @@
   },
   "NOTIFY": {
     "error": "Notification failed",
-    "success": "Notification sent successfully",
+    "success": "Notification E-mails will be sent",
     "BODY_PLACEHOLDER": "Enter e-mail content here"
   },
   "LABELS": {

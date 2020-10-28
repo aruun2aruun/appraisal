@@ -80,6 +80,7 @@ import { AppraisalSummaryComponent } from './appraisal/appraisal-summary/apprais
 import { DiscussionSummaryComponent } from './appraisal/discussion-summary/discussion-summary.component';
 import { AppraisalReviewCommentRatingComponent } from './appraisal/appraisal-review-comment-rating/appraisal-review-comment-rating.component';
 import { WorkflowMapPipe } from './core/services/workflow-map.pipe';
+import { AppraisalSetGoalComponent } from './appraisal/appraisal-set-goal/appraisal-set-goal.component';
 
 
 @NgModule({
@@ -121,7 +122,8 @@ import { WorkflowMapPipe } from './core/services/workflow-map.pipe';
     AppraisalSummaryComponent,
     DiscussionSummaryComponent,
     AppraisalReviewCommentRatingComponent,
-    WorkflowMapPipe
+    WorkflowMapPipe,
+    AppraisalSetGoalComponent
   ],
   imports: [
     MatToolbarModule,

@@ -1,0 +1,12 @@
+<!-- SET GOALS -->
+<div class="set-self-goals">
+  <mat-label>{{loggedInUser.id | idToName}} (Set Self Goal)</mat-label>
+  <div class="self-goals">
+    <mat-form-field class="response-full-width">  
+      <textarea style="width: 100%" [(ngModel)]="jobGoal.description" [ngModelOptions]="{ standalone: true }"
+                matInput matTextareaAutosize matAutosizeMinRows=1 matAutosizeMaxRows=4 data-ng-minLength="10"
+                placeholder="Description">
+      </textarea>
+    </mat-form-field>
+  </div>
+</div>

@@ -39,13 +39,15 @@
                 >({{ additionalFields[role.id]?.daysRemaining }} days remain)</span
               >
             </td>
-            <td data-label="Rating">
+            <td data-label="Goals and objectives">
+              <span *ngIf="!role.complete">-</span>
               <span *ngIf="role.complete">{{
                 additionalFields[role.id]?.primaryRating
               }}</span>
               <span *ngIf="role.complete"> ({{ role.primaryScore }})</span>
             </td>
-            <td data-label="Rating">
+            <td data-label="Personal Targets">
+              <span *ngIf="!role.complete">-</span>
               <span *ngIf="role.complete">{{
                 additionalFields[role.id]?.secondaryRating
               }}</span>

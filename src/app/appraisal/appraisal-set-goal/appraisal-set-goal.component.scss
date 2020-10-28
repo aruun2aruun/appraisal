@@ -1,0 +1,17 @@
+.set-self-goals {
+  background-color: rgba($color: #cce5ff, $alpha: 0.5);
+  border-radius: 4px;
+  border: 1px solid #b8daff;
+  color: #004085;
+  padding: 10px;
+  margin: 0 0 10px 0;
+  .self-goals {
+    display: flex;
+    align-items: flex-end;
+    margin: 10px 0 0;
+  }
+}
+.response-full-width {
+  width: 100%;
+  margin: 0 10px 0 0;
+}
