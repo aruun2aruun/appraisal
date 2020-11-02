@@ -341,9 +341,12 @@ MIT
 @ngrx/store
 MIT
 
-@angular/material/core
-
 @angular/material/form-field
+
+@angular/forms
+MIT
+
+@angular/material/core
 
 @angular/flex-layout
 MIT
@@ -369,9 +372,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-
-@angular/forms
-MIT
 
 @angular/material/select
 
