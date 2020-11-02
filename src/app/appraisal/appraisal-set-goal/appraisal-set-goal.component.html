@@ -9,8 +9,8 @@
 
 
 <!-- REVIEW GOALS -->
-<div class="set-review-goals" *ngIf="reviewGoal">
-  <mat-label *ngIf="showSubmit">Targets for the next year</mat-label>
+<div [ngClass]="showSubmit ? 'set-review-goals': 'set-self-goals'" *ngIf="reviewGoal">
+  <mat-label class="reviewed-by" *ngIf="showSubmit">Targets for the next year</mat-label>
   <div class="review-goals">
     <mat-form-field *ngIf="showSubmit" class="response-full-width">
       <textarea style="width: 100%" [(ngModel)]="reviewGoal.comment" [ngModelOptions]="{ standalone: true }"
@@ -18,10 +18,10 @@
                 placeholder="Set targets for the next year">
       </textarea>
     </mat-form-field>
-    <div *ngIf="!showSubmit">
-      <mat-label class="reviewed-by">Targets for next year</mat-label>
-      <p *ngIf="reviewGoal.comment">{{reviewGoal.comment}}</p>
-      <p *ngIf="!reviewGoal.comment">No targets set for next year</p>
-    </div>
+  </div>
+  <div class="self-goals" *ngIf="!showSubmit">
+    <mat-label class="reviewed-by">Targets for next year</mat-label>
+    <p *ngIf="reviewGoal.comment">{{reviewGoal.comment}}</p>
+    <p *ngIf="!reviewGoal.comment">No targets set for next year</p>
   </div>
 </div>

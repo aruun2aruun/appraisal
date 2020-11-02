@@ -1,3 +1,23 @@
+.set-self-goals {
+  background-color: white;
+  border: 1px dotted #d2d2d2;
+  border-radius: 4px;
+  padding: 10px;
+  margin: 10px 0 0 0;
+  .self-goals {
+    margin: 10px 0 0;
+    p {
+      margin-bottom: 0;
+    }
+  }
+  .reviewed-by {
+    font-weight: bold;
+  }
+}
+.response-full-width {
+  width: 100%;
+  margin: 0 10px 0 0;
+}
 .set-review-goals {
   background-color: rgba($color: #cce5ff, $alpha: 0.5);
   border-radius: 4px;
@@ -5,27 +25,13 @@
   color: #004085;
   padding: 10px;
   margin: 10px 0 0 0;
-  .self-goals {
+  .review-goals {
     margin: 10px 0 0;
-    .reviewed-by {
-      font-weight: bold;
+    p {
+      margin-bottom: 0;
     }
   }
-}
-.set-self-goals {
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 10px;
-  margin: 10px 0 0 0;
-  .self-goals {
-    margin: 10px 0 0;
-    .reviewed-by {
-      font-weight: bold;
-    }
+  .reviewed-by {
+    font-weight: bold;
   }
-}
-.response-full-width {
-  width: 100%;
-  margin: 0 10px 0 0;
 }
