@@ -44,14 +44,14 @@
               <span *ngIf="role.complete">{{
                 additionalFields[role.id]?.primaryRating
               }}</span>
-              <span *ngIf="role.complete"> ({{ role.primaryScore }})</span>
+              <span *ngIf="role.complete"> ({{ role.primaryScore | number : '1.1-1' }})</span>
             </td>
             <td data-label="Personal Targets">
               <span *ngIf="!role.complete">-</span>
               <span *ngIf="role.complete">{{
                 additionalFields[role.id]?.secondaryRating
               }}</span>
-              <span *ngIf="role.complete"> ({{ role.secondaryScore }})</span>
+              <span *ngIf="role.complete"> ({{ role.secondaryScore | number : '1.1-1' }})</span>
             </td>
           </tr>
         </tbody>

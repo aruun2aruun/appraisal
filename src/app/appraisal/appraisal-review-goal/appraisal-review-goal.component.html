@@ -26,8 +26,8 @@
                 placeholder="Weightage" value="">
       </mat-form-field>
     </div> -->
-    <app-appraisal-set-goal [jobGoal]="jobGoal" [appraisalGoals]="appraisalGoals" [appraisalReview]="appraisalReview" [appraisalCycle]="appraisalCycle" goalType="SET_GOAL"></app-appraisal-set-goal>
+    <app-appraisal-set-goal [showSubmit]="showSubmit" [jobGoal]="jobGoal" [appraisalGoals]="appraisalGoals" [appraisalReview]="appraisalReview" [appraisalCycle]="appraisalCycle" goalType="SET_GOAL"></app-appraisal-set-goal>
     <app-appraisal-review-goal-review [jobGoal]="jobGoal" [appraisalGoals]="appraisalGoals" [appraisalReview]="appraisalReview" [appraisalCycle]="appraisalCycle" [ratings]="ratings" (testValue)="testValue($event)"></app-appraisal-review-goal-review>
-    <app-appraisal-set-goal [jobGoal]="jobGoal" [appraisalGoals]="appraisalGoals" [appraisalReview]="appraisalReview" [appraisalCycle]="appraisalCycle" goalType="REVIEW_GOAL"></app-appraisal-set-goal>
+    <app-appraisal-set-goal [showSubmit]="showSubmit" [jobGoal]="jobGoal" [appraisalGoals]="appraisalGoals" [appraisalReview]="appraisalReview" [appraisalCycle]="appraisalCycle" goalType="REVIEW_GOAL"></app-appraisal-set-goal>
   </div>
 </div>

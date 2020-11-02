@@ -15,6 +15,7 @@ export class AppraisalSetGoalComponent implements OnChanges {
   @Input() appraisalReview: any;
   @Input() appraisalCycle: any;
   @Input() goalType: string;
+  @Input() showSubmit: boolean;
   loggedInUser: UserType;
   setGoal: any = null;
   reviewGoal: any = null;
@@ -43,91 +44,6 @@ export class AppraisalSetGoalComponent implements OnChanges {
           .find((appraisalGoal) => appraisalGoal.goalId === this.jobGoal.id && appraisalGoal.reviewerType === 'REVIEW_GOAL');
       }
     }
-  }
-
-  getVisibility(loggedInUser, appraisalGoal) {
-    let visibility = 'WRITE';
-    if (
-      loggedInUser.id !== appraisalGoal.reviewerId ||
-      appraisalGoal.reviewerType !== this.appraisalReview.status ||
-      appraisalGoal.complete
-    ) {
-      visibility = 'READ';
-    }
-
-    switch (this.appraisalReview.status) {
-      case 'Self':
-        if (
-          [
-            'Level_1',
-            'Level_2',
-            'Level_3',
-            'Level_4',
-          ].includes(appraisalGoal.reviewerType)
-        ) {
-          visibility = 'HIDE';
-        }
-        if (
-          appraisalGoal.reviewerType === 'Self' &&
-          !appraisalGoal.complete &&
-          appraisalGoal.reviewerId !== loggedInUser.id
-        ) {
-          visibility = 'HIDE';
-        }
-        break;
-      case 'Level_1':
-        if (
-          ['Level_2', 'Level_3', 'Level_4'].includes(
-            appraisalGoal.reviewerType
-          )
-        ) {
-          visibility = 'HIDE';
-        }
-        if (
-          appraisalGoal.reviewerType === 'Level_1' &&
-          !appraisalGoal.complete &&
-          appraisalGoal.reviewerId !== loggedInUser.id
-        ) {
-          visibility = 'HIDE';
-        }
-        break;
-      case 'Level_2':
-        if (['Level_3', 'Level_4'].includes(appraisalGoal.reviewerType)) {
-          visibility = 'HIDE';
-        }
-        if (
-          appraisalGoal.reviewerType === 'Level_2' &&
-          !appraisalGoal.complete &&
-          appraisalGoal.reviewerId !== loggedInUser.id
-        ) {
-          visibility = 'HIDE';
-        }
-        break;
-      case 'Level_3':
-        if (['Level_4'].includes(appraisalGoal.reviewerType)) {
-          visibility = 'HIDE';
-        }
-        if (
-          appraisalGoal.reviewerType === 'Level_3' &&
-          !appraisalGoal.complete &&
-          appraisalGoal.reviewerId !== loggedInUser.id
-        ) {
-          visibility = 'HIDE';
-        }
-        break;
-      // TBD Extend for other stages using getVisibilityBasedOnStatusAndType()
-    }
-
-    if (
-      this.appraisalCycle &&
-      !this.appraisalCycle.showReviewToSelf &&
-      loggedInUser.id === appraisalGoal.employeeId &&
-      loggedInUser.id !== appraisalGoal.reviewerId
-    ) {
-      visibility = 'HIDE';
-    }
-
-    return visibility;
   }
 
 }
