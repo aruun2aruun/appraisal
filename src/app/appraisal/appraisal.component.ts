@@ -180,6 +180,7 @@ export class AppraisalComponent implements OnInit {
   }
 
   submitAppraisal() {
+    this.saveAsDraft();
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
       const submitObj = this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id &&
                                                        item.reviewerType === this.appraisalReview.status));
