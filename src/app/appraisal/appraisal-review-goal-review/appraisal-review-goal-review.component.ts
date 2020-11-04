@@ -23,6 +23,7 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
   @Input() appraisalReview: any;
   @Input() appraisalCycle: any;
   @Input() ratings: any;
+  @Input() yourRoles: any;
 
   @Output() testValue = new EventEmitter();
 
@@ -136,14 +137,16 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
 
     if (
       this.appraisalCycle &&
-      !this.appraisalCycle.showReviewToSelf &&
-      loggedInUser.id === appraisalGoal.employeeId &&
-      loggedInUser.id !== appraisalGoal.reviewerId
+      !this.appraisalCycle.showReviewToSelf && this.getProtectionStatus(appraisalGoal)
     ) {
       visibility = 'HIDE';
     }
 
     return visibility;
+  }
+
+  getProtectionStatus(appraisalGoal) {
+    return !this.appraisalCycle.visibilityMap[appraisalGoal.reviewerType].find(item => this.yourRoles.includes(item));
   }
 
   getVisibilityBasedOnStatusAndType() {

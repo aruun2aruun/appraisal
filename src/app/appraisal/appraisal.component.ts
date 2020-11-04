@@ -29,6 +29,7 @@ export class AppraisalComponent implements OnInit {
   showDiscussion = false;
   ratings: Ratings[];
   cuRatings: CuRatings[];
+  yourRoles: any;
 
   constructor(
     private pageHeaderService: PageHeaderService,
