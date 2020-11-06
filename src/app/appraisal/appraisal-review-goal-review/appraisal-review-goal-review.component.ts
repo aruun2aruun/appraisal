@@ -146,7 +146,7 @@ export class AppraisalReviewGoalReviewComponent implements OnChanges {
   }
 
   getProtectionStatus(appraisalGoal) {
-    return !this.appraisalCycle.visibilityMap[appraisalGoal.reviewerType].find(item => this.yourRoles.includes(item));
+    return !this.appraisalCycle.visibilityMap[appraisalGoal.reviewerType].find(item => this.yourRoles && this.yourRoles.includes(item));
   }
 
   getVisibilityBasedOnStatusAndType() {

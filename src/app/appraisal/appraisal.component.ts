@@ -143,6 +143,7 @@ export class AppraisalComponent implements OnInit {
           )
           .subscribe((roles) => {
             this.roles = roles;
+            this.yourRoles = roles.filter((item) => item.reviewerId === loggedInUser.id).map(item => item.reviewerType);
             const reviewer = roles.find((item) => item.reviewerId === loggedInUser.id && item.reviewerType === appraisalReview.status && item.reviewerType !== 'Master');
             this.showSubmit = reviewer && !reviewer.complete;
             const master = roles.find((item) => item.reviewerId === loggedInUser.id && item.reviewerType === 'Master');
