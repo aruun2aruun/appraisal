@@ -31,7 +31,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import {MatStepperModule} from '@angular/material/stepper';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthGuard } from './auth.guard';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -81,6 +81,7 @@ import { DiscussionSummaryComponent } from './appraisal/discussion-summary/discu
 import { AppraisalReviewCommentRatingComponent } from './appraisal/appraisal-review-comment-rating/appraisal-review-comment-rating.component';
 import { WorkflowMapPipe } from './core/services/workflow-map.pipe';
 import { AppraisalSetGoalComponent } from './appraisal/appraisal-set-goal/appraisal-set-goal.component';
+import { JwtInterceptor } from './jwt.interceptor';
 
 
 @NgModule({
@@ -169,7 +170,14 @@ import { AppraisalSetGoalComponent } from './appraisal/appraisal-set-goal/apprai
       appraisalReviews: AppraisalReviewReducer
     })
   ],
-  providers: [AuthGuard],
+  providers: [
+    AuthGuard,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: JwtInterceptor,
+        multi: true,
+    }
+  ],
   bootstrap: [AppComponent],
   entryComponents: [
     TextInputDialogComponent,
