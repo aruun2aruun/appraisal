@@ -19,7 +19,8 @@ export class JwtInterceptor implements HttpInterceptor {
     if (isLoggedIn) {
         request = request.clone({
             setHeaders: {
-                Authorization: `Bearer ${currentUser.idToken}`
+              IdentityToken: `${currentUser.idToken}`,
+              Authorization: `${currentUser.accessToken}`
             }
         });
     }
