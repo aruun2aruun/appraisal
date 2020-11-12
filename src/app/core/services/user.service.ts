@@ -18,14 +18,18 @@ export class UserService {
   }
 
   getUsers(): Observable<any> {
-    return this.httpService.get('/person').pipe(map(response => response));
+    return this.httpService.get('person').pipe(map(response => response));
   }
 
   getUsersById(userId): Observable<any> {
-    return this.httpService.get( `/person/${userId}`).pipe(map(response => response));
+    return this.httpService.get(`person/${userId}`).pipe(map(response => response));
   }
 
   getUsersByEmail(email): Observable<any> {
-    return this.httpService.get(`/person/email/${email}`).pipe(map(response => response));
+    return this.httpService.get(`person/email`).pipe(map(response => response));
+  }
+
+  getLoggedInUserData(): Observable<any> {
+    return this.httpService.get(`person/email`).pipe(map(response => response));
   }
 }

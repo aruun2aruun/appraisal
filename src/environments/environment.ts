@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:8080'
+  baseUrl: 'http://localhost:8080/'
   // baseUrl: 'https://appraisal-api.westernacher.com:444'
 };
 
