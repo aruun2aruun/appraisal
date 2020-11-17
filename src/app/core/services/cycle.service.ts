@@ -18,18 +18,18 @@ export class CycleService {
   }
 
   getCyclebyId(cycleId): Observable<any> {
-    return this.httpService.get( `/cycle/${cycleId}`).pipe(map(response => response));
+    return this.httpService.get( `cycle/${cycleId}`).pipe(map(response => response));
   }
 
   getCycles(): Observable<any> {
-    return this.httpService.get(`/cycle`).pipe(map(response => response));
+    return this.httpService.get(`cycle`).pipe(map(response => response));
   }
 
   createCycle(result): Observable<any> {
-    return this.httpService.post(`/cycle`, result, httpOptions);
+    return this.httpService.post(`cycle`, result, httpOptions);
   }
 
   deleteCycle(cycleId: string): Observable<any> {
-    return this.httpService.delete(`/cycle/${cycleId}`, httpOptions);
+    return this.httpService.delete(`cycle/${cycleId}`, httpOptions);
   }
 }

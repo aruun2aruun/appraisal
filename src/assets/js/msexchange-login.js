@@ -260,8 +260,8 @@ $(function() {
     // Now that we've passed our checks, save the bits of data
     // we need from the token.
 
-    sessionStorage.userDisplayName = payload.name;
-    sessionStorage.userSigninName = payload.preferred_username;
+    // sessionStorage.userDisplayName = payload.name;
+    // sessionStorage.userSigninName = payload.preferred_username;
 
     // Per the docs at:
     // https://azure.microsoft.com/en-us/documentation/articles/active-directory-v2-protocols-implicit/#send-the-sign-in-request

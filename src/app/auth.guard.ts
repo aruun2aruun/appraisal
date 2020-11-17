@@ -24,8 +24,7 @@ export class AuthGuard implements CanActivate {
             this.router.navigate(['/unauthorized']);
             return false;
         } else {
-
-          this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
+          this.userService.getLoggedInUserData().subscribe(
             data => {
               if (data === null) {
                 this.router.navigate(['/unauthorized']);

@@ -47,16 +47,12 @@ export class InitializationService {
 
   initializeLoggedInUser() {
     console.log('******* Retrieving Login data *******');
-    if (sessionStorage.getItem('userSigninName')) {
-      this.users$.subscribe((users) => {
-        this.loggedInUser$.next(
-          users.find(
-            (item) =>
-              item.email ===
-              sessionStorage.getItem('userSigninName').toLowerCase()
-          )
-        );
-      });
+    if (sessionStorage.getItem('idToken')) {
+      this.userService.getLoggedInUserData().subscribe(
+        data => {
+          this.loggedInUser$.next(data);
+        }
+      );
       console.log('******* Login data read *******');
     } else {
       setTimeout(() => {
@@ -66,8 +62,12 @@ export class InitializationService {
   }
 
   getAllUsers() {
-    this.userService.getUsers().subscribe((users) => {
-      this.store.dispatch(new UserReload(users));
+    this.loggedInUser$.subscribe((loggedInUser) => {
+      if (loggedInUser) {
+        this.userService.getUsers().subscribe((users) => {
+          this.store.dispatch(new UserReload(users));
+        });
+      }
     });
   }
 
@@ -96,8 +96,12 @@ export class InitializationService {
   }
 
   getAllCycles() {
-    this.cycleService.getCycles().subscribe((cycles) => {
-      this.store.dispatch(new CycleReload(cycles));
+    this.loggedInUser$.subscribe((loggedInUser) => {
+      if (loggedInUser) {
+        this.cycleService.getCycles().subscribe((cycles) => {
+          this.store.dispatch(new CycleReload(cycles));
+        });
+      }
     });
   }
 

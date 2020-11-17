@@ -59,7 +59,7 @@ export class ManageAppraisalComponent implements OnInit {
 
   ngOnInit() {
     setTimeout(() => {
-      this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
+      this.userService.getLoggedInUserData().subscribe(
         data => {
           this.loggedInUser = data;
           this.initialize();
@@ -103,7 +103,7 @@ export class ManageAppraisalComponent implements OnInit {
       }
     });
 
-    this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
+    this.userService.getLoggedInUserData().subscribe(
       data => {
         this.loggedInUser = data;
         this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));

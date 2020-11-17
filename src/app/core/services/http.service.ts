@@ -145,7 +145,7 @@ export class HttpService {
     }
 
     constructUrl = (endpoint: string) =>
-             `${this.baseURL}/${endpoint}`
+             `${this.baseURL}${endpoint}`
 
     // add unique id as an argument
     handleResponse = (httpCall, observer, isBackgroundProcess, uId) => {
