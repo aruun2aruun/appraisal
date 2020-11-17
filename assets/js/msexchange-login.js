@@ -4,6 +4,12 @@ $(function() {
   var redirectUri = 'https://appraisalbeta.ioak.org/home';
   // var redirectUri = 'http://localhost:4200/home';
   var appId = '833bb97f-9e05-464e-a674-5beffa849424';
+  
+  // Production settings
+  // var authEndpoint = 'https://login.microsoftonline.com/383c90fa-6923-42f9-ae77-a44fb1adc56e/oauth2/v2.0/authorize?';
+  // var redirectUri = 'https://appraisal.westernacher.com/home';
+  // var appId = '05d4ecf5-128d-4cd1-b423-d1b4a31a00bb';
+
   var scopes = 'openid profile User.Read';
 
   // Check for browser support for sessionStorage
