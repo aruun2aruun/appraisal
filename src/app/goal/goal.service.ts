@@ -15,6 +15,6 @@ export class GoalService {
   }
 
   getGoals(cycleId: string): any {
-    return this.httpService.get(`/appraisal/goal?cycleId=${cycleId}`);
+    return this.httpService.get(`appraisal/goal?cycleId=${cycleId}`);
   }
 }

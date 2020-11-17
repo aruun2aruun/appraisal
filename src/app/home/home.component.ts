@@ -51,9 +51,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.pageHeaderService.hideCycle();
-    console.log(sessionStorage.getItem('userSigninName'));
     setTimeout(() => {
-      console.log(sessionStorage.getItem('userSigninName'));
       this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName')).subscribe(
         data => {
           this.loggedInUser = data;
@@ -144,7 +142,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.userService.getUsersByEmail(sessionStorage.getItem('userSigninName').toLowerCase()).subscribe(
+    this.userService.getLoggedInUserData().subscribe(
       data => {
         this.authService.isAdministrator = false;
         this.authService.isReviewer = false;
