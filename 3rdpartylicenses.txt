@@ -379,8 +379,6 @@ THE SOFTWARE.
 
 @angular/material/tabs
 
-@angular/material/checkbox
-
 @angular/material/sort
 
 @angular/material/table
@@ -394,6 +392,8 @@ THE SOFTWARE.
 @angular/material/snack-bar
 
 @angular/material/datepicker
+
+@angular/material/checkbox
 
 @angular/material/progress-spinner
 
