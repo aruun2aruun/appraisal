@@ -20,20 +20,13 @@ import { ChangeCycleDialogComponent } from './change-cycle-dialog/change-cycle-d
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'home', component: ChangeCycleDialogComponent},
-  { path: 'dev', component: HomeComponent},
   { path: '', component: LoginComponent},
   { path: 'help', component: HelpComponent},
   { path: 'appraisal', component: AppraisalComponent, canActivate: [AuthGuard]},
-  { path: 'provide-feedback', component: ProvideFeedbackComponent, canActivate: [AuthGuard]},
-  { path: 'review-response', component: ReviewResponseComponent, canActivate: [AuthGuard]},
-  { path: 'view-response', component: ViewResponseComponent, canActivate: [AuthGuard]},
   { path: 'user-administration', component: UserAdministrationComponent, canActivate: [AuthGuard]},
   { path: 'appraisal', component: SelfAppraisalComponent, canActivate: [AuthGuard]},
   { path: 'reportees', component: ManageAppraisalComponent, canActivate: [AuthGuard]},
-  { path: 'goal-definition', component: GoalComponent, canActivate: [AuthGuard]},
-  { path: 'rating-scale', component: RatingScaleComponent, canActivate: [AuthGuard]},
-  { path: 'unauthorized', component: UnauthorizedComponent, canActivate: [AuthGuard]},
-  { path: 'set-goals', component: SetGoalsComponent, canActivate: [AuthGuard]}
+  { path: 'unauthorized', component: UnauthorizedComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
