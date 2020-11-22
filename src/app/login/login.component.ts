@@ -14,6 +14,7 @@ import {AppraisalService} from '../core/services/appraisal.service';
 })
 export class LoginComponent implements OnInit, OnDestroy {
 
+    email: string;
     loggedIn: boolean;
 
     constructor(private router: Router,
@@ -28,7 +29,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
       this.initialize();
-      
     }
 
     refresh() {
@@ -37,6 +37,7 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     initialize() {
       this.loggedIn = false;
+      this.email = sessionStorage.getItem('userSigninName');
       if (sessionStorage.getItem('idToken') !== null) {
         this.loggedIn = true;
       }
