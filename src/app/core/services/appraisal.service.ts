@@ -95,11 +95,11 @@ export class AppraisalService {
     return this.http.put<any>(url, jsonObj, httpOptions);
   }
   notifyAppraisal(cycleId: string, result: any): Observable<any> {
-    const url = environment.baseUrl + '/notification/' + cycleId + '/send';
+    const url = environment.baseUrl + 'notification/' + cycleId + '/send';
     return this.http.post<any>(url, result, httpOptions);
   }
   notifyUser(result: any): Observable<any> {
-    const url = environment.baseUrl + '/notification/send';
+    const url = environment.baseUrl + 'notification/send';
     return this.http.post<any>(url, result, httpOptions);
   }
   saveSectionOneFeedback(jsonObj, cycleId, userId): Observable<any> {
