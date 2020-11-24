@@ -72,8 +72,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     dialogConfig.width = '50%';
     dialogConfig.data = {
       to: 'appraisal.westernacher@gmail.com',
-      subject: 'Subject',
-      body: 'Please specify your email Id while raising any question.'
+      subject: '',
+      body: ''
     };
     const dialogRef = this.dialog.open(NotifyDialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {

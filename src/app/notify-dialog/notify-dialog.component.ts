@@ -8,15 +8,13 @@ import * as messageObject from '../message.json';
   styleUrls: ['./notify-dialog.component.scss']
 })
 export class NotifyDialogComponent implements OnInit {
-  dialogHeader: string = 'Send Notification';
+  dialogHeader = 'Send Notification';
 
   placeholder_body: string = messageObject.NOTIFY.BODY_PLACEHOLDER;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
 
   ngOnInit() {
-    this.data.subject = this.data.subject;
-    this.data.body = this.data.body;
-    this.data.signature = 'Regards,\n' + this.data.name;
+    this.data.signature = sessionStorage.getItem('userSigninName');
   }
 }
