@@ -186,10 +186,23 @@ export class AppraisalComponent implements OnInit {
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
       const submitObj = this.appraisalGoals.filter(item => (item.reviewerId === loggedInUser.id &&
                                                        item.reviewerType === this.appraisalReview.status));
+      const reviewGoals = this.appraisalGoals.filter(item => item.reviewerType === 'REVIEW_GOAL');
       if (submitObj.find(item => item.rating === '') ) {
         this.initializationService.showValidationErrors$.next(true);
         this.snackBar.open(messageObject.MANDATORY.rating, null, {
           duration: 6000,
+          panelClass: 'error'
+        });
+      } else if (this.appraisalCycle.minCommentLength > 0 && submitObj.find(item => !item.comment || item.comment.length < this.appraisalCycle.minCommentLength)) {
+        this.initializationService.showValidationErrors$.next(true);
+        this.snackBar.open(messageObject.MANDATORY.comment, null, {
+          duration: 10000,
+          panelClass: 'error'
+        });
+      } else if (this.appraisalCycle.minCommentLength > 0 && reviewGoals.find(item => !item.comment || item.comment.length < this.appraisalCycle.minCommentLength)) {
+        this.initializationService.showValidationErrors$.next(true);
+        this.snackBar.open(messageObject.MANDATORY.goals, null, {
+          duration: 10000,
           panelClass: 'error'
         });
       } else {

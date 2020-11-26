@@ -88,7 +88,8 @@
     "submit": "Goals submitted successfully!"
   },
   "MANDATORY": {
-    "comment": "Appraisal comment minimum length should be",
+    "goals": "Goals for next year is mandatory for all goals and should be longer than 20 characters",
+    "comment": "Appraisal comment minimum length should be 20 characters",
     "rating": "Appraisal ratings are mandatory. Please fill all the Ratings!",
     "all": "All comments and ratings are mandatory. Please fill all Comments and Ratings!"
   }
