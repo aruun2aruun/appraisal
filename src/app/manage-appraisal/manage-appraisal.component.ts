@@ -15,6 +15,7 @@ import { Store, select } from '@ngrx/store';
 import { AppState } from '../app-state';
 import { InitializationService } from '../core/services/initialization.service';
 import { SubmitConfirmationDialogComponent } from '../submit-confirmation-dialog/submit-confirmation-dialog.component';
+import { AngularCsv } from 'angular7-csv';
 
 @Component({
   selector: 'app-manage-appraisal',
@@ -56,6 +57,19 @@ export class ManageAppraisalComponent implements OnInit {
     pageHeaderService.setTitle('Manage Appraisal');
     cycleSelectionService.cycleChangedEvent.subscribe(data => this.initialize());
   }
+
+  csvOptions = {
+    fieldSeparator: ',',
+    quoteStrings: '"',
+    decimalseparator: '.',
+    showLabels: true,
+    showTitle: false,
+    title: 'Summary:',
+    nullToEmptyString: true,
+    useBom: true,
+    noDownload: false,
+    headers: []
+  };
 
   ngOnInit() {
     setTimeout(() => {
@@ -353,6 +367,18 @@ export class ManageAppraisalComponent implements OnInit {
     this.appraisalService.notifyUser(result).subscribe(
       response => {
         this.snackBar.open(messageObject.NOTIFY.success, null, {
+          duration: 6000,
+        });
+      });
+  }
+
+  download() {
+    this.cycleId = this.currentCycle.id;
+    this.appraisalService.download(this.cycleId).subscribe(
+      response => {
+        // new Angular5Csv(this.currentCycle.name, response + '_Feedback Report_' + new  Date().getTime(), this.csvOptions);
+        new AngularCsv(response, 'summary', this.csvOptions);
+        this.snackBar.open(messageObject.EXPORT.success, null, {
           duration: 6000,
         });
       });

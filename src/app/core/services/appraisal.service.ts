@@ -133,4 +133,8 @@ export class AppraisalService {
     const url = environment.baseUrl + `notification/send/one/${cycleId}/${appraisalId}`;
     return this.http.post<any>(url, httpOptions);
   }
+  download(cycleId: string): Observable<any> {
+    const url = environment.baseUrl + `report/summary/${cycleId}`;
+    return this.http.get<any>(url, httpOptions);
+  }
 }
