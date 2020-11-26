@@ -19,11 +19,16 @@ export class AppraisalSetGoalComponent implements OnChanges {
   loggedInUser: UserType;
   setGoal: any = null;
   reviewGoal: any = null;
+  showValidationErrors: boolean;
 
   constructor(
     private initializationService: InitializationService,
     private store: Store<AppState>
-  ) { }
+  ) {
+    this.initializationService.showValidationErrors$.subscribe((showValidationErrors) => {
+      this.showValidationErrors = showValidationErrors;
+    });
+  }
 
   ngOnChanges() {
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {

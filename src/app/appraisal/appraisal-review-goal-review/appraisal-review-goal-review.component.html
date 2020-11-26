@@ -37,7 +37,7 @@
       <mat-label>
         {{ appraisalGoal.reviewerId | idToName }} ({{appraisalGoal.reviewerType | workflowMap}})
       </mat-label>
-      <mat-form-field class="response-full-width">
+      <mat-form-field class="response-full-width" [ngClass]="{'inValid': showValidationErrors && (appraisalGoal.comment.length < appraisalCycle.minCommentLength)}">
         <textarea
           style="width: 100%"
           [(ngModel)]="appraisalGoal.comment"
