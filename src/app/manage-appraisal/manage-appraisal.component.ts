@@ -68,7 +68,23 @@ export class ManageAppraisalComponent implements OnInit {
     nullToEmptyString: true,
     useBom: true,
     noDownload: false,
-    headers: []
+    headers: [
+              "Cycle Id",
+              "Cycle Name",
+              "Employee Id",
+              "Employee First Name",
+              "Employee Last Name",
+              "Employee Email",
+              "Employee Job",
+              "Employee CU",
+              "Reviewer First Name",
+              "Reviewer Last Name",
+              "Reviewer Email",
+              "Reviewer Role",
+              "Goals and Objectives Score",
+              "Secondary Section Score",
+              "Completion Status"
+            ]
   };
 
   ngOnInit() {
