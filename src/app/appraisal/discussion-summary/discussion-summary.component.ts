@@ -117,7 +117,7 @@ export class DiscussionSummaryComponent implements OnChanges {
           .submitDiscussion({ ...data, complete: true })
           .subscribe(
             (response) => {
-              // this.initializationService.initialize();
+              this.initializationService.initialize();
             },
             (error) => {
               console.log(error);
