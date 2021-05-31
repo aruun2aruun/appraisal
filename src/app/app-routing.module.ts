@@ -16,6 +16,7 @@ import { RatingScaleComponent } from './rating-scale/rating-scale.component';
 import { SetGoalsComponent } from './set-goals/set-goals.component';
 import { AppraisalComponent } from './appraisal/appraisal.component';
 import { ChangeCycleDialogComponent } from './change-cycle-dialog/change-cycle-dialog.component';
+import { AppraisalV2Component } from './appraisal-v2/appraisal-v2.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent},
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'help', component: HelpComponent},
   { path: 'appraisal', component: AppraisalComponent, canActivate: [AuthGuard]},
+  { path: 'appraisalv2', component: AppraisalV2Component, canActivate: [AuthGuard]},
   { path: 'user-administration', component: UserAdministrationComponent, canActivate: [AuthGuard]},
   { path: 'appraisal', component: SelfAppraisalComponent, canActivate: [AuthGuard]},
   { path: 'reportees', component: ManageAppraisalComponent, canActivate: [AuthGuard]},

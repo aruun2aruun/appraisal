@@ -22,9 +22,11 @@ body {
 }
 
 .container {
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-top: 2%;
+  // padding-left: 5%;
+  // padding-right: 5%;
+  // padding-top: 2%;
+  background-color: #c7c7c7;
+  height: calc(100vh - 64px);
 }
 
 .fill-remaining-space {

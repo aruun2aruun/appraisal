@@ -82,6 +82,11 @@ import { AppraisalReviewCommentRatingComponent } from './appraisal/appraisal-rev
 import { WorkflowMapPipe } from './core/services/workflow-map.pipe';
 import { AppraisalSetGoalComponent } from './appraisal/appraisal-set-goal/appraisal-set-goal.component';
 import { JwtInterceptor } from './jwt.interceptor';
+import { AppraisalV2Component } from './appraisal-v2/appraisal-v2.component';
+import { StarRatingComponent } from './appraisal-v2/star-rating/star-rating.component';
+import { CriteriaComponent } from './appraisal-v2/criteria/criteria.component';
+import { TargetComponent } from './appraisal-v2/target/target.component';
+import { RatingComponent } from './appraisal-v2/rating/rating.component';
 
 
 @NgModule({
@@ -124,7 +129,12 @@ import { JwtInterceptor } from './jwt.interceptor';
     DiscussionSummaryComponent,
     AppraisalReviewCommentRatingComponent,
     WorkflowMapPipe,
-    AppraisalSetGoalComponent
+    AppraisalSetGoalComponent,
+    AppraisalV2Component,
+    StarRatingComponent,
+    CriteriaComponent,
+    TargetComponent,
+    RatingComponent
   ],
   imports: [
     MatToolbarModule,

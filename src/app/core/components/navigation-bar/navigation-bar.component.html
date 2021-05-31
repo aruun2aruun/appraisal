@@ -5,6 +5,7 @@
     </a>
 
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/reportees">Appraisal</button>
+    <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/appraisalv2">Appraisal-v2</button>
     <button *ngIf="authService.loggedIn" mat-stroked-button fxHide="false" fxHide.lt-md routerLink="/home">Choose Cycle</button>
     <button class="logo_menu" mat-stroked-button fxShow="false" fxShow.lt-md [matMenuTriggerFor]="mobileMenu">
       <mat-icon>menu</mat-icon>

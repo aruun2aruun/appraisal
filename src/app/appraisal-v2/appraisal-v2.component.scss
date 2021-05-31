@@ -1,0 +1,85 @@
+.mat-stepper-vertical {
+  // margin: -2% -5% 0;
+  background-color: #c7c7c7;
+  padding: 20px 10%;
+  .mat-step {
+    background-color: #f00;
+  }
+}
+// Impossible Overrides using ng-deep
+:host ::ng-deep .mat-list-item-content {
+  display: grid !important;
+  grid-template-columns: 1fr auto;
+  padding: 0 !important;
+  font-size: 14px;
+}
+:host ::ng-deep .mat-step-label {
+  font-size: 20px;
+  text-transform: capitalize;
+}
+:host ::ng-deep .mat-step-header {
+  background-color: white;
+}
+:host ::ng-deep .mat-vertical-content-container {
+  background-color: #f1f1f1;
+  margin: 0;
+}
+:host ::ng-deep .mat-stepper-vertical-line::before {
+  display: none;
+}
+:host ::ng-deep .mat-step {
+  margin: 20px 0;
+  &:first-of-type,
+  &:last-of-type {
+    margin: 0;
+  }
+}
+.mat-subheader {
+  padding: 10px 0 0 0;
+  font-size: 18px;
+}
+.step-button {
+  margin: 20px 0 0;
+  display: flex;
+  justify-content: space-between;
+}
+mat-star-rating {
+  display: block;
+  text-align: center;
+}
+.date {
+  color: #999;
+  font-size: 12px;
+  text-align: right;
+  margin: 0 0 5px 0;
+}
+.goal-reference {
+  font-size: 13px;
+}
+.target {
+  font-size: 13px;
+}
+
+:host ::ng-deep .mat-step-header .mat-step-icon-state-done,
+:host ::ng-deep .mat-step-header .mat-step-icon-state-edit {
+  background-color: #60992d !important;
+  color: white;
+  + .mat-step-label {
+    color: #60992d !important;
+  }
+}
+:host ::ng-deep .mat-step-header .mat-step-icon-selected {
+  // background-color: $primary;
+  background-color: #276fbf !important;
+  color: white;
+  + .mat-step-label {
+    color: #276fbf !important;
+  }
+}
+:host ::ng-deep .mat-step-header .mat-step-label {
+  color: rgba(0, 0, 0, 1);
+}
+:host ::ng-deep .mat-step-header .mat-step-icon {
+  color: rgba(255, 255, 255, 1);
+  background-color: transparent;
+}
