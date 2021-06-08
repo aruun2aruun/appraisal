@@ -19,23 +19,37 @@ export class AppraisalV2Service {
   constructor(private httpService: HttpService, private http: HttpClient) {
   }
 
+  header(): Observable<any> {
+    return this.httpService.get(`api/header`, false)
+      .pipe(map(response => response));
+  }
+
+  getheaderId(headerSubmitObj): Observable<any> {
+    return this.httpService.post(`api/header`, headerSubmitObj, httpOptions)
+      .pipe(map(response => response));
+  }
+
   goal(): Observable<any> {
-    const url = baseUrl + 'appraisal/custom/goal?_limit=3';
-    return this.http.get<any>(url, httpOptions);
+    return this.http.get(baseUrl + 'appraisal/custom/goal?_limit=12', httpOptions);
   }
 
   goalReference(): Observable<any> {
-    const url = baseUrl + 'appraisal/custom/goalreference?_limit=3';
-    return this.http.get<any>(url, httpOptions);
+    return this.http.get(baseUrl + 'appraisal/custom/goalreference?_limit=12', httpOptions);
   }
 
   target(): Observable<any> {
-    const url = baseUrl + 'appraisal/custom/target?_limit=10';
-    return this.http.get<any>(url, httpOptions);
+    return this.httpService.get(`api/appraisal/custom/target`, false)
+      .pipe(map(response => response));
   }
 
-  appraisallong(): Observable<any> {
-    const url = baseUrl + 'appraisal/custom/appraisallong?_limit=10';
-    return this.http.get<any>(url, httpOptions);
+  appraisallong(headerId): Observable<any> {
+    return this.httpService.get(`api/appraisal/custom/appraisallong`, false)
+      .pipe(map(response => response));
+    //?headerId=${headerId}
+  }
+
+  updateAppraisallong(obj): Observable<any> {
+    return this.httpService.post(`api/appraisal/custom/appraisallong`, obj, httpOptions)
+      .pipe(map(response => response));
   }
 }

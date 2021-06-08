@@ -1,0 +1,10 @@
+<div class="your-rating">
+  <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="ratingInput"
+    (change)="onClick($event)">
+    <mat-radio-button class="example-radio-button" color="primary" *ngFor="let rating of ratings; index as i"
+      [value]="rating.score">
+      {{rating.value}}
+    </mat-radio-button>
+  </mat-radio-group>
+  <!-- <div class="cannot-rate"><a> I cannot rate on this criteria.</a> I did not work with the person on this capacity.</div> -->
+</div>

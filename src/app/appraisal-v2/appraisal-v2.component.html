@@ -4,9 +4,7 @@
     <app-criteria [goalReference]="goalReferences[goal?.orderId]"></app-criteria>
     <app-target [target]="targets[goal?.orderId]"></app-target>
     <app-rating [appraisal]="appraisalLong[goal?.orderId]"></app-rating>
-    <mat-star-rating [rating]="rating" [starCount]="starCount" [color]="starColorP"
-      (ratingUpdated)="onRatingChanged($event)">
-    </mat-star-rating>
+    <app-radio-rating [ratingInput]="appraisalLong[goal?.orderId].rating" (updatedRating)="appraisalLong[goal?.orderId].rating = $event"></app-radio-rating>
     <div class="step-button">
       <button mat-raised-button matStepperPrevious>Previous</button>
       <button mat-raised-button color="primary" matStepperNext>Next ></button>
@@ -20,6 +18,7 @@
     </mat-star-rating>
     <div class="step-button">
       <button mat-raised-button matStepperPrevious>Back</button>
+      <button mat-raised-button color="primary" (click)="submit()">Submit</button>
       <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button>
     </div>
   </mat-step>

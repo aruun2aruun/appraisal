@@ -2,7 +2,8 @@
 <mat-list>
   <mat-list-item>
     <div>
-      <div mat-line>{{appraisal?.reviewerId | idToName}}</div>
+      <div mat-line>{{appraisal?.reviewerId | idToName}} as {{appraisal?.reviewerType}}</div>
+      <div mat-line>{{appraisal?.comment | idToName}}</div>
     </div>
     <div>
       <!-- <div mat-line>{{appraisal?.reviewerId | idToName}}</div>
@@ -10,6 +11,7 @@
       <div mat-line class="date">{{appraisal?.to | date}}</div>
       <div mat-line>{{ratings[appraisal?.rating]}}</div>
     </div>
+    <br>
     <mat-divider></mat-divider>
   </mat-list-item>
 </mat-list>

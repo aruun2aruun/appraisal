@@ -11,3 +11,11 @@ p {
   text-align: right;
   margin: 0 0 5px 0;
 }
+
+// Impossible Overrides using ng-deep
+:host ::ng-deep .mat-list-item {
+  .mat-line {
+    padding: 5px 0;
+    white-space: break-spaces;
+  }
+}

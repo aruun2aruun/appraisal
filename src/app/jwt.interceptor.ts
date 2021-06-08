@@ -10,19 +10,23 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
 
-  constructor() {}
+  constructor() { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // add auth header with jwt if user is logged in and request is to the api url
     const currentUser = sessionStorage;
     const isLoggedIn = currentUser && currentUser.idToken;
     if (isLoggedIn) {
+      if (request.url.includes('api.ioak.io:8040')) {
+        request = request;
+      } else {
         request = request.clone({
-            setHeaders: {
-              IdentityToken: `${currentUser.idToken}`,
-              Authorization: `${currentUser.accessToken}`
-            }
+          setHeaders: {
+            IdentityToken: `${currentUser.idToken}`,
+            Authorization: `${currentUser.accessToken}`
+          }
         });
+      }
     }
     return next.handle(request);
   }
