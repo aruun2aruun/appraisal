@@ -189,3 +189,26 @@ pre {
     box-shadow: none;
   }
 }
+
+// Snackbar Styles
+.error {
+  color: white !important;
+  background-color: red !important;
+  .mat-simple-snackbar-action {
+      color: white !important;
+  }
+}
+.success {
+  color: white !important;
+  background-color: green !important;
+  .mat-simple-snackbar-action {
+      color: white !important;
+  }
+}
+.delete {
+  color: white !important;
+  background-color: orange !important;
+  .mat-simple-snackbar-action {
+      color: white !important;
+  }
+}

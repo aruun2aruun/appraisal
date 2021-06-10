@@ -1,17 +1,17 @@
-<div mat-subheader>Rating</div>
-<mat-list>
-  <mat-list-item>
-    <div>
-      <div mat-line>{{appraisal?.reviewerId | idToName}} as {{appraisal?.reviewerType}}</div>
-      <div mat-line>{{appraisal?.comment | idToName}}</div>
-    </div>
-    <div>
-      <!-- <div mat-line>{{appraisal?.reviewerId | idToName}}</div>
-      <div mat-line>{{appraisal?.reviewerId | idToName}}</div> -->
-      <div mat-line class="date">{{appraisal?.to | date}}</div>
-      <div mat-line>{{ratings[appraisal?.rating]}}</div>
-    </div>
-    <br>
-    <mat-divider></mat-divider>
-  </mat-list-item>
-</mat-list>
+<div class="rating">
+  <div>
+    <p>
+      {{headersMap.get(appraisal.headerId)?.reviewerId | idToName}} as
+      {{headersMap.get(appraisal.headerId)?.reviewerType}}
+    </p>
+    <p class="date">{{headersMap.get(appraisal.headerId)?.from}}</p>
+  </div>
+  <div>
+    <p>{{ratings[appraisal?.rating - 1]}}</p>
+    <p class="date">
+      {{headersMap.get(appraisal.headerId)?.from}} - {{headersMap.get(appraisal.headerId)?.to}}
+    </p>
+  </div>
+</div>
+<p class="comment">{{appraisal?.comment | idToName}}</p>
+<mat-divider></mat-divider>

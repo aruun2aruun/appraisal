@@ -19,8 +19,8 @@ export class AppraisalV2Service {
   constructor(private httpService: HttpService, private http: HttpClient) {
   }
 
-  header(): Observable<any> {
-    return this.httpService.get(`api/header`, false)
+  header(employeeId): Observable<any> {
+    return this.httpService.get(`api/header/employee/${employeeId}`, false)
       .pipe(map(response => response));
   }
 
@@ -29,7 +29,7 @@ export class AppraisalV2Service {
       .pipe(map(response => response));
   }
 
-  goal(): Observable<any> {
+  goals(): Observable<any> {
     return this.http.get(baseUrl + 'appraisal/custom/goal?_limit=12', httpOptions);
   }
 
@@ -45,11 +45,10 @@ export class AppraisalV2Service {
   appraisallong(headerId): Observable<any> {
     return this.httpService.get(`api/appraisal/custom/appraisallong`, false)
       .pipe(map(response => response));
-    //?headerId=${headerId}
   }
 
-  updateAppraisallong(obj): Observable<any> {
-    return this.httpService.post(`api/appraisal/custom/appraisallong`, obj, httpOptions)
+  updateAppraisallong(obj, headerId): Observable<any> {
+    return this.httpService.post(`api/appraisal/custom/appraisallong?headerId=${headerId}`, obj, httpOptions)
       .pipe(map(response => response));
   }
 }

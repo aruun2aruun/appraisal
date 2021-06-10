@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent},
   { path: 'help', component: HelpComponent},
   { path: 'appraisal', component: AppraisalComponent, canActivate: [AuthGuard]},
-  { path: 'appraisalv2', component: AppraisalV2Component, canActivate: [AuthGuard]},
+  { path: 'appraisalv2/:employeeId', component: AppraisalV2Component, canActivate: [AuthGuard]},
   { path: 'user-administration', component: UserAdministrationComponent, canActivate: [AuthGuard]},
   { path: 'appraisal', component: SelfAppraisalComponent, canActivate: [AuthGuard]},
   { path: 'reportees', component: ManageAppraisalComponent, canActivate: [AuthGuard]},

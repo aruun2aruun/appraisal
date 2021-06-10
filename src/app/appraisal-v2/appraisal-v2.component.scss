@@ -59,6 +59,11 @@ mat-star-rating {
 .target {
   font-size: 13px;
 }
+.description {
+  display: grid;
+  font-size: 13px;
+  margin: 10px 0 0;
+}
 
 :host ::ng-deep .mat-step-header .mat-step-icon-state-done,
 :host ::ng-deep .mat-step-header .mat-step-icon-state-edit {
@@ -82,4 +87,5 @@ mat-star-rating {
 :host ::ng-deep .mat-step-header .mat-step-icon {
   color: rgba(255, 255, 255, 1);
   background-color: transparent;
+  font-size: 12px;
 }

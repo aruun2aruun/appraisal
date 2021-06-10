@@ -88,6 +88,7 @@ import { CriteriaComponent } from './appraisal-v2/criteria/criteria.component';
 import { TargetComponent } from './appraisal-v2/target/target.component';
 import { RatingComponent } from './appraisal-v2/rating/rating.component';
 import { RadioRatingComponent } from './appraisal-v2/radio-rating/radio-rating.component';
+import { DescriptionComponent } from './appraisal-v2/description/description.component';
 
 
 @NgModule({
@@ -136,7 +137,8 @@ import { RadioRatingComponent } from './appraisal-v2/radio-rating/radio-rating.c
     CriteriaComponent,
     TargetComponent,
     RatingComponent,
-    RadioRatingComponent
+    RadioRatingComponent,
+    DescriptionComponent
   ],
   imports: [
     MatToolbarModule,

@@ -1,9 +1,9 @@
 export enum Ratings {
-  one = '1 - Deficient',
-  two = '2 - Improvements Required',
-  three = '3 - Meets Expectations',
-  four = '4 - Above Expectations',
-  five = '5 - Excellent',
+  one = '1 - Needs Improvement',
+  two = '2 - Meets Expectations',
+  three = '3 - Above Expectations',
+  four= '4 - Excellent',
+  five = '5 - Outstanding'
 }
 
 export enum CuRatings {

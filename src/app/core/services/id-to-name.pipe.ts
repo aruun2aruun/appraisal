@@ -10,13 +10,16 @@ import { AppState } from 'src/app/app-state';
 export class IdToNamePipe implements PipeTransform {
   users: any[] = [];
   users$ = this.store.pipe(select(state => state.users));
-
+  userMap = new Map();
 
   constructor(private snackBar: MatSnackBar,
               private store: Store<AppState>) {
     this.users$.subscribe(
       result => {
         this.users = result;
+        result.forEach(element => {
+          this.userMap.set(element.id, element);
+        });
       },
       error => {
         this.snackBar.open(error.message, error.statusText, {

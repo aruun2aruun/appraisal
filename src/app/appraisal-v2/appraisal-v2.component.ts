@@ -4,7 +4,7 @@ import { StarRatingColor } from './star-rating/star-rating.component';
 import { Ratings } from '../core/enum/ratings.enum';
 import { ActivatedRoute } from '@angular/router';
 import { InitializationService } from '../core/services/initialization.service';
-import { AuthService } from '../core/services/auth.service';
+import { MatSnackBar } from '@angular/material';
 
 export interface IGoal {
   criteria: string;
@@ -49,62 +49,156 @@ export class AppraisalV2Component implements OnInit {
   starColorP: StarRatingColor = StarRatingColor.primary;
   starColorW: StarRatingColor = StarRatingColor.warn;
 
-  header: any;
+  headers: any;
   goals: IGoal[];
   goalReferences: IGoalReference[];
   targets: ITarget[];
   appraisalLong: IAppraisal[];
+  descriptions = [
+    {
+      from: 202010,
+      to: 202103,
+      type: 'start',
+      comment: 'Perferendis assumenda fugiat fugit dignissimos harum non dolore explicabo voluptatum ex nisi eos sed accusamus modi iusto'
+    }, {
+      from: 202010,
+      to: 202103,
+      type: 'continue',
+      comment: 'Non provident eligendi repellendus illum voluptas unde voluptas enim officiis deserunt'
+    }, {
+      from: 202010,
+      to: 202103,
+      type: 'stop',
+      comment: 'Iusto nobis animi architecto illum nesciunt exercitationem facilis officia quisquam necessitatibus iste sit praesentium fugit molestiae'
+    }
+  ];
 
-  submitObj: IAppraisal[] = [];
+  headersMap = new Map();
+  goalsMap = new Map();
+  goalReferencesMap = new Map();
+  targetsMap = new Map();
+  appraisalLongMap = new Map();
+
+  payload: IAppraisal[] = [];
   headerId: any;
+  employeeId: string;
   loggedInUser: any;
 
   constructor(
     private appraisalv2Service: AppraisalV2Service,
     private route: ActivatedRoute,
     private initializationService: InitializationService,
-    private authService: AuthService) { }
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.route.params.subscribe(params => {
+      this.employeeId = params.employeeId;
+    });
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
       if (loggedInUser) {
         this.loggedInUser = loggedInUser;
       }
     });
-    console.log(this.authService.loggedInUser);
     this.ratings = Object.values(Ratings);
-    // this.getHeaders();
-    this.getHeaderObj();
-    this.getAppraisalGoal();
+    this.getHeaders();
+    this.getGoals();
     this.getGoalReference();
     this.getTarget();
     this.getAppraisalLong();
+    setTimeout(() => {
+      this.initializePayload();
+    }, 1000);
   }
 
   trackByIndex(index: number, obj: any): any {
     return index;
   }
 
-  // getHeaders() {
-  //   this.appraisalv2Service.header().subscribe(
-  //     response => {
-  //       this.header = response;
-  //     });
-  // }
+  getHeaders() {
+    this.appraisalv2Service.header(this.employeeId).subscribe(
+      response => {
+        this.headers = response;
+        response.forEach(element => {
+          this.headersMap.set(element.id, element);
+        });
+      });
+  }
 
-  getHeaderObj() {
+  getGoals() {
+    this.appraisalv2Service.goals().subscribe(
+      response => {
+        this.goals = response;
+        response.forEach(element => {
+          this.goalsMap.set(element.orderId, element);
+        });
+      });
+  }
+
+  getGoalReference() {
+    this.appraisalv2Service.goalReference().subscribe(
+      response => {
+        this.goalReferences = response;
+        response.forEach(element => {
+          this.goalReferencesMap.set(element.orderId, element);
+        });
+      });
+  }
+
+  getTarget() {
+    this.appraisalv2Service.target().subscribe(
+      response => {
+        this.targets = response;
+        response.forEach(element => {
+          this.targetsMap.set(element.orderId, element);
+        });
+      });
+  }
+
+  getAppraisalLong() {
+    this.appraisalv2Service.appraisallong(this.headerId).subscribe(
+      response => {
+        this.appraisalLong = response;
+        response.forEach(element => {
+          if (this.appraisalLongMap.has(element.orderId)) {
+            this.appraisalLongMap.get(element.orderId).push(element);
+          } else {
+            this.appraisalLongMap.set(element.orderId, [element]);
+          }
+        });
+      });
+  }
+
+  getValues(map) {
+    return Array.from(map.values());
+  }
+
+  onRatingChanged(rating) {
+    // console.log(rating);
+  }
+
+  submit() {
     const headerSubmitObj = {
       from: 202009,
       to: 202103,
       employeeId: this.loggedInUser.id,
-      reviewerId: this.loggedInUser.id,
-      reviewerType: this.loggedInUser.job
+      reviewerId: this.loggedInUser.id
     };
     this.appraisalv2Service.getheaderId(headerSubmitObj)
       .subscribe(
         (response) => {
-          console.log(response);
           this.headerId = response.id;
+          this.appraisalv2Service.updateAppraisallong(this.payload, response.id)
+            .subscribe(
+              (response) => {
+                this.snackBar.open('You rating is submitted!', '', {
+                  duration: 6000,
+                  panelClass: 'success',
+                });
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
         },
         (error) => {
           console.log(error);
@@ -112,62 +206,15 @@ export class AppraisalV2Component implements OnInit {
       );
   }
 
-  async getAppraisalGoal() {
-    await this.appraisalv2Service.goal().subscribe(
-      response => {
-        this.goals = response;
-        console.log('goals',response);
-});
-  }
-
-  async getGoalReference() {
-    await this.appraisalv2Service.goalReference().subscribe(
-      response => {
-        this.goalReferences = response;
-        console.log('goalReferences', response);      });
-  }
-
-  async getTarget() {
-    await this.appraisalv2Service.target().subscribe(
-      response => {
-        this.targets = response;
-        console.log('targets',response);      });
-  }
-
-  async getAppraisalLong() {
-    await this.appraisalv2Service.appraisallong(this.headerId).subscribe(
-      response => {
-        this.appraisalLong = response;
-        console.log('appraisalLong',response);      });
-  }
-
-  onRatingChanged(rating) {
-    console.log(rating);
-  }
-
-  submit() {
-    this.createSubmitObj();
-  }
-
-  createSubmitObj() {
-    this.goals.forEach(item => {
+  initializePayload() {
+    this.payload = [];
+    this.goals.forEach(goal => {
       const obj: IAppraisal = {
-        comment: this.goalReferences[item.orderId].description,
-        orderId: item.orderId,
-        rating: this.appraisalLong[item.orderId].rating,
-        headerId: this.headerId
+        comment: '',
+        orderId: goal.orderId,
+        rating: null
       };
-      this.submitObj.push(obj);
+      this.payload.push(obj);
     });
-    this.appraisalv2Service.updateAppraisallong(this.submitObj)
-      .subscribe(
-        (response) => {
-          this.submitObj = [];
-          console.log(response);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
   }
 }

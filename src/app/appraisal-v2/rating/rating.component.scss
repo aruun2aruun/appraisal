@@ -1,21 +1,18 @@
+.rating {
+  display: grid;
+  grid-template-columns: 9fr 3fr;
+  & > :last-child {
+    text-align: right;
+  }
+}
 p {
   font-size: 13px;
-}
-.mat-subheader {
-  padding: 10px 0 0 0;
-  font-size: 18px;
-}
-.date {
-  color: #999;
-  font-size: 12px;
-  text-align: right;
-  margin: 0 0 5px 0;
-}
-
-// Impossible Overrides using ng-deep
-:host ::ng-deep .mat-list-item {
-  .mat-line {
-    padding: 5px 0;
-    white-space: break-spaces;
+  margin: 5px 0 0;
+  &.date {
+    color: #555;
+    font-size: 12px;
+  }
+  &.comment {
+    margin: 10px 0;
   }
 }

@@ -1,18 +1,17 @@
-.example-radio-group {
-  display: flex;
-  flex-direction: row;
-}
-
-.example-radio-button {
-  margin: 5px;
-}
-
 .your-rating {
   display: grid;
   justify-content: center;
   align-items: center;
   gap: 10px;
   padding: 20px 0;
+  font-size: 13px;
+  .example-radio-group {
+    display: flex;
+    flex-direction: row;
+    .example-radio-button {
+      margin: 5px;
+    }
+  }
   // .cannot-rate {
   //   font-size: 12px;
   //   a {

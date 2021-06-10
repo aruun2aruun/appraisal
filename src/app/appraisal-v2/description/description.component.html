@@ -1,0 +1,14 @@
+<div class="description" [ngClass]="{
+  'start': description.type === 'start',
+  'continue': description.type === 'continue',
+  'stop': description.type === 'stop'
+}">
+  <div>
+    <p>{{description.comment}}</p>
+    <p class="date">{{description.from}}</p>
+  </div>
+  <div>
+    <p>{{description.type}}</p>
+    <p class="date">{{description.to}}</p>
+  </div>
+</div>
