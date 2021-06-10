@@ -1,3 +1,9 @@
+<mat-icon [ngClass]="{
+  'start': description.type === 'start',
+  'continue': description.type === 'continue',
+  'stop': description.type === 'stop'
+}">fiber_manual_record</mat-icon>
+
 <div class="description" [ngClass]="{
   'start': description.type === 'start',
   'continue': description.type === 'continue',

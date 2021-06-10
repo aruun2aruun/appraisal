@@ -1,3 +1,20 @@
+:host {
+    display: grid;
+    grid-template-columns: 1fr 23fr;
+    align-items: center;
+    mat-icon {
+        &.start {
+          color: #0570e4;
+        }
+        &.continue {
+          color: #60992d;
+        }
+        &.stop {
+          color: #bb0819;
+        }
+    }
+}
+
 .description {
   display: grid;
   grid-template-columns: 9fr 3fr;
