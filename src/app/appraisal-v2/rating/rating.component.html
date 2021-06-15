@@ -1,15 +1,15 @@
 <div class="rating">
   <div>
     <p>
-      {{headersMap.get(appraisal.headerId)?.reviewerId | idToName}} as
-      {{headersMap.get(appraisal.headerId)?.reviewerType}}
+      {{appraisal.reviewerId | idToName}} as
+      {{appraisal.reviewerType}}
     </p>
-    <p class="date">{{headersMap.get(appraisal.headerId)?.from}}</p>
+    <p class="date">{{appraisal.from}}</p>
   </div>
   <div>
     <p>{{ratings[appraisal?.rating - 1]}}</p>
     <p class="date">
-      {{headersMap.get(appraisal.headerId)?.from}} - {{headersMap.get(appraisal.headerId)?.to}}
+      {{appraisal.from}} - {{appraisal.to}}
     </p>
   </div>
 </div>

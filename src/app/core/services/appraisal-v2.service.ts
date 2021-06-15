@@ -51,4 +51,14 @@ export class AppraisalV2Service {
     return this.httpService.post(`api/appraisal/custom/appraisallong?headerId=${headerId}`, obj, httpOptions)
       .pipe(map(response => response));
   }
+
+  getDescriptive(): Observable<any> {
+    return this.httpService.get(`api/descriptive`, false)
+      .pipe(map(response => response));
+  }
+
+  updateDescriptive(obj, headerId): Observable<any> {
+    return this.httpService.post(`api/descriptive?headerId=${headerId}`, obj, httpOptions)
+      .pipe(map(response => response));
+  }
 }

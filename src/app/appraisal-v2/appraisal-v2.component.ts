@@ -54,7 +54,8 @@ export class AppraisalV2Component implements OnInit {
   goalReferences: IGoalReference[];
   targets: ITarget[];
   appraisalLong: IAppraisal[];
-  descriptions = [
+  yourDescriptive: any = {};
+  descriptives = [
     {
       from: 202010,
       to: 202103,
@@ -101,6 +102,7 @@ export class AppraisalV2Component implements OnInit {
     });
     this.ratings = Object.values(Ratings);
     this.getHeaders();
+    this.getDescription();
     this.getGoals();
     this.getGoalReference();
     this.getTarget();
@@ -121,6 +123,14 @@ export class AppraisalV2Component implements OnInit {
         response.forEach(element => {
           this.headersMap.set(element.id, element);
         });
+      });
+  }
+
+  getDescription() {
+    this.appraisalv2Service.getDescriptive().subscribe(
+      response => {
+        this.descriptives = response;
+        console.log(response);
       });
   }
 
@@ -199,6 +209,8 @@ export class AppraisalV2Component implements OnInit {
                 console.log(error);
               }
             );
+
+            this.updateDescription(this.headerId);
         },
         (error) => {
           console.log(error);
@@ -212,9 +224,17 @@ export class AppraisalV2Component implements OnInit {
       const obj: IAppraisal = {
         comment: '',
         orderId: goal.orderId,
-        rating: null
+        rating: 0
       };
       this.payload.push(obj);
     });
+  }
+
+  updateDescription(headerId) {
+    this.appraisalv2Service.updateDescriptive(this.yourDescriptive, headerId).subscribe(
+      response => {
+        this.yourDescriptive = response;
+        console.log(response);
+      });
   }
 }

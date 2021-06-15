@@ -7,7 +7,7 @@
     <div *ngFor="let appraisal of appraisalLongMap.get(goal?.orderId) | keyvalue">
       <app-rating [appraisal]="appraisal.value" [headersMap]="headersMap" [headers]="headers"></app-rating>
     </div>
-    <app-radio-rating [ratingInput]="null" (updatedRating)="goal.rating = $event"></app-radio-rating>
+    <app-radio-rating [ratingInput]="goal.rating" (updatedRating)="goal.rating = $event"></app-radio-rating>
     <div class="step-button">
       <button mat-raised-button matStepperPrevious>Previous</button>
       <button mat-raised-button color="primary" matStepperNext>Next ></button>
@@ -19,27 +19,27 @@
     <!-- <mat-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
       (ratingUpdated)="onRatingChanged($event)">
     </mat-star-rating> -->
-    <div *ngFor="let descrip of descriptions">
-      <app-description [description]="descrip"></app-description>
+    <div *ngFor="let descriptive of descriptives">
+      <app-description [descriptive]="descriptive" [headersMap]="headersMap"></app-description>
     </div>
     <div class="description">
       <mat-form-field appearance="outline">
         <mat-label>Start</mat-label>
-        <textarea style="width: 100%" matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="4"
-          data-ng-minLength="10" placeholder="Provide a comment to support your rating" #reviewComment
-          required></textarea>
-      </mat-form-field>
-      <mat-form-field appearance="outline">
-        <mat-label>Continue</mat-label>
-        <textarea style="width: 100%" matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="4"
-          data-ng-minLength="10" placeholder="Provide a comment to support your rating" #reviewComment
-          required></textarea>
+        <textarea style="width: 100%" [(ngModel)]="yourDescriptive.start" [ngModelOptions]="{ standalone: true }" matInput
+          matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="4" data-ng-minLength="10"
+          placeholder="Provide a comment to support your rating" #reviewComment required></textarea>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Stop</mat-label>
-        <textarea style="width: 100%" matInput matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="4"
-          data-ng-minLength="10" placeholder="Provide a comment to support your rating" #reviewComment
-          required></textarea>
+        <textarea style="width: 100%" [(ngModel)]="yourDescriptive.stop" [ngModelOptions]="{ standalone: true }" matInput
+          matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="4" data-ng-minLength="10"
+          placeholder="Provide a comment to support your rating" #reviewComment required></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>To Continue</mat-label>
+        <textarea style="width: 100%" [(ngModel)]="yourDescriptive.toContinue" [ngModelOptions]="{ standalone: true }" matInput
+          matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="4" data-ng-minLength="10"
+          placeholder="Provide a comment to support your rating" #reviewComment required></textarea>
       </mat-form-field>
     </div>
     <div class="step-button">

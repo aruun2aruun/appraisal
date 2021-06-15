@@ -15,13 +15,16 @@
     }
 }
 
-.description {
+.descriptive {
   display: grid;
   grid-template-columns: 9fr 3fr;
   padding: .5rem 1rem;
   margin: 1rem 0 0;
   border: 1px solid transparent;
   border-radius: .25rem;
+  color: #222;
+  background-color: #ddd;
+  border-color: #999;
   &.start {
     color: #004085;
     background-color: #cce5ff;
