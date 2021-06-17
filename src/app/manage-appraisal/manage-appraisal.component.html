@@ -32,9 +32,7 @@
         <tr *ngFor="let role of rolesView" (click)="viewAppraisal(role)">
           <td scope="row" data-label="Name">{{role.employeeId | idToName}}</td>
           <td data-label="Your roles">
-            <span *ngFor="let reviewerType of role.reviewerType">
-              {{reviewerType | workflowMap}}<br/>
-            </span>
+            {{role.reviewerType | workflowMap}}
           </td>
           <td data-label="Status">{{appraisalReviewMap[role.employeeId]?.status | workflowMap}}</td>
           <td>

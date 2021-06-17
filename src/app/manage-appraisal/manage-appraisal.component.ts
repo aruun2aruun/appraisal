@@ -108,17 +108,7 @@ export class ManageAppraisalComponent implements OnInit {
               state.roles.filter((item) => item.reviewerId === loggedInUser.id)
             )
           ).subscribe((roles) => {
-            this.roles = [];
-            roles.forEach(role => {
-              const existingElement = this.roles.find(item => item.employeeId === role.employeeId);
-              if (existingElement) {
-                existingElement['reviewerType'] = [...existingElement['reviewerType'], role.reviewerType];
-              } else {
-                this.roles.push({
-                  ...role, reviewerType: [role.reviewerType]
-                });
-              }
-            });
+            this.roles = roles;
             this.filterRolesForView();
           });
 
@@ -276,7 +266,7 @@ export class ManageAppraisalComponent implements OnInit {
         state.appraisalReviews.filter((item) => item.employeeId  === role.employeeId)
       )
     ).subscribe((appraisalReviews) => {
-      this.router.navigate([`appraisal`], {
+      this.router.navigate([`appraisalv2/choose-review-period/${this.loggedInUser.id}`], {
         queryParams: {id: appraisalReviews[0].id},
       });
     });

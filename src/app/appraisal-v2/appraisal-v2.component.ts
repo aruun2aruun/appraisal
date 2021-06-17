@@ -74,7 +74,6 @@ export class AppraisalV2Component implements OnInit {
     }
   ];
 
-  headersMap = new Map();
   goalsMap = new Map();
   goalReferencesMap = new Map();
   targetsMap = new Map();
@@ -101,7 +100,6 @@ export class AppraisalV2Component implements OnInit {
       }
     });
     this.ratings = Object.values(Ratings);
-    this.getHeaders();
     this.getDescription();
     this.getGoals();
     this.getGoalReference();
@@ -116,21 +114,10 @@ export class AppraisalV2Component implements OnInit {
     return index;
   }
 
-  getHeaders() {
-    this.appraisalv2Service.header(this.employeeId).subscribe(
-      response => {
-        this.headers = response;
-        response.forEach(element => {
-          this.headersMap.set(element.id, element);
-        });
-      });
-  }
-
   getDescription() {
     this.appraisalv2Service.getDescriptive().subscribe(
       response => {
         this.descriptives = response;
-        console.log(response);
       });
   }
 
@@ -224,7 +211,7 @@ export class AppraisalV2Component implements OnInit {
       const obj: IAppraisal = {
         comment: '',
         orderId: goal.orderId,
-        rating: 0
+        rating: -1
       };
       this.payload.push(obj);
     });
@@ -236,5 +223,12 @@ export class AppraisalV2Component implements OnInit {
         this.yourDescriptive = response;
         console.log(response);
       });
+  }
+
+  stepChanged(event, stepper){
+    console.log(event);
+    if (event.previouslySelectedIndex > event.selectedIndex) {
+     event.previouslySelectedStep.interacted = false;
+    }
   }
 }

@@ -7,7 +7,6 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class DescriptionComponent implements OnInit {
   @Input() descriptive: any;
-  @Input() headersMap?: Map<string, any>;
 
   constructor() { }
 

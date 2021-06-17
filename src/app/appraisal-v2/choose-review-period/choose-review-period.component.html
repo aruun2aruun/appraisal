@@ -1,0 +1,33 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <mat-card-title>Choose Review Period</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group"
+      [(ngModel)]="selectedReviewPeriod">
+      <mat-radio-button class="example-radio-button" color="primary" value="predefined">
+        Predefined review period
+      </mat-radio-button>
+      <mat-radio-button class="example-radio-button" color="primary" value="custom">
+        Custom review period
+      </mat-radio-button>
+    </mat-radio-group>
+    <div *ngIf="selectedReviewPeriod === 'custom'">
+      <mat-form-field class="example-full-width">
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="fromdate" placeholder="From date"
+          [(ngModel)]="from">
+        <mat-datepicker-toggle matSuffix [for]="fromdate"></mat-datepicker-toggle>
+        <mat-datepicker #fromdate></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="todate" placeholder="To date"
+          [(ngModel)]="to">
+        <mat-datepicker-toggle matSuffix [for]="todate"></mat-datepicker-toggle>
+        <mat-datepicker #todate></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-flat-button color="primary" (click)="reviewPeriodSelection()">Proceed</button>
+  </mat-card-actions>
+</mat-card>

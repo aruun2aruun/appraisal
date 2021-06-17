@@ -1,11 +1,11 @@
-<mat-vertical-stepper #stepper>
+<mat-vertical-stepper #stepper (selectionChange)="stepChanged($event, stepper);">
   <mat-step *ngFor="let goal of payload">
     <ng-template matStepLabel>{{goalsMap.get(goal.orderId).criteria}}</ng-template>
     <app-criteria [goalReference]="goalReferencesMap.get(goal?.orderId)"></app-criteria>
     <app-target [target]="targetsMap.get(goal?.orderId)"></app-target>
     <div mat-subheader>Rating</div>
     <div *ngFor="let appraisal of appraisalLongMap.get(goal?.orderId) | keyvalue">
-      <app-rating [appraisal]="appraisal.value" [headersMap]="headersMap" [headers]="headers"></app-rating>
+      <app-rating [appraisal]="appraisal.value" [headers]="headers"></app-rating>
     </div>
     <app-radio-rating [ratingInput]="goal.rating" (updatedRating)="goal.rating = $event"></app-radio-rating>
     <div class="step-button">
@@ -20,25 +20,25 @@
       (ratingUpdated)="onRatingChanged($event)">
     </mat-star-rating> -->
     <div *ngFor="let descriptive of descriptives">
-      <app-description [descriptive]="descriptive" [headersMap]="headersMap"></app-description>
+      <app-description [descriptive]="descriptive"></app-description>
     </div>
     <div class="description">
       <mat-form-field appearance="outline">
         <mat-label>Start</mat-label>
         <textarea style="width: 100%" [(ngModel)]="yourDescriptive.start" [ngModelOptions]="{ standalone: true }" matInput
-          matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="4" data-ng-minLength="10"
+          matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="4" data-ng-minLength="10"
           placeholder="Provide a comment to support your rating" #reviewComment required></textarea>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Stop</mat-label>
         <textarea style="width: 100%" [(ngModel)]="yourDescriptive.stop" [ngModelOptions]="{ standalone: true }" matInput
-          matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="4" data-ng-minLength="10"
+          matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="4" data-ng-minLength="10"
           placeholder="Provide a comment to support your rating" #reviewComment required></textarea>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>To Continue</mat-label>
         <textarea style="width: 100%" [(ngModel)]="yourDescriptive.toContinue" [ngModelOptions]="{ standalone: true }" matInput
-          matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="4" data-ng-minLength="10"
+          matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="4" data-ng-minLength="10"
           placeholder="Provide a comment to support your rating" #reviewComment required></textarea>
       </mat-form-field>
     </div>

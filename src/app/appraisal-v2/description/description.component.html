@@ -1,32 +1,36 @@
-<mat-icon [ngClass]="{'start': descriptive['start']}">fiber_manual_record</mat-icon>
-<div class="descriptive" [ngClass]="{'start': descriptive['start']}">
+<h5>{{descriptive?.reviewerId | idToName}}</h5>
+<p>{{descriptive?.reviewerType | idToName}}</p>
+<div class="descriptive">
+  <div class="line" [ngClass]="{'start': descriptive['start']}"></div>
   <div>
     <p>{{descriptive.start}}</p>
-    <p class="date">{{headersMap.get(descriptive.headerId)?.from}}</p>
+    <p class="date">{{descriptive?.from}}</p>
   </div>
   <div>
-    <p class="date">{{headersMap.get(descriptive.headerId)?.to}}</p>
+    <p class="date">{{descriptive?.to}}</p>
   </div>
 </div>
 
-<mat-icon [ngClass]="{'stop': descriptive['stop']}">fiber_manual_record</mat-icon>
-<div class="descriptive" [ngClass]="{'stop': descriptive['stop']}">
+<div class="descriptive">
+  <div class="line" [ngClass]="{'stop': descriptive['stop']}"></div>
   <div>
     <p>{{descriptive.stop}}</p>
-    <p class="date">{{headersMap.get(descriptive.headerId)?.from}}</p>
+    <p class="date">{{descriptive?.from}}</p>
   </div>
   <div>
-    <p class="date">{{headersMap.get(descriptive.headerId)?.to}}</p>
+    <p class="date">{{descriptive?.to}}</p>
   </div>
 </div>
 
-<mat-icon [ngClass]="{'continue': descriptive['toContinue']}">fiber_manual_record</mat-icon>
-<div class="descriptive" [ngClass]="{'continue': descriptive['toContinue']}">
+<div class="descriptive">
+  <div class="line" [ngClass]="{'continue': descriptive['toContinue']}"></div>
   <div>
     <p>{{descriptive.toContinue}}</p>
-    <p class="date">{{headersMap.get(descriptive.headerId)?.from}}</p>
+    <p class="date">{{descriptive?.from}}</p>
   </div>
   <div>
-    <p class="date">{{headersMap.get(descriptive.headerId)?.to}}</p>
+    <p class="date">{{descriptive?.to}}</p>
   </div>
 </div>
+
+<mat-divider></mat-divider>

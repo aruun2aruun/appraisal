@@ -25,7 +25,6 @@ export class RatingComponent implements OnInit {
     value: 'Needs Improvement'
   }];
   @Input() appraisal?: IAppraisal;
-  @Input() headersMap?: Map<string, any>;
   @Input() headers?: any;
 
   constructor() { }

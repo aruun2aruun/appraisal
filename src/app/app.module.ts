@@ -89,6 +89,8 @@ import { TargetComponent } from './appraisal-v2/target/target.component';
 import { RatingComponent } from './appraisal-v2/rating/rating.component';
 import { RadioRatingComponent } from './appraisal-v2/radio-rating/radio-rating.component';
 import { DescriptionComponent } from './appraisal-v2/description/description.component';
+import { ChooseReviewPeriodComponent } from './appraisal-v2/choose-review-period/choose-review-period.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -138,7 +140,8 @@ import { DescriptionComponent } from './appraisal-v2/description/description.com
     TargetComponent,
     RatingComponent,
     RadioRatingComponent,
-    DescriptionComponent
+    DescriptionComponent,
+    ChooseReviewPeriodComponent
   ],
   imports: [
     MatToolbarModule,
@@ -190,7 +193,8 @@ import { DescriptionComponent } from './appraisal-v2/description/description.com
         provide: HTTP_INTERCEPTORS,
         useClass: JwtInterceptor,
         multi: true,
-    }
+    },
+    DatePipe
   ],
   bootstrap: [AppComponent],
   entryComponents: [
