@@ -1,9 +1,9 @@
 .mat-stepper-vertical {
   // margin: -2% -5% 0;
-  background-color: #c7c7c7;
-  padding: 20px 10%;
+  background-color: #f0f0f0;
+  padding: 20px 10% 70px;
   @media only screen and (max-width: 768px) {
-    padding: 10px;
+    padding: 10px 10px 70px;
   }
   .mat-step {
     background-color: #f00;
@@ -19,6 +19,9 @@
 :host ::ng-deep .mat-step-label {
   font-size: 20px;
   text-transform: capitalize;
+  @media only screen and (max-width: 768px) {
+    font-size: 16px;
+  }
 }
 :host ::ng-deep .mat-step-header {
   background-color: #455065 !important;
@@ -29,6 +32,7 @@
 :host ::ng-deep .mat-vertical-content-container {
   background-color: #fafafa;
   margin: 0;
+  border: 1px solid #45506530;
   .mat-vertical-content {
     @media only screen and (max-width: 768px) {
       padding: 10px;
@@ -113,3 +117,71 @@ mat-star-rating {
 .mat-mini-fab.mat-primary {
   background-color: #1492cc;
 }
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  background-color: #d6d8d9;
+  border-top: 1px solid #999999;
+  position: fixed;
+  width: calc(100% - 20px);
+  padding: 10px;
+  bottom: 0px;
+  right: 0px;
+  align-items: center;
+  .error {
+    background-color: transparent !important;
+    mat-label {
+      vertical-align: super;
+      a {
+        color: red;
+        cursor: pointer;
+        margin: 0 0 0 5px;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+  .footer-button {
+    float: right;
+  }
+  .submit-msg {
+    color: green;
+    font-weight: bold;
+    margin: 0;
+  }
+}
+
+// footer {
+//   background-color: #d6d8d9;
+//   border-top: 1px solid #999999;
+//   position: fixed;
+//   width: 100%;
+//   bottom: 0px;
+//   right: 0px;
+// }
+// .footer-button {
+//   margin: 1%;
+//   float: right;
+// }
+// .error {
+//   margin: 1.5% 0 0 2%;
+//   display: inline-block;
+// }
+// a {
+//   color: red;
+//   cursor: pointer;
+//   margin-left: 10px;
+// }
+// a:hover {
+//   text-decoration: underline;
+// }
+// mat-label {
+//   vertical-align: super;
+// }
+// .submit-msg {
+//   color: green;
+//   font-weight: bold;
+//   margin: 0 5px 0 0;
+// }

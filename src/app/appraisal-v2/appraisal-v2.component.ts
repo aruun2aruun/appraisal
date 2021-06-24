@@ -4,7 +4,9 @@ import { StarRatingColor } from './star-rating/star-rating.component';
 import { Ratings } from '../core/enum/ratings.enum';
 import { ActivatedRoute } from '@angular/router';
 import { InitializationService } from '../core/services/initialization.service';
-import { MatSnackBar } from '@angular/material';
+import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
+import { SubmitErrorDialogComponent } from '../submit-error-dialog/submit-error-dialog.component';
+import { SubmitConfirmationDialogComponent } from '../submit-confirmation-dialog/submit-confirmation-dialog.component';
 
 export interface IGoal {
   criteria: string;
@@ -85,12 +87,14 @@ export class AppraisalV2Component implements OnInit {
   loggedInUser: any;
   from: any;
   to: any;
+  error: any;
 
   constructor(
     private appraisalv2Service: AppraisalV2Service,
     private route: ActivatedRoute,
     private initializationService: InitializationService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog,) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -235,5 +239,43 @@ export class AppraisalV2Component implements OnInit {
     if (event.previouslySelectedIndex > event.selectedIndex) {
       event.previouslySelectedStep.interacted = false;
     }
+  }
+
+  checkResponse() {
+    // this.appraisalService.errorCheck(this.appraisalId).subscribe(
+    //   response => {
+    //     this.openConfirmationDialog();
+    //   }, error => {
+    //     if (error.status === 406) {
+    //       this.error = error;
+    //       this.openErrorDialog();
+    //     }
+    //   }
+    // );
+  }
+
+  save() {
+    alert('TBD');
+  }
+
+  openErrorDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '600px';
+    dialogConfig.data = '';
+    this.dialog.open(SubmitErrorDialogComponent, dialogConfig);
+  }
+
+  openConfirmationDialog() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '500px';
+    dialogConfig.data = {};
+    const dialogRef = this.dialog.open(SubmitConfirmationDialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // this.submit();
+      }
+    });
   }
 }

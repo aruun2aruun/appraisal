@@ -54,13 +54,40 @@
           placeholder="Provide a comment to support your rating" #reviewComment required></textarea>
       </mat-form-field>
     </div>
-    <div class="step-button">
+    <!-- <div class="step-button">
       <button mat-raised-button matStepperPrevious>Back</button>
       <button mat-raised-button color="primary" (click)="submit()">
         Submit
         <mat-icon matSuffix>done_all</mat-icon>
       </button>
-      <!-- <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button> -->
-    </div>
+      <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button>
+    </div> -->
   </mat-step>
 </mat-vertical-stepper>
+
+
+<footer>
+  <div *ngIf="!error" layout="row" layout-align="center center" class="error">
+    <mat-icon color="warn">error</mat-icon>
+    <mat-label>
+      <a title="Click to see Errors" (click)="openErrorDialog()">
+        {{error?.error?.sectionOneError?.length}}
+        errors
+      </a>
+    </mat-label>
+  </div>
+  <div *ngIf="error" layout="row" layout-align="center center" class="footer-button">
+    <p class="submit-msg">Your self appraisal is submitted</p>
+  </div>
+  <div layout="row" layout-align="center center" class="footer-button">
+    <button type="button" mat-raised-button (click)="save()">
+      <mat-icon>done</mat-icon>
+      Save
+    </button>
+    &nbsp;
+    <button type="button" mat-raised-button (click)="submit()" color="primary">
+      <mat-icon>done_all</mat-icon>
+      Submit
+    </button>
+  </div>
+</footer>
