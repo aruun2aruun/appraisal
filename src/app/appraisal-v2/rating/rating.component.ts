@@ -23,6 +23,9 @@ export class RatingComponent implements OnInit {
   }, {
     score: 1,
     value: 'Needs Improvement'
+  }, {
+    score: 0,
+    value: 'Not Rated'
   }];
   @Input() appraisal?: IAppraisal;
   @Input() headers?: any;

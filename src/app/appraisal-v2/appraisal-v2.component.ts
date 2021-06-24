@@ -83,6 +83,8 @@ export class AppraisalV2Component implements OnInit {
   headerId: any;
   employeeId: string;
   loggedInUser: any;
+  from: any;
+  to: any;
 
   constructor(
     private appraisalv2Service: AppraisalV2Service,
@@ -93,6 +95,10 @@ export class AppraisalV2Component implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       this.employeeId = params.employeeId;
+    });
+    this.route.queryParams.subscribe((params) => {
+      this.from = params.from;
+      this.to = params.to;
     });
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
       if (loggedInUser) {
@@ -115,7 +121,7 @@ export class AppraisalV2Component implements OnInit {
   }
 
   getDescription() {
-    this.appraisalv2Service.getDescriptive().subscribe(
+    this.appraisalv2Service.getDescriptive(this.employeeId, this.from, this.to).subscribe(
       response => {
         this.descriptives = response;
       });
@@ -152,7 +158,7 @@ export class AppraisalV2Component implements OnInit {
   }
 
   getAppraisalLong() {
-    this.appraisalv2Service.appraisallong(this.headerId).subscribe(
+    this.appraisalv2Service.appraisallong(this.employeeId, this.from, this.to).subscribe(
       response => {
         this.appraisalLong = response;
         response.forEach(element => {
@@ -196,8 +202,7 @@ export class AppraisalV2Component implements OnInit {
                 console.log(error);
               }
             );
-
-            this.updateDescription(this.headerId);
+          this.updateDescription(this.headerId);
         },
         (error) => {
           console.log(error);
@@ -225,10 +230,10 @@ export class AppraisalV2Component implements OnInit {
       });
   }
 
-  stepChanged(event, stepper){
+  stepChanged(event, stepper) {
     console.log(event);
     if (event.previouslySelectedIndex > event.selectedIndex) {
-     event.previouslySelectedStep.interacted = false;
+      event.previouslySelectedStep.interacted = false;
     }
   }
 }

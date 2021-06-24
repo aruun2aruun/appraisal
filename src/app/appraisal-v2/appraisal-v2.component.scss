@@ -2,6 +2,9 @@
   // margin: -2% -5% 0;
   background-color: #c7c7c7;
   padding: 20px 10%;
+  @media only screen and (max-width: 768px) {
+    padding: 10px;
+  }
   .mat-step {
     background-color: #f00;
   }
@@ -18,10 +21,10 @@
   text-transform: capitalize;
 }
 :host ::ng-deep .mat-step-header {
-  background-color: white;
+  background-color: #455065 !important;
 }
 :host ::ng-deep .mat-vertical-content-container {
-  background-color: #f1f1f1;
+  background-color: #fafafa;
   margin: 0;
 }
 :host ::ng-deep .mat-stepper-vertical-line::before {
@@ -29,6 +32,9 @@
 }
 :host ::ng-deep .mat-step {
   margin: 20px 0;
+  @media only screen and (max-width: 768px) {
+    margin: 10px 0;
+  }
   &:first-of-type,
   &:last-of-type {
     margin: 0;
@@ -59,6 +65,7 @@ mat-star-rating {
 .target {
   font-size: 13px;
 }
+.comment,
 .description {
   display: grid;
   font-size: 13px;
@@ -67,25 +74,32 @@ mat-star-rating {
 
 :host ::ng-deep .mat-step-header .mat-step-icon-state-done,
 :host ::ng-deep .mat-step-header .mat-step-icon-state-edit {
-  background-color: #60992d !important;
+  background-color: #42d697 !important;
   color: white;
   + .mat-step-label {
-    color: #60992d !important;
+    color: #42d697 !important;
   }
 }
 :host ::ng-deep .mat-step-header .mat-step-icon-selected {
   // background-color: $primary;
-  background-color: #276fbf !important;
+  background-color: #1492cc;
   color: white;
   + .mat-step-label {
-    color: #276fbf !important;
+    color: white !important;
   }
 }
 :host ::ng-deep .mat-step-header .mat-step-label {
-  color: rgba(0, 0, 0, 1);
+  color: white;
 }
 :host ::ng-deep .mat-step-header .mat-step-icon {
   color: rgba(255, 255, 255, 1);
-  background-color: transparent;
+  background-color: #1492cc;
   font-size: 12px;
+}
+
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+  background-color: #1492cc;
 }

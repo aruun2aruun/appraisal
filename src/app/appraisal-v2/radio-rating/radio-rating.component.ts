@@ -24,7 +24,7 @@ export class RadioRatingComponent implements OnInit {
     value: 'Needs Improvement'
   }];
   @Output() private updatedRating = new EventEmitter();
-  cannotRated: boolean = false;
+  cannotRate = false;
 
   constructor() { }
 
@@ -36,7 +36,11 @@ export class RadioRatingComponent implements OnInit {
     return false;
   }
 
-  cannotRate() {
-    this.cannotRated = true;
+  cannotRateCriteria(event) {
+    console.log(event);
+    this.cannotRate = !this.cannotRate;
+    if(this.cannotRate) {
+      this.updatedRating.emit(0);
+    };
   }
 }

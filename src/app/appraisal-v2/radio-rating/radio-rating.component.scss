@@ -5,18 +5,38 @@
   gap: 10px;
   padding: 20px 0;
   font-size: 13px;
+  text-align: center;
+  @media only screen and (max-width: 768px) {
+    display: block;
+    text-align: left;
+  }
   .example-radio-group {
     display: flex;
     flex-direction: row;
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
+    }
     .example-radio-button {
       margin: 5px;
+      @media only screen and (max-width: 768px) {
+        margin: 5px 0;
+      }
     }
   }
-  // .cannot-rate {
-  //   font-size: 12px;
-  //   a {
-  //     text-decoration: underline;
-  //     cursor: pointer;
-  //   }
-  // }
+  .cannot-rate {
+    @media only screen and (max-width: 768px) {
+      margin: 10px 0 0;
+    }
+    a {
+      text-decoration: underline;
+      cursor: pointer;
+      font-style: italic;
+      &:hover {
+        color: #276fbf;
+      }
+    }
+  }
+  ::ng-deep .mat-slide-toggle-content {
+    font-family: "Open Sans", sans-serif;
+  }
 }

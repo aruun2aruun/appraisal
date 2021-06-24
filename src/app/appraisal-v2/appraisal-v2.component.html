@@ -8,9 +8,21 @@
       <app-rating [appraisal]="appraisal.value" [headers]="headers"></app-rating>
     </div>
     <app-radio-rating [ratingInput]="goal.rating" (updatedRating)="goal.rating = $event"></app-radio-rating>
+    <div mat-subheader>Comment</div>
+    <div class="comment">
+      <mat-form-field appearance="outline">
+        <textarea style="width: 100%" [(ngModel)]="goal.comment" [ngModelOptions]="{ standalone: true }" matInput
+          matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="4" data-ng-minLength="10"
+          placeholder="Provide a comment to support your rating" #reviewComment></textarea>
+      </mat-form-field>
+    </div>
     <div class="step-button">
-      <button mat-raised-button matStepperPrevious>Previous</button>
-      <button mat-raised-button color="primary" matStepperNext>Next ></button>
+      <button mat-mini-fab color="basic" matStepperPrevious>
+        <mat-icon matPrefix>chevron_left</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary" matStepperNext>
+        <mat-icon matSuffix>chevron_right</mat-icon>
+      </button>
     </div>
   </mat-step>
 
@@ -25,27 +37,30 @@
     <div class="description">
       <mat-form-field appearance="outline">
         <mat-label>Start</mat-label>
-        <textarea style="width: 100%" [(ngModel)]="yourDescriptive.start" [ngModelOptions]="{ standalone: true }" matInput
-          matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="4" data-ng-minLength="10"
+        <textarea style="width: 100%" [(ngModel)]="yourDescriptive.start" [ngModelOptions]="{ standalone: true }"
+          matInput matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="4" data-ng-minLength="10"
           placeholder="Provide a comment to support your rating" #reviewComment required></textarea>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>Stop</mat-label>
-        <textarea style="width: 100%" [(ngModel)]="yourDescriptive.stop" [ngModelOptions]="{ standalone: true }" matInput
-          matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="4" data-ng-minLength="10"
+        <textarea style="width: 100%" [(ngModel)]="yourDescriptive.stop" [ngModelOptions]="{ standalone: true }"
+          matInput matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="4" data-ng-minLength="10"
           placeholder="Provide a comment to support your rating" #reviewComment required></textarea>
       </mat-form-field>
       <mat-form-field appearance="outline">
         <mat-label>To Continue</mat-label>
-        <textarea style="width: 100%" [(ngModel)]="yourDescriptive.toContinue" [ngModelOptions]="{ standalone: true }" matInput
-          matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="4" data-ng-minLength="10"
+        <textarea style="width: 100%" [(ngModel)]="yourDescriptive.toContinue" [ngModelOptions]="{ standalone: true }"
+          matInput matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="4" data-ng-minLength="10"
           placeholder="Provide a comment to support your rating" #reviewComment required></textarea>
       </mat-form-field>
     </div>
     <div class="step-button">
       <button mat-raised-button matStepperPrevious>Back</button>
-      <button mat-raised-button color="primary" (click)="submit()">Submit</button>
-      <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button>
+      <button mat-raised-button color="primary" (click)="submit()">
+        Submit
+        <mat-icon matSuffix>done_all</mat-icon>
+      </button>
+      <!-- <button mat-raised-button color="warn" (click)="stepper.reset()">Reset</button> -->
     </div>
   </mat-step>
 </mat-vertical-stepper>

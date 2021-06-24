@@ -42,8 +42,8 @@ export class AppraisalV2Service {
       .pipe(map(response => response));
   }
 
-  appraisallong(headerId): Observable<any> {
-    return this.httpService.get(`api/appraisal/custom/appraisallong`, false)
+  appraisallong(employeeId, from, to): Observable<any> {
+    return this.httpService.get(`api/appraisal/custom/appraisallong?employeeId=${employeeId}?from=${from}?to=${to}`, false)
       .pipe(map(response => response));
   }
 
@@ -52,8 +52,8 @@ export class AppraisalV2Service {
       .pipe(map(response => response));
   }
 
-  getDescriptive(): Observable<any> {
-    return this.httpService.get(`api/descriptive`, false)
+  getDescriptive(employeeId, from, to): Observable<any> {
+    return this.httpService.get(`api/descriptive?employeeId=${employeeId}?from=${from}?to=${to}`, false)
       .pipe(map(response => response));
   }
 
