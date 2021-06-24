@@ -22,10 +22,18 @@
 }
 :host ::ng-deep .mat-step-header {
   background-color: #455065 !important;
+  @media only screen and (max-width: 768px) {
+    padding: 10px;
+  }
 }
 :host ::ng-deep .mat-vertical-content-container {
   background-color: #fafafa;
   margin: 0;
+  .mat-vertical-content {
+    @media only screen and (max-width: 768px) {
+      padding: 10px;
+    }
+  }
 }
 :host ::ng-deep .mat-stepper-vertical-line::before {
   display: none;
@@ -96,7 +104,9 @@ mat-star-rating {
   background-color: #1492cc;
   font-size: 12px;
 }
-
+:host ::ng-deep .mat-form-field-wrapper {
+  padding-bottom: 0;
+}
 .mat-flat-button.mat-primary,
 .mat-raised-button.mat-primary,
 .mat-fab.mat-primary,
