@@ -13,7 +13,7 @@ import { UserType } from 'src/app/model/user-type';
 export class ChooseReviewPeriodComponent implements OnInit {
   loggedInUser: UserType;
   minDate = new Date(2018, 0, 1);
-  maxDate = new Date(2022, 0, 1);
+  maxDate = new Date();
   selectedReviewPeriod: any;
   from: any = null;
   to: any = null;

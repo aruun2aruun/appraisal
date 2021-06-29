@@ -4,12 +4,13 @@
       {{appraisal.reviewerId | idToName}} as
       {{appraisal.reviewerType}}
     </p>
-    <p class="date">{{appraisal.from}}</p>
+    <p class="date">{{appraisal.from | customDate}}</p>
   </div>
   <div>
-    <p>{{ratings[appraisal?.rating - 1]}}</p>
+    <p *ngIf="appraisal?.rating >= 0">{{ratings[appraisal?.rating - 1]}}</p>
+    <p *ngIf="appraisal?.rating < 0">0 - Not Rated</p>
     <p class="date">
-      {{appraisal.from}} - {{appraisal.to}}
+      {{appraisal.from | customDate}} - {{appraisal.to | customDate}}
     </p>
   </div>
 </div>

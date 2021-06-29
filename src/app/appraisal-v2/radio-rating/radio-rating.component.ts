@@ -7,21 +7,22 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class RadioRatingComponent implements OnInit {
   @Input() ratingInput;
+  @Input() submitted;
   ratings: any[] = [{
-    score: 5,
-    value: 'Outstanding'
-  }, {
-    score: 4,
-    value: 'Excellent'
-  }, {
+  //   score: 5,
+  //   value: 'Outstanding'
+  // }, {
+  //   score: 4,
+  //   value: 'Excellent'
+  // }, {
     score: 3,
-    value: 'Above Expectation'
+    value: 'Above Expectations'
   }, {
     score: 2,
-    value: 'Meets Expectation'
+    value: 'Meets Expectations'
   }, {
     score: 1,
-    value: 'Needs Improvement'
+    value: 'Below Expectations'
   }];
   @Output() private updatedRating = new EventEmitter();
   cannotRate = false;

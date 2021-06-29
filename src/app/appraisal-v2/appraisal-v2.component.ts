@@ -88,6 +88,7 @@ export class AppraisalV2Component implements OnInit {
   from: any;
   to: any;
   error: any;
+  submitted = false;
 
   constructor(
     private appraisalv2Service: AppraisalV2Service,
@@ -185,8 +186,8 @@ export class AppraisalV2Component implements OnInit {
 
   submit() {
     const headerSubmitObj = {
-      from: 202009,
-      to: 202103,
+      from: this.from,
+      to: this.to,
       employeeId: this.loggedInUser.id,
       reviewerId: this.loggedInUser.id
     };
@@ -197,6 +198,9 @@ export class AppraisalV2Component implements OnInit {
           this.appraisalv2Service.updateAppraisallong(this.payload, response.id)
             .subscribe(
               (response) => {
+                if(response) {
+                  this.submitted = true;
+                }
                 this.snackBar.open('You rating is submitted!', '', {
                   duration: 6000,
                   panelClass: 'success',

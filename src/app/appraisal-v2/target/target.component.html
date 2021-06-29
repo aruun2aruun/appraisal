@@ -1,5 +1,15 @@
 <div mat-subheader>Goals and Targets</div>
-<div>
+<div *ngIf="!target">
+  <p>No individual targets defined</p>
+  <div class="comment">
+    <mat-form-field appearance="outline">
+      <textarea style="width: 100%" (ngModel)="target?.description" [ngModelOptions]="{ standalone: true }" matInput
+        matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="4" data-ng-minLength="10"
+        placeholder="Enter Goal"></textarea>
+    </mat-form-field>
+  </div>
+</div>
+<div *ngIf="target">
   <p class="date">{{target?.createdDate | date}}</p>
   <p>{{target?.description}}</p>
-</div>  
+</div>

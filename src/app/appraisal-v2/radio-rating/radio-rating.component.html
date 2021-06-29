@@ -1,13 +1,13 @@
 <div class="your-rating">
   <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]="ratingInput"
-    name="radio" (change)="onClick($event)" [disabled]="cannotRate">
+    name="radio" (change)="onClick($event)" [disabled]="cannotRate || submitted">
     <mat-radio-button class="example-radio-button" color="primary" *ngFor="let rating of ratings; index as i"
       [value]="rating.score" required>
       {{rating.value}}
     </mat-radio-button>
   </mat-radio-group>
   <div class="cannot-rate">
-    <mat-checkbox color="primary" [checked]="cannotRate" (change)="cannotRateCriteria($event)">
+    <mat-checkbox color="primary" [checked]="cannotRate" (change)="cannotRateCriteria($event)" [disabled]="submitted">
       I cannot rate on this criteria. I did not work with the person on this capacity.
     </mat-checkbox>
     <!-- <mat-slide-toggle class="example-margin" color="primary" [checked]="cannotRate"

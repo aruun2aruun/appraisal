@@ -16,16 +16,13 @@ export class RatingComponent implements OnInit {
     value: 'Excellent'
   }, {
     score: 3,
-    value: 'Above Expectation'
+    value: 'Above Expectations'
   }, {
     score: 2,
-    value: 'Meets Expectation'
+    value: 'Meets Expectations'
   }, {
     score: 1,
-    value: 'Needs Improvement'
-  }, {
-    score: 0,
-    value: 'Not Rated'
+    value: 'Below Expectations'
   }];
   @Input() appraisal?: IAppraisal;
   @Input() headers?: any;

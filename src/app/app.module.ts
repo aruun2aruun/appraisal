@@ -91,6 +91,7 @@ import { RadioRatingComponent } from './appraisal-v2/radio-rating/radio-rating.c
 import { DescriptionComponent } from './appraisal-v2/description/description.component';
 import { ChooseReviewPeriodComponent } from './appraisal-v2/choose-review-period/choose-review-period.component';
 import { DatePipe } from '@angular/common';
+import { CustomDatePipe } from './core/services/custom-date.pipe';
 
 
 @NgModule({
@@ -141,7 +142,8 @@ import { DatePipe } from '@angular/common';
     RatingComponent,
     RadioRatingComponent,
     DescriptionComponent,
-    ChooseReviewPeriodComponent
+    ChooseReviewPeriodComponent,
+    CustomDatePipe
   ],
   imports: [
     MatToolbarModule,
