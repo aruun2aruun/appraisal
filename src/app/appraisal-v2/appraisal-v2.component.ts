@@ -187,7 +187,7 @@ export class AppraisalV2Component implements OnInit {
       from: this.from,
       to: this.to,
       employeeId: this.loggedInUser.id,
-      reviewerId: this.loggedInUser.id
+      reviewerId: this.employeeId
     };
     this.appraisalv2Service.getheaderId(headerSubmitObj)
       .subscribe(
