@@ -1,29 +1,36 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import {MatDialog, MatDialogConfig, MatPaginator, MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
-import {CycleSelectionService} from '../core/services/cycle-selection.service';
-import {UserService} from './../core/services/user.service';
-import {AppraisalService} from '../core/services/appraisal.service';
-import {CycleType} from '../model/cycle-type';
-import {UserType} from '../model/user-type';
-import {ManageAppraisalDialogComponent} from '../manage-appraisal-dialog/manage-appraisal-dialog.component';
-import {NotifyDialogComponent} from '../notify-dialog/notify-dialog.component';
-import {PageHeaderService} from '../core/services/page-header.service';
-import * as messageObject from '../message.json';
-import {AuthService} from '../core/services/auth.service';
-import { Router } from '@angular/router';
-import { Store, select } from '@ngrx/store';
-import { AppState } from '../app-state';
-import { InitializationService } from '../core/services/initialization.service';
-import { SubmitConfirmationDialogComponent } from '../submit-confirmation-dialog/submit-confirmation-dialog.component';
-import { AngularCsv } from 'angular7-csv';
+import { Component, OnInit, ViewChild } from "@angular/core";
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatPaginator,
+  MatSnackBar,
+  MatSort,
+  MatTableDataSource,
+} from "@angular/material";
+import { CycleSelectionService } from "../core/services/cycle-selection.service";
+import { UserService } from "./../core/services/user.service";
+import { AppraisalService } from "../core/services/appraisal.service";
+import { CycleType } from "../model/cycle-type";
+import { UserType } from "../model/user-type";
+import { ManageAppraisalDialogComponent } from "../manage-appraisal-dialog/manage-appraisal-dialog.component";
+import { NotifyDialogComponent } from "../notify-dialog/notify-dialog.component";
+import { PageHeaderService } from "../core/services/page-header.service";
+import * as messageObject from "../message.json";
+import { AuthService } from "../core/services/auth.service";
+import { Router } from "@angular/router";
+import { Store, select } from "@ngrx/store";
+import { AppState } from "../app-state";
+import { InitializationService } from "../core/services/initialization.service";
+import { SubmitConfirmationDialogComponent } from "../submit-confirmation-dialog/submit-confirmation-dialog.component";
+import { AngularCsv } from "angular7-csv";
 
 @Component({
-  selector: 'app-manage-appraisal',
-  templateUrl: './manage-appraisal.component.html',
-  styleUrls: ['./manage-appraisal.component.scss']
+  selector: "app-manage-appraisal",
+  templateUrl: "./manage-appraisal.component.html",
+  styleUrls: ["./manage-appraisal.component.scss"],
 })
 export class ManageAppraisalComponent implements OnInit {
-  displayedColumns: string[] = ['username', 'status', 'action'];
+  displayedColumns: string[] = ["username", "status", "action"];
   dataSource: any;
 
   currentCycle: CycleType;
@@ -44,99 +51,107 @@ export class ManageAppraisalComponent implements OnInit {
   searchText: any;
   users: any[];
 
-  constructor(private cycleSelectionService: CycleSelectionService,
-               private pageHeaderService: PageHeaderService,
-               private userService: UserService,
-               private snackBar: MatSnackBar,
-               private appraisalService: AppraisalService,
-               public dialog: MatDialog,
-               private authService: AuthService,
-               private router: Router,
-               public initializationService: InitializationService,
-               private store: Store<AppState>) {
-    pageHeaderService.setTitle('Manage Appraisal');
-    cycleSelectionService.cycleChangedEvent.subscribe(data => this.initialize());
+  constructor(
+    private cycleSelectionService: CycleSelectionService,
+    private pageHeaderService: PageHeaderService,
+    private userService: UserService,
+    private snackBar: MatSnackBar,
+    private appraisalService: AppraisalService,
+    public dialog: MatDialog,
+    private authService: AuthService,
+    private router: Router,
+    public initializationService: InitializationService,
+    private store: Store<AppState>
+  ) {
+    pageHeaderService.setTitle("Manage Appraisal");
+    cycleSelectionService.cycleChangedEvent.subscribe((data) =>
+      this.initialize()
+    );
   }
 
   csvOptions = {
-    fieldSeparator: ',',
+    fieldSeparator: ",",
     quoteStrings: '"',
-    decimalseparator: '.',
+    decimalseparator: ".",
     showLabels: true,
     showTitle: false,
-    title: 'Summary:',
+    title: "Summary:",
     nullToEmptyString: true,
     useBom: true,
     noDownload: false,
     headers: [
-              "Cycle Id",
-              "Cycle Name",
-              "Employee Id",
-              "Employee First Name",
-              "Employee Last Name",
-              "Employee Email",
-              "Employee Job",
-              "Employee CU",
-              "Reviewer First Name",
-              "Reviewer Last Name",
-              "Reviewer Email",
-              "Reviewer Role",
-              "Goals and Objectives Score",
-              "Secondary Section Score",
-              "Completion Status"
-            ]
+      "Cycle Id",
+      "Cycle Name",
+      "Employee Id",
+      "Employee First Name",
+      "Employee Last Name",
+      "Employee Email",
+      "Employee Job",
+      "Employee CU",
+      "Reviewer First Name",
+      "Reviewer Last Name",
+      "Reviewer Email",
+      "Reviewer Role",
+      "Goals and Objectives Score",
+      "Secondary Section Score",
+      "Completion Status",
+    ],
   };
 
   ngOnInit() {
     setTimeout(() => {
-      this.userService.getLoggedInUserData().subscribe(
-        data => {
-          this.loggedInUser = data;
-          this.initialize();
-        }
-      );
+      this.userService.getLoggedInUserData().subscribe((data) => {
+        this.loggedInUser = data;
+        this.initialize();
+      });
     }, 100);
   }
 
   initialize() {
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
       if (loggedInUser) {
-        this.store.select((state) => state.users).subscribe(users => this.users = users);
+        this.store
+          .select((state) => state.users)
+          .subscribe((users) => (this.users = users));
         this.store
           .pipe(
             select((state) =>
               state.roles.filter((item) => item.reviewerId === loggedInUser.id)
             )
-          ).subscribe((roles) => {
+          )
+          .subscribe((roles) => {
             this.roles = roles;
             this.filterRolesForView();
           });
 
         this.store
-          .pipe(
-            select((state) =>
-              state.appraisalReviews
-            )
-          ).subscribe((appraisalReviews) => {
-            appraisalReviews.forEach(item => this.appraisalReviewMap[item.employeeId] = item);
+          .pipe(select((state) => state.appraisalReviews))
+          .subscribe((appraisalReviews) => {
+            appraisalReviews.forEach(
+              (item) => (this.appraisalReviewMap[item.employeeId] = item)
+            );
           });
       }
     });
 
-    this.userService.getLoggedInUserData().subscribe(
-      data => {
-        this.loggedInUser = data;
-        this.currentCycle = JSON.parse(localStorage.getItem('currentCycle'));
-        // this.getAllUsers();
-        this.RenderDataTable();
-      });
+    this.userService.getLoggedInUserData().subscribe((data) => {
+      this.loggedInUser = data;
+      this.currentCycle = JSON.parse(localStorage.getItem("currentCycle"));
+      // this.getAllUsers();
+      this.RenderDataTable();
+    });
   }
 
   filterRolesForView() {
     if (this.users.length > 0 && this.searchText) {
-      this.rolesView = this.roles.filter(item => {
-        const employee = this.users.find(user => user.id === item.employeeId);
-        if (employee && (`${employee.firstName} ${employee.lastName}`).toLowerCase().includes(this.searchText.toLowerCase())) {
+      this.rolesView = this.roles.filter((item) => {
+        const employee = this.users.find((user) => user.id === item.employeeId);
+        if (
+          employee &&
+          `${employee.firstName} ${employee.lastName}`
+            .toLowerCase()
+            .includes(this.searchText.toLowerCase())
+        ) {
           return true;
         } else {
           return false;
@@ -149,14 +164,12 @@ export class ManageAppraisalComponent implements OnInit {
 
   getSummaryData(role) {
     this.initializationService.loggedInUser$.subscribe((loggedInUser) => {
-      console.log('****loggedInUser');
+      console.log("****loggedInUser");
       if (loggedInUser) {
         this.store
           .pipe(
             select((state) =>
-              state.roles.filter(
-                (item) => item.employeeId === role.employeeId
-              )
+              state.roles.filter((item) => item.employeeId === role.employeeId)
             )
           )
           .subscribe((roles) => {
@@ -176,7 +189,9 @@ export class ManageAppraisalComponent implements OnInit {
               this.store
                 .pipe(
                   select((state) =>
-                    state.cycles.find((item) => item.id === appraisalReview.cycleId)
+                    state.cycles.find(
+                      (item) => item.id === appraisalReview.cycleId
+                    )
                   )
                 )
                 .subscribe((appraisalCycle) => {
@@ -202,15 +217,15 @@ export class ManageAppraisalComponent implements OnInit {
     //         obj.userId = item.userId;
     //         this.userIds.push(item.userId);
     //       }));
-          this.dataSource = new MatTableDataSource();
-          this.dataSource.data = this.roles;
-          this.dataSource.sort = this.sort;
-          this.dataSource.paginator = this.paginator;
-      //   }
-      // },
-      // error => {
-      //   console.log('There was an error while retrieving Posts !!!' + error);
-      // });
+    this.dataSource = new MatTableDataSource();
+    this.dataSource.data = this.roles;
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    //   }
+    // },
+    // error => {
+    //   console.log('There was an error while retrieving Posts !!!' + error);
+    // });
   }
 
   applyFilter(filterValue: string) {
@@ -225,27 +240,29 @@ export class ManageAppraisalComponent implements OnInit {
   }
 
   getAllUsers() {
-    this.userService.getUsers().subscribe(
-      users => {
-        if (users.length > 0) {
-          users.forEach((item => {
-            this.userNameMap[item.id] = item;
-          }));
-        }
-      });
+    this.userService.getUsers().subscribe((users) => {
+      if (users.length > 0) {
+        users.forEach((item) => {
+          this.userNameMap[item.id] = item;
+        });
+      }
+    });
   }
 
   openViewDialog(row) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '80%';
+    dialogConfig.width = "80%";
     dialogConfig.data = {
       userStatus: row.status,
       currentUser: this.userNameMap[row.userId],
-      userId: row.userId
+      userId: row.userId,
     };
-    const dialogRef = this.dialog.open(ManageAppraisalDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
+    const dialogRef = this.dialog.open(
+      ManageAppraisalDialogComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((result) => {
       this.initialize();
       if (result) {
         this.viewCycle(result.cycleId, result.extend);
@@ -260,30 +277,26 @@ export class ManageAppraisalComponent implements OnInit {
   }
 
   viewAppraisal(role) {
-    this.store
-    .pipe(
-      select((state) =>
-        state.appraisalReviews.filter((item) => item.employeeId  === role.employeeId)
-      )
-    ).subscribe((appraisalReviews) => {
-      this.router.navigate([`appraisalv2/choose-review-period/${this.loggedInUser.id}`], {
-        queryParams: {id: appraisalReviews[0].id},
-      });
-    });
+    this.router.navigate([
+      `appraisalv2/choose-review-period/${role.employeeId}`,
+    ]);
   }
 
   openSummaryDialog(role) {
     this.getSummaryData(role);
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '80%';
+    dialogConfig.width = "80%";
     dialogConfig.data = {
       roles: this.allRoles,
       appraisalReview: this.appraisalReview,
-      appraisalCycle: this.appraisalCycle
+      appraisalCycle: this.appraisalCycle,
     };
-    const dialogRef = this.dialog.open(ManageAppraisalDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
+    const dialogRef = this.dialog.open(
+      ManageAppraisalDialogComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((result) => {
       console.log(result);
     });
   }
@@ -291,12 +304,15 @@ export class ManageAppraisalComponent implements OnInit {
   openReminderDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '50%';
+    dialogConfig.width = "50%";
     dialogConfig.data = {
-      type: 'Reminder'
+      type: "Reminder",
     };
-    const dialogRef = this.dialog.open(SubmitConfirmationDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
+    const dialogRef = this.dialog.open(
+      SubmitConfirmationDialogComponent,
+      dialogConfig
+    );
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.appraisalReminder(result);
       }
@@ -307,13 +323,14 @@ export class ManageAppraisalComponent implements OnInit {
     console.log(this.rolesView);
     console.log(this.roles);
     const empId = [];
-    this.roles.forEach(element => {
+    this.roles.forEach((element) => {
       empId.push(element.employeeId);
     });
     console.log(empId);
     if (result.send) {
-      this.appraisalService.remindCycle(this.currentCycle.id, empId).subscribe(
-        response => {
+      this.appraisalService
+        .remindCycle(this.currentCycle.id, empId)
+        .subscribe((response) => {
           this.snackBar.open(messageObject.NOTIFY.success, null, {
             duration: 6000,
           });
@@ -324,15 +341,15 @@ export class ManageAppraisalComponent implements OnInit {
   openNotifyDialog() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '50%';
+    dialogConfig.width = "50%";
     dialogConfig.data = {
-      to: 'Open Self Review',
+      to: "Open Self Review",
       name: this.loggedInUser.name,
-      subject: 'Subject',
-      body: 'Body'
+      subject: "Subject",
+      body: "Body",
     };
     const dialogRef = this.dialog.open(NotifyDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.notify(result);
       }
@@ -341,8 +358,9 @@ export class ManageAppraisalComponent implements OnInit {
 
   notify(result: any) {
     this.cycleId = this.currentCycle.id;
-    this.appraisalService.notifyAppraisal(this.cycleId, result).subscribe(
-      response => {
+    this.appraisalService
+      .notifyAppraisal(this.cycleId, result)
+      .subscribe((response) => {
         this.snackBar.open(messageObject.NOTIFY.success, null, {
           duration: 6000,
         });
@@ -352,16 +370,16 @@ export class ManageAppraisalComponent implements OnInit {
   openNotifyUserDialog(row) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
-    dialogConfig.width = '50%';
-    dialogConfig.height = '575px';
+    dialogConfig.width = "50%";
+    dialogConfig.height = "575px";
     dialogConfig.data = {
-      to: 'test',
+      to: "test",
       name: this.loggedInUser.name,
-      subject: 'Subject',
-      body: 'Body'
+      subject: "Subject",
+      body: "Body",
     };
     const dialogRef = this.dialog.open(NotifyDialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.notifyUser(result);
       }
@@ -369,24 +387,22 @@ export class ManageAppraisalComponent implements OnInit {
   }
 
   notifyUser(result: any) {
-    result.body = result.body + '\n\n' + result.signature;
-    this.appraisalService.notifyUser(result).subscribe(
-      response => {
-        this.snackBar.open(messageObject.NOTIFY.success, null, {
-          duration: 6000,
-        });
+    result.body = result.body + "\n\n" + result.signature;
+    this.appraisalService.notifyUser(result).subscribe((response) => {
+      this.snackBar.open(messageObject.NOTIFY.success, null, {
+        duration: 6000,
       });
+    });
   }
 
   download() {
     this.cycleId = this.currentCycle.id;
-    this.appraisalService.download(this.cycleId).subscribe(
-      response => {
-        // new Angular5Csv(this.currentCycle.name, response + '_Feedback Report_' + new  Date().getTime(), this.csvOptions);
-        new AngularCsv(response, 'summary', this.csvOptions);
-        this.snackBar.open(messageObject.EXPORT.success, null, {
-          duration: 6000,
-        });
+    this.appraisalService.download(this.cycleId).subscribe((response) => {
+      // new Angular5Csv(this.currentCycle.name, response + '_Feedback Report_' + new  Date().getTime(), this.csvOptions);
+      new AngularCsv(response, "summary", this.csvOptions);
+      this.snackBar.open(messageObject.EXPORT.success, null, {
+        duration: 6000,
       });
+    });
   }
 }

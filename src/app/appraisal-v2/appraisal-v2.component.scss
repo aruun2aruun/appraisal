@@ -9,6 +9,9 @@
     background-color: #f00;
   }
 }
+:host ::ng-deep .mat-vertical-stepper-header {
+  padding: 12px 24px;
+}
 // Impossible Overrides using ng-deep
 :host ::ng-deep .mat-list-item-content {
   display: grid !important;
@@ -30,7 +33,7 @@
   }
 }
 :host ::ng-deep .mat-vertical-content-container {
-  background-color: #fafafa;
+  background-color: #fcfcfc;
   margin: 0;
   border: 1px solid #45506530;
   .mat-vertical-content {
