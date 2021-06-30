@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppraisalV2Service } from '../core/services/appraisal-v2.service';
 import { StarRatingColor } from './star-rating/star-rating.component';
 import { Ratings } from '../core/enum/ratings.enum';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InitializationService } from '../core/services/initialization.service';
 import { MatDialog, MatDialogConfig, MatSnackBar } from '@angular/material';
 import { SubmitErrorDialogComponent } from '../submit-error-dialog/submit-error-dialog.component';
@@ -93,6 +93,7 @@ export class AppraisalV2Component implements OnInit {
   constructor(
     private appraisalv2Service: AppraisalV2Service,
     private route: ActivatedRoute,
+    private router: Router,
     private initializationService: InitializationService,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,) { }
@@ -186,8 +187,8 @@ export class AppraisalV2Component implements OnInit {
     const headerSubmitObj = {
       from: this.from,
       to: this.to,
-      employeeId: this.loggedInUser.id,
-      reviewerId: this.employeeId
+      employeeId: this.employeeId,
+      reviewerId: this.loggedInUser.id
     };
     this.appraisalv2Service.getheaderId(headerSubmitObj)
       .subscribe(
@@ -258,6 +259,10 @@ export class AppraisalV2Component implements OnInit {
 
   save() {
     alert('TBD');
+  }
+
+  cancel() {
+    this.router.navigate([`reportees`]);
   }
 
   openErrorDialog() {

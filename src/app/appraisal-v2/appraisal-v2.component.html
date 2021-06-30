@@ -68,21 +68,21 @@
 
 <footer *ngIf="!submitted">
   <div *ngIf="!error" layout="row" layout-align="center center" class="error">
-    <mat-icon color="warn">error</mat-icon>
+    <!-- <mat-icon color="warn">error</mat-icon>
     <mat-label>
       <a title="Click to see Errors" (click)="openErrorDialog()">
         {{error?.error?.sectionOneError?.length}}
         errors
       </a>
-    </mat-label>
+    </mat-label> -->
   </div>
   <div *ngIf="error" layout="row" layout-align="center center" class="footer-button">
     <p class="submit-msg">Your self appraisal is submitted</p>
   </div>
   <div layout="row" layout-align="center center" class="footer-button">
-    <button type="button" mat-raised-button (click)="save()">
+    <button type="button" mat-raised-button (click)="cancel()">
       <mat-icon>done</mat-icon>
-      Save
+      Cancel
     </button>
     &nbsp;
     <button type="button" mat-raised-button (click)="submit()" color="primary">
