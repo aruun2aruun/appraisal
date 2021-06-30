@@ -26,7 +26,7 @@
     </div>
   </mat-step>
 
-  <mat-step>
+  <mat-step *ngIf="payload.length > 0">
     <ng-template matStepLabel>Done</ng-template>
     <!-- <mat-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
       (ratingUpdated)="onRatingChanged($event)">
