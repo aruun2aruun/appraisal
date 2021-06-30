@@ -116,9 +116,6 @@ export class AppraisalV2Component implements OnInit {
     this.getGoalReference();
     this.getTarget();
     this.getAppraisalLong();
-    setTimeout(() => {
-      this.initializePayload();
-    }, 1000);
   }
 
   trackByIndex(index: number, obj: any): any {
@@ -139,6 +136,7 @@ export class AppraisalV2Component implements OnInit {
         response.forEach(element => {
           this.goalsMap.set(element.orderId, element);
         });
+        this.initializePayload();
       });
   }
 
