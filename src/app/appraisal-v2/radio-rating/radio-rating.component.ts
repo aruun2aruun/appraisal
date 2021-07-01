@@ -38,7 +38,6 @@ export class RadioRatingComponent implements OnInit {
   }
 
   cannotRateCriteria(event) {
-    console.log(event);
     this.cannotRate = !this.cannotRate;
     if(this.cannotRate) {
       this.updatedRating.emit(0);

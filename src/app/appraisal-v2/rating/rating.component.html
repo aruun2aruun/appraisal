@@ -7,8 +7,7 @@
     <p class="date">{{appraisal.from | customDate}}</p>
   </div>
   <div>
-    <p *ngIf="appraisal?.rating >= 0">{{ratings[appraisal?.rating - 1]}}</p>
-    <p *ngIf="appraisal?.rating < 0">0 - Not Rated</p>
+    <p *ngIf="appraisal?.rating >= 0">{{ratings[appraisal?.rating]?.value}}</p>
     <p class="date">
       {{appraisal.from | customDate}} - {{appraisal.to | customDate}}
     </p>

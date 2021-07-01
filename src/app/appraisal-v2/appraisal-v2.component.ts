@@ -11,6 +11,7 @@ import { SubmitConfirmationDialogComponent } from '../submit-confirmation-dialog
 export interface IGoal {
   criteria: string;
   orderId: number;
+  order?: number;
 };
 
 export interface IGoalReference {
@@ -131,11 +132,11 @@ export class AppraisalV2Component implements OnInit {
   }
 
   getGoals() {
-    this.appraisalv2Service.goals().subscribe(
+    this.appraisalv2Service.goals(this.employeeId).subscribe(
       response => {
         this.goals = response;
         response.forEach(element => {
-          this.goalsMap.set(element.orderId, element);
+          this.goalsMap.set(element.order, element);
         });
         this.initializePayload();
       });
@@ -222,7 +223,7 @@ export class AppraisalV2Component implements OnInit {
     this.goals.forEach(goal => {
       const obj: IAppraisal = {
         comment: '',
-        orderId: goal.orderId,
+        orderId: goal.order,
         rating: -1
       };
       this.payload.push(obj);
@@ -238,7 +239,6 @@ export class AppraisalV2Component implements OnInit {
   }
 
   stepChanged(event, stepper) {
-    console.log(event);
     if (event.previouslySelectedIndex > event.selectedIndex) {
       event.previouslySelectedStep.interacted = false;
     }

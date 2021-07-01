@@ -1,5 +1,5 @@
 export enum Ratings {
-  one = '1 - Needs Improvement',
+  one = '1 - Below Expectations',
   two = '2 - Meets Expectations',
   three = '3 - Above Expectations',
   four= '4 - Excellent',

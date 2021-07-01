@@ -9,20 +9,23 @@ import { IAppraisal } from '../appraisal-v2.component';
 })
 export class RatingComponent implements OnInit {
   ratings: any[] = [{
-    score: 5,
-    value: 'Outstanding'
-  }, {
-    score: 4,
-    value: 'Excellent'
-  }, {
-    score: 3,
-    value: 'Above Expectations'
-  }, {
-    score: 2,
-    value: 'Meets Expectations'
+    score: 0,
+    value: '0 - Not Rated'
   }, {
     score: 1,
-    value: 'Below Expectations'
+    value: '1 - Below Expectations'
+  }, {
+    score: 2,
+    value: '2 - Meets Expectations'
+  }, {
+    score: 3,
+    value: '3 - Above Expectations'
+  }, {
+    score: 4,
+    value: '4 - Excellent'
+  }, {
+    score: 5,
+    value: '5 - Outstanding'
   }];
   @Input() appraisal?: IAppraisal;
   @Input() headers?: any;
@@ -30,7 +33,7 @@ export class RatingComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.ratings = Object.values(Ratings);
+    // this.ratings = Object.values(Ratings);
   }
 
   getValues(id) {

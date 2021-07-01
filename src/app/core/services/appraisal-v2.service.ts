@@ -29,16 +29,19 @@ export class AppraisalV2Service {
       .pipe(map((response) => response));
   }
 
-  goals(): Observable<any> {
-    return this.http.get(
-      baseUrl + "appraisal/custom/goal?_limit=12",
-      httpOptions
-    );
+  goals(employeeId): Observable<any> {
+    return this.httpService
+      .get(`api/appraisal/custom/goal/${employeeId}`, false)
+      .pipe(map((response) => response));
+    // return this.http.get(
+    //   baseUrl + "appraisal/custom/goal?_limit=12",
+    //   httpOptions
+    // );
   }
 
   goalReference(): Observable<any> {
     return this.http.get(
-      baseUrl + "appraisal/custom/goalreference?_limit=12",
+      baseUrl + "appraisal/custom/goalreference?_limit=16",
       httpOptions
     );
   }
