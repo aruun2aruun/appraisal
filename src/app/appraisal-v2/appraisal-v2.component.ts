@@ -189,37 +189,37 @@ export class AppraisalV2Component implements OnInit {
 
   submit() {
     this.updateTargets();
-    // const headerSubmitObj = {
-    //   from: this.from,
-    //   to: this.to,
-    //   employeeId: this.employeeId,
-    //   reviewerId: this.loggedInUser.id
-    // };
-    // this.appraisalv2Service.getheaderId(headerSubmitObj)
-    //   .subscribe(
-    //     (response) => {
-    //       this.headerId = response.id;
-    //       this.appraisalv2Service.updateAppraisallong(this.payload, response.id)
-    //         .subscribe(
-    //           (response) => {
-    //             if(response) {
-    //               this.submitted = true;
-    //             }
-    //             this.snackBar.open('You rating is submitted!', '', {
-    //               duration: 6000,
-    //               panelClass: 'success',
-    //             });
-    //           },
-    //           (error) => {
-    //             console.log(error);
-    //           }
-    //         );
-    //       this.updateDescription(this.headerId);
-    //     },
-    //     (error) => {
-    //       console.log(error);
-    //     }
-    //   );
+    const headerSubmitObj = {
+      from: this.from,
+      to: this.to,
+      employeeId: this.employeeId,
+      reviewerId: this.loggedInUser.id
+    };
+    this.appraisalv2Service.getheaderId(headerSubmitObj)
+      .subscribe(
+        (response) => {
+          this.headerId = response.id;
+          this.appraisalv2Service.updateAppraisallong(this.payload, response.id)
+            .subscribe(
+              (response) => {
+                if(response) {
+                  this.submitted = true;
+                }
+                this.snackBar.open('You rating is submitted!', '', {
+                  duration: 6000,
+                  panelClass: 'success',
+                });
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+          this.updateDescription(this.headerId);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 
   initializePayload() {
