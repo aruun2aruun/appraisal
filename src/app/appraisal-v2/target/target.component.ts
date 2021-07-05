@@ -8,6 +8,7 @@ import { ITarget } from '../appraisal-v2.component';
 })
 export class TargetComponent implements OnInit {
   @Input() target?: ITarget;
+  @Input() newTarget?: ITarget;
 
   constructor() { }
 

@@ -46,9 +46,9 @@ export class AppraisalV2Service {
     );
   }
 
-  target(): Observable<any> {
+  targets(employeeId): Observable<any> {
     return this.httpService
-      .get(`api/appraisal/custom/target`, false)
+      .get(`api/appraisal/custom/target/${employeeId}`, false)
       .pipe(map((response) => response));
   }
 
@@ -83,6 +83,12 @@ export class AppraisalV2Service {
   updateDescriptive(obj, headerId): Observable<any> {
     return this.httpService
       .post(`api/descriptive?headerId=${headerId}`, obj, httpOptions)
+      .pipe(map((response) => response));
+  }
+
+  updateTarget(obj): Observable<any> {
+    return this.httpService
+      .post(`api/appraisal/custom/target`, obj, httpOptions)
       .pipe(map((response) => response));
   }
 }

@@ -1,8 +1,8 @@
 <mat-vertical-stepper #stepper (selectionChange)="stepChanged($event, stepper);">
   <mat-step *ngFor="let goal of payload">
-    <ng-template matStepLabel>{{goalsMap.get(goal.orderId).criteria}}</ng-template>
-    <app-criteria [goalReference]="goalReferencesMap.get(goal?.orderId)"></app-criteria>
-    <app-target [target]="targetsMap.get(goal?.orderId)"></app-target>
+    <ng-template matStepLabel>{{goalsMap.get(goal?.orderId)?.criteria}}</ng-template>
+    <app-criteria [goalReference]="goalsMap.get(goal?.orderId)"></app-criteria>
+    <app-target [target]="targetsMap.get(goal?.orderId)" [newTarget]="targetPayload[goal.orderId - 1]"></app-target>
     <div mat-subheader>Rating</div>
     <div *ngFor="let appraisal of appraisalLongMap.get(goal?.orderId) | keyvalue">
       <app-rating [appraisal]="appraisal.value" [headers]="headers"></app-rating>

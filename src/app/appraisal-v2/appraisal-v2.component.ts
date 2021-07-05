@@ -35,6 +35,7 @@ export interface IAppraisal {
   reviewerId?: string;
   reviewerType?: string;
   headerId?: string;
+  order?: number;
 }
 
 @Component({
@@ -83,6 +84,7 @@ export class AppraisalV2Component implements OnInit {
   appraisalLongMap = new Map();
 
   payload: IAppraisal[] = [];
+  targetPayload: any = [];
   headerId: any;
   employeeId: string;
   loggedInUser: any;
@@ -138,6 +140,7 @@ export class AppraisalV2Component implements OnInit {
         response.forEach(element => {
           this.goalsMap.set(element.order, element);
         });
+        this.createTargetPayload();
         this.initializePayload();
       });
   }
@@ -153,7 +156,7 @@ export class AppraisalV2Component implements OnInit {
   }
 
   getTarget() {
-    this.appraisalv2Service.target().subscribe(
+    this.appraisalv2Service.targets(this.employeeId).subscribe(
       response => {
         this.targets = response;
         response.forEach(element => {
@@ -185,37 +188,38 @@ export class AppraisalV2Component implements OnInit {
   }
 
   submit() {
-    const headerSubmitObj = {
-      from: this.from,
-      to: this.to,
-      employeeId: this.employeeId,
-      reviewerId: this.loggedInUser.id
-    };
-    this.appraisalv2Service.getheaderId(headerSubmitObj)
-      .subscribe(
-        (response) => {
-          this.headerId = response.id;
-          this.appraisalv2Service.updateAppraisallong(this.payload, response.id)
-            .subscribe(
-              (response) => {
-                if(response) {
-                  this.submitted = true;
-                }
-                this.snackBar.open('You rating is submitted!', '', {
-                  duration: 6000,
-                  panelClass: 'success',
-                });
-              },
-              (error) => {
-                console.log(error);
-              }
-            );
-          this.updateDescription(this.headerId);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+    this.updateTargets();
+    // const headerSubmitObj = {
+    //   from: this.from,
+    //   to: this.to,
+    //   employeeId: this.employeeId,
+    //   reviewerId: this.loggedInUser.id
+    // };
+    // this.appraisalv2Service.getheaderId(headerSubmitObj)
+    //   .subscribe(
+    //     (response) => {
+    //       this.headerId = response.id;
+    //       this.appraisalv2Service.updateAppraisallong(this.payload, response.id)
+    //         .subscribe(
+    //           (response) => {
+    //             if(response) {
+    //               this.submitted = true;
+    //             }
+    //             this.snackBar.open('You rating is submitted!', '', {
+    //               duration: 6000,
+    //               panelClass: 'success',
+    //             });
+    //           },
+    //           (error) => {
+    //             console.log(error);
+    //           }
+    //         );
+    //       this.updateDescription(this.headerId);
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //     }
+    //   );
   }
 
   initializePayload() {
@@ -228,6 +232,24 @@ export class AppraisalV2Component implements OnInit {
       };
       this.payload.push(obj);
     });
+  }
+
+  createTargetPayload() {
+    this.targetPayload = [];
+    this.goals.forEach(goal => {
+      const obj = {
+        description: '',
+        orderId: goal.order
+      };
+      this.targetPayload.push(obj);
+    });
+  }
+  
+  updateTargets() {
+    this.appraisalv2Service.updateTarget(this.targetPayload).subscribe(
+      response => {
+        this.targetPayload = response;
+      });
   }
 
   updateDescription(headerId) {
