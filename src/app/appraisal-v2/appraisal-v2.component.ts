@@ -246,7 +246,7 @@ export class AppraisalV2Component implements OnInit {
   }
   
   updateTargets() {
-    this.appraisalv2Service.updateTarget(this.targetPayload).subscribe(
+    this.appraisalv2Service.updateTarget(this.targetPayload, this.employeeId).subscribe(
       response => {
         this.targetPayload = response;
       });

@@ -86,9 +86,9 @@ export class AppraisalV2Service {
       .pipe(map((response) => response));
   }
 
-  updateTarget(obj): Observable<any> {
+  updateTarget(obj, employeeId): Observable<any> {
     return this.httpService
-      .post(`api/appraisal/custom/target`, obj, httpOptions)
+      .post(`api/appraisal/custom/target/${employeeId}`, obj, httpOptions)
       .pipe(map((response) => response));
   }
 }
