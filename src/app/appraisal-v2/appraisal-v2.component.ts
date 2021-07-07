@@ -59,7 +59,11 @@ export class AppraisalV2Component implements OnInit {
   goalReferences: IGoalReference[];
   targets: ITarget[];
   appraisalLong: IAppraisal[];
-  yourDescriptive: any = {};
+  yourDescriptive: any = {
+    start: '',
+    stop: '',
+    toContinue: ''
+  };
   descriptives = [
     {
       from: 202010,
