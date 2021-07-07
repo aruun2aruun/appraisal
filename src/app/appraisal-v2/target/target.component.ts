@@ -7,7 +7,7 @@ import { ITarget } from '../appraisal-v2.component';
   styleUrls: ['./target.component.scss']
 })
 export class TargetComponent implements OnInit {
-  @Input() target?: ITarget;
+  @Input() targets?: ITarget[];
   @Input() newTarget?: ITarget;
 
   constructor() { }

@@ -14,55 +14,59 @@
     }
   }
 }
-h5 {
-  margin: 10px 0 5px;
-}
-.descriptive {
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  padding: 0.5rem 0;
-  border-left: 3px solid transparent;
-  gap: 10px;
-  line-height: 18px;
-  align-items: center;
-  // border-radius: .25rem;
-  // color: #222;
-  // background-color: #ddd;
-  // border-color: #999;
-  .line {
+.descriptives {
+  .descriptive {
     display: grid;
-    width: 6px;
-    height: 60%;
+    grid-template-columns: auto 1fr auto;
+    padding: 5px 0 0;
+    border-left: 3px solid transparent;
+    gap: 10px;
+    line-height: 18px;
     align-items: center;
-    border-radius: 10px;
-    &.start {
-      // color: #004085;
-      // background-color: #cce5ff;
-      background-color: #0570e4;
+    // border-radius: .25rem;
+    // color: #222;
+    // background-color: #ddd;
+    // border-color: #999;
+    &:last-of-type {
+      margin: 0 0 10px;
     }
-    &.continue {
-      // color: #155724;
-      // background-color: #d4edda;
-      background-color: #60992d;
+    .line {
+      display: grid;
+      width: 6px;
+      height: 60%;
+      align-items: center;
+      border-radius: 10px;
+      &.start {
+        // color: #004085;
+        // background-color: #cce5ff;
+        background-color: #0570e4;
+      }
+      &.continue {
+        // color: #155724;
+        // background-color: #d4edda;
+        background-color: #60992d;
+      }
+      &.stop {
+        // color: #721c24;
+        // background-color: #f8d7da;
+        background-color: #bb0819;
+      }
     }
-    &.stop {
-      // color: #721c24;
-      // background-color: #f8d7da;
-      background-color: #bb0819;
+    & > :last-child {
+      text-align: right;
+      align-items: flex-end;
     }
   }
-  & > :last-child {
-    text-align: right;
-    align-items: flex-end;
-  }
-}
-p {
-  font-size: 13px;
-  margin: 0;
-  &.date {
-    font-size: 12px;
-  }
-  &.comment {
-    margin: 10px 0;
+  p {
+    font-size: 13px;
+    margin: 5px 0;
+    &.date {
+      color: #999;
+      font-size: 11px;
+      margin: 0 0 2px 0;
+    }
+    &.comment {
+      margin: 10px 0;
+    }
   }
 }

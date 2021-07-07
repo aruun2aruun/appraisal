@@ -1,9 +1,11 @@
 <div mat-subheader>Goals and Targets</div>
-<div *ngIf="target">
-  <p class="date">{{target?.createdDate | date}}</p>
-  <p>{{target?.description}}</p>
+<div *ngIf="targets?.length > 0" class="targets">
+  <div *ngFor="let target of targets" class="target">
+    <p>{{target?.description}}</p>
+    <p class="date">{{target?.createdDate | date}}</p>
+  </div>
 </div>
-<div *ngIf="!target">
+<div *ngIf="targets?.length == 0">
   <p>No individual targets defined</p>
 </div>
 <div *ngIf="newTarget">

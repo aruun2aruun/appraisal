@@ -1,36 +1,36 @@
-<h5>{{descriptive?.reviewerId | idToName}}</h5>
-<p>{{descriptive?.reviewerType | idToName}}</p>
-<div class="descriptive">
-  <div class="line" [ngClass]="{'start': descriptive['start']}"></div>
-  <div>
-    <p>{{descriptive.start}}</p>
-    <p class="date">{{descriptive?.from | customDate}}</p>
+<div *ngFor="let descriptive of descriptives" class="descriptives">
+  <p>{{descriptive?.reviewerId | idToName}} as {{descriptive?.reviewerType | idToName}}</p>
+  <div class="descriptive">
+    <div class="line" [ngClass]="{'start': descriptive['start']}"></div>
+    <div>
+      <p>{{descriptive.start}}</p>
+      <p class="date">{{descriptive?.createdDate | date}}</p>
+    </div>
+    <div>
+      <p class="date">{{descriptive?.from | customDate}} - {{descriptive?.to | customDate}}</p>
+    </div>
   </div>
-  <div>
-    <p class="date">{{descriptive?.to | customDate}}</p>
-  </div>
-</div>
 
-<div class="descriptive">
-  <div class="line" [ngClass]="{'stop': descriptive['stop']}"></div>
-  <div>
-    <p>{{descriptive.stop}}</p>
-    <p class="date">{{descriptive?.from | customDate}}</p>
+  <div class="descriptive">
+    <div class="line" [ngClass]="{'stop': descriptive['stop']}"></div>
+    <div>
+      <p>{{descriptive.stop}}</p>
+      <p class="date">{{descriptive?.createdDate | date}}</p>
+    </div>
+    <div>
+      <p class="date">{{descriptive?.from | customDate}} - {{descriptive?.to | customDate}}</p>
+    </div>
   </div>
-  <div>
-    <p class="date">{{descriptive?.to | customDate}}</p>
-  </div>
-</div>
 
-<div class="descriptive">
-  <div class="line" [ngClass]="{'continue': descriptive['toContinue']}"></div>
-  <div>
-    <p>{{descriptive.toContinue}}</p>
-    <p class="date">{{descriptive?.from | customDate}}</p>
+  <div class="descriptive">
+    <div class="line" [ngClass]="{'continue': descriptive['toContinue']}"></div>
+    <div>
+      <p>{{descriptive.toContinue}}</p>
+      <p class="date">{{descriptive?.createdDate | date}}</p>
+    </div>
+    <div>
+      <p class="date">{{descriptive?.from | customDate}} - {{descriptive?.to | customDate}}</p>
+    </div>
   </div>
-  <div>
-    <p class="date">{{descriptive?.to | customDate}}</p>
-  </div>
+  <mat-divider></mat-divider>
 </div>
-
-<mat-divider></mat-divider>

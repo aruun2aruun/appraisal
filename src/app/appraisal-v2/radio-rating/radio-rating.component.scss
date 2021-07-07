@@ -24,24 +24,30 @@
         margin: 5px 0;
       }
     }
-  }
-  .cannot-rate {
-    @media only screen and (max-width: 768px) {
-      margin: 10px 0 0;
-    }
-    .mat-checkbox-label {
-      line-height: 18px;
-      white-space: normal;
-    }
-    a {
-      text-decoration: underline;
-      cursor: pointer;
-      font-style: italic;
-      &:hover {
-        color: #276fbf;
-      }
+    .cannot-rate {
+      color: #bbb;
+      // ::ng-deep .mat-radio-outer-circle {
+      //   border-color: #bbb;
+      // }
     }
   }
+  // .cannot-rate {
+  //   @media only screen and (max-width: 768px) {
+  //     margin: 10px 0 0;
+  //   }
+  //   .mat-checkbox-label {
+  //     line-height: 18px;
+  //     white-space: normal;
+  //   }
+  //   a {
+  //     text-decoration: underline;
+  //     cursor: pointer;
+  //     font-style: italic;
+  //     &:hover {
+  //       color: #276fbf;
+  //     }
+  //   }
+  // }
   ::ng-deep .mat-slide-toggle-content {
     font-family: "Open Sans", sans-serif;
   }

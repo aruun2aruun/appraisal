@@ -54,6 +54,11 @@
   &:last-of-type {
     margin: 0;
   }
+  &:last-of-type {
+    .mat-step-header {
+      background-color: #45506595 !important;
+    }
+  }
 }
 .mat-subheader {
   padding: 10px 0 0 0;
@@ -70,7 +75,7 @@ mat-star-rating {
 }
 .date {
   color: #999;
-  font-size: 12px;
+  font-size: 11px;
   text-align: right;
   margin: 0 0 5px 0;
 }

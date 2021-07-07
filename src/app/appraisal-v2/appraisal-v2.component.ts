@@ -36,6 +36,7 @@ export interface IAppraisal {
   reviewerType?: string;
   headerId?: string;
   order?: number;
+  createdDate?: string;
 }
 
 @Component({
@@ -160,7 +161,11 @@ export class AppraisalV2Component implements OnInit {
       response => {
         this.targets = response;
         response.forEach(element => {
-          this.targetsMap.set(element.orderId, element);
+          if (this.targetsMap.has(element.orderId)) {
+            this.targetsMap.get(element.orderId).push(element);
+          } else {
+            this.targetsMap.set(element.orderId, [element]);
+          }
         });
       });
   }
@@ -202,7 +207,7 @@ export class AppraisalV2Component implements OnInit {
           this.appraisalv2Service.updateAppraisallong(this.payload, response.id)
             .subscribe(
               (response) => {
-                if(response) {
+                if (response) {
                   this.submitted = true;
                 }
                 this.snackBar.open('You rating is submitted!', '', {
@@ -244,12 +249,14 @@ export class AppraisalV2Component implements OnInit {
       this.targetPayload.push(obj);
     });
   }
-  
+
   updateTargets() {
-    this.appraisalv2Service.updateTarget(this.targetPayload, this.employeeId).subscribe(
-      response => {
-        this.targetPayload = response;
-      });
+    if (this.targetPayload.find(item => item.description !== '')) {
+      this.appraisalv2Service.updateTarget(this.targetPayload, this.employeeId).subscribe(
+        response => {
+          this.targetPayload = response;
+        });
+    }
   }
 
   updateDescription(headerId) {

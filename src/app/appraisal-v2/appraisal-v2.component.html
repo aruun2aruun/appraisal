@@ -2,7 +2,7 @@
   <mat-step *ngFor="let goal of payload">
     <ng-template matStepLabel>{{goalsMap.get(goal?.orderId)?.criteria}}</ng-template>
     <app-criteria [goalReference]="goalsMap.get(goal?.orderId)"></app-criteria>
-    <app-target [target]="targetsMap.get(goal?.orderId)" [newTarget]="targetPayload[goal.orderId - 1]"></app-target>
+    <app-target [targets]="targetsMap.get(goal?.orderId)" [newTarget]="targetPayload[goal.orderId - 1]"></app-target>
     <div mat-subheader>Rating</div>
     <div *ngFor="let appraisal of appraisalLongMap.get(goal?.orderId) | keyvalue">
       <app-rating [appraisal]="appraisal.value" [headers]="headers"></app-rating>
@@ -26,14 +26,12 @@
     </div>
   </mat-step>
 
-  <mat-step *ngIf="payload.length > 0">
-    <ng-template matStepLabel>Done</ng-template>
+  <mat-step *ngIf="payload.length > 0" class="done">
+    <ng-template matStepLabel>Start, Stop, Continue</ng-template>
     <!-- <mat-star-rating [rating]="rating" [starCount]="starCount" [color]="starColor"
       (ratingUpdated)="onRatingChanged($event)">
     </mat-star-rating> -->
-    <div *ngFor="let descriptive of descriptives">
-      <app-description [descriptive]="descriptive"></app-description>
-    </div>
+    <app-description [descriptives]="descriptives"></app-description>
     <div class="description">
       <mat-form-field appearance="outline">
         <mat-label>Start</mat-label>

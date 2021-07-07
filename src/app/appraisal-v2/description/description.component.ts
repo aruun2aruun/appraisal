@@ -6,7 +6,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./description.component.scss']
 })
 export class DescriptionComponent implements OnInit {
-  @Input() descriptive: any;
+  @Input() descriptives: any;
 
   constructor() { }
 
